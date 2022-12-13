@@ -25,7 +25,9 @@
           <span class="date"><xsl:value-of select="Start" /></span><br />
           <span class="title"><xsl:value-of select="Series" /></span><br />
           <xsl:value-of select="Description" />
+          <span onclick="toggle({Series}Cast);">[Cast]</span>
         </p>
+        <div id="{Series}Cast" style="display: none;">
         <ul class="castlist">
           <xsl:for-each select="CastList/CastMember">
             <li>
@@ -38,6 +40,7 @@
             </li>
           </xsl:for-each>
         </ul>
+        </div>
       </div>
     </xsl:for-each>
   </xsl:for-each>
