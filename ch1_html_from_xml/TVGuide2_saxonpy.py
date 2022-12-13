@@ -4,7 +4,7 @@ from saxonpy import PySaxonProcessor
 
 this_dir = Path(__file__).parent
 
-XML_FILE = "TVGuide1.xml"
+XML_FILE = "TVGuide2.xml"
 XSL_FILE = "TVGuide2.xsl"
 OUTPUT_FILE = "TVGuide2.html"
 
