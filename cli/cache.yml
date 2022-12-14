@@ -1,0 +1,5 @@
+home_dir: /home/scott/xslt/ch3_templates
+output_file_name: TVGuide2.html
+processor: saxonpy
+xls_file_name: TVGuide2.xsl
+xml_file_name: TVGuide2.xml
