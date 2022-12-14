@@ -45,19 +45,23 @@ to take it for free).
 
 It is very difficult to learn XML from a book.  You have to have an extremely
 patient mind to learn the non-stop alphabet soup of acronyms before you get to
-your "hello world".  If you are transcribing their examples into files, then
-trying to run those files through your python program, most of your time will
-be spent debugging, and not learning. XML books have a way of bleeding-away
-will-power.  This repo tries to solve this problem; the book's examples are
-organized into separate chapter-folders, and a CLI tool it installed to make it
-easy to run a specific example and check its output and results.  The CLI tool
-has a cache, so you only have to type the minimal number of things to get the
-result you want.
+your first program.  If you are transcribing the book's examples, then trying to
+run those files through your python program, most of your time will be spent
+debugging, and not learning. XML books have a way of bleeding-away will-power.
+This repo tries to solve this problem; the book's examples are organized into
+separate chapter-folders, and a CLI tool is installed to make it easy to run a
+specific example and check its output and results.  The CLI tool has a cache, so
+you only have to type the minimal number of things to get the result you want.
+
+To install the CLI, the two XSLT python parsers and the examples:
 
 ```bash
+git clone git@github.com:aleph2c/leaning_xslt.git
+cd learning_xslt
 python3 -m venv venv
 pip install --upgrade pip
 pip install -e .
+source ./venv/bin/activate
 ```
 
 # Running Examples
