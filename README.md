@@ -11,47 +11,42 @@ of the data you feed your template, but with XSLT, XPath gives you a way to
 create data search strings as you create your data transforms.  Jinja2 is still
 a great tool for transforming small data structures, while XSLT can be used for
 arbitrarily large data sets.  Both Jinja2 and XSLT are mini-languages; just as
-regular expressions are a mini-language.
+regular expressions are a mini-language (XPath >=2.0).
 
-I created this repo to learn XSLT and how it can be integrated with Python.
-Python does not come with an XSLT parser, but you can install external
-libraries that integrate these parsers into Python.  There are currently three
-versions of XSLT, but most open-source tools only support version "1.0".  The
-XSLT technology is powerful, but it fell out of favour, as did XML and UML.
-These technologies came from a different time, where arbitrary amounts of
-formalism (and tedium) were accepted by the community.  The position of an
-architect was a thing, and the water fall process was followed.  Today,
-developers are more mercenary with their time, and they want immediate
-understanding and results.
+I created this repo to learn XSLT and how it can be integrated with Python.  I
+wanted something that had a lazy CLI (caches previous command inputs and uses
+them to minimize typing), and an experimental environment to try the different
+XSLT parsers.
+
+Python does not come with an XSLT parser, but you can install external libraries
+that integrate these parsers into Python.  XSLT is current at version "3.0", but
+most open-source tools only support version "1.0".  The XSLT technology is
+powerful, but it fell out of favour, as did XML and UML.  These technologies
+came from a different time, where arbitrary amounts of formalism (and tedium)
+were accepted by the community.  The position of an architect was a thing, and
+the water fall process was followed.  Today, developers seem to be more
+mercenary with their time, and they want immediate understanding and results.
 
 The community that supports XSLT and XML is very different from the open-source
 community.  They seem to want to get paid for their work!
 
-I keep being drawn back to XML because of XPath.  I continue to have to
-template data into other files and forms; in researching better ways to do
-this, I found XSLT.  I guess I should learn it before I integrate it into my
-work.
-
-If you want to follow along, go and get a copy of "Beginning XSLT 2.0 From
-Novice to Professional" by Jeni Tennison, clone this repo and install the
-command line tools and the XSLT parsers.
+To follow along go and get a copy of "Beginning XSLT 2.0 From Novice to
+Professional" by Jeni Tennison, clone this repo and install the command line
+tools and the XSLT parsers.
 
 This package uses two XSLT python interpreters, the freely available lxml
-(support for XSLT version 1.0) and saxonpy (support for XSLT 1.0, 2.0 and 3.0).
-The saxonpy install will only work on Linux, if you want to build this for a
-mac, you will have to pull down the saxon c source files and build it locally.
-(the saxonica people want to be paid for their code and aren't making it easy
-to take it for free).
+(support for XSLT version 1.0, XPath 1.0) and saxonpy (support for XSLT 1.0, 2.0
+and 3.0, XPath 2.0).  The saxonpy install will only work on Linux.  (But as soon
+as I get access to a MAC I will make sure the saxonica parser works there too.)
 
-It is very difficult to learn XML from a book.  You have to have an extremely
-patient mind to learn the non-stop alphabet soup of acronyms before you get to
-your first program.  If you are transcribing the book's examples, then trying to
-run those files through your python program, most of your time will be spent
-debugging, and not learning. XML books have a way of bleeding-away will-power.
-This repo tries to solve this problem; the book's examples are organized into
-separate chapter-folders, and a CLI tool is installed to make it easy to run a
-specific example and check its output and results.  The CLI tool has a cache, so
-you only have to type the minimal number of things to get the result you want.
+It is very difficult to learn XML from a book.  If you are transcribing the
+book's examples, then trying to run those files through your python program,
+most of your time will be spent debugging, and not learning. XML books have a
+way of bleeding-away will-power.  This repo tries to solve this problem; the
+book's examples are organized into separate chapter-folders, and a CLI tool is
+installed to make it easy to run a specific example and check its output and
+results.  The CLI tool has a cache, so you only have to type the minimal number
+of things to get the result you want.
 
 To install the CLI, the two XSLT python parsers and the examples:
 
@@ -62,6 +57,15 @@ python3 -m venv venv
 pip install --upgrade pip
 pip install -e .
 source ./venv/bin/activate
+
+# If the saxonpy pip package fails to run on your system you can try building
+# the saxonica code from source and installing it into your venv
+#
+# This command will download, build andinstall the saxonica parser and fix a
+# broken *nix install of the saxonpy pip package (if you are running on windows
+# you can use the WSL or adjust the setup.py in this repo)
+#
+# python setup.py install
 ```
 
 # Running Examples

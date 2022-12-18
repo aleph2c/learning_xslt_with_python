@@ -235,6 +235,11 @@ def cli(ctx, home_dir):
     if ctx.cache.home_dir is None:
         ctx.cache.home_dir = str(PathToDefault)
         click.echo(home_dir)
+    elif home_dir is not None and Path(home_dir).exists():
+        ctx.cache.home_dir = str(Path(home_dir).resolve())
+    elif home_dir is not None and not Path(home_dir).exists():
+        click.echo(f'{home_dir} does not exist')
+        exit(1)
 
 
 @cli.command
