@@ -15,8 +15,15 @@ declarative, you tell it what you want, and it figures out how to give it to
 you.
 
 Jinja2 is a great tool for transforming small data structures, while XSLT
-can be used for arbitrarily large data sets.  XSLT software has been compiled
-from XSLT.
+can be used for arbitrarily large data sets or data streams.  XSLT software
+has been compiled from XSLT.
+
+XSLT is an XML dialect.  It is very difficult to learn XML from a book; If 
+you are transcribing the book's examples, then trying to run those files 
+through your python program, most of your time will be spent debugging, 
+and not learning.  XML books have a way of bleeding-away will-power because
+XML syntax is hard to look at.  XSLT is known as a beautiful language with 
+atrocious syntax.
 
 I created this repo to learn XSLT and how it can be integrated with Python.  I
 wanted something that had a lazy CLI (caches previous command inputs and uses
@@ -24,13 +31,10 @@ them to minimize typing), and an experimental environment to try the different
 XSLT parsers from program examples included from three training sources.
 
 Python does not come with an XSLT parser, but you can install external libraries
-that integrate XSLT programming language into Python.  XSLT is current at
-version "3.0", but most open-source tools only support version "1.0".  The XSLT
-technology is powerful, but it seems to have fell out of favour, as did XML and
-UML.  These technologies came from a different time, where arbitrary amounts of
-formalism (and tedius syntax) were accepted by the community.
+that integrate the XSLT language into Python.  The XSLT standard is currently at
+version "3.0", but most open-source tools only support version "1.0".
 
-TTo follow along, go and get a copy of "Beginning XSLT 2.0 From Novice to
+To follow along, go and get a copy of "Beginning XSLT 2.0 From Novice to
 Professional" by Jeni Tennison, clone this repo and install the command line
 tools and the XSLT parsers (see below).  After that, I recommend getting a copy
 of "XSLT 2.0 and XPath 2.0 Programmer's Reference 4th Edition" and work through
@@ -40,22 +44,12 @@ the new XML-to-JSON, JSON-to-XML and JSON transform features of XSLT 3.0, read
 There is supporting example code for some of these JSON transforms and the
 pattern's code in the pattern's folder of this repo.
 
-An XSLT 3.0 book has not yet been published, and I find that the specifications
-are written for an "in group", not someone trying to learn the technology.
+An XSLT 3.0 book has not yet been published.
 
 This package uses two XSLT python interpreters, the freely available lxml python
 library (support for XSLT version 1.0, XPath 1.0) and saxonpy (support for XSLT
 1.0, 2.0 and 3.0, and XPath 3.1).  The saxonpy pip install will only work on
 Linux.
-
-It is very difficult to learn XML from a book.  If you are transcribing the
-book's examples, then trying to run those files through your python program,
-most of your time will be spent debugging, and not learning. XML books have a
-way of bleeding-away will-power.  This repo tries to solve this problem; the
-book's examples are organized into separate chapter-folders, and a CLI tool is
-installed to make it easy to run a specific example and check its output and
-results.  The CLI tool has a cache, so you only have to type the minimal number
-of things to get the result you want.
 
 # Installation of two XSLT processors and a Supporting CLI
 
@@ -259,7 +253,7 @@ python -m json.tool ./patterns/json_output.json
 ## JSON Transform Example 2
 
 We would like to invert the hierarchy of a json document. In this example we
-will take the data being oranized from faculty->courses->students->email and
+will take the data being organized from faculty->courses->students->email and
 transform it to email->courses.  We will also sort the output based on last name
 and then the first name of each student, but we will keep the student's name out
 of the final output.
