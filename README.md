@@ -37,19 +37,24 @@ version "3.0", but most open-source tools only support version "1.0".
 To follow along, go and get a copy of "Beginning XSLT 2.0 From Novice to
 Professional" by Jeni Tennison, clone this repo and install the command line
 tools and the XSLT parsers (see below).  After that, I recommend getting a copy
-of "XSLT 2.0 and XPath 2.0 Programmer's Reference 4th Edition" and work through
-Chapter 17: Stylesheet Design Patterns.  If you would like to learn how to use
-the new XML-to-JSON, JSON-to-XML and JSON transform features of XSLT 3.0, read
-[Transforming JSON using XSLT 3.0](https://www.saxonica.com/papers/xmlprague-2016mhk.pdf).
-There is supporting example code for some of these JSON transforms and the
-pattern's code in the pattern's folder of this repo.
+of "XSLT 2.0 and XPath 2.0 Programmer's Reference 4th Edition" by Michael Kay,
+and work through  Chapter 17: Stylesheet Design Patterns.  If you would like to
+learn how to use the new XML-to-JSON, JSON-to-XML and JSON transform features of XSLT 3.0, read
+[Transforming JSON using XSLT 3.0](https://www.saxonica.com/papers/xmlprague-2016mhk.pdf),
+by Michael Kay.  There is supporting example code for some of these JSON transforms 
+and the pattern's code in the pattern's folder of this repo.
 
 An XSLT 3.0 book has not yet been published.
 
 This package uses two XSLT python interpreters, the freely available lxml python
 library (support for XSLT version 1.0, XPath 1.0) and saxonpy (support for XSLT
 1.0, 2.0 and 3.0, and XPath 3.1).  The saxonpy pip install will only work on
-Linux.
+Linux.  The saxonpy package, uses the open sourced SaxonicaC-HE version of
+Michael Kay's XSLT 3.0 engine (Mozilla Public Licence).  If you would like 
+access to more of the XSLT 3.0 advanced features, like Schema support and 
+streaming transforms, you will have to pay for a licence, see 
+[the Saxonica download page](https://www.saxonica.com/download/c.xml)
+for details.
 
 # Installation of two XSLT processors and a Supporting CLI
 
@@ -383,4 +388,12 @@ python -m json.tool ./patterns/json_output2.json
 ]
 ```
 
+# Useful links
 
+- [XSLT XPath Tutorial by arbitrarytechnology](https://www.youtube.com/watch?v=WggVR4YI5oI)
+- [Building saxonC-HE from source](https://stackoverflow.com/a/74017370)
+- [Dealing with recursion depth](https://stackoverflow.com/questions/5435881/xslt-processing-recursion-depth)
+- [White space article for XSLT 3.0](https://blogs.sap.com/2020/02/26/thinking-in-xslt-filtering-xml-elements/)
+- [Jeni's white space comments on SO](https://stackoverflow.com/a/185048)
+- [XSLT 3.0 Prague 2016 resources](https://github.com/Saxonica/Prague2016)
+- [Saxon XSLT 3.0 JSON Whitepaper](https://www.saxonica.com/papers/xmlprague-2016mhk.pdf)
