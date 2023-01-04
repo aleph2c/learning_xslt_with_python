@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgchart date="2004-03-31">
+  <person>
+    <name>Tim Berners-Lee</name>
+    <title>Chief Executive Officer</title>
+    <reports>
+      <person>
+        <name>Sharon Adler</name>
+        <title>Chief Engineer</title>
+      </person>
+      <person>
+        <name>James Clark</name>
+        <title>Directory of Research</title>
+      </person>
+      <person>
+        <name>Henry Thompson</name>
+        <title>Operations and Finance</title>
+      </person>
+      <person>
+        <name>David Meggison</name>
+        <title>Human Resources</title>
+      </person>
+      <person>
+        <name>Steve Muench</name>
+        <title>Marketing</title>
+      </person>
+    </reports>
+  </person>
+</orgchart>

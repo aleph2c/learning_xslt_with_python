@@ -1,5 +1,5 @@
-home_dir: /home/scott/xslt/ch4_conditionals
-output_file_name: TVGuide.html
-processor: lxml
-xls_file_name: TVGuide.xsl
-xml_file_name: TVGuide.xml
+home_dir: /home/scott/xslt/patterns
+output_file_name: json_output2.xml
+processor: saxon
+xml_file_name: json_input2.json
+xsl_file_name: to_json2.0.xsl

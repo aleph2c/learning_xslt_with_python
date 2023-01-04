@@ -21,8 +21,6 @@ SAXON_DIR = "libsaxon-HEC-11.4"
 SAXON_ZIP_NAME = f'{SAXON_PACKAGE}.zip'
 SAXON_URL = f'https://saxonica.com/download/{SAXON_ZIP_NAME}'
 
-
-
 def path_to_this_python_install():
     result = None
     result_blob = subprocess.run(

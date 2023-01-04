@@ -26,7 +26,7 @@ class CliCache:
         self,
         home_dir,
         xml_file_name=None,
-        xls_file_name=None,
+        xsl_file_name=None,
         processor=None,
         output_file_name=None,
     ):
@@ -37,7 +37,7 @@ class CliCache:
             self._cache = {}
             self._cache["home_dir"] = str(home_dir)
             self._cache["xml_file_name"] = None
-            self._cache["xls_file_name"] = None
+            self._cache["xsl_file_name"] = None
             self._cache["processor"] = None
             self._cache["output_file_name"] = None
 
@@ -98,16 +98,16 @@ class CliCache:
             cache["xml_file_name"] = xml_file_name
 
     @property
-    def xls_file_name(self):
+    def xsl_file_name(self):
         result = None
         with self.cached() as cache:
-            result = cache["xls_file_name"]
+            result = cache["xsl_file_name"]
         return result
 
-    @xls_file_name.setter
-    def xls_file_name(self, xls_file_name):
+    @xsl_file_name.setter
+    def xsl_file_name(self, xsl_file_name):
         with self.cached() as cache:
-            cache["xls_file_name"] = xls_file_name
+            cache["xsl_file_name"] = xsl_file_name
 
     @property
     def processor(self):
@@ -142,10 +142,10 @@ class Config:
 
     def clear(self):
         self.cache.xml_file_name = None
-        self.cache.xls_file_name = None
+        self.cache.xsl_file_name = None
         self.cache.processor = None
 
-    def cache_inputs(self, home_dir, xml_file_name, xls_file_name, processor):
+    def cache_inputs(self, home_dir, xml_file_name, xsl_file_name, processor):
         cache_exists = True if CliCache.exists() else False
 
         if cache_exists:
@@ -154,8 +154,8 @@ class Config:
                 home_dir = self.cache.home_dir
             if xml_file_name is None:
                 xml_file_name = self.cache.xml_file_name
-            if xls_file_name is None:
-                xls_file_name = self.cache.xls_file_name
+            if xsl_file_name is None:
+                xsl_file_name = self.cache.xsl_file_name
             if processor is None:
                 processor = self.cache.processor
 
@@ -165,19 +165,19 @@ class Config:
             self.cache = CliCache(
                 home_dir=home_dir,
                 xml_file_name=None,
-                xls_file_name=None,
+                xsl_file_name=None,
                 processor=None,
             )
 
         self.cache.xml_file_name = xml_file_name
-        self.cache.xls_file_name = xls_file_name
+        self.cache.xsl_file_name = xsl_file_name
         self.cache.processor = processor
 
     def create_file_from_lxml(
-        self, home_dir, xml_file_name, xls_file_name, output_file_name
+        self, home_dir, xml_file_name, xsl_file_name, output_file_name
     ):
 
-        xsl_p = (Path(home_dir) / xls_file_name).resolve()
+        xsl_p = (Path(home_dir) / xsl_file_name).resolve()
         if not xsl_p.exists():
             raise Exception(f"{xsl_p} doesn't exist")
 
@@ -195,19 +195,23 @@ class Config:
             fp.write(etree.tostring(result, pretty_print=True))
 
     def create_file_from_saxonpy(
-        self, home_dir, xml_file_name, xls_file_name, output_file_name
+        self, home_dir, xml_file_name, xsl_file_name, output_file_name
     ):
 
         with PySaxonProcessor(license=False) as proc:
             xsltproc = proc.new_xslt_processor()
 
-            with open(home_dir / xml_file_name) as fp:
-                xml_text = fp.read()
-            document = proc.parse_xml(xml_text=xml_text)
+            if Path(xml_file_name).suffix == '.json':
+              xsltproc.set_parameter('json_input_filename',
+                  proc.make_string_value(str(home_dir / xml_file_name)))
+            else:
+              with open(home_dir / xml_file_name) as fp:
+                  xml_text = fp.read()
+              document = proc.parse_xml(xml_text=xml_text)
+              xsltproc.set_source(xdm_node=document)
 
-            with open(home_dir / xls_file_name) as fp:
+            with open(home_dir / xsl_file_name) as fp:
                 xslt_text = fp.read()
-            xsltproc.set_source(xdm_node=document)
             xsltproc.compile_stylesheet(stylesheet_text=xslt_text)
             output = xsltproc.transform_to_string()
             print(output)
@@ -230,7 +234,7 @@ pass_config = click.make_pass_decorator(Config, ensure=True)
 def cli(ctx, home_dir):
     '''Try an XSLT example and cache the command'''
     ctx.cache_inputs(
-        home_dir=home_dir, xml_file_name=None, xls_file_name=None, processor=None
+        home_dir=home_dir, xml_file_name=None, xsl_file_name=None, processor=None
     )
     if ctx.cache.home_dir is None:
         ctx.cache.home_dir = str(PathToDefault)
@@ -253,7 +257,8 @@ def cache(ctx):
 @pass_config
 @click.option("-n", "--node-name", default=None, help="Set the node name")
 @click.option("-x", "--xml", "xml_file_name", default=None, help="Set the xml file")
-@click.option("-l", "--xls", "xls_file_name", default=None, help="Set the xls file")
+@click.option("-j", "--json", "json_file_name", default=None, help="Set the json file (saxon)")
+@click.option("-l", "--xls", "xsl_file_name", default=None, help="Set the xls file")
 @click.option("-p", "--processor", default=None, help="Set the processor (lxml|saxon)")
 @click.option(
     "-o",
@@ -262,22 +267,25 @@ def cache(ctx):
     default=None,
     help="Set the output file name",
 )
-def ex(ctx, node_name, xml_file_name, xls_file_name, processor, output_file_name):
-    '''Run an exercise'''
+def ex(ctx, node_name, xml_file_name, xsl_file_name, json_file_name, processor, output_file_name):
+    '''Run an XSLT exercise'''
     if node_name:
         xml_file_name = f"{node_name}.xml"
-        xls_file_name = f"{node_name}.xsl"
+        xsl_file_name = f"{node_name}.xsl"
         output_file_name = f"{node_name}.html"
+
+    if json_file_name:
+        xml_file_name = json_file_name
 
     if xml_file_name:
         ctx.cache.xml_file_name = xml_file_name
     else:
         xml_file_name = ctx.cache.xml_file_name
 
-    if xls_file_name:
-        ctx.cache.xls_file_name = xls_file_name
+    if xsl_file_name:
+        ctx.cache.xsl_file_name = xsl_file_name
     else:
-        xls_file_name = ctx.cache.xls_file_name
+        xsl_file_name = ctx.cache.xsl_file_name
 
     if processor:
         ctx.cache.processor = processor
@@ -293,8 +301,8 @@ def ex(ctx, node_name, xml_file_name, xls_file_name, processor, output_file_name
         click.echo("you need to specify an xml_file_name or node_name")
         exit(0)
 
-    if not xls_file_name:
-        click.echo("you need to specify an xls_file_name or node_name")
+    if not xsl_file_name:
+        click.echo("you need to specify an xsl_file_name or node_name")
         exit(0)
 
     if not processor:
@@ -309,7 +317,7 @@ def ex(ctx, node_name, xml_file_name, xls_file_name, processor, output_file_name
         ctx.create_file_from_lxml(
             home_dir=ctx.cache.home_dir,
             xml_file_name=xml_file_name,
-            xls_file_name=xls_file_name,
+            xsl_file_name=xsl_file_name,
             output_file_name=output_file_name,
         )
         click.echo("ran the lxml processor")
@@ -317,7 +325,7 @@ def ex(ctx, node_name, xml_file_name, xls_file_name, processor, output_file_name
         ctx.create_file_from_saxonpy(
             home_dir=ctx.cache.home_dir,
             xml_file_name=xml_file_name,
-            xls_file_name=xls_file_name,
+            xsl_file_name=xsl_file_name,
             output_file_name=output_file_name,
         )
         click.echo("ran the saxon processor")

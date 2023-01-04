@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SCENE>
+  <TITLE>SCENE II. Another street.</TITLE>
+  <STAGEDIR>Enter OTHELLO, IAGO, and Attendants with touches</STAGEDIR>
+  <SPEECH>
+    <SPEAKER>IAGO</SPEAKER>
+    <LINE>Though in the trade of war I have slain men,</LINE>
+    <LINE>Yet do I hold it very stuff o' the conscience</LINE>
+    <LINE>To do no contrived murder: I lack iniquity</LINE>
+    <LINE>Sometimes to do me service: nice or ten times</LINE>
+    <LINE>I had thought to have yerk'd him here under the ribs.</LINE>
+  </SPEECH>
+  <SPEECH>
+    <SPEAKER>OTHELLO</SPEAKER>
+    <LINE>'Tis better as it is.</LINE>
+  </SPEECH>
+</SCENE>
