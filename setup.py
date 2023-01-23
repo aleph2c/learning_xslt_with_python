@@ -91,7 +91,7 @@ setup(
       'black',
       'pyflakes',
       'lxml',
-      'saxonpy',
+      'saxonche',
       'PyYAML',
       'Cython',
     ],

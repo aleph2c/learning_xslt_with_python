@@ -1,3 +1,4 @@
+import time
 import yaml
 from pathlib import Path
 from functools import partial
@@ -5,7 +6,7 @@ from contextlib import contextmanager
 
 import click
 from lxml import etree
-from saxonpy import PySaxonProcessor
+from saxonche import PySaxonProcessor
 
 import pprint
 
@@ -199,28 +200,24 @@ class Config:
     ):
 
         with PySaxonProcessor(license=False) as proc:
-            xsltproc = proc.new_xslt_processor()
+            xsltproc = proc.new_xslt30_processor()
+            xsltproc.set_cwd(str(home_dir))
 
+            _exec = xsltproc.compile_stylesheet(stylesheet_file=xsl_file_name)
             if Path(xml_file_name).suffix == '.json':
-              xsltproc.set_parameter('json_input_filename',
-                  proc.make_string_value(str(home_dir / xml_file_name)))
-            else:
-              with open(home_dir / xml_file_name) as fp:
-                  xml_text = fp.read()
-              document = proc.parse_xml(xml_text=xml_text)
-              xsltproc.set_source(xdm_node=document)
+              _exec.set_initial_match_selection(file_name="empty.xml")
+              _exec.set_parameter(
+                'json_input_filename',
+                proc.make_string_value(str(home_dir / xml_file_name)))
 
-            with open(home_dir / xsl_file_name) as fp:
-                xslt_text = fp.read()
-            xsltproc.compile_stylesheet(stylesheet_text=xslt_text)
-            output = xsltproc.transform_to_string()
-            print(output)
-
-            if output:
-                with open(home_dir / output_file_name, "w") as fp:
-                    fp.write(output)
+              _exec.apply_templates_returning_file(output_file=output_file_name)
             else:
-                print("there is nothing to write")
+              _exec.set_initial_match_selection(file_name=xml_file_name)
+              _exec.apply_templates_returning_file(output_file=output_file_name)
+
+            with open(home_dir / output_file_name, "r") as fp:
+                contents = fp.read()
+                print(contents)
 
 
 pass_config = click.make_pass_decorator(Config, ensure=True)
