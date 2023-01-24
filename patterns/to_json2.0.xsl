@@ -30,6 +30,5 @@
     </xsl:variable>
     <xsl:sequence select="$input-as-xml"/>
   </xsl:template>
-
 </xsl:stylesheet>
 

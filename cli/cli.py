@@ -174,7 +174,7 @@ class Config:
         self.cache.xsl_file_name = xsl_file_name
         self.cache.processor = processor
 
-    def create_file_from_lxml(
+    def transform_with_lxml(
         self, home_dir, xml_file_name, xsl_file_name, output_file_name
     ):
 
@@ -195,23 +195,65 @@ class Config:
         with open(out_p, "wb") as fp:
             fp.write(etree.tostring(result, pretty_print=True))
 
-    def create_file_from_saxonpy(
+    def transform_with_saxonche(
         self, home_dir, xml_file_name, xsl_file_name, output_file_name
     ):
-
+        # Don't use the context manager if you are calling saxonica over and
+        # over again with your program.  Instead build the proc and
+        # xsltproc once, and call it over and over.  If you don't do this, you
+        # will get strange errors associated with memory problems. (last seen
+        # in version 11.4)
+        #
+        # Instead do something like this:
+        #
+        # saxonica_globals = {}
+        #
+        # def transform_with_saxonche(...)
+        #   if 'proc' not in saxonica_globals:
+        #     proc = PySaxonProcessor(license=False)
+        #     xsltproc = proc.new_xslt30_processor()
+        #     saxonica_globals['proc'] = proc
+        #     saxonica_globals['xsltproc'] = xsltproc
+        #   else:
+        #     proc = saxonica_globals['proc']
+        #     xsltproc = saxonica_globals['xsltproc']
+        # 
         with PySaxonProcessor(license=False) as proc:
             xsltproc = proc.new_xslt30_processor()
             xsltproc.set_cwd(str(home_dir))
 
-            _exec = xsltproc.compile_stylesheet(stylesheet_file=xsl_file_name)
-            if Path(xml_file_name).suffix == '.json':
-              _exec.set_initial_match_selection(file_name="empty.xml")
-              _exec.set_parameter(
-                'json_input_filename',
-                proc.make_string_value(str(home_dir / xml_file_name)))
+            if not Path(home_dir).exists():
+              print(f"{home_dir} doesn't exist")
+              exit(1)
 
-              _exec.apply_templates_returning_file(output_file=output_file_name)
+            if not (Path(home_dir) / xml_file_name ).exists():
+              print(f"xml_file_name: {str(Path(home_dir) / xml_file_name)} doesn't exist")
+              exit(1)
+
+            if not (Path(home_dir) / xsl_file_name ).exists():
+              print(f"xsl_file_name: {str(Path(home_dir) / xsl_file_name)} doesn't exist")
+              exit(1)
+
+            if Path(xml_file_name).suffix == '.json':
+              json_input_param = proc.make_string_value(str(home_dir / xml_file_name))
+              xsltproc.set_parameter('json_input_filename', json_input_param)
+
+            stylesheet_file = str(Path(home_dir) / xsl_file_name)
+            _exec = xsltproc.compile_stylesheet(
+                stylesheet_file=stylesheet_file,
+            )
+            if _exec is None:
+              print("saxonica failed")
+              exit(1)
+
+            if Path(xml_file_name).suffix == '.json':
+              # it's a mystery why we have to use call_template_returning_file
+              # and not make_string_value (this isn't documented anywhere)
+              _exec.call_template_returning_file(output_file=output_file_name)
             else:
+              # add a test_param to validate saxon is working
+              test_param = proc.make_string_value(str(home_dir / xml_file_name))
+              _exec.set_parameter('test_param', test_param)
               _exec.set_initial_match_selection(file_name=xml_file_name)
               _exec.apply_templates_returning_file(output_file=output_file_name)
 
@@ -311,7 +353,7 @@ def ex(ctx, node_name, xml_file_name, xsl_file_name, json_file_name, processor, 
         exit(0)
 
     if processor == "lxml":
-        ctx.create_file_from_lxml(
+        ctx.transform_with_lxml(
             home_dir=ctx.cache.home_dir,
             xml_file_name=xml_file_name,
             xsl_file_name=xsl_file_name,
@@ -319,7 +361,7 @@ def ex(ctx, node_name, xml_file_name, xsl_file_name, json_file_name, processor, 
         )
         click.echo("ran the lxml processor")
     elif "saxon" in processor:
-        ctx.create_file_from_saxonpy(
+        ctx.transform_with_saxonche(
             home_dir=ctx.cache.home_dir,
             xml_file_name=xml_file_name,
             xsl_file_name=xsl_file_name,
