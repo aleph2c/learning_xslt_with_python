@@ -384,7 +384,7 @@ python -m json.tool ./patterns/json_output2.json
 ]
 ```
 
-# Intergrating XSLT 3.0 with Python
+# Integrating XSLT 3.0 with Python
 
 The [saxonche documentation](https://pypi.org/project/saxonche/) is wrong.  It is a copy of the docs from the [saxonpy project](https://github.com/tennom/saxonpy), which is based on SaxonC-HE 11.4 and not SaxonC-HE 12.0.  If you want to get your python code to parse XML/JSON/XSLT and output XML/JSON using ``saxonche`` consider the following:
 
@@ -396,25 +396,24 @@ from saxonche import PySaxonProcessor
 def transform_with_saxonche(
     self, home_dir, xml_file_name, xsl_file_name, output_file_name
 ):
-    # Don't use the context manager if you are calling saxonica over and
-    # over again with your program.  Instead build the proc and
+    # Don't use the PySaxonProcess context manager if you are calling saxonica
+    # over and over again within your program.  Instead build the proc and
     # xsltproc once, and reference them when you need them.  If you don't do
-    # this, you will get strange memory errors. (last seen in version 11.4)
+    # this, you will get strange memory errors:
+    # "JNI_CreateJavaVM() failed with result: -5" (last seen in 11.4)
     #
-    # Example of building proc and xsltproc once and reusing them:
+    # Example of how to build the proc and xsltproc once per program invocation:
     #
-    # saxonica_globals = {}
+    # from functools import cache as cached
+    # @cached
+    # def get_cached_procs_from(*args):
+    #   proc = PySaxonProcessor(licence=False)
+    #   xsltproc = proc.new_xslt30_processor()
+    #   return proc, xsltproc
     #
     # def transform_with_saxonche(...)
-    #   if 'proc' not in saxonica_globals:
-    #     proc = PySaxonProcessor(license=False)
-    #     xsltproc = proc.new_xslt30_processor()
-    #     saxonica_globals['proc'] = proc
-    #     saxonica_globals['xsltproc'] = xsltproc
-    #   else:
-    #     proc = saxonica_globals['proc']
-    #     xsltproc = saxonica_globals['xsltproc']
-    #     # ...
+    #   proc, xsltproc = get_cached_procs_from(PySaxonProcessor)
+    #   # ...
 
     # If you are running your transforms once per program invocation
     # you can use the PySaxonProcessor context manager.
