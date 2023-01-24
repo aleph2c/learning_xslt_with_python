@@ -1,5 +1,5 @@
 home_dir: /home/scott/xslt/patterns
-output_file_name: json_output2.xml
+output_file_name: json_output2.json
 processor: saxon
-xml_file_name: json_input.json
-xsl_file_name: to_json.xsl
+xml_file_name: json_input2.json
+xsl_file_name: to_json2.xsl

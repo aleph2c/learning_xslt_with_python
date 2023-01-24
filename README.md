@@ -51,7 +51,8 @@ version of the XSLT programming language compiler and parser (Mozilla Public
 Licence) as a Python pip package.  This package is called ``saxonche``, and it
 supports XSLT 3.0, XQuery 3.1 and has a Schema Validator processor, based on
 SaxonC-HE 12.0.  The SaxonC project is a port of the Saxon Java software to C,
-so it can be used with C/C++, PHP and Python.  (see the docs below)
+so it can be used with C/C++, PHP and Python.  (see the docs below on how to use
+saxonche with Python)
 
 # Installation of two XSLT processors and a Supporting CLI
 
@@ -122,7 +123,7 @@ try cache
 {'home_dir': '/home/scott/xslt/ch3_templates', 'output_file_name':
 'TVGuide2.html', 'processor': 'lxml', 'xls_file_name': 'TVGuide2.xsl',
 'xml_file_name': 'TVGuide2.xml'}
-```
+``
 
 To run the same exercise again:
 
@@ -134,11 +135,11 @@ ran the lxml processor
 ```
 
 To try the same example with the saxon processor, you just have to tell the
-``try`` command you want to use the ``saxonpy`` processor, if the other options
+``try`` command you want to use the ``saxon`` processor, if the other options
 are not specified it will use your cached options:
 
 ```
-try ex -p saxonpy
+try ex -p saxon
 # a lot of XML
 
 ran the saxon processor
@@ -158,7 +159,7 @@ tagged with "ice" by 10 percent (see ./patterns/to_json.xs):
 Given this input:
 
 ```
-python -m json.tool ./patterns.json_input.json
+python -m json.tool ./patterns/json_input.json
 
 [
   {
@@ -197,9 +198,10 @@ Perform a transform:
 
 ```
 try -d patterns \
-  ex -j json_intput.json \
+  ex -j json_input.json \
      -l to_json.xsl \
-     -o json_output.json
+     -o json_output.json \
+     -p saxon
 ```
 
 This will create the following output:
@@ -328,10 +330,14 @@ Given this input:
 ]
 ```
 
-Perform the tranform:
+Perform the transform:
 
 ```
-try -d patterns ex -x json_input2.json -l to_json2.xsl -o json_output2.json
+try -d patterns \
+  ex -x json_input2.json \
+     -l to_json2.xsl \
+     -o json_output2.json \
+     -p saxon
 ```
 
 This will produce the following output
