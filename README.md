@@ -396,11 +396,11 @@ from saxonche import PySaxonProcessor
 def transform_with_saxonche(
     self, home_dir, xml_file_name, xsl_file_name, output_file_name
 ):
-    # Don't use the PySaxonProcess context manager if you are calling saxonica
+    # Don't use the PySaxonProcess context manager if you are calling saxonche
     # over and over again within your program.  Instead build the proc and
     # xsltproc once, and reference them when you need them.  If you don't do
     # this, you will get strange memory errors:
-    # "JNI_CreateJavaVM() failed with result: -5" (last seen in 11.4)
+    # "JNI_CreateJavaVM() failed with result: -5" (last seen in saxonc-he 11.4)
     #
     # Example of how to build the proc and xsltproc once per program invocation:
     #
@@ -416,7 +416,10 @@ def transform_with_saxonche(
     #   # ...
 
     # If you are running your transforms once per program invocation
-    # you can use the PySaxonProcessor context manager.
+    # you can use the PySaxonProcessor context manager.  Don't be fooled, given
+    # that this context manager doesn't clean up memory when it's done, it's not
+    # really behaving like a Python context manager. (see the memory bug
+    # mentioned above)
     with PySaxonProcessor(license=False) as proc:
         xsltproc = proc.new_xslt30_processor()
         xsltproc.set_cwd(str(home_dir))
