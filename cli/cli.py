@@ -1,4 +1,3 @@
-import time
 import yaml
 from pathlib import Path
 from functools import partial
@@ -190,7 +189,7 @@ class Config:
         trasform = etree.XSLT(etree.parse(str(xsl_p)))
         doc = etree.parse(str(xml_p))
         result = trasform(doc)
-        result_as_string = etree.tostring(result, pretty_print=True).decode('utf-8')
+        result_as_string = etree.tostring(result, pretty_print=True).decode("utf-8")
         print(result_as_string)
         with open(out_p, "wb") as fp:
             fp.write(etree.tostring(result, pretty_print=True))
@@ -217,45 +216,49 @@ class Config:
         #   else:
         #     proc = saxonica_globals['proc']
         #     xsltproc = saxonica_globals['xsltproc']
-        # 
+        #
         with PySaxonProcessor(license=False) as proc:
             xsltproc = proc.new_xslt30_processor()
             xsltproc.set_cwd(str(home_dir))
 
             if not Path(home_dir).exists():
-              print(f"{home_dir} doesn't exist")
-              exit(1)
+                print(f"{home_dir} doesn't exist")
+                exit(1)
 
-            if not (Path(home_dir) / xml_file_name ).exists():
-              print(f"xml_file_name: {str(Path(home_dir) / xml_file_name)} doesn't exist")
-              exit(1)
+            if not (Path(home_dir) / xml_file_name).exists():
+                print(
+                    f"xml_file_name: {str(Path(home_dir) / xml_file_name)} doesn't exist"
+                )
+                exit(1)
 
-            if not (Path(home_dir) / xsl_file_name ).exists():
-              print(f"xsl_file_name: {str(Path(home_dir) / xsl_file_name)} doesn't exist")
-              exit(1)
+            if not (Path(home_dir) / xsl_file_name).exists():
+                print(
+                    f"xsl_file_name: {str(Path(home_dir) / xsl_file_name)} doesn't exist"
+                )
+                exit(1)
 
-            if Path(xml_file_name).suffix == '.json':
-              json_input_param = proc.make_string_value(str(home_dir / xml_file_name))
-              xsltproc.set_parameter('json_input_filename', json_input_param)
+            if Path(xml_file_name).suffix == ".json":
+                json_input_param = proc.make_string_value(str(home_dir / xml_file_name))
+                xsltproc.set_parameter("json_input_filename", json_input_param)
 
             stylesheet_file = str(Path(home_dir) / xsl_file_name)
             _exec = xsltproc.compile_stylesheet(
                 stylesheet_file=stylesheet_file,
             )
             if _exec is None:
-              print("saxonica failed")
-              exit(1)
+                print("saxonica failed")
+                exit(1)
 
-            if Path(xml_file_name).suffix == '.json':
-              # it's a mystery why we have to use call_template_returning_file
-              # and not make_string_value (this isn't documented anywhere)
-              _exec.call_template_returning_file(output_file=output_file_name)
+            if Path(xml_file_name).suffix == ".json":
+                # it's a mystery why we have to use call_template_returning_file
+                # and not make_string_value (this isn't documented anywhere)
+                _exec.call_template_returning_file(output_file=output_file_name)
             else:
-              # add a test_param to validate saxon is working
-              test_param = proc.make_string_value(str(home_dir / xml_file_name))
-              _exec.set_parameter('test_param', test_param)
-              _exec.set_initial_match_selection(file_name=xml_file_name)
-              _exec.apply_templates_returning_file(output_file=output_file_name)
+                # add a test_param to validate saxon is working
+                test_param = proc.make_string_value(str(home_dir / xml_file_name))
+                _exec.set_parameter("test_param", test_param)
+                _exec.set_initial_match_selection(file_name=xml_file_name)
+                _exec.apply_templates_returning_file(output_file=output_file_name)
 
             with open(home_dir / output_file_name, "r") as fp:
                 contents = fp.read()
@@ -271,7 +274,7 @@ pass_config = click.make_pass_decorator(Config, ensure=True)
 )
 @pass_config
 def cli(ctx, home_dir):
-    '''Try an XSLT example and cache the command'''
+    """Try an XSLT example and cache the command"""
     ctx.cache_inputs(
         home_dir=home_dir, xml_file_name=None, xsl_file_name=None, processor=None
     )
@@ -281,14 +284,14 @@ def cli(ctx, home_dir):
     elif home_dir is not None and Path(home_dir).exists():
         ctx.cache.home_dir = str(Path(home_dir).resolve())
     elif home_dir is not None and not Path(home_dir).exists():
-        click.echo(f'{home_dir} does not exist')
+        click.echo(f"{home_dir} does not exist")
         exit(1)
 
 
 @cli.command
 @pass_config
 def cache(ctx):
-    '''View your command cache'''
+    """View your command cache"""
     click.echo(ctx.cache)
 
 
@@ -296,7 +299,9 @@ def cache(ctx):
 @pass_config
 @click.option("-n", "--node-name", default=None, help="Set the node name")
 @click.option("-x", "--xml", "xml_file_name", default=None, help="Set the xml file")
-@click.option("-j", "--json", "json_file_name", default=None, help="Set the json file (saxon)")
+@click.option(
+    "-j", "--json", "json_file_name", default=None, help="Set the json file (saxon)"
+)
 @click.option("-l", "--xls", "xsl_file_name", default=None, help="Set the xls file")
 @click.option("-p", "--processor", default=None, help="Set the processor (lxml|saxon)")
 @click.option(
@@ -306,8 +311,16 @@ def cache(ctx):
     default=None,
     help="Set the output file name",
 )
-def ex(ctx, node_name, xml_file_name, xsl_file_name, json_file_name, processor, output_file_name):
-    '''Run an XSLT exercise'''
+def ex(
+    ctx,
+    node_name,
+    xml_file_name,
+    xsl_file_name,
+    json_file_name,
+    processor,
+    output_file_name,
+):
+    """Run an XSLT exercise"""
     if node_name:
         xml_file_name = f"{node_name}.xml"
         xsl_file_name = f"{node_name}.xsl"
