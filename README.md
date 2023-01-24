@@ -356,10 +356,78 @@ python -m json.tool ./patterns/json_output2.json
 The [saxonche documentation](https://pypi.org/project/saxonche/) is wrong.  It is a copy of the docs from the [saxonpy project](https://github.com/tennom/saxonpy), which is based on SaxonC-HE 11.4 and not SaxonC-HE 12.0.  If you want to get your python code to parse XML/JSON/XSLT and output XML/JSON using ``saxonche`` consider the following:
 
 ```python
+
 from pathlib import Path
 from saxonche import PySaxonProcessor
 
+def transform_with_saxonche(
+    self, home_dir, xml_file_name, xsl_file_name, output_file_name
+):
+    # Don't use the context manager if you are calling saxonica over and
+    # over again with your program.  Instead build the proc and
+    # xsltproc once, and call it over and over.  If you don't do this, you
+    # will get strange memory errors. (last seen in version 11.4)
+    #
+    # Instead do something like this:
+    #
+    # saxonica_globals = {}
+    #
+    # def transform_with_saxonche(...)
+    #   if 'proc' not in saxonica_globals:
+    #     proc = PySaxonProcessor(license=False)
+    #     xsltproc = proc.new_xslt30_processor()
+    #     saxonica_globals['proc'] = proc
+    #     saxonica_globals['xsltproc'] = xsltproc
+    #   else:
+    #     proc = saxonica_globals['proc']
+    #     xsltproc = saxonica_globals['xsltproc']
+    #
+    with PySaxonProcessor(license=False) as proc:
+        xsltproc = proc.new_xslt30_processor()
+        xsltproc.set_cwd(str(home_dir))
 
+        if not Path(home_dir).exists():
+            print(f"{home_dir} doesn't exist")
+            exit(1)
+
+        if not (Path(home_dir) / xml_file_name).exists():
+            print(
+                f"xml_file_name: {str(Path(home_dir) / xml_file_name)} doesn't exist"
+            )
+            exit(1)
+
+        if not (Path(home_dir) / xsl_file_name).exists():
+            print(
+                f"xsl_file_name: {str(Path(home_dir) / xsl_file_name)} doesn't exist"
+            )
+            exit(1)
+
+        if Path(xml_file_name).suffix == ".json":
+            json_input_param = proc.make_string_value(str(home_dir / xml_file_name))
+            xsltproc.set_parameter("json_input_filename", json_input_param)
+
+        stylesheet_file = str(Path(home_dir) / xsl_file_name)
+        _exec = xsltproc.compile_stylesheet(
+            stylesheet_file=stylesheet_file,
+        )
+        if _exec is None:
+            print("saxonica failed")
+            exit(1)
+
+        if Path(xml_file_name).suffix == ".json":
+            # it's a mystery why we have to use call_template_returning_file
+            # and not make_string_value (this isn't documented anywhere)
+            _exec.call_template_returning_file(output_file=output_file_name)
+        else:
+            # add a test_param to validate saxon is working
+            test_param = proc.make_string_value(str(home_dir / xml_file_name))
+            _exec.set_parameter("test_param", test_param)
+            _exec.set_initial_match_selection(file_name=xml_file_name)
+            _exec.apply_templates_returning_file(output_file=output_file_name)
+
+        with open(home_dir / output_file_name, "r") as fp:
+            contents = fp.read()
+            print(contents)
 
 ```
 
