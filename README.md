@@ -1,4 +1,4 @@
-# Learning XSLT
+# Learning XSLT with Python
 
 XSLT is a language used to convert the data of an XML file, into another format.
 XSLT stands for eXtensible Stylesheet Language Transforms. XSLT is very
@@ -18,11 +18,11 @@ Jinja2 is a great tool for transforming small data structures, while XSLT can be
 used for arbitrarily large data sets or data streams. XSLT software has been
 compiled from XSLT.
 
-XSLT is an XML dialect, and it's an XML lisp. It is very difficult to learn XML
-from a book; If you are transcribing the book's examples, then trying to run
-those files through your python program, most of your time will be spent
-debugging, and not learning. XML books have a way of bleeding-away will-power
-because XML syntax is hard to look at.
+XSLT is an XML dialect. It is very difficult to learn XML from a book; If you
+are transcribing the book's examples, then trying to run those files through
+your python program, most of your time will be spent debugging, and not
+learning. XML books have a way of bleeding-away will-power because XML syntax is
+hard to look at.
 
 I created this repo to learn XSLT and how it can be integrated with Python. I
 wanted something that had a lazy CLI (caches previous command inputs and uses
