@@ -1,16 +1,38 @@
 # Learning XSLT
 
-XSLT is a language used to convert the data of an XML file, into another format. XSLT stands for eXtensible Stylesheet Language Transforms. XSLT is very flexible; you can convert your XML/JSON data into HTML files, SVGs or Python programs, or any other file format.
+XSLT is a language used to convert the data of an XML file, into another format.
+XSLT stands for eXtensible Stylesheet Language Transforms. XSLT is very
+flexible; you can convert your XML/JSON data into HTML files, SVGs or Python
+programs, or any other file format.
 
-XSLT is significantly more powerful than a lot of the newer templating techniques, such as Python's Jinja2 library. This is because XSLT is a fully functional programming language that contains the powerful XPath mini-tree-searching language and, within XPath, there is support for regular expressions and custom function construction. To use Jinja2, you have to have a complete understanding of the data you feed your template, but XSLT is declarative, you tell it what you want, and it figures out how to give it to you.
+XSLT is significantly more powerful than a lot of the newer templating
+techniques, such as Python's Jinja2 library. This is because XSLT is a fully
+functional programming language that contains the powerful XPath
+mini-tree-searching language and, within XPath, there is support for regular
+expressions and custom function construction. To use Jinja2, you have to have a
+complete understanding of the data you feed your template, but XSLT is
+declarative, you tell it what you want, and it figures out how to give it to
+you.
 
-Jinja2 is a great tool for transforming small data structures, while XSLT can be used for arbitrarily large data sets or data streams. XSLT software has been compiled from XSLT.
+Jinja2 is a great tool for transforming small data structures, while XSLT can be
+used for arbitrarily large data sets or data streams. XSLT software has been
+compiled from XSLT.
 
-XSLT is an XML dialect, and it's an XML lisp. It is very difficult to learn XML from a book; If you are transcribing the book's examples, then trying to run those files through your python program, most of your time will be spent debugging, and not learning. XML books have a way of bleeding-away will-power because XML syntax is hard to look at.
+XSLT is an XML dialect, and it's an XML lisp. It is very difficult to learn XML
+from a book; If you are transcribing the book's examples, then trying to run
+those files through your python program, most of your time will be spent
+debugging, and not learning. XML books have a way of bleeding-away will-power
+because XML syntax is hard to look at.
 
-I created this repo to learn XSLT and how it can be integrated with Python. I wanted something that had a lazy CLI (caches previous command inputs and uses them to minimize typing), to create an experimental environment to try the different XSLT parsers from program examples included from three training sources.
+I created this repo to learn XSLT and how it can be integrated with Python. I
+wanted something that had a lazy CLI (caches previous command inputs and uses
+them to minimize typing), to create an experimental environment to try the
+different XSLT parsers from program examples included from three training
+sources.
 
-Python does not come with an XSLT parser, but you can install external libraries that integrate the XSLT language into Python. The XSLT standard is currently at version "3.0", but most open-source tools only support version "1.0".
+Python does not come with an XSLT parser, but you can install external libraries
+that integrate the XSLT language into Python. The XSLT standard is currently at
+version "3.0", but most open-source tools only support version "1.0".
 
 To follow along, go and get a copy of "Beginning XSLT 2.0 From Novice to
 Professional" by Jeni Tennison, clone this repo and install the command line
@@ -24,9 +46,12 @@ and the pattern's code in the pattern's folder of this repo. (see the docs below
 
 An XSLT 3.0 book has not yet been published.
 
-As of Jan 13 2023, Michael Kay's company, Saxonica, has released an open-source version of the XSLT programming language compiler and parser (Mozilla Public Licence) as a Python pip package.  This package is called ``saxonche``, and it supports XSLT 3.0, XQuery 3.1 and has a Schema Validator processor, based on SaxonC-HE 12.0.  The SaxonC project is a port of the Saxon Java software to C, so it can be used with C/C++, PHP and Python.
-
-
+As of Jan 13 2023, Michael Kay's company, Saxonica, has released an open-source
+version of the XSLT programming language compiler and parser (Mozilla Public
+Licence) as a Python pip package.  This package is called ``saxonche``, and it
+supports XSLT 3.0, XQuery 3.1 and has a Schema Validator processor, based on
+SaxonC-HE 12.0.  The SaxonC project is a port of the Saxon Java software to C,
+so it can be used with C/C++, PHP and Python.  (see the docs below)
 
 # Installation of two XSLT processors and a Supporting CLI
 
@@ -365,10 +390,10 @@ def transform_with_saxonche(
 ):
     # Don't use the context manager if you are calling saxonica over and
     # over again with your program.  Instead build the proc and
-    # xsltproc once, and call it over and over.  If you don't do this, you
-    # will get strange memory errors. (last seen in version 11.4)
+    # xsltproc once, and reference them when you need them.  If you don't do
+    # this, you will get strange memory errors. (last seen in version 11.4)
     #
-    # Instead do something like this:
+    # Example of building proc and xsltproc once and reusing them:
     #
     # saxonica_globals = {}
     #
@@ -381,7 +406,10 @@ def transform_with_saxonche(
     #   else:
     #     proc = saxonica_globals['proc']
     #     xsltproc = saxonica_globals['xsltproc']
-    #
+    #     # ...
+
+    # If you are running your transforms once per program invocation
+    # you can use the PySaxonProcessor context manager.
     with PySaxonProcessor(license=False) as proc:
         xsltproc = proc.new_xslt30_processor()
         xsltproc.set_cwd(str(home_dir))
