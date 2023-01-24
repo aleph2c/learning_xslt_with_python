@@ -1,60 +1,32 @@
 # Learning XSLT
 
-XSLT is a language used to convert the data of an XML file, into another format.
-XSLT stands for eXtensible Stylesheet Language Transforms.  XSLT is very
-flexible; you can convert your XML/JSON data into HTML files, SVG images or
-Python programs, or any other file format.
+XSLT is a language used to convert the data of an XML file, into another format. XSLT stands for eXtensible Stylesheet Language Transforms. XSLT is very flexible; you can convert your XML/JSON data into HTML files, SVGs or Python programs, or any other file format.
 
-XSLT is significantly more powerful than a lot of the newer templating
-techniques, such as Python's Jinja2 library.  This is because XSLT is a fully
-functional programming language that contains the powerful XPath
-mini-tree-searching language and, within XPath, there is support for regular
-expressions and custom function construction.  To use Jinja2, you have to have a
-complete understanding of the data you feed your template, but XSLT is
-declarative, you tell it what you want, and it figures out how to give it to
-you.
+XSLT is significantly more powerful than a lot of the newer templating techniques, such as Python's Jinja2 library. This is because XSLT is a fully functional programming language that contains the powerful XPath mini-tree-searching language and, within XPath, there is support for regular expressions and custom function construction. To use Jinja2, you have to have a complete understanding of the data you feed your template, but XSLT is declarative, you tell it what you want, and it figures out how to give it to you.
 
-Jinja2 is a great tool for transforming small data structures, while XSLT
-can be used for arbitrarily large data sets or data streams.  XSLT software
-has been compiled from XSLT.
+Jinja2 is a great tool for transforming small data structures, while XSLT can be used for arbitrarily large data sets or data streams. XSLT software has been compiled from XSLT.
 
-XSLT is an XML dialect.  It is very difficult to learn XML from a book; If 
-you are transcribing the book's examples, then trying to run those files 
-through your python program, most of your time will be spent debugging, 
-and not learning.  XML books have a way of bleeding-away will-power because
-XML syntax is hard to look at.  XSLT is known as a beautiful language with 
-atrocious syntax.
+XSLT is an XML dialect, and it's an XML lisp. It is very difficult to learn XML from a book; If you are transcribing the book's examples, then trying to run those files through your python program, most of your time will be spent debugging, and not learning. XML books have a way of bleeding-away will-power because XML syntax is hard to look at.
 
-I created this repo to learn XSLT and how it can be integrated with Python.  I
-wanted something that had a lazy CLI (caches previous command inputs and uses
-them to minimize typing), and an experimental environment to try the different
-XSLT parsers from program examples included from three training sources.
+I created this repo to learn XSLT and how it can be integrated with Python. I wanted something that had a lazy CLI (caches previous command inputs and uses them to minimize typing), to create an experimental environment to try the different XSLT parsers from program examples included from three training sources.
 
-Python does not come with an XSLT parser, but you can install external libraries
-that integrate the XSLT language into Python.  The XSLT standard is currently at
-version "3.0", but most open-source tools only support version "1.0".
+Python does not come with an XSLT parser, but you can install external libraries that integrate the XSLT language into Python. The XSLT standard is currently at version "3.0", but most open-source tools only support version "1.0".
 
 To follow along, go and get a copy of "Beginning XSLT 2.0 From Novice to
 Professional" by Jeni Tennison, clone this repo and install the command line
 tools and the XSLT parsers (see below).  After that, I recommend getting a copy
 of "XSLT 2.0 and XPath 2.0 Programmer's Reference 4th Edition" by Michael Kay,
-and work through  Chapter 17: Stylesheet Design Patterns.  If you would like to
+and work through Chapter 17: Stylesheet Design Patterns.  If you would like to
 learn how to use the new XML-to-JSON, JSON-to-XML and JSON transform features of XSLT 3.0, read
 [Transforming JSON using XSLT 3.0](https://www.saxonica.com/papers/xmlprague-2016mhk.pdf),
 by Michael Kay.  There is supporting example code for some of these JSON transforms 
-and the pattern's code in the pattern's folder of this repo.
+and the pattern's code in the pattern's folder of this repo. (see the docs below)
 
 An XSLT 3.0 book has not yet been published.
 
-This package uses two XSLT python interpreters, the freely available lxml python
-library (support for XSLT version 1.0, XPath 1.0) and saxonpy (support for XSLT
-1.0, 2.0 and 3.0, and XPath 3.1).  The saxonpy pip install will only work on
-Linux.  The saxonpy package, uses the open sourced SaxonicaC-HE version of
-Michael Kay's XSLT 3.0 engine (Mozilla Public Licence).  If you would like 
-access to more of the XSLT 3.0 advanced features, like Schema support and 
-streaming transforms, you will have to pay for a licence, see 
-[the Saxonica download page](https://www.saxonica.com/download/c.xml)
-for details.
+As of Jan 13 2023, Michael Kay's company, Saxonica, has released an open-source version of the XSLT programming language compiler and parser (Mozilla Public Licence) as a Python pip package.  This package is called ``saxonche``, and it supports XSLT 3.0, XQuery 3.1 and has a Schema Validator processor, based on SaxonC-HE 12.0.  The SaxonC project is a port of the Saxon Java software to C, so it can be used with C/C++, PHP and Python.
+
+
 
 # Installation of two XSLT processors and a Supporting CLI
 
@@ -67,15 +39,6 @@ python3 -m venv venv
 pip install --upgrade pip
 pip install -e .
 source ./venv/bin/activate
-
-# If the saxonpy pip package fails to run on your system you can try building
-# the saxonica code from source and installing it into your venv
-#
-# This command will download, build andinstall the saxonica parser and fix a
-# broken *nix install of the saxonpy pip package (if you are running on windows
-# you can use the WSL or adjust the setup.py in this repo)
-#
-# python setup.py install
 ```
 
 # Running Examples
@@ -386,6 +349,18 @@ python -m json.tool ./patterns/json_output2.json
     ]
   }
 ]
+```
+
+# Intergrating XSLT 3.0 with Python
+
+The [saxonche documentation](https://pypi.org/project/saxonche/) is wrong.  It is a copy of the docs from the [saxonpy project](https://github.com/tennom/saxonpy), which is based on SaxonC-HE 11.4 and not SaxonC-HE 12.0.  If you want to get your python code to parse XML/JSON/XSLT and output XML/JSON using ``saxonche`` consider the following:
+
+```python
+from pathlib import Path
+from saxonche import PySaxonProcessor
+
+
+
 ```
 
 # Useful links
