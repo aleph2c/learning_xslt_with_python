@@ -123,7 +123,7 @@ try cache
 {'home_dir': '/home/scott/xslt/ch3_templates', 'output_file_name':
 'TVGuide2.html', 'processor': 'lxml', 'xls_file_name': 'TVGuide2.xsl',
 'xml_file_name': 'TVGuide2.xml'}
-``
+```
 
 To run the same exercise again:
 
@@ -338,11 +338,13 @@ try -d patterns \
      -l to_json2.xsl \
      -o json_output2.json \
      -p saxon
+
 ```
 
 This will produce the following output
 
 ```
+
 python -m json.tool ./patterns/json_output2.json
 
 [
