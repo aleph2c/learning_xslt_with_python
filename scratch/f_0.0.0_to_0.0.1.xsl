@@ -20,13 +20,14 @@
   This file could be one of many used to transform the customer's data to the
   current version fo the software.
 -->
+<xsl:mode on-no-match="shallow-copy"/>
 
 <xsl:output method="xml" encoding="UTF-8" indent="yes" />
 
 <xsl:variable name="old_version" as="xs:string" select="'0.0.0'" />
 <xsl:variable name="new-version" as="xs:string" select="'0.0.1'" />
 
-<xsl:template name="xsl:initial-template">
+<xsl:template match="/">
   <ooda version="{$new-version}">
   <mission></mission>
   <parent></parent>

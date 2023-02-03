@@ -1,1 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<ooda version="0.0.1">
+   <mission/>
+   <parent/>
+   <observe>
+      <goal/>
+      <summary/>
+   </observe>
+   <orient>
+      <discoveries/>
+      <questions/>
+      <ideas/>
+   </orient>
+   <decide>
+      <plan/>
+   </decide>
+   <act/>
+</ooda>
