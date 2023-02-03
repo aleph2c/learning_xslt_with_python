@@ -481,17 +481,16 @@ def transform_with_saxonche(
 
 ```
 
-# Integrating XSLT 3.0 with Multithread Python
+# Integrating XSLT 3.0 with Multithreaded Python
 
-The [saxonche library will throw StackOverFlow errors](https://saxonica.plan.io/issues/5787) when you try to instantiate in
-certain Python environments.  This bug has been given a "low" priority by
-Saxonica.  This means this library is not production ready; do you want to
-troubleshoot a StackOverFlow in production?
+The [saxonche library will throw StackOverFlow errors](https://saxonica.plan.io/issues/5787) when you try to instantiate it in
+certain Python environments (Flask, or in a thread, etc.).  This bug has been given a "low" priority by
+Saxonica.  This means this library is not production ready.
 
-But if you are willing to accept some risk, here is a demo of Python thread
+But if you are willing to accept some risk, here is a working demo of Python thread
 performing XSLT transforms using saxonche without causing StackOverFlows:
 
-```syntax
+```python
 import os
 import shutil
 from uuid import uuid1
@@ -654,10 +653,10 @@ def thread_runner(lock, task_event, input_queue, output_queue):
         )
         output_queue.put(result)
 
+# this function demontrates how to create a thread, communicate with it and stop it.
 def saxon_xslt30_transform(
     home_dir, xml_file_name, xsl_file_name, output_file_name, verbose=False
 ):
-
     global proc_globals_lock
 
     input_queue = Queue()
@@ -674,7 +673,6 @@ def saxon_xslt30_transform(
     # The task event is a flag, which when:
     # - set: means the thread should run
     # - cleared: means the thread should stop and exit
-
     task_event = ThreadEvent()
     task_event.set()
 
