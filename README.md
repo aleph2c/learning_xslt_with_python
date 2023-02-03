@@ -390,18 +390,6 @@ The [saxonche documentation](https://pypi.org/project/saxonche/) is wrong.  It 
 
 ```python
 
-# saxonc/saxonche is currently unreliable, it issues StackOverFlow errors using
-# python on a server: https://saxonica.plan.io/issues/5787
-#
-# Through experimentation I found that the following works:
-#   - Create these in the main thread:
-#       - PySaxonProcessor(licence=False) => proc
-#       - proc.new_xslt30_processor() => xsltproc
-#   - Store the proc/xsltproc in a global, DO NOT use functools.cache or you will
-#     get a StackOverFlow
-#   - Create a thread lock to defend the proc and xsltproc from being used by
-#     two threads at the same time
-
 from pathlib import Path
 from saxonche import PySaxonProcessor
 
