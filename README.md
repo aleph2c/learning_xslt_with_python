@@ -473,7 +473,14 @@ def transform_with_saxonche(
 
 The [saxonche library will throw StackOverFlow errors](https://saxonica.plan.io/issues/5787) when you try to instantiate it in
 certain Python environments (Flask, or in a thread, etc.).  This bug has been given a "low" priority by
-Saxonica.  This means this library is not production ready.
+Saxonica.  This means this library is not production ready.  If you want XSLT in
+production, use XSLT 1.0 and lxml:
+
+```python
+# This doesn't cause StackOverFlow crashes and, its documented and its
+# documentation isn't wrong
+import lxml
+```
 
 But if you are willing to accept some risk, here is a working demo of Python thread
 performing XSLT transforms using saxonche without causing StackOverFlows:
