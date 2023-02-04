@@ -60,7 +60,7 @@ in a thread.  This bug is known, and it has been given a "low" priority by Saxon
 this reason, you might want to stay away from the ``Saxonc/saxoniche`` projects for
 production until they have stabilized a bit.  If you need XSLT 3.0, consider calling out
 to the JAVA or javascript versions of Saxonica using a subprocess.  But if you are willing
-to take a risk, there is some code at the end of this doc that demonstrates how call
+to take a risk, there is some code at the end of this doc that demonstrates how to call
 ``saxonche`` in a python thread and not have it crash.
 
 # Installation of two XSLT processors and a Supporting CLI
