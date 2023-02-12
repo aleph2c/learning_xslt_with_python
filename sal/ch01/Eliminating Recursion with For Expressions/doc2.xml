@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 sp1 U (http://www.xmlspy.com) by Salvatore R. Mangano (Into Technology) -->
+<doc>
+	<section>
+		<para id="62">You want to derive an output sequence from an input sequence where each item in the output is an arbitrarily <ref idref="97"/> complex function of the input and the sizes of each sequence are not necessarily the same. <ref idref="766"/>
+	</para>`	
+	</section>
+	<section>
+	</section>
+	<section>
+		<para id="97">As I indicated in recipe 1.4, the addition of control flow constructs into an expression language like XPath might at first be perceived as odd or even misguided you will quickly overcome your doubts when you experience the liberating power of these XPath 2.0 constructs. This is especially true for the Xpath 2.0 for expression.</para>
+		<para id="108">The power of for becomes must apparent when one considers how it can be applied to reduce many complicated recursive XSLT 1.0 solutions to just a single XPath 2.0 expression. Consider the problem of computing sums in XSLT 1.0. If all you need is a simple sum, there is no problem because the built-in XPath 1.0 sum function will do fine. However, if you need to compute the sum of squares, you are forced to write a larger, more <ref idref="766"/> awkward and less transparent recursive template. In fact, a good portion of the first edition of this book was recipes for canned solutions to these recursive gymnastics. With Xpath 2.0, a sum of squares becomes nothing more than sum(for $x in $numbers return $x * $x) where $numbers contains the sequence of numbers we wish to sum over. Think of the trees that could have been saved if this facility was in XPath 1.0! </para>
+		<para id="766">However, the for expression is hiding even more power. You are not limited to just one iteration variable.  Several variables can be combined to create nested loops that create sequences from interrelated nodes in a complex document. <ref idref="108"/><ref idref="62"/><ref idref="97"/></para>
+	</section>
+</doc>

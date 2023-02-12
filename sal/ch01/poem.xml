@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<poem xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2004/07/xpath-functions" xmlns:xdt="http://www.w3.org/2004/07/xpath-datatypes">
+	<line>There once was a programmer from Nantucket.</line> 
+	<line>Who liked his bits in a bucket.</line> 
+	<line>He said with a grin</line> 
+	<line>and drops of coffee on his chin,</line> 
+  <line>"if XSLT had a left-shift, I would love it!"</line> 
+</poem>

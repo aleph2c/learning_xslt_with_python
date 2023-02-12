@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.3 U (http://www.xmlspy.com) by Salvatore R Mangano (Man Machine Interfaces) -->
+<people>
+  <person name="Al Zehtooney" age="33" sex="m" smoker="no"/>
+  <person name="Brad York" age="38" sex="m" smoker="yes"/>
+  <person name="Charles Xavier" age="32" sex="m" smoker="no"/>
+</people>

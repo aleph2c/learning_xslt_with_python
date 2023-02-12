@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-
+microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/
+REC-html40">
+  <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+    <Author>Salvatore R. Mangano</Author>
+    <LastAuthor>Salvatore R. Mangano</LastAuthor>
+    <Created>2002-08-18T00:43:49Z</Created>
+    <LastSaved>2002-08-18T02:19:21Z</LastSaved>
+    <Company>Into Technology Inc.</Company>
+    <Version>10.3501</Version>
+  </DocumentProperties>
+  <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+    <DownloadComponents/>
+    <LocationOfComponents HRef="/"/>
+  </OfficeDocumentSettings>
+  <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+    <WindowHeight>9915</WindowHeight>
+    <WindowWidth>10140</WindowWidth>
+    <WindowTopX>240</WindowTopX>
+    <WindowTopY>255</WindowTopY>
+    <ProtectStructure>False</ProtectStructure>
+    <ProtectWindows>False</ProtectWindows>
+  </ExcelWorkbook>
+  <Styles>
+    <Style ss:ID="Default" ss:Name="Normal">
+      <Alignment ss:Vertical="Bottom"/>
+      <Borders/>
+      <Font/>
+      <Interior/>
+      <NumberFormat/>
+      <Protection/>
+    </Style>
+  </Styles>
+  <Worksheet ss:Name="msft">
+    <Table ss:ExpandedColumnCount="3" ss:ExpandedRowCount="5" x:FullColumns="1" 
+    x:FullRows="1">
+      <Row>
+        <Cell>
+          <Data ss:Type="String">Date</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Price</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Volume</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell>
+          <Data ss:Type="Number">20010817</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">61.88</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">260163</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell>
+          <Data ss:Type="Number">20010820</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">62.7</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">241859</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell>
+          <Data ss:Type="Number">20010821</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">60.78</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">233989</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell>
+          <Data ss:Type="Number">20010822</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">60.66</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">387444</Data>
+        </Cell>
+      </Row>
+    </Table>
+    <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+      <Selected/>
+      <Panes>
+        <Pane>
+          <Number>3</Number>
+          <ActiveRow>11</ActiveRow>
+          <ActiveCol>5</ActiveCol>
+        </Pane>
+      </Panes>
+      <ProtectObjects>False</ProtectObjects>
+      <ProtectScenarios>False</ProtectScenarios>
+    </WorksheetOptions>
+  </Worksheet>
+</Workbook>
+

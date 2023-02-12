@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<people>
+  <class name="union"/>
+  <person>
+    <firstname>Warren</firstname>
+    <lastname>Rosenbaum</lastname>
+    <age>37</age>
+    <height>5.75</height>
+  </person>
+  <person>
+    <firstname>Dror</firstname>
+    <lastname>Seagull</lastname>
+    <age>28</age>
+    <height>5.10</height>
+  </person>
+  <person>
+    <firstname>Mike</firstname>
+    <lastname>Heavyman</lastname>
+    <age>45</age>
+    <height>6.0</height>
+  </person>
+  <person>
+    <firstname>Theresa</firstname>
+    <lastname>Archul</lastname>
+    <age>37</age>
+    <height>5.5</height>
+  </person>
+  <class name="salaried"/>
+  <person>
+    <firstname>Sal</firstname>
+    <lastname>Mangano</lastname>
+    <age>37</age>
+    <height>5.75</height>
+  </person>
+  <person>
+    <firstname>Jane</firstname>
+    <lastname>Smith</lastname>
+    <age>28</age>
+    <height>5.10</height>
+  </person>
+  <person>
+    <firstname>Rick</firstname>
+    <lastname>Winters</lastname>
+    <age>45</age>
+    <height>6.0</height>
+  </person>
+  <person>
+    <firstname>James</firstname>
+    <lastname>O'Riely</lastname>
+    <age>33</age>
+    <height>5.5</height>
+  </person>
+</people>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doc>
+  <h1>heading 1</h1>
+  <para>p1</para>
+  <para>p2</para>
+  <para>p3</para>
+  <para>p4</para>
+  <h1>heading 2</h1>
+  <para>p5</para>
+  <para>p6</para>
+  <h1>heading 3</h1>
+  <h2>sub head</h2>
+  <para>p7</para>
+  <para>p8</para>
+  <para>p9</para>
+</doc>

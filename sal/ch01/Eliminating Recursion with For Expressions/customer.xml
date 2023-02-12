@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<customers>
+	<customer>
+		<id>1</id>
+		<name>BZ Media</name>
+	</customer>
+	<customer>
+		<id>2</id>
+		<name>SIAC</name>
+	</customer>
+	<customer>
+		<id>3</id>
+		<name>NPD Group</name>
+	</customer>
+</customers>

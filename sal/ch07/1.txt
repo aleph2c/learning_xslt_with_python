@@ -1,0 +1,33 @@
+
+Name                 Age    Sex   Smoker
+--------------------|------|-----|---------
+Al Zehtooney                '|'33        '|'m          '|'no              
+Brad York                      '|'38        '|'m          '|'yes            
+Charles Xavier            '|'32        '|'m          '|'no              
+David Willimas            '|'33        '|'m          '|'no              
+Edward Ulster              '|'33        '|'m          '|'yes            
+Frank Townsend            '|'35        '|'m          '|'no              
+Greg Sutter                  '|'40        '|'m          '|'no              
+Harry Rogers                '|'37        '|'m          '|'no              
+John Quincy                  '|'43        '|'m          '|'yes            
+Kent Peterson              '|'31        '|'m          '|'no              
+Larry Newell                '|'23        '|'m          '|'no              
+Max Milton                    '|'22        '|'m          '|'no              
+Norman Lamagna            '|'30        '|'m          '|'no              
+Ollie Kensinton          '|'44        '|'m          '|'no              
+John Frank                    '|'24        '|'m          '|'no              
+Mary Williams              '|'33        '|'f          '|'no              
+Jane Frank                    '|'38        '|'f          '|'yes            
+Jo Peterson                  '|'32        '|'f          '|'no              
+Angie Frost                  '|'33        '|'f          '|'no              
+Betty Bates                  '|'33        '|'f          '|'no              
+Connie Date                  '|'35        '|'f          '|'no              
+Donna Finster              '|'20        '|'f          '|'no              
+Esther Gates                '|'37        '|'f          '|'no              
+Fanny Hill                    '|'33        '|'f          '|'yes            
+Geta Iota                      '|'27        '|'f          '|'no              
+Hillary Johnson          '|'22        '|'f          '|'no              
+Ingrid Kent                  '|'21        '|'f          '|'no              
+Jill Larson                  '|'20        '|'f          '|'no              
+Kim Mulrooney              '|'41        '|'f          '|'no              
+Lisa Nevins                  '|'21        '|'f          '|'no              

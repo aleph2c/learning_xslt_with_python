@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sales>
+  <product sku="10000" sales="90000.00" region="NE"/>
+  <product sku="10000" sales="10000.00" region="NW"/>
+  <product sku="10000" sales="55000.00" region="SE"/>
+  <product sku="10000" sales="32000.00" region="SW"/>
+  <product sku="10000" sales="95000.00" region="NC"/>
+  <product sku="10000" sales="88000.00" region="SC"/>
+  <product sku="20000" sales="77000.00" region="NE"/>
+  <product sku="20000" sales="11100.00" region="NW"/>
+  <product sku="20000" sales="33210.00" region="SE"/>
+  <product sku="20000" sales="78000.00" region="SW"/>
+  <product sku="20000" sales="105000.00" region="NC"/>
+  <product sku="20000" sales="12300.00" region="SC"/>
+  <product sku="30000" sales="1000.00" region="NE"/>
+  <product sku="30000" sales="5100.00" region="NW"/>
+  <product sku="30000" sales="3210.00" region="SE"/>
+  <product sku="30000" sales="8000.00" region="SW"/>
+  <product sku="30000" sales="5000.00" region="NC"/>
+  <product sku="30000" sales="11300.00" region="SC"/>
+</sales>

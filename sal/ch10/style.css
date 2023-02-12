@@ -1,0 +1,52 @@
+body
+{
+   margin-left:100;
+   margin-right:100;
+   margin-top:50;
+   margin-bottom:50;
+   font-family: Times serif;
+   font-size : 12pt; 
+   color:black; 
+}
+
+div.chapter
+{
+   text-align:right;
+   font-size : 48pt; 
+   font-weight: bold; 
+   padding-bottom:10; 
+   color:red;
+}
+
+div.title
+{
+   font-size : 24pt; 
+   font-family: Times serif; 
+   padding-bottom:150; 
+   color:red"
+}
+
+div.epigraph
+{   
+   font-style:: italic;
+} 
+
+div.epigraph, div.epigraph-attribution
+{
+   text-align: right; 
+   font-size : 10pt; 
+   padding-top: 4; 
+   padding-bottom: 4;
+}
+
+h1
+{
+   font-size : 18pt; 
+   font-weight : bold;
+} 
+
+h2
+{
+   font-size : 14pt; 
+   font-weight : bold";
+}  

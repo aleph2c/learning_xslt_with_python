@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.3 U (http://www.xmlspy.com) by Salvatore R Mangano (Man Machine Interfaces) -->
+<people>
+  <person name="Al Zehtooney" age="33" sex="m" smoker="no"/>
+  <person name="Brad York" age="38" sex="m" smoker="yes"/>
+  <person name="Charles Xavier" age="32" sex="m" smoker="no"/>
+  <person name="David Willimas" age="33" sex="m" smoker="no"/>
+  <person name="Edward Ulster" age="33" sex="m" smoker="yes"/>
+  <person name="Frank Townsend" age="35" sex="m" smoker="no"/>
+  <person name="Greg Sutter" age="40" sex="m" smoker="no"/>
+  <person name="Harry Rogers" age="37" sex="m" smoker="no"/>
+  <person name="John Quincy" age="43" sex="m" smoker="yes"/>
+  <person name="Kent Peterson" age="31" sex="m" smoker="no"/>
+  <person name="Larry Newell" age="23" sex="m" smoker="no"/>
+  <person name="Max Milton" age="22" sex="m" smoker="no"/>
+  <person name="Norman Lamagna" age="30" sex="m" smoker="no"/>
+  <person name="Ollie Kensinton" age="44" sex="m" smoker="no"/>
+  <person name="John Frank" age="24" sex="m" smoker="no"/>
+  <person name="Mary Williams" age="33" sex="f" smoker="no"/>
+  <person name="Jane Frank" age="38" sex="f" smoker="yes"/>
+  <person name="Jo Peterson" age="32" sex="f" smoker="no"/>
+  <person name="Angie Frost" age="33" sex="f" smoker="no"/>
+  <person name="Betty Bates" age="33" sex="f" smoker="no"/>
+  <person name="Connie Date" age="35" sex="f" smoker="no"/>
+  <person name="Donna Finster" age="20" sex="f" smoker="no"/>
+  <person name="Esther Gates" age="37" sex="f" smoker="no"/>
+  <person name="Fanny Hill" age="33" sex="f" smoker="yes"/>
+  <person name="Geta Iota" age="27" sex="f" smoker="no"/>
+  <person name="Hillary Johnson" age="22" sex="f" smoker="no"/>
+  <person name="Ingrid Kent" age="21" sex="f" smoker="no"/>
+  <person name="Jill Larson" age="20" sex="f" smoker="no"/>
+  <person name="Kim Mulrooney" age="41" sex="f" smoker="no"/>
+  <person name="Lisa Nevins" age="21" sex="f" smoker="no"/>
+</people>

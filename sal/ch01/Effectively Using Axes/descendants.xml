@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Test id="descendants">
+	<parent>
+		<X id="1"/>
+		<X id="2"/>
+		<Y id="3">
+			<X id="3-1"/>
+			<Y id="3-2"/>
+			<X id="3-3"/>
+		</Y>
+		<X id="4"/>
+		<Y id="5"/>
+		<Z id="6"/>
+		<X id="7"/>
+		<X id="8"/>
+		<Y id="9"/>
+	</parent>
+</Test>

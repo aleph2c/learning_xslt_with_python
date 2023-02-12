@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="2.0" 
+                           xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+                           xmlns:xs="http://www.w3.org/2001/XMLSchema" >
+	<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+
+	<xsl:param name="titlePrefix" select=" '' " as="xs:string"/>
+	
+	<xsl:template match="/">
+    <html>
+      <head>
+        <title><xsl:value-of select="concat($titlePrefix, /*/title)"/></title>
+      </head>
+      <body>
+        <xsl:call-template name="standard-processing-sequence"/>
+      </body>
+    </html>
+	</xsl:template>
+
+  <xsl:template name="standard-processing-sequence">
+	<xsl:apply-templates mode="front-matter">
+			<xsl:with-param name="mode" select=" 'front-matter' " tunnel="yes" as="xs:string"/>
+		</xsl:apply-templates>
+		
+		<xsl:apply-templates mode="toc">
+			<xsl:with-param name="mode" select=" 'toc' " tunnel="yes" as="xs:string"/>
+		</xsl:apply-templates>
+		
+		<xsl:apply-templates mode="body">
+			<xsl:with-param name="mode" select=" 'body' " tunnel="yes" as="xs:string"/>
+		</xsl:apply-templates>
+		
+		<xsl:apply-templates mode="appendicies">
+			<xsl:with-param name="mode" select=" 'appendicies' " tunnel="yes" as="xs:string"/>
+		</xsl:apply-templates>
+	</xsl:template>
+	
+	<xsl:template match="/*" mode="#all">
+		<xsl:param name="mode"  tunnel="yes" as="xs:string"/>
+    <div class="{$mode}">
+      <xsl:apply-templates mode="#current"/>
+    </div>
+  </xsl:template>
+
+  <!-- Default templates for various modes go here - these can be overridden in importing stylesheets -->
+  
+	
+</xsl:stylesheet>

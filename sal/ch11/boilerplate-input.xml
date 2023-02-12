@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product-sales description="Top 5 Product Sales (in $1000)">
+  <product name="Widget">
+    <sales multiple="1000" currency="USD">70</sales>
+  </product>
+  <product name="Foo Bar">
+    <sales multiple="1000" currency="USD">880</sales>
+  </product>
+  <product name="Grunt Master 9000">
+    <sales multiple="1000" currency="USD">1000</sales>
+  </product>
+  <product name="Spam Slicer">
+    <sales multiple="1000" currency="USD">532</sales>
+  </product>
+  <product name="Wonder Bar">
+    <sales multiple="1000" currency="USD">100</sales>
+  </product>
+</product-sales>

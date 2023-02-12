@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orders>
+	<order>
+		<custID>1</custID>
+		<total>100.00</total>
+	</order>
+	<order>
+		<custID>1</custID>
+		<total>1777.00</total>
+	</order>
+	<order>
+		<custID>1</custID>
+		<total>10000.00</total>
+	</order>
+	<order>
+		<custID>2</custID>
+		<total>17000.00</total>
+	</order>
+	<order>
+		<custID>2</custID>
+		<total>21100.00</total>
+	</order>
+</orders>
