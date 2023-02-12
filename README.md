@@ -1,5 +1,9 @@
 # Learning XSLT with Python
 
+**WARNING:**
+Don't use saxonche, it triggers StackOverFlow errors and it's documentation is wrong 
+(copied and pasted from someone else's project).
+
 XSLT is a language used to convert the data of an XML file, into another format.
 XSLT stands for eXtensible Stylesheet Language Transforms. XSLT is very
 flexible; you can convert your XML/JSON data into HTML files, SVG or Python
@@ -119,7 +123,7 @@ Options:
 To run an example:
 
 ```
-try -d ch2_html_from_xml ex -n TVGuide2 -p lxml
+try -d jenni/ch2_html_from_xml ex -n TVGuide2 -p lxml
 # a lot of XML
 
 ran the lxml process
@@ -129,7 +133,7 @@ To see your cache:
 
 ```
 try cache
-{'home_dir': '/home/scott/xslt/ch3_templates', 'output_file_name':
+{'home_dir': 'jenni/home/scott/xslt/ch3_templates', 'output_file_name':
 'TVGuide2.html', 'processor': 'lxml', 'xls_file_name': 'TVGuide2.xsl',
 'xml_file_name': 'TVGuide2.xml'}
 ```
@@ -168,7 +172,7 @@ tagged with "ice" by 10 percent (see ./patterns/to_json.xs):
 Given this input:
 
 ```
-python -m json.tool ./patterns/json_input.json
+python -m json.tool ./michael/json_input.json
 
 [
   {
@@ -203,10 +207,10 @@ python -m json.tool ./patterns/json_input.json
 ]
 ```
 
-Perform a transform:
+Perform a transform (saxonpy works, saxonche stackoverflow):
 
 ```
-try -d patterns \
+try -d michael \
   ex -j json_input.json \
      -l to_json.xsl \
      -o json_output.json \
@@ -339,10 +343,10 @@ Given this input:
 ]
 ```
 
-Perform the transform:
+Perform the transform (saxonpy works, saxonche stackoverflow):
 
 ```
-try -d patterns \
+try -d michael \
   ex -x json_input2.json \
      -l to_json2.xsl \
      -o json_output2.json \
@@ -716,10 +720,12 @@ if __name__ == '__main__':
 
 # Useful links
 
-- [XSLT XPath Tutorial by arbitrarytechnology](https://www.youtube.com/watch?v=WggVR4YI5oI)
-- [Building saxonC-HE from source](https://stackoverflow.com/a/74017370)
+- [saxonche docs are wrong](https://saxonica.plan.io/issues/5842)
+- [saxonche fails with stackoverflow errors](https://saxonica.plan.io/issues/5787)
+- [interview with Michael Kay](https://www.youtube.com/watch?v=2Zt9oJtFKGw)
+- [XSLT 3.0 Prague 2016 resources](https://github.com/Saxonica/Prague2016)
+- [XSLT XPath Tutorial by arbitrarytechnology](https://www.youtube.com/watch?v=WggVR4YI5oI]
 - [Dealing with recursion depth](https://stackoverflow.com/questions/5435881/xslt-processing-recursion-depth)
 - [White space article for XSLT 3.0](https://blogs.sap.com/2020/02/26/thinking-in-xslt-filtering-xml-elements/)
 - [Jeni's white space comments on SO](https://stackoverflow.com/a/185048)
-- [XSLT 3.0 Prague 2016 resources](https://github.com/Saxonica/Prague2016)
 - [Saxon XSLT 3.0 JSON Whitepaper](https://www.saxonica.com/papers/xmlprague-2016mhk.pdf)
