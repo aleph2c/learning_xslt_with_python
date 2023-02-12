@@ -2,7 +2,7 @@
 
 XSLT is a language used to convert the data of an XML file, into another format.
 XSLT stands for eXtensible Stylesheet Language Transforms. XSLT is very
-flexible; you can convert your XML/JSON data into HTML files, SVGs or Python
+flexible; you can convert your XML/JSON data into HTML files, SVG or Python
 programs, or any other file format.
 
 XSLT is significantly more powerful than a lot of the newer templating
@@ -51,8 +51,17 @@ version of the XSLT programming language compiler and parser (Mozilla Public
 Licence) as a Python pip package.  This package is called ``saxonche``, and it
 supports XSLT 3.0, XQuery 3.1 and has a Schema Validator processor, based on
 SaxonC-HE 12.0.  The SaxonC project is a port of the Saxon Java software to C,
-so it can be used with C/C++, PHP and Python.  (see the docs below on how to use
-saxonche with Python)
+so it can be used with C/C++, PHP and Python.
+
+The ``saxonche`` library's documentation is wrong.  If you try to follow their 
+instructions your program won't run.  The ``saxonche`` library also causes StackOverFlow
+errors when you try and instantiate it within certain Python environments, like Flask or
+in a thread.  This bug is known, and it has been given a "low" priority by Saxonica.  For 
+this reason, you might want to stay away from the ``Saxonc/saxoniche`` projects for
+production until they have stabilized a bit.  If you need XSLT 3.0, consider calling out
+to the JAVA or javascript versions of Saxonica using a subprocess.  But if you are willing
+to take a risk, there is some code at the end of this doc that demonstrates how to call
+``saxonche`` in a python thread and not have it crash.
 
 # Installation of two XSLT processors and a Supporting CLI
 
@@ -477,8 +486,8 @@ Saxonica.  This means this library is not production ready.  If you want XSLT in
 production, use XSLT 1.0 and lxml:
 
 ```python
-# This doesn't cause StackOverFlow crashes and, its documented and its
-# documentation isn't wrong
+# This doesn't cause StackOverFlow crashes and, its fully documented 
+# and its documentation isn't wrong
 import lxml
 ```
 
