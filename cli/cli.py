@@ -138,24 +138,25 @@ def __saxon_xslt30_transform(
             os.remove(output_file_path)
             output_file_path = stashed_output_file_path
 
-        # post test to see if the provided xsl_file_name created valid xml
-        xsl_post_test_path = ValidateXmlPath
+        if Path(output_file_name).suffix == ".xml":
+            # post test to see if the provided xsl_file_name created valid xml
+            xsl_post_test_path = ValidateXmlPath
 
-        if not (xsl_post_test_path).exists():
-            result = f"xsl_file_name:\n{xsl_post_test_path}\ndoesn't exist"
-            lock.release()
-            return result
+            if not (xsl_post_test_path).exists():
+                result = f"xsl_file_name:\n{xsl_post_test_path}\ndoesn't exist"
+                lock.release()
+                return result
 
-        _exec = xsltproc.compile_stylesheet(stylesheet_file=str(xsl_post_test_path))
+            _exec = xsltproc.compile_stylesheet(stylesheet_file=str(xsl_post_test_path))
 
-        _exec.transform_to_string(
-            source_file=str(output_file_path),
-        )
-        if _exec.exception_occurred:
-            saxon_error = f"{_exec.error_message}"
-            _exec.exception_clear()
-            lock.release()
-            raise RuntimeError(saxon_error)
+            _exec.transform_to_string(
+                source_file=str(output_file_path),
+            )
+            if _exec.exception_occurred:
+                saxon_error = f"{_exec.error_message}"
+                _exec.exception_clear()
+                lock.release()
+                raise RuntimeError(saxon_error)
         del _exec
 
     if verbose:
