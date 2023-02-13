@@ -1,5 +1,9 @@
 # Learning XSLT with Python
 
+**WARNING:**
+Don't use saxonche, it triggers StackOverFlow errors and it's documentation is wrong 
+(copied and pasted from someone else's project).
+
 XSLT is a language used to convert the data of an XML file, into another format.
 XSLT stands for eXtensible Stylesheet Language Transforms. XSLT is very
 flexible; you can convert your XML/JSON data into HTML files, SVG or Python
@@ -717,8 +721,8 @@ if __name__ == '__main__':
 
 # Testing XPath
 
-Here we run an XPath expression against the "_1.1.xml" file in the "sal/ch01"
-directory, then cache the results:
+Here we run an XPath expression against the ``_1.1.xml`` file in the
+``sal/ch01`` directory, then cache the command:
 
 ```
 try -d sal/ch01 xpath -x "_1.1.xml" -p "//parent/X"
