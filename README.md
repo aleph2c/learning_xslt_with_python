@@ -1,9 +1,5 @@
 # Learning XSLT with Python
 
-**WARNING:**
-Don't use saxonche, it triggers StackOverFlow errors and it's documentation is wrong 
-(copied and pasted from someone else's project).
-
 XSLT is a language used to convert the data of an XML file, into another format.
 XSLT stands for eXtensible Stylesheet Language Transforms. XSLT is very
 flexible; you can convert your XML/JSON data into HTML files, SVG or Python
