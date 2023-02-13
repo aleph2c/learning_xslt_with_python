@@ -1,5 +1,5 @@
-home_dir: /home/scott/xslt/michael
-output_file_name: json_output2.json
+home_dir: /home/scott/xslt/sal/ch01
+output_file_name: _1.1.txt
 processor: saxon
-xml_file_name: json_input2.json
-xsl_file_name: to_json2.xsl
+xml_file_name: _1.1.xml
+xsl_file_name: _1.1.xsl

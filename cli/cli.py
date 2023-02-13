@@ -17,6 +17,7 @@ from threading import Event as ThreadEvent
 import click
 from lxml import etree
 from saxonche import PySaxonProcessor
+from saxonche import PyXPathProcessor
 
 
 def pp(item):
@@ -189,6 +190,18 @@ def thread_runner(lock, task_event, input_queue, output_queue):
 
 
 
+def xpath_with_saxon(
+    home_dir, xml_file_name, pattern
+  ):
+    with PySaxonProcessor(license=False) as proc:
+      xpath_processor = proc.new_xpath_processor()
+      xml_as_string = ""
+      with open((Path(home_dir) / xml_file_name), "r") as fp:
+        xml_as_string = fp.read()
+      node = proc.parse_xml(xml_text=xml_as_string)
+      xpath_processor.set_context(xdm_item=node)
+      item = xpath_processor.evaluate(pattern)
+      print(item)
 
 
 def saxon_xslt30_transform(
@@ -513,6 +526,25 @@ def cache(ctx):
     """View your command cache"""
     click.echo(ctx.cache)
 
+@cli.command
+@click.option("-x", "--xml", "xml_file_name", default=None, help="Set the xml file")
+@click.option("-p", "--pattern", default=None, help="Pattern")
+@pass_config
+def xpath(
+    ctx,
+    xml_file_name,
+    pattern,
+):
+
+  if xml_file_name:
+      ctx.cache.xml_file_name = xml_file_name
+  else:
+      xml_file_name = ctx.cache.xml_file_name
+  xpath_with_saxon(
+            home_dir=ctx.cache.home_dir,
+            xml_file_name=xml_file_name,
+            pattern=pattern
+  )
 
 @cli.command
 @pass_config

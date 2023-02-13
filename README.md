@@ -716,7 +716,31 @@ if __name__ == '__main__':
         home_dir, xml_file_name, xsl_file_name, output_file_name, verbose=True
     )
     print(result)
+
 ```
+
+# Testing XPath
+
+Here we run an XPath expression against the "_1.1.xml" file in the "sal/ch01"
+directory, then cache the results:
+
+```
+try -d sal/ch01 xpath -x "_1.1.xml" -p "//parent/X"
+
+<X id="1"/>
+<X id="2"/>
+<X id="4"/>
+<X id="7"/>
+<X id="8"/>
+```
+
+To run the next xpath query against the same file:
+
+```
+try xpath -p "//parent/X[1]"
+<X id="1" />
+```
+
 
 # Useful links
 
