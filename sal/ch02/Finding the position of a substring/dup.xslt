@@ -4,7 +4,6 @@ xmlns:ckbk="http://www.oreilly.com/catalog/xsltckbk">
 
   <xsl:output method="text"/>
 
-
   <xsl:template match="/">
     <xsl:if test="ckbk:dup('a') ne 'aa'">
       <xsl:message terminate="yes">

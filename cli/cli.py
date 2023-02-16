@@ -261,6 +261,7 @@ class CliCache:
         xsl_file_name=None,
         processor=None,
         output_file_name=None,
+        context=None,
     ):
         self._cache = None
         self.cache_yml_path = CliCache.PathToCache
@@ -272,6 +273,7 @@ class CliCache:
             self._cache["xsl_file_name"] = None
             self._cache["processor"] = None
             self._cache["output_file_name"] = None
+            self._cache["context"] = None
 
             if not self.cache_yml_path.exists():
                 with open(self.cache_yml_path, "wt") as f:
@@ -365,6 +367,18 @@ class CliCache:
         with self.cached() as cache:
             cache["output_file_name"] = output_file_name
 
+    @property
+    def context(self):
+        result = None
+        with self.cached() as cache:
+            result = cache["context"]
+        return result
+
+    @context.setter
+    def context(self, context):
+        with self.cached() as cache:
+            cache["context"] = context
+
 
 class Config:
     def __init__(self):
@@ -377,7 +391,8 @@ class Config:
         self.cache.xsl_file_name = None
         self.cache.processor = None
 
-    def cache_inputs(self, home_dir, xml_file_name, xsl_file_name, processor):
+    def cache_inputs(self, home_dir, xml_file_name, xsl_file_name, processor,
+        context):
         cache_exists = True if CliCache.exists() else False
 
         if cache_exists:
@@ -390,6 +405,8 @@ class Config:
                 xsl_file_name = self.cache.xsl_file_name
             if processor is None:
                 processor = self.cache.processor
+            if context is None:
+                context = self.cache.context
 
         else:
             if home_dir is None:
@@ -399,11 +416,13 @@ class Config:
                 xml_file_name=None,
                 xsl_file_name=None,
                 processor=None,
+                context=None,
             )
 
         self.cache.xml_file_name = xml_file_name
         self.cache.xsl_file_name = xsl_file_name
         self.cache.processor = processor
+        self.cache.context = context
 
     def transform_with_lxml(
         self, home_dir, xml_file_name, xsl_file_name, output_file_name
@@ -508,7 +527,8 @@ pass_config = click.make_pass_decorator(Config, ensure=True)
 def cli(ctx, home_dir):
     """Try an XSLT example and cache the command"""
     ctx.cache_inputs(
-        home_dir=home_dir, xml_file_name=None, xsl_file_name=None, processor=None
+        home_dir=home_dir, xml_file_name=None, xsl_file_name=None,
+        processor=None, context=None
     )
     if ctx.cache.home_dir is None:
         ctx.cache.home_dir = str(PathToDefault)
@@ -527,23 +547,58 @@ def cache(ctx):
     click.echo(ctx.cache)
 
 @cli.command
-@click.option("-x", "--xml", "xml_file_name", default=None, help="Set the xml file")
+@click.option("-x", "--xml", "xml_file_name", default=None, help="Set the xml file (Cachable)")
 @click.option("-p", "--pattern", default=None, help="Pattern")
+@click.option("-c", "--context", default=None, help="Cachable context")
+@click.option("--cache", is_flag=True, default=False, help="Reflect upon the Cache")
+@click.option("-v", "--version", is_flag=True, default=False, help="Output the XPath version")
 @pass_config
 def xpath(
     ctx,
     xml_file_name,
     pattern,
+    context,
+    cache,
+    version,
 ):
+  '''Test an XPath query on a given xml doc and context'''
+  xpath_version = "3.1"
+  if version:
+      click.echo(f"XPath {xpath_version}")
+      exit(0)
+
+  if cache:
+      click.echo(f"XPath cache:")
+      home_dir = str(ctx.cache.home_dir)
+      xml_file_name = ctx.cache.xml_file_name
+      context = ctx.cache.context
+      click.echo(f"  home_dir: {home_dir}")
+      click.echo(f"  xml_file_name: {xml_file_name}")
+      click.echo(f"  context: {context}")
+      exit(0)
 
   if xml_file_name:
       ctx.cache.xml_file_name = xml_file_name
   else:
       xml_file_name = ctx.cache.xml_file_name
+
+  if context or context == '':
+    ctx.cache.context = context
+  else:
+    context = ctx.cache.context
+
+  if ctx.cache.context:
+    click.echo(f"context: {ctx.cache.context}")
+
+  if context:
+    full_pattern = context + pattern
+  else:
+    full_pattern = pattern
+
   xpath_with_saxon(
             home_dir=ctx.cache.home_dir,
             xml_file_name=xml_file_name,
-            pattern=pattern
+            pattern=full_pattern
   )
 
 @cli.command

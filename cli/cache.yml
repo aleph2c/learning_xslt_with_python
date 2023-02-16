@@ -1,5 +1,6 @@
+context: /Test/parent/
 home_dir: /home/scott/xslt/sal/ch01
 output_file_name: _1.1.txt
 processor: saxon
-xml_file_name: _1.1.xml
+xml_file_name: 1.2.0.xml
 xsl_file_name: _1.1.xsl

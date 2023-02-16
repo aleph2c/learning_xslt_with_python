@@ -53,9 +53,9 @@ An XSLT 3.0 book has not yet been published.
 As of Jan 13 2023, Michael Kay's company, Saxonica, has released an open-source
 version of the XSLT programming language compiler and parser (Mozilla Public
 Licence) as a Python pip package.  This package is called ``saxonche``, and it
-supports XSLT 3.0, XQuery 3.1 and has a Schema Validator processor, based on
-SaxonC-HE 12.0.  The SaxonC project is a port of the Saxon Java software to C,
-so it can be used with C/C++, PHP and Python.
+supports XSLT 3.0, XPath 3.1, XQuery 3.1, XSD 1.1 and has a Schema Validator
+processor, based on SaxonC-HE 12.0.  The SaxonC project is a port of the Saxon
+Java software to C, so it can be used with C/C++, PHP and Python.
 
 The ``saxonche`` library's documentation is wrong.  If you try to follow their 
 instructions your program won't run.  The ``saxonche`` library also causes StackOverFlow

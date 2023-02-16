@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Test xmlns:NS="http://www.ora.com/xstlcbk/1"
+  xmlns:NS2="http://www.ora.com/xstlcbk/
+  2">
+  <NS:A id="1"/>
+  <NS2:A id="2"/>
+  <NS:B id="3"/>
+  <NS2:B id="3"/>
+</Test>

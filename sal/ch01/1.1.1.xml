@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Test id="preceding-siblings">
+	<A id="1"/>
+	<A id="2"/>
+	<B id="3"/>
+	<A id="4"/>
+	<B id="5"/>
+	<C id="6"/>
+	<A id="7"/>
+	<A id="8"/>
+	<B id="9"/>
+</Test>

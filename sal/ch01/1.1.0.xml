@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Test id="descendants">
 	<parent>
-    <X id="1" />
-    <X id="2" />
+		<X id="1" />
+		<X id="2" />
 		<Y id="3">
 			<X id="3-1"/>
 			<Y id="3-2"/>
