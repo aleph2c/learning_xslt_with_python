@@ -1,8 +1,6 @@
 # Learning XSLT with Python
 
 **WARNING:**
-Don't use saxonche, it triggers StackOverFlow errors and it's documentation is wrong 
-(copied and pasted from someone else's project).
 
 XSLT is a language used to convert the data of an XML file, into another format.
 XSLT stands for eXtensible Stylesheet Language Transforms. XSLT is very
@@ -12,7 +10,7 @@ programs, or any other file format.
 XSLT is significantly more powerful than a lot of the newer templating
 techniques, such as Python's Jinja2 library. This is because XSLT is a fully
 functional programming language that contains the powerful XPath
-mini-tree-searching language and, within XPath, there is support for regular
+tree-language and, within XPath, there is support for regular
 expressions and custom function construction. To use Jinja2, you have to have a
 complete understanding of the data you feed your template, but XSLT is
 declarative, you tell it what you want, and it figures out how to give it to
@@ -20,13 +18,14 @@ you.
 
 Jinja2 is a great tool for transforming small data structures, while XSLT can be
 used for arbitrarily large data sets or data streams. XSLT software has been
-compiled from XSLT.
+compiled from XSLT.  XSLT is an XML dialect, so you can use XSLT to transform
+your XSLT.
 
-XSLT is an XML dialect. It is very difficult to learn XML from a book; If you
-are transcribing the book's examples, then trying to run those files through
-your python program, most of your time will be spent debugging, and not
-learning. XML books have a way of bleeding-away will-power because XML syntax is
-hard to look at.
+But, it is very difficult to learn XSLT from a book; If you are transcribing the 
+book's examples, then trying to run those files through your python program,
+most of your time will be spent debugging, and not learning.  What makes this
+even harder, is that you have to hold a picture of multiple graphs in your head all
+while you are trying to rememmber the new syntax and semantics.  It can be challenging.
 
 I created this repo to learn XSLT and how it can be integrated with Python. I
 wanted something that had a lazy CLI (caches previous command inputs and uses
@@ -47,6 +46,10 @@ learn how to use the new XML-to-JSON, JSON-to-XML and JSON transform features of
 [Transforming JSON using XSLT 3.0](https://www.saxonica.com/papers/xmlprague-2016mhk.pdf),
 by Michael Kay.  There is supporting example code for some of these JSON transforms 
 and the pattern's code in the pattern's folder of this repo. (see the docs below)
+Finally, get a copy of Sal Mangano's XSLT Cookbook, then work through the examples as lab work.
+I found that I was completely incapable of writing basic programs after reading
+Jenni's book (you have to wait till page 233 to learn about variables), but with Sal's 
+take you can do hands on examples, and train your intuition on how to think XPath and XSLT.
 
 An XSLT 3.0 book has not yet been published.
 
@@ -62,10 +65,10 @@ instructions your program won't run.  The ``saxonche`` library also causes Stack
 errors when you try and instantiate it within certain Python environments, like Flask or
 in a thread.  This bug is known, and it has been given a "low" priority by Saxonica.  For 
 this reason, you might want to stay away from the ``Saxonc/saxoniche`` projects for
-production until they have stabilized a bit.  If you need XSLT 3.0, consider calling out
+production until they have stabilized.  If you need XSLT 3.0, consider calling out
 to the JAVA or javascript versions of Saxonica using a subprocess.  But if you are willing
 to take a risk, there is some code at the end of this doc that demonstrates how to call
-``saxonche`` in a python thread and not have it crash.
+``saxonche`` in a python thread and not have it crash (I built it through guess-work).
 
 # Installation of two XSLT processors and a Supporting CLI
 
