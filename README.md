@@ -22,7 +22,7 @@ your XSLT.
 But, it is very difficult to learn XSLT from a book; If you are transcribing the 
 book's examples, then trying to run those files through your python program,
 most of your time will be spent debugging, and not learning.  What makes this
-even harder, is that you have to hold a picture of multiple graphs in your head all
+even harder, is that you have to hold a picture of multiple graphs in your head
 while you are trying to rememmber the new syntax and semantics.  It can be challenging.
 
 I created this repo to learn XSLT and how it can be integrated with Python. I
@@ -31,9 +31,11 @@ them to minimize typing), to create an experimental environment to try the
 different XSLT parsers from program examples included from three training
 sources.
 
-Python does not come with an XSLT parser, but you can install external libraries
+Python does not come with a modern XSLT parser, but you can install external libraries
 that integrate the XSLT language into Python. The XSLT standard is currently at
 version "3.0", but most open-source tools only support version "1.0".
+
+An XSLT 3.0 book has not yet been published.  There are lots of XSLT 2.0 books.
 
 To follow along, go and get a copy of "Beginning XSLT 2.0 From Novice to
 Professional" by Jeni Tennison, clone this repo and install the command line
@@ -45,12 +47,7 @@ XSLT 3.0, read [Transforming JSON using XSLT 3.0](https://www.saxonica.com/paper
 by Michael Kay.  There is supporting example code for some of these JSON
 transforms and the pattern's code in the pattern's folder of this repo. (see the
 docs below) Finally, get a copy of Sal Mangano's XSLT Cookbook, then work
-through the examples as lab work.  I found that I was completely incapable of
-writing basic programs after reading Jenni's book (you have to wait till page
-233 to learn about variables), but with Sal's take you can do hands on examples,
-and train your intuition on how to think XPath and XSLT.
-
-An XSLT 3.0 book has not yet been published.
+through his examples as lab work.
 
 As of Jan 13 2023, Michael Kay's company, Saxonica, has released an open-source
 version of the XSLT programming language compiler and parser (Mozilla Public
@@ -58,12 +55,14 @@ Licence) as a Python pip package.  This package is called ``saxonche``, and it
 supports XSLT 3.0, XPath 3.1, XQuery 3.1, XSD 1.1 and has a Schema Validator
 processor, based on SaxonC-HE 12.0.  The SaxonC project is a port of the Saxon
 Java software to C, so it can be used with C/C++, PHP and Python.  But, before
-you get excited, know you probably shouldn't use this library.
+you get excited, know that you should avoid this library.
 
 The ``saxonche`` library's documentation is wrong.  If you try to follow their
-instructions your program won't run.  These docs were copies from the
-``saxonpy`` library, written by non-saxonica people, which was build to support
-an earlier version of the saxon api.
+instructions your program won't run.  These docs were copied and pasted from the
+``saxonpy`` library, written by non-saxonica people.  The ``saxonpy`` library was
+build to support an earlier version of the saxon api.  If you only need to 
+run your python/XSLT programs in Linux use the ``saxonpy`` library.  If you need
+to run your code on a mac, you are stuck with ``saxonche``.
 
 The ``saxonche`` library also causes StackOverFlow errors when you try and
 instantiate it within certain Python environments, like Flask or in a thread.
@@ -73,18 +72,19 @@ until it has stabilized.  But if you are willing to take a risk, there is
 some code at the end of this doc that demonstrates how to call ``saxonche`` in a
 python thread and not have it crash (I built it through guess-work).
 
-Now, if things weren't bad enough, error messages from incorrect xsl
+If things weren't bad enough, error messages from incorrect xsl
 compilations are turned off by default in ``saxonche``.  It took me a while to
-know that saxon produces nice compiler errors, but if you use ``saxonche`` all
-you see it "there was an compiler error".  This is less than helpful if you
+understand that saxon produces nice compiler errors (Michael Kay talks about this
+in his interviews), but if you use ``saxonche`` all
+you see is "there was a compiler error".  This isn't that helpful if you
 are trying to learn XSLT.
 
-As stated before, the documentation for ``saxonche`` is wrong, so good look
-trying to figure out how to turn on the compiler errors.   To learn Saxon, you
-want to be able to see it's compiler errors when your ``.xsl`` file contains
-syntax issues.  To figure things out you can either use some 1960's debugging
-techniques, or you can just download the [zipped java version of saxon](https://github.com/Saxonica/Saxon-HE/blob/be4dd844d935d8d0ef09748490448624abe3c66b/12/source/saxon12-0source.zip),
-decompress it and run it's command line tool:
+To learn XSLT 3.0 you need to be able to see its xsl compiler errors.  As
+I said before, ``saxonche`` isn't documented.  I spent a long time trying to
+figure out how to get compiler errors working with a threadable ``saxonche`` and
+eventually decided to try something else.  I downloaded the 
+[zipped java version of saxon](https://github.com/Saxonica/Saxon-HE/blob/be4dd844d935d8d0ef09748490448624abe3c66b/12/source/saxon12-0source.zip),
+decompressed it and ran it's command line tool:
 
 ```
   java -jar <path to saxon-he-12.0.jar> \
@@ -92,10 +92,11 @@ decompress it and run it's command line tool:
    -s:<path to your xml file>
 ```
 
-In fact, a reasonable way to run the saxonica open source tools is the use the
-python subprocessing module and call to the Java code over the command line.
-This way you don't have to worry about StackOverFlow issues, incorrect
-documentation or zero compiler feedback while writing your xslt code.
+By default this java-project produces XSLT compiler errors so you can debug your ``.xsl`` programs.
+
+The command line was adjusted to call out to Java when python detects an XSLT compiler error.  If you
+want to use this feature, you will have to manually download the files and place them in a specific directory.
+See the instructions below for details:
 
 # Installation of two XSLT processors and a Supporting CLI
 
@@ -110,13 +111,12 @@ pip install -e .
 source ./venv/bin/activate
 ```
 
-If you are "the one", you will not need to see the saxon compiler
-errors, because all of your programs are perfect when you type them into the
-computer.  Otherwise, download the [zipped java version of saxon](https://github.com/Saxonica/Saxon-HE/blob/be4dd844d935d8d0ef09748490448624abe3c66b/12/source/saxon12-0source.zip)
+The saxonche processor used by this package will not output XSLT compiler errors,
+but if you want to see them (which you do), download the [zipped java version of saxon](https://github.com/Saxonica/Saxon-HE/blob/be4dd844d935d8d0ef09748490448624abe3c66b/12/source/saxon12-0source.zip)
 and decompress its contents in ``./java/``.  The
 ``try`` cli tool will call out to java when the ``saxoniche`` library fails to
-compile your ``.xsl`` files when you have made a mistake.  It will output the
-error messages to the terminal.
+compile your ``.xsl``.  It will output the error messages to the terminal and give you
+the feedback required to debug your program.
 
 # Running Examples
 
