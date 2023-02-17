@@ -2,6 +2,7 @@ import os
 import yaml
 import pprint
 import shutil
+import subprocess
 from uuid import uuid1
 from pathlib import Path
 from functools import partial
@@ -66,6 +67,29 @@ proc_globals_lock.acquire()
 __initialize_saxon()
 proc_globals_lock.release()
 
+def call_out_to_java_to_get_saxon_compile_errors(
+    home_dir, xml_file_name, xsl_file_name
+):
+    '''having spent hours dealing with undocumented saxonche, I gave up and used the java version instead'''
+    xml_file_path_str = str((Path(home_dir) / xml_file_name).resolve())
+    xsl_file_path_str = str((Path(home_dir) / xsl_file_name).resolve())
+    run_path = (Path(__file__).parent / "..").resolve()
+    run_path_str = str(run_path)
+    saxon_java_path = run_path / "java" / "saxon-he-12.0.jar"
+    saxon_java_path_str = str(saxon_java_path)
+    output_obj = None
+    if not saxon_java_path.exists():
+      feedback0 = f"saxonche isn't documented, so there is no way to get saxon compiler errors"
+      feedback1 = f"download saxon-he-12.0.jar and place it in {saxon_java_path_str}"
+      feedback2 = f"saxon-he-12.0.jar can be used to generate compiler messages"
+      click.echo(feedback0)
+      click.echo(feedback1)
+      click.echo(feedback2)
+    else:
+      cmd = f"java -jar '{saxon_java_path_str}' -xsl:'{xsl_file_path_str}' -s:'{xml_file_path_str}'"
+      output_obj = subprocess.run(cmd, cwd=run_path_str, shell=True, capture_output=True,
+        text=True)
+    return output_obj
 
 def __saxon_xslt30_transform(
     lock, home_dir, xml_file_name, xsl_file_name, output_file_name, verbose=False
@@ -108,10 +132,18 @@ def __saxon_xslt30_transform(
 
     _exec = xsltproc.compile_stylesheet(stylesheet_file=str(xsl_file_path))
     if _exec is None:
-        error = f"{xsltproc.error_message}"
+        saxon_error = f"{xsltproc.error_message}\n"
         xsltproc.exception_clear()
         lock.release()
-        raise RuntimeError(error)
+        # the saxonche library doesn't output saxon compile errors so use 
+        # java instead
+        java_feedback = call_out_to_java_to_get_saxon_compile_errors(
+            home_dir, xml_file_name, xsl_file_name
+        )
+        if java_feedback:
+          #saxon_error += java_feedback.stdout
+          saxon_error += java_feedback.stderr
+        raise RuntimeError(saxon_error)
 
     if Path(xml_file_name).suffix == ".json":
         # it's a mystery why we have to use call_template_returning_file
@@ -129,9 +161,17 @@ def __saxon_xslt30_transform(
         _exec.set_initial_match_selection(file_name=str(xml_file_path))
         _exec.apply_templates_returning_file(output_file=str(output_file_path))
         if _exec.exception_occurred:
-            saxon_error = f"{_exec.error_message}"
+            saxon_error = f"{_exec.error_message}\n"
             _exec.exception_clear()
             lock.release()
+            # the saxonche library doesn't output saxon compile errors so use 
+            # java instead
+            java_feedback = call_out_to_java_to_get_saxon_compile_errors(
+                home_dir, xml_file_name, xsl_file_name
+            )
+            if java_feedback:
+              saxon_error += java_feedback.stdout
+              saxon_error += java_feedback.sterr
             raise RuntimeError(saxon_error)
 
         if stashed_output_file_path:
@@ -154,7 +194,7 @@ def __saxon_xslt30_transform(
                 source_file=str(output_file_path),
             )
             if _exec.exception_occurred:
-                saxon_error = f"{_exec.error_message}"
+                saxon_error = f"{_exec.error_message}\n"
                 _exec.exception_clear()
                 lock.release()
                 raise RuntimeError(saxon_error)
@@ -178,14 +218,17 @@ def thread_runner(lock, task_event, input_queue, output_queue):
     while task_event.is_set():
         q = input_queue.get(block=True)
         input_queue.task_done()
-        result = __saxon_xslt30_transform(
-            lock,
-            home_dir=q.home_dir,
-            xml_file_name=q.xml_file_name,
-            xsl_file_name=q.xsl_file_name,
-            output_file_name=q.output_file_name,
-            verbose=q.verbose,
-        )
+        try:
+          result = __saxon_xslt30_transform(
+              lock,
+              home_dir=q.home_dir,
+              xml_file_name=q.xml_file_name,
+              xsl_file_name=q.xsl_file_name,
+              output_file_name=q.output_file_name,
+              verbose=q.verbose,
+          )
+        except RuntimeError as ex:
+          result = str(ex)
         output_queue.put(result)
 
 

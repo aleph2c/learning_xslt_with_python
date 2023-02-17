@@ -2,3 +2,4 @@ venv/*
 *.egg-info/*
 tags
 cli/__pycache__/*
+java/*
