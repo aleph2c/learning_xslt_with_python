@@ -3,4 +3,4 @@ home_dir: /home/scott/xslt/sal/ch07
 output_file_name: text.hierarchy.txt
 processor: saxon
 xml_file_name: books.xml
-xsl_file_name: text.hierarchy.xsl
+xsl_file_name: text.hierarchy2.xsl

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BOOKLIST>
    <BOOKS>
-      <ITEM CAT="MMP">
+      <ITEM CAT="MMP" AUX="WHATEVER">
          <TITLE>Pride and Prejudice</TITLE>
          <AUTHOR>Jane Austen</AUTHOR>
          <PUBLISHER>Modern Library</PUBLISHER>

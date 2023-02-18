@@ -45,7 +45,7 @@ proc_globals_lock = Lock()
 ValidateXmlPath = (Path(__file__).parent / "validate_xml.xsl").resolve()
 SaxonPayload = namedtuple(
     "SaxonPayload",
-    ["home_dir", "xml_file_name", "xsl_file_name", "output_file_name", "verbose"],
+    ["home_dir", "xml_file_name", "xsl_file_name", "output_file_name", "params", "verbose"],
 )
 
 def __initialize_saxon(*args):
@@ -92,7 +92,7 @@ def call_out_to_java_to_get_saxon_compile_errors(
     return output_obj
 
 def __saxon_xslt30_transform(
-    lock, home_dir, xml_file_name, xsl_file_name, output_file_name, verbose=False
+    lock, home_dir, xml_file_name, xsl_file_name, output_file_name, params=None, verbose=False
 ):
 
     result = ""
@@ -130,6 +130,7 @@ def __saxon_xslt30_transform(
         json_input_param = proc.make_string_value(str(home_dir / xml_file_name))
         xsltproc.set_parameter("json_input_filename", json_input_param)
 
+
     _exec = xsltproc.compile_stylesheet(stylesheet_file=str(xsl_file_path))
     if _exec is None:
         saxon_error = f"{xsltproc.error_message}\n"
@@ -158,6 +159,17 @@ def __saxon_xslt30_transform(
         # add a test_param to validate saxon is working
         test_param = proc.make_string_value(str(xml_file_path))
         _exec.set_parameter("test_param", test_param)
+        # pass in parameters
+        if params:
+            for k, v in params.items():
+              if len(v) > 3:
+                # if "'string'" => "string" or
+                # if '"string"' => "string"
+                if "'" == v[0] and "'" == v[-1] or \
+                   '"' == v[0] and '"' == v[-1]:
+                  v = v[1:-1]
+              param = proc.make_string_value(str(v))
+              _exec.set_parameter(k, param)
         _exec.set_initial_match_selection(file_name=str(xml_file_path))
         _exec.apply_templates_returning_file(output_file=str(output_file_path))
         if _exec.exception_occurred:
@@ -225,6 +237,7 @@ def thread_runner(lock, task_event, input_queue, output_queue):
               xml_file_name=q.xml_file_name,
               xsl_file_name=q.xsl_file_name,
               output_file_name=q.output_file_name,
+              params=q.params,
               verbose=q.verbose,
           )
         except RuntimeError as ex:
@@ -248,7 +261,12 @@ def xpath_with_saxon(
 
 
 def saxon_xslt30_transform(
-    home_dir, xml_file_name, xsl_file_name, output_file_name, verbose=False
+    home_dir,
+    xml_file_name,
+    xsl_file_name,
+    output_file_name,
+    params=None,
+    verbose=False,
 ):
 
     global proc_globals_lock
@@ -261,6 +279,7 @@ def saxon_xslt30_transform(
         xml_file_name=xml_file_name,
         xsl_file_name=xsl_file_name,
         output_file_name=output_file_name,
+        params=params,
         verbose=verbose,
     )
 
@@ -660,6 +679,7 @@ def xpath(
     default=None,
     help="Set the output file name",
 )
+@click.option("--params", default=None, help="Set the optional parameter(s)")
 @click.option(
     "-v", "--verbose", is_flag=True, default=False, help="Run in verbose mode?"
 )
@@ -671,9 +691,17 @@ def ex(
     json_file_name,
     processor,
     output_file_name,
+    params,
     verbose,
 ):
-    """Run an XSLT exercise"""
+    """Run an XSLT exercise:
+
+
+    try -d sal/ch07 -ex -x books.xml -l text.hierarchy.xsl \\
+
+      -p "indent='   ',param2=2,param3='bob'" -o text.hierarchy.txt
+
+    """
     if node_name:
         xml_file_name = f"{node_name}.xml"
         xsl_file_name = f"{node_name}.xsl"
@@ -718,6 +746,13 @@ def ex(
         click.echo("you need to specify an output_file_name")
         exit(0)
 
+    if params:
+       scratch = params.split(',')
+       _params = {k:v for k,v in [item.split('=') for item in scratch]}
+    else:
+       _params = None
+
+
     if processor == "lxml":
         ctx.transform_with_lxml(
             home_dir=ctx.cache.home_dir,
@@ -732,6 +767,7 @@ def ex(
             xml_file_name=xml_file_name,
             xsl_file_name=xsl_file_name,
             output_file_name=output_file_name,
+            params=_params,
             verbose=verbose,
         )
         click.echo(result)

@@ -2,12 +2,12 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:fn="http://www.w3.org/2004/10/xpath-functions"
-  xmlns:xdt="http://www.w3.org/2004/10/xpath-datatypes"
-  xmlns:str="http://www.ora.com/XSLTCookbook/namespaces/strings"
-  xmlns:str-fn="local-functions.uri"
   xmlns:private-str-fn="local-functions.uri"
-  exclude-result-prefixes="xs str-fn private-str-fn"
+  exclude-result-prefixes="xs"
 >
+
+<xsl:import href="./string.replace.xsl" />
+<xsl:import href="./string.dup.xsl" />
 <xsl:output method="text"/>
 
 <!--Levels indented with two spaces by default -->
@@ -98,54 +98,6 @@
 
 <xsl:template match="*" mode="line-break">
   <xsl:text>&#xa;</xsl:text>
-</xsl:template>
-
-<xsl:template name="string-dup">
-  <xsl:param name="input" as="xs:string" />
-  <xsl:param name="count" as="xs:integer" />
-    <xsl:value-of select="private-str-fn:dup($input, $count)" />
-</xsl:template>
-
-<xsl:function name="str-fn:dup">
-  <xsl:param name="input" as="xs:string" />
-  <xsl:sequence select="private-str-fn:dup($input, 2)" />
-</xsl:function>
-
-<xsl:function name="private-str-fn:dup">
-  <xsl:param name="input" as="xs:string" />
-  <xsl:param name="count" as="xs:integer" />
-  <xsl:sequence select="string-join(for $i in 1 to $count return $input,'')" />
-</xsl:function>
-
-<xsl:template name="string-replace">
-  <xsl:param name="input" as="xs:string" />
-  <xsl:param name="search-string" as="xs:string" />
-  <xsl:param name="replace-string" as="xs:string" />
-  <xsl:choose>
-    <!-- See if the input contains the search string -->
-    <xsl:when test="$search-string and contains($input,$search-string)">
-    <!-- If so, then concatenate the substring before the search
-      string to the replacement string and to the result of
-      recursively applying this template to the remaining substring.
-    -->
-    <xsl:value-of select="substring-before($input,$search-string)"/>
-    <xsl:value-of select="$replace-string"/>
-    <xsl:call-template name="string-replace">
-      <xsl:with-param name="input"
-      select="substring-after($input,$search-string)"/>
-      <xsl:with-param name="search-string"
-      select="$search-string"/>
-      <xsl:with-param name="replace-string"
-      select="$replace-string"/>
-      </xsl:call-template>
-
-      </xsl:when>
-      <xsl:otherwise>
-        <!-- There are no more occurrences of the search string so
-        just return the current input string -->
-        <xsl:value-of select="$input"/>
-        </xsl:otherwise>
-    </xsl:choose>
 </xsl:template>
 
 </xsl:stylesheet>
