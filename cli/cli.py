@@ -2,6 +2,7 @@ import os
 import yaml
 import pprint
 import shutil
+import zipfile
 import subprocess
 from uuid import uuid1
 from pathlib import Path
@@ -16,6 +17,7 @@ from threading import Event as ThreadEvent
 
 
 import click
+import requests
 from lxml import etree
 from saxonche import PySaxonProcessor
 from saxonche import PyXPathProcessor
@@ -694,6 +696,44 @@ def xpath(
             xml_file_name=xml_file_name,
             pattern=full_pattern
   )
+
+def download_file(url, file_path=None):
+  if file_path is None:
+    local_filename = Path(url.split('/')[-1])
+  else:
+    local_filename = file_path
+  with requests.get(url, stream=True) as r:
+      with open(local_filename, 'wb') as f:
+          shutil.copyfileobj(r.raw, f)
+  return local_filename
+
+@click.group()
+def xslt():
+  pass
+
+@xslt.command
+def install_compiler_errors():
+  '''Download and inflate java version of saxon-he'''
+  url = 'https://github.com/Saxonica/Saxon-HE/raw/be4dd844d935d8d0ef09748490448624abe3c66b/12/Java/SaxonHE12-0J.zip'
+  zip_file_path = Path(url.split('/')[-1])
+  install_directory = (Path(__file__).parent / '..' / 'java').resolve()
+  target_path = install_directory / 'saxon-he-12.0.jar'
+
+  if not install_directory.exists():
+    os.makedirs(install_directory)
+
+  if not target_path.exists():
+    downloaded_file = download_file(
+      url,
+      file_path = zip_file_path
+    )
+    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+      zip_ref.extractall(install_directory)
+    os.remove(downloaded_file)
+    click.echo(f"{str(target_path)} installed")
+  else:
+    click.echo(f"{str(target_path)} already installed")
+
 
 @cli.command
 @pass_config

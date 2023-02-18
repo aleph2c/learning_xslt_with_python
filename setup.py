@@ -16,5 +16,6 @@ setup(
     entry_points="""
       [console_scripts]
       try=cli.cli:cli
+      xslt=cli.cli:xslt
     """,
 )
