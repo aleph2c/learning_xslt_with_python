@@ -160,8 +160,8 @@ By default this java-project produces XSLT compiler errors so you can debug your
 
 The command line tool used in this project was adjusted to call out to Java when
 ``saxonche`` detects an XSLT compiler error.  If you want to use this feature,
-you will have to manually download the files and place them in a specific
-directory.  See the instructions below for details:
+you will have to have java installed on your system.  See the installation
+instructions below for details:
 
 # Installation of two XSLT processors and a Supporting CLI
 
@@ -186,7 +186,7 @@ but if you want to see them (which you do) this command will fix the problem:
 xslt install-compile-errors
 ```
 
-This will download the 
+This will download the
 [zipped java version of saxon](https://github.com/Saxonica/Saxon-HE/blob/be4dd844d935d8d0ef09748490448624abe3c66b/12/source/saxon12-0source.zip)
 and decompress its contents in ``./java/``.  With this jar installed the ``try``
 cli tool will call out to java when the ``saxoniche`` library fails to compile
