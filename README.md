@@ -1,6 +1,54 @@
 # Learning XSLT with Python
 
-XSLT is a language used to convert the data of an XML file, into another format.
+XSLT is an XML Lisp used to transform data from one form to another.  The XSLT language
+contains the XPath tree mini-language within it.
+
+## Quick Start
+
+I created this repo to learn XSLT/XPath and how it can be integrated with Python. It
+has a lazy CLI (it caches previous command inputs and uses
+them to minimize typing).
+
+Imagine you are trying to learn XSLT.  You have installed this repo's command line tools and
+XSLT compilers (see below).
+And now you find yourself working on the chapter 7.4 exercize of Sal Mangano's XSLT Cookbook.
+You transcribe his text-hierarchy XSLT example into ``./sal/ch07/text.hierarchy.xsl``.
+Now you want to use this .xsl program to transform ``book.xml`` into
+``text.hierarchy.txt``.
+
+To:
+
+- set the working directory as ``sal/ch07``, and
+- transform the ``books.xml`` file, with the
+- ``text.hierarchy.xsl`` XSLT program,
+- while providing the ``text.hierachy.xsl`` program with an ``indent`` parameter equal to four spaces, to produce
+- the ``text.hierarchy.txt`` file, and
+- see the output verbosely (-v) printed to the screen:
+
+```
+try -d sal/ch07 ex \
+  -x books.xml \
+  -p saxon \
+  -l text.hierarchy.xsl \
+  --params "indent='    '" \
+  -o text.hieracrhy.txt \
+  -v
+```
+
+Since you are learning, you probably made some mistakes.  You read the resulting XSLT
+compiler errors and make an attempt to fix your program.  Since the ``try`` command caches its inputs
+you don't have to retype a long command to re-try your ``.xsl`` XSLT program, instead you type:
+
+```
+try ex -v
+```
+
+Now you can cycle between trying to fix your program and running the XSLT 3.0 compiler until your
+program does what you want.
+
+## Context
+
+XSLT is a language used to convert the data of an XML/JSON file, into another format.
 XSLT stands for eXtensible Stylesheet Language Transforms. XSLT is very
 flexible; you can convert your XML/JSON data into HTML files, SVG or Python
 programs, or any other file format.
@@ -15,7 +63,7 @@ declarative, you tell it what you want, and it figures out how to give it to
 you.
 
 Jinja2 is a great tool for transforming small data structures, while XSLT can be
-used for arbitrarily large data sets or data streams. XSLT software has been
+used for arbitrarily large data sets or data streams. XSLT compilers have been
 compiled from XSLT.  XSLT is an XML dialect, so you can use XSLT to transform
 your XSLT.
 
@@ -24,12 +72,6 @@ book's examples, then running those files through your Python program,
 most of your time will be spent debugging, and not learning.  What makes this
 even harder, is that you have to hold a picture of multiple graphs in your head
 while you are trying to remember the new syntax and semantics.  It can be challenging.
-
-I created this repo to learn XSLT and how it can be integrated with Python. It
-has a lazy CLI (it caches previous command inputs and uses
-them to minimize typing), to create an experimental environment to try the
-different XSLT parsers from program examples included from three training
-sources.
 
 Python does not come with a modern XSLT parser, but you can install external libraries
 that integrate the XSLT language into Python. The XSLT standard is currently at
@@ -50,13 +92,17 @@ docs below) To become competent, get a copy of Sal Mangano's XSLT Cookbook,
 then work through his examples as lab work.  For mastery, do a deep dive back
 into Michael's book.
 
-As of Jan 13 2023, Michael Kay's company, Saxonica, has released an open-source
+XSLT is a powerful and robust technology.  It has been actively developed for almost 25 years, and it has been responsive to its community's feedback.  This has been possible because Michael Kay has created a company called Saxonica, where he can get paid to develop the language while also working on open standards boards and writing books about XSLT/XPath.  He offers up part of his software as open source, and makes his money by licensing XSLT compilers that have more features.  His open-source software acts as a loss-leader for his business.   He and his developers are active on StackOverflow, manage their bugs using openly available bug trackers and are in constant contact with their users.  It's worth learning XSLT.  It is also worth listening to Michael for many other reasons, such as how to have a good life as a computer scientist, how to build a software business, how to manage a committee, and how to follow long-term plans.
+
+As of Jan 13 2023, Saxonica, has released an open-source
 version of the XSLT programming language compiler and parser (Mozilla Public
 Licence) as a Python pip package.  This package is called ``saxonche``, and it
 supports XSLT 3.0, XPath 3.1, XQuery 3.1, XSD 1.1 and has a Schema Validator
-processor, based on SaxonC-HE 12.0.  The SaxonC project is a port of the Saxon
-Java software to C, so it can be used with C/C++, PHP and Python.  But, before
-you get excited, know that you should avoid this library:
+processor, based on SaxonC-HE 12.0.  The ``saxconche`` python library uses
+ctypes to build a SaxonC XSLT compiler and run it within Python.  The SaxonC
+project is a port of the Saxon Java software to C, so it can be used with C/C++,
+PHP and Python.  But, before you get excited, know that you should avoid this 
+library for production:
 
 - The ``saxonche`` library's documentation is wrong.  If you try to follow their
   instructions your program won't run.  These docs were copied and pasted from the
@@ -79,6 +125,9 @@ you get excited, know that you should avoid this library:
   in his interviews), but if you use ``saxonche`` all
   you see is "there was a compiler error" when you make a mistake.  This isn't that
   helpful if you are trying to learn XSLT.
+  
+The developer who is working on these bugs is buried with other work (at the time of
+this writing he has about 96 bugs in his queue).
 
 To learn XSLT 3.0 you need to be able to see its xsl compiler errors.  As
 I said before, ``saxonche`` isn't documented.  I spent a long time trying to
