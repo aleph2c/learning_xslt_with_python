@@ -1,147 +1,147 @@
 [BOOKLIST]
-    [BOOKS]
-        [ITEM CAT="MMP" AUX="WHATEVER"]
-            [TITLE]
-            Pride and Prejudice
-            [AUTHOR]
-            Jane Austen
-            [PUBLISHER]
-            Modern Library
-            [PUB-DATE]
-            2002-12-31
-            [LANGUAGE]
-            English
-            [PRICE]
-            9
-            [QUANTITY]
-            187
-            [ISBN]
-            0679601686
-            [PAGES]
-            352
-            [DIMENSIONS UNIT="in"]
-            8.3 5.7 1.1
-            [WEIGHT UNIT="oz"]
-            6.1
-        [ITEM CAT="P"]
-            [TITLE]
-            Wuthering Heights
-            [AUTHOR]
-            Charlotte Brontë
-            [PUBLISHER]
-            Penguin Classics
-            [PUB-DATE]
-            2002-12-31
-            [LANGUAGE]
-            English
-            [PRICE]
-            9
-            [QUANTITY]
-            113
-            [ISBN]
-            0141439556
-            [PAGES]
-            430
-            [DIMENSIONS UNIT="in"]
-            1.0 5.2 7.8
-            [WEIGHT UNIT="oz"]
-            11.2
-        [ITEM CAT="P"]
-            [TITLE]
-            Tess of the d'Urbervilles
-            [AUTHOR]
-            Thomas Hardy
-            [PUBLISHER]
-            Bantam Classics
-            [PUB-DATE]
-            1984-05-01
-            [LANGUAGE]
-            English
-            [PRICE]
-            12.5
-            [QUANTITY]
-            85
-            [ISBN]
-            0553211684
-            [PAGES]
-            480
-            [DIMENSIONS UNIT="in"]
-            6.8 4.2 0.8
-            [WEIGHT UNIT="oz"]
-            7.7
-        [ITEM CAT="P"]
-            [TITLE]
-            Jude the Obscure
-            [AUTHOR]
-            Thomas Hardy
-            [PUBLISHER]
-            Penguin Classics
-            [PUB-DATE]
-            1998-09-01
-            [LANGUAGE]
-            English
-            [PRICE]
-            7
-            [QUANTITY]
-            129
-            [ISBN]
-            0140435387
-            [PAGES]
-            528
-            [DIMENSIONS UNIT="in"]
-            7.8 5.2 0.9
-            [WEIGHT UNIT="oz"]
-            10.9
-        [ITEM CAT="H"]
-            [TITLE]
-            The Big Over Easy
-            [AUTHOR]
-            Jasper Fforde
-            [PUBLISHER]
-            Hodder & Stoughton
-            [PUB-DATE]
-            2005-07-11
-            [LANGUAGE]
-            English
-            [PRICE]
-            14.55
-            [QUANTITY]
-            129
-            [ISBN]
-            0340835672
-            [PAGES]
-            346
-            [DIMENSIONS UNIT="cm"]
-            22.5 18.0 3.5
-            [WEIGHT UNIT="g"]
-            390
-        [ITEM CAT="P"]
-            [TITLE]
-            The Eyre Affair
-            [AUTHOR]
-            Jasper Fforde
-            [PUBLISHER]
-            Penguin
-            [PUB-DATE]
-            2003-02-25
-            [LANGUAGE]
-            English
-            [PRICE]
-            15
-            [QUANTITY]
-            129
-            [ISBN]
-            0142001805
-            [PAGES]
-            384
-            [DIMENSIONS UNIT="in"]
-            7.8 5.0 0.9
-            [WEIGHT UNIT="oz"]
-            9.0
-    [CATEGORIES DESC="Miscellaneous categories"]
-        [CATEGORY CODE="P" DESC="Paperback"]
-        
-        [CATEGORY CODE="MMP" DESC="Mass-market Paperback"]
-        
-        [CATEGORY CODE="H" DESC="Hard Cover"]
-        
+        [BOOKS]
+                [ITEM CAT="MMP" AUX="WHATEVER"]
+                        [TITLE]
+                        Pride and Prejudice
+                        [AUTHOR]
+                        Jane Austen
+                        [PUBLISHER]
+                        Modern Library
+                        [PUB-DATE]
+                        2002-12-31
+                        [LANGUAGE]
+                        English
+                        [PRICE]
+                        9
+                        [QUANTITY]
+                        187
+                        [ISBN]
+                        0679601686
+                        [PAGES]
+                        352
+                        [DIMENSIONS UNIT="in"]
+                        8.3 5.7 1.1
+                        [WEIGHT UNIT="oz"]
+                        6.1
+                [ITEM CAT="P"]
+                        [TITLE]
+                        Wuthering Heights
+                        [AUTHOR]
+                        Charlotte Brontë
+                        [PUBLISHER]
+                        Penguin Classics
+                        [PUB-DATE]
+                        2002-12-31
+                        [LANGUAGE]
+                        English
+                        [PRICE]
+                        9
+                        [QUANTITY]
+                        113
+                        [ISBN]
+                        0141439556
+                        [PAGES]
+                        430
+                        [DIMENSIONS UNIT="in"]
+                        1.0 5.2 7.8
+                        [WEIGHT UNIT="oz"]
+                        11.2
+                [ITEM CAT="P"]
+                        [TITLE]
+                        Tess of the d'Urbervilles
+                        [AUTHOR]
+                        Thomas Hardy
+                        [PUBLISHER]
+                        Bantam Classics
+                        [PUB-DATE]
+                        1984-05-01
+                        [LANGUAGE]
+                        English
+                        [PRICE]
+                        12.5
+                        [QUANTITY]
+                        85
+                        [ISBN]
+                        0553211684
+                        [PAGES]
+                        480
+                        [DIMENSIONS UNIT="in"]
+                        6.8 4.2 0.8
+                        [WEIGHT UNIT="oz"]
+                        7.7
+                [ITEM CAT="P"]
+                        [TITLE]
+                        Jude the Obscure
+                        [AUTHOR]
+                        Thomas Hardy
+                        [PUBLISHER]
+                        Penguin Classics
+                        [PUB-DATE]
+                        1998-09-01
+                        [LANGUAGE]
+                        English
+                        [PRICE]
+                        7
+                        [QUANTITY]
+                        129
+                        [ISBN]
+                        0140435387
+                        [PAGES]
+                        528
+                        [DIMENSIONS UNIT="in"]
+                        7.8 5.2 0.9
+                        [WEIGHT UNIT="oz"]
+                        10.9
+                [ITEM CAT="H"]
+                        [TITLE]
+                        The Big Over Easy
+                        [AUTHOR]
+                        Jasper Fforde
+                        [PUBLISHER]
+                        Hodder & Stoughton
+                        [PUB-DATE]
+                        2005-07-11
+                        [LANGUAGE]
+                        English
+                        [PRICE]
+                        14.55
+                        [QUANTITY]
+                        129
+                        [ISBN]
+                        0340835672
+                        [PAGES]
+                        346
+                        [DIMENSIONS UNIT="cm"]
+                        22.5 18.0 3.5
+                        [WEIGHT UNIT="g"]
+                        390
+                [ITEM CAT="P"]
+                        [TITLE]
+                        The Eyre Affair
+                        [AUTHOR]
+                        Jasper Fforde
+                        [PUBLISHER]
+                        Penguin
+                        [PUB-DATE]
+                        2003-02-25
+                        [LANGUAGE]
+                        English
+                        [PRICE]
+                        15
+                        [QUANTITY]
+                        129
+                        [ISBN]
+                        0142001805
+                        [PAGES]
+                        384
+                        [DIMENSIONS UNIT="in"]
+                        7.8 5.0 0.9
+                        [WEIGHT UNIT="oz"]
+                        9.0
+        [CATEGORIES DESC="Miscellaneous categories"]
+                [CATEGORY CODE="P" DESC="Paperback"]
+                
+                [CATEGORY CODE="MMP" DESC="Mass-market Paperback"]
+                
+                [CATEGORY CODE="H" DESC="Hard Cover"]
+                

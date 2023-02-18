@@ -324,6 +324,7 @@ class CliCache:
         processor=None,
         output_file_name=None,
         context=None,
+        params=None,
     ):
         self._cache = None
         self.cache_yml_path = CliCache.PathToCache
@@ -336,6 +337,7 @@ class CliCache:
             self._cache["processor"] = None
             self._cache["output_file_name"] = None
             self._cache["context"] = None
+            self._cache["params"] = None
 
             if not self.cache_yml_path.exists():
                 with open(self.cache_yml_path, "wt") as f:
@@ -432,14 +434,40 @@ class CliCache:
     @property
     def context(self):
         result = None
+        set_empty_context = False
         with self.cached() as cache:
-            result = cache["context"]
+            if "context" not in cache:
+              set_empty_context = True
+              result = ""
+            else:
+              result = cache["context"]
+        if set_empty_context:
+            self.context = result
         return result
 
     @context.setter
     def context(self, context):
         with self.cached() as cache:
             cache["context"] = context
+
+    @property
+    def params(self):
+        result = None
+        set_empty_params = False
+        with self.cached() as cache:
+            if "params" not in cache:
+              set_empty_params = True
+              result = ""
+            else:
+              result = cache["params"]
+        if set_empty_params:
+            self.params = result
+        return result
+
+    @params.setter
+    def params(self, params):
+        with self.cached() as cache:
+            cache["params"] = params
 
 
 class Config:
@@ -454,7 +482,7 @@ class Config:
         self.cache.processor = None
 
     def cache_inputs(self, home_dir, xml_file_name, xsl_file_name, processor,
-        context):
+        context, params):
         cache_exists = True if CliCache.exists() else False
 
         if cache_exists:
@@ -469,6 +497,8 @@ class Config:
                 processor = self.cache.processor
             if context is None:
                 context = self.cache.context
+            if params is None:
+                params = self.cache.params
 
         else:
             if home_dir is None:
@@ -479,12 +509,14 @@ class Config:
                 xsl_file_name=None,
                 processor=None,
                 context=None,
+                params=None
             )
 
         self.cache.xml_file_name = xml_file_name
         self.cache.xsl_file_name = xsl_file_name
         self.cache.processor = processor
         self.cache.context = context
+        self.cache.params = params
 
     def transform_with_lxml(
         self, home_dir, xml_file_name, xsl_file_name, output_file_name
@@ -590,7 +622,7 @@ def cli(ctx, home_dir):
     """Try an XSLT example and cache the command"""
     ctx.cache_inputs(
         home_dir=home_dir, xml_file_name=None, xsl_file_name=None,
-        processor=None, context=None
+        processor=None, context=None, params=None
     )
     if ctx.cache.home_dir is None:
         ctx.cache.home_dir = str(PathToDefault)
@@ -697,9 +729,9 @@ def ex(
     """Run an XSLT exercise:
 
 
-    try -d sal/ch07 -ex -x books.xml -l text.hierarchy.xsl \\
+    try -d sal/ch07 ex -x books.xml -l text.hierarchy.xsl \\
 
-      -p "indent='   ',param2=2,param3='bob'" -o text.hierarchy.txt
+      -p "indent='   ',param2='some_value'" -o text.hierarchy.txt
 
     """
     if node_name:
@@ -747,11 +779,18 @@ def ex(
         exit(0)
 
     if params:
+      ctx.cache.params = params
+    elif params == '':
+      ctx.cache.params = None
+      params = None
+    else:
+      params = ctx.cache.params
+
+    if params:
        scratch = params.split(',')
        _params = {k:v for k,v in [item.split('=') for item in scratch]}
     else:
        _params = None
-
 
     if processor == "lxml":
         ctx.transform_with_lxml(
