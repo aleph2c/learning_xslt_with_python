@@ -179,14 +179,14 @@ xslt install-compile-errors
 ```
 
 **Note:**
-The ``saxonche`` pip package used by this package will not output XSLT compiler errors,
+The ``saxonche`` pip package used by this repo will not output XSLT compiler errors,
 but if you want to see them (which you do) this command will fix the problem:
 
 ```bash
 xslt install-compile-errors
 ```
 
-This will , download the 
+This will download the 
 [zipped java version of saxon](https://github.com/Saxonica/Saxon-HE/blob/be4dd844d935d8d0ef09748490448624abe3c66b/12/source/saxon12-0source.zip)
 and decompress its contents in ``./java/``.  With this jar installed the ``try``
 cli tool will call out to java when the ``saxoniche`` library fails to compile

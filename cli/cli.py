@@ -20,7 +20,6 @@ import click
 import requests
 from lxml import etree
 from saxonche import PySaxonProcessor
-from saxonche import PyXPathProcessor
 
 
 def pp(item):
@@ -47,8 +46,16 @@ proc_globals_lock = Lock()
 ValidateXmlPath = (Path(__file__).parent / "validate_xml.xsl").resolve()
 SaxonPayload = namedtuple(
     "SaxonPayload",
-    ["home_dir", "xml_file_name", "xsl_file_name", "output_file_name", "params", "verbose"],
+    [
+        "home_dir",
+        "xml_file_name",
+        "xsl_file_name",
+        "output_file_name",
+        "params",
+        "verbose",
+    ],
 )
+
 
 def __initialize_saxon(*args):
     """The PySaxonProcessor proc and the xslt30 proc should only be made once"""
@@ -69,10 +76,11 @@ proc_globals_lock.acquire()
 __initialize_saxon()
 proc_globals_lock.release()
 
+
 def call_out_to_java_to_get_saxon_compile_errors(
     home_dir, xml_file_name, xsl_file_name
 ):
-    '''having spent hours dealing with undocumented saxonche, I gave up and used the java version instead'''
+    """having spent hours dealing with undocumented saxonche, I gave up and used the java version instead"""
     xml_file_path_str = str((Path(home_dir) / xml_file_name).resolve())
     xsl_file_path_str = str((Path(home_dir) / xsl_file_name).resolve())
     run_path = (Path(__file__).parent / "..").resolve()
@@ -81,20 +89,28 @@ def call_out_to_java_to_get_saxon_compile_errors(
     saxon_java_path_str = str(saxon_java_path)
     output_obj = None
     if not saxon_java_path.exists():
-      feedback0 = f"saxonche isn't documented, so there is no way to get saxon compiler errors"
-      feedback1 = f"download saxon-he-12.0.jar and place it in {saxon_java_path_str}"
-      feedback2 = f"saxon-he-12.0.jar can be used to generate compiler messages"
-      click.echo(feedback0)
-      click.echo(feedback1)
-      click.echo(feedback2)
+        feedback0 = "saxonche isn't documented, so there is no way to get saxon compiler errors"
+        feedback1 = f"download saxon-he-12.0.jar and place it in {saxon_java_path_str}"
+        feedback2 = "saxon-he-12.0.jar can be used to generate compiler messages"
+        click.echo(feedback0)
+        click.echo(feedback1)
+        click.echo(feedback2)
     else:
-      cmd = f"java -jar '{saxon_java_path_str}' -xsl:'{xsl_file_path_str}' -s:'{xml_file_path_str}'"
-      output_obj = subprocess.run(cmd, cwd=run_path_str, shell=True, capture_output=True,
-        text=True)
+        cmd = f"java -jar '{saxon_java_path_str}' -xsl:'{xsl_file_path_str}' -s:'{xml_file_path_str}'"
+        output_obj = subprocess.run(
+            cmd, cwd=run_path_str, shell=True, capture_output=True, text=True
+        )
     return output_obj
 
+
 def __saxon_xslt30_transform(
-    lock, home_dir, xml_file_name, xsl_file_name, output_file_name, params=None, verbose=False
+    lock,
+    home_dir,
+    xml_file_name,
+    xsl_file_name,
+    output_file_name,
+    params=None,
+    verbose=False,
 ):
 
     result = ""
@@ -132,20 +148,19 @@ def __saxon_xslt30_transform(
         json_input_param = proc.make_string_value(str(home_dir / xml_file_name))
         xsltproc.set_parameter("json_input_filename", json_input_param)
 
-
     _exec = xsltproc.compile_stylesheet(stylesheet_file=str(xsl_file_path))
     if _exec is None:
         saxon_error = f"{xsltproc.error_message}\n"
         xsltproc.exception_clear()
         lock.release()
-        # the saxonche library doesn't output saxon compile errors so use 
+        # the saxonche library doesn't output saxon compile errors so use
         # java instead
         java_feedback = call_out_to_java_to_get_saxon_compile_errors(
             home_dir, xml_file_name, xsl_file_name
         )
         if java_feedback:
-          #saxon_error += java_feedback.stdout
-          saxon_error += java_feedback.stderr
+            # saxon_error += java_feedback.stdout
+            saxon_error += java_feedback.stderr
         raise RuntimeError(saxon_error)
 
     if Path(xml_file_name).suffix == ".json":
@@ -164,28 +179,27 @@ def __saxon_xslt30_transform(
         # pass in parameters
         if params:
             for k, v in params.items():
-              if len(v) > 3:
-                # if "'string'" => "string" or
-                # if '"string"' => "string"
-                if "'" == v[0] and "'" == v[-1] or \
-                   '"' == v[0] and '"' == v[-1]:
-                  v = v[1:-1]
-              param = proc.make_string_value(str(v))
-              _exec.set_parameter(k, param)
+                if len(v) > 3:
+                    # if "'string'" => "string" or
+                    # if '"string"' => "string"
+                    if "'" == v[0] and "'" == v[-1] or '"' == v[0] and '"' == v[-1]:
+                        v = v[1:-1]
+                param = proc.make_string_value(str(v))
+                _exec.set_parameter(k, param)
         _exec.set_initial_match_selection(file_name=str(xml_file_path))
         _exec.apply_templates_returning_file(output_file=str(output_file_path))
         if _exec.exception_occurred:
             saxon_error = f"{_exec.error_message}\n"
             _exec.exception_clear()
             lock.release()
-            # the saxonche library doesn't output saxon compile errors so use 
+            # the saxonche library doesn't output saxon compile errors so use
             # java instead
             java_feedback = call_out_to_java_to_get_saxon_compile_errors(
                 home_dir, xml_file_name, xsl_file_name
             )
             if java_feedback:
-              saxon_error += java_feedback.stdout
-              saxon_error += java_feedback.sterr
+                saxon_error += java_feedback.stdout
+                saxon_error += java_feedback.sterr
             raise RuntimeError(saxon_error)
 
         if stashed_output_file_path:
@@ -233,33 +247,30 @@ def thread_runner(lock, task_event, input_queue, output_queue):
         q = input_queue.get(block=True)
         input_queue.task_done()
         try:
-          result = __saxon_xslt30_transform(
-              lock,
-              home_dir=q.home_dir,
-              xml_file_name=q.xml_file_name,
-              xsl_file_name=q.xsl_file_name,
-              output_file_name=q.output_file_name,
-              params=q.params,
-              verbose=q.verbose,
-          )
+            result = __saxon_xslt30_transform(
+                lock,
+                home_dir=q.home_dir,
+                xml_file_name=q.xml_file_name,
+                xsl_file_name=q.xsl_file_name,
+                output_file_name=q.output_file_name,
+                params=q.params,
+                verbose=q.verbose,
+            )
         except RuntimeError as ex:
-          result = str(ex)
+            result = str(ex)
         output_queue.put(result)
 
 
-
-def xpath_with_saxon(
-    home_dir, xml_file_name, pattern
-  ):
+def xpath_with_saxon(home_dir, xml_file_name, pattern):
     with PySaxonProcessor(license=False) as proc:
-      xpath_processor = proc.new_xpath_processor()
-      xml_as_string = ""
-      with open((Path(home_dir) / xml_file_name), "r") as fp:
-        xml_as_string = fp.read()
-      node = proc.parse_xml(xml_text=xml_as_string)
-      xpath_processor.set_context(xdm_item=node)
-      item = xpath_processor.evaluate(pattern)
-      print(item)
+        xpath_processor = proc.new_xpath_processor()
+        xml_as_string = ""
+        with open((Path(home_dir) / xml_file_name), "r") as fp:
+            xml_as_string = fp.read()
+        node = proc.parse_xml(xml_text=xml_as_string)
+        xpath_processor.set_context(xdm_item=node)
+        item = xpath_processor.evaluate(pattern)
+        print(item)
 
 
 def saxon_xslt30_transform(
@@ -439,10 +450,10 @@ class CliCache:
         set_empty_context = False
         with self.cached() as cache:
             if "context" not in cache:
-              set_empty_context = True
-              result = ""
+                set_empty_context = True
+                result = ""
             else:
-              result = cache["context"]
+                result = cache["context"]
         if set_empty_context:
             self.context = result
         return result
@@ -458,10 +469,10 @@ class CliCache:
         set_empty_params = False
         with self.cached() as cache:
             if "params" not in cache:
-              set_empty_params = True
-              result = ""
+                set_empty_params = True
+                result = ""
             else:
-              result = cache["params"]
+                result = cache["params"]
         if set_empty_params:
             self.params = result
         return result
@@ -483,8 +494,9 @@ class Config:
         self.cache.xsl_file_name = None
         self.cache.processor = None
 
-    def cache_inputs(self, home_dir, xml_file_name, xsl_file_name, processor,
-        context, params):
+    def cache_inputs(
+        self, home_dir, xml_file_name, xsl_file_name, processor, context, params
+    ):
         cache_exists = True if CliCache.exists() else False
 
         if cache_exists:
@@ -511,7 +523,7 @@ class Config:
                 xsl_file_name=None,
                 processor=None,
                 context=None,
-                params=None
+                params=None,
             )
 
         self.cache.xml_file_name = xml_file_name
@@ -621,10 +633,14 @@ pass_config = click.make_pass_decorator(Config, ensure=True)
 )
 @pass_config
 def cli(ctx, home_dir):
-    """Try an XSLT example and cache the command"""
+    """Try an XSLT/XPath example and cache the command"""
     ctx.cache_inputs(
-        home_dir=home_dir, xml_file_name=None, xsl_file_name=None,
-        processor=None, context=None, params=None
+        home_dir=home_dir,
+        xml_file_name=None,
+        xsl_file_name=None,
+        processor=None,
+        context=None,
+        params=None,
     )
     if ctx.cache.home_dir is None:
         ctx.cache.home_dir = str(PathToDefault)
@@ -642,12 +658,17 @@ def cache(ctx):
     """View your command cache"""
     click.echo(ctx.cache)
 
+
 @cli.command
-@click.option("-x", "--xml", "xml_file_name", default=None, help="Set the xml file (Cachable)")
+@click.option(
+    "-x", "--xml", "xml_file_name", default=None, help="Set the xml file (Cachable)"
+)
 @click.option("-p", "--pattern", default=None, help="Pattern")
 @click.option("-c", "--context", default=None, help="Cachable context")
 @click.option("--cache", is_flag=True, default=False, help="Reflect upon the Cache")
-@click.option("-v", "--version", is_flag=True, default=False, help="Output the XPath version")
+@click.option(
+    "-v", "--version", is_flag=True, default=False, help="Output the XPath version"
+)
 @pass_config
 def xpath(
     ctx,
@@ -657,82 +678,80 @@ def xpath(
     cache,
     version,
 ):
-  '''Test an XPath query on a given xml doc and context'''
-  xpath_version = "3.1"
-  if version:
-      click.echo(f"XPath {xpath_version}")
-      exit(0)
+    """Test an XPath query on a given xml doc and context"""
+    xpath_version = "3.1"
+    if version:
+        click.echo(f"XPath {xpath_version}")
+        exit(0)
 
-  if cache:
-      click.echo(f"XPath cache:")
-      home_dir = str(ctx.cache.home_dir)
-      xml_file_name = ctx.cache.xml_file_name
-      context = ctx.cache.context
-      click.echo(f"  home_dir: {home_dir}")
-      click.echo(f"  xml_file_name: {xml_file_name}")
-      click.echo(f"  context: {context}")
-      exit(0)
+    if cache:
+        click.echo("XPath cache:")
+        home_dir = str(ctx.cache.home_dir)
+        xml_file_name = ctx.cache.xml_file_name
+        context = ctx.cache.context
+        click.echo(f"  home_dir: {home_dir}")
+        click.echo(f"  xml_file_name: {xml_file_name}")
+        click.echo(f"  context: {context}")
+        exit(0)
 
-  if xml_file_name:
-      ctx.cache.xml_file_name = xml_file_name
-  else:
-      xml_file_name = ctx.cache.xml_file_name
+    if xml_file_name:
+        ctx.cache.xml_file_name = xml_file_name
+    else:
+        xml_file_name = ctx.cache.xml_file_name
 
-  if context or context == '':
-    ctx.cache.context = context
-  else:
-    context = ctx.cache.context
+    if context or context == "":
+        ctx.cache.context = context
+    else:
+        context = ctx.cache.context
 
-  if ctx.cache.context:
-    click.echo(f"context: {ctx.cache.context}")
+    if ctx.cache.context:
+        click.echo(f"context: {ctx.cache.context}")
 
-  if context:
-    full_pattern = context + pattern
-  else:
-    full_pattern = pattern
+    if context:
+        full_pattern = context + pattern
+    else:
+        full_pattern = pattern
 
-  xpath_with_saxon(
-            home_dir=ctx.cache.home_dir,
-            xml_file_name=xml_file_name,
-            pattern=full_pattern
-  )
+    xpath_with_saxon(
+        home_dir=ctx.cache.home_dir, xml_file_name=xml_file_name, pattern=full_pattern
+    )
+
 
 def download_file(url, file_path=None):
-  if file_path is None:
-    local_filename = Path(url.split('/')[-1])
-  else:
-    local_filename = file_path
-  with requests.get(url, stream=True) as r:
-      with open(local_filename, 'wb') as f:
-          shutil.copyfileobj(r.raw, f)
-  return local_filename
+    if file_path is None:
+        local_filename = Path(url.split("/")[-1])
+    else:
+        local_filename = file_path
+    with requests.get(url, stream=True) as r:
+        with open(local_filename, "wb") as f:
+            shutil.copyfileobj(r.raw, f)
+    return local_filename
+
 
 @click.group()
 def xslt():
-  pass
+    pass
+
 
 @xslt.command
 def install_compiler_errors():
-  '''Download and inflate java version of saxon-he'''
-  url = 'https://github.com/Saxonica/Saxon-HE/raw/be4dd844d935d8d0ef09748490448624abe3c66b/12/Java/SaxonHE12-0J.zip'
-  zip_file_path = Path(url.split('/')[-1])
-  install_directory = (Path(__file__).parent / '..' / 'java').resolve()
-  target_path = install_directory / 'saxon-he-12.0.jar'
+    """Download and inflate java version of saxon-he"""
+    url = "https://github.com/Saxonica/Saxon-HE/raw/be4dd844d935d8d0ef09748490448624abe3c66b/12/Java/SaxonHE12-0J.zip"
+    zip_file_path = Path(url.split("/")[-1])
+    install_directory = (Path(__file__).parent / ".." / "java").resolve()
+    target_path = install_directory / "saxon-he-12.0.jar"
 
-  if not install_directory.exists():
-    os.makedirs(install_directory)
+    if not install_directory.exists():
+        os.makedirs(install_directory)
 
-  if not target_path.exists():
-    downloaded_file = download_file(
-      url,
-      file_path = zip_file_path
-    )
-    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
-      zip_ref.extractall(install_directory)
-    os.remove(downloaded_file)
-    click.echo(f"{str(target_path)} installed")
-  else:
-    click.echo(f"{str(target_path)} already installed")
+    if not target_path.exists():
+        downloaded_file = download_file(url, file_path=zip_file_path)
+        with zipfile.ZipFile(zip_file_path, "r") as zip_ref:
+            zip_ref.extractall(install_directory)
+        os.remove(downloaded_file)
+        click.echo(f"{str(target_path)} installed")
+    else:
+        click.echo(f"{str(target_path)} already installed")
 
 
 @cli.command
@@ -819,18 +838,18 @@ def ex(
         exit(0)
 
     if params:
-      ctx.cache.params = params
-    elif params == '':
-      ctx.cache.params = None
-      params = None
+        ctx.cache.params = params
+    elif params == "":
+        ctx.cache.params = None
+        params = None
     else:
-      params = ctx.cache.params
+        params = ctx.cache.params
 
     if params:
-       scratch = params.split(',')
-       _params = {k:v for k,v in [item.split('=') for item in scratch]}
+        scratch = params.split(",")
+        _params = {k: v for k, v in [item.split("=") for item in scratch]}
     else:
-       _params = None
+        _params = None
 
     if processor == "lxml":
         ctx.transform_with_lxml(
