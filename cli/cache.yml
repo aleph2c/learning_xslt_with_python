@@ -1,7 +1,7 @@
-context: /Test/parent/
-home_dir: /home/scott/xslt/sal/ch07
+context: /menu/entrees
+home_dir: /home/scott/xslt/otegem/ch03
 output_file_name: text.hierarchy.txt
-params: indent='        '
+params: indent='    '
 processor: saxon
-xml_file_name: books.xml
+xml_file_name: menus.xml
 xsl_file_name: text.hierarchy2.xsl

@@ -83,16 +83,23 @@ books.
 
 To follow along, go and get a copy of "Beginning XSLT 2.0 From Novice to
 Professional" by Jeni Tennison, clone this repo and install the command line
-tools and the XSLT parsers (see below).  After that, I recommend getting a copy
-of "XSLT 2.0 and XPath 2.0 Programmer's Reference 4th Edition" by Michael Kay,
-and work through Chapter 17: Stylesheet Design Patterns.  If you would like to
-learn how to use the new XML-to-JSON, JSON-to-XML and JSON transform features of
-XSLT 3.0, read [Transforming JSON using XSLT 3.0](https://www.saxonica.com/papers/xmlprague-2016mhk.pdf),
-by Michael Kay.  There is supporting example code for some of these JSON
-transforms and the pattern's code in the pattern's folder of this repo. (see the
-docs below) To become competent, get a copy of Sal Mangano's XSLT Cookbook, then
-work through his examples as lab work.  For mastery, do a deep dive back into
-Michael's book.
+tools and the XSLT parsers (see below).  This isn't an easy book to read, it's
+like trying to comprehend a swarm of bees at a glance.  If you would like a
+clear step by step understanding of what is going on, step down from XSLT 2.0
+back to XSLT 1.0, and read Michiel van Otegem's teach yourself XSLT in 21 days.
+Pay special attention to chapter 3 which explains XPath using diagrams.
+
+After that, I recommend getting a copy of "XSLT 2.0 and XPath 2.0 Programmer's
+Reference 4th Edition" by Michael Kay, and work through Chapter 17: Stylesheet
+Design Patterns.  If you would like to learn how to use the new XML-to-JSON,
+JSON-to-XML and JSON transform features of XSLT 3.0, read [Transforming JSON
+using XSLT 3.0](https://www.saxonica.com/papers/xmlprague-2016mhk.pdf), by
+Michael Kay.  There is supporting example code for some of these JSON transforms
+and the pattern's code in the pattern's folder of this repo. (see the docs
+below) To become competent, get a copy of Sal Mangano's XSLT Cookbook, then work
+through his examples as lab work.  For mastery, do a deep dive back into
+Michael's book.  (I am guessing at this education path, I'm not competent with
+XSLT yet).
 
 XSLT is a powerful and robust technology.  It has been actively developed for
 almost 25 years, and it has been responsive to its community's feedback.  This
@@ -844,26 +851,80 @@ if __name__ == '__main__':
 
 # Testing XPath
 
-Here we run an XPath expression against the ``_1.1.xml`` file in the
-``sal/ch01`` directory, then cache the command:
+Here we run an XPath expression against the ``menu.xml`` file in the
+``otegem/ch03`` directory, then cache the command:
 
 ```
-try -d sal/ch01 xpath -x "_1.1.xml" -p "//parent/X"
-
-<X id="1"/>
-<X id="2"/>
-<X id="4"/>
-<X id="7"/>
-<X id="8"/>
+try -d ./otegem/ch03 xpath -x menus.xml -c "/" -p "menu"
+context: /
+<menu>
+  <appetizers title="Work up an Appetite">
+    <dish id="1" price="8.95">Crab Cakes</dish>
+    <dish id="2" price="9.95">Jumbo Prawns</dish>
+    <dish id="3" price="10.95">Smoked Salmon and Avocado Quesadilla</dish>
+    <dish id="4" price="6.95">Caesar Salad</dish>
+  </appetizers>
+  <entrees title="Chow Time!">
+    <dish id="5" price="19.95">Grilled Salmon</dish>
+    <dish id="6" price="17.95">Seafood Pasta</dish>
+    <dish id="7" price="16.95">Linguini al Pesto</dish>
+    <dish id="8" price="18.95">Rack of Lamb</dish>
+    <dish id="9" price="16.95">Ribs and Wings</dish>
+  </entrees>
+  <desserts title="To Top It Off">
+    <dish id="10" price="6.95">Dame Blanche</dish>
+    <dish id="11" price="5.95">Chocolate Mousse</dish>
+    <dish id="12" price="6.95">Banana Split</dish>
+  </desserts>
+</menu>
 ```
 
 To run the next xpath query against the same file:
 
 ```
-try xpath -p "//parent/X[1]"
-<X id="1" />
+try xpath -p "(//dish)[6]"
+context: /
+<dish id="6" price="17.95">Seafood Past</dish>
+
+try xpath -c "/" -p "/menu/entrees/*/text()"
+context: /
+Grilled Salmon
+Seafood Pasta
+Linguini al Pestro
+Rack of Lamb
+Ribs and Wings
+
 ```
 
+You would use the context to simulate how a template matching an XPath pattern
+would behave.  Suppose you were trying to see what line 12 of the following
+would output:
+
+```
+ 1  <?xml version="1.0" encoding="UTF-8"?>
+ 2  <xsl:stylesheet version="1.0"
+ 3   xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+ 4    <xsl: tempate match="/">
+ 5      <xsl:apply-templates />
+ 6    </xsl:template>
+ 7    <xsl: tempate match="/menu/entrees">
+ 8      Entrees:
+ 9      <xsl:apply-templates />
+10    </xsl:template>
+11    <xsl:template match="dish">
+12      <xsl:value-of select="text" />
+13    </xsl:template>
+13  </xsl:stylesheet>
+```
+
+We could simulate what would be expressed at line 12 by setting the context to
+``/menu/entrees``:
+
+```
+try xpath -c "/menu/entrees" -p "dish/text()[1]"
+context: /menu/entrees
+Grilled Salmon
+```
 
 # Useful links
 

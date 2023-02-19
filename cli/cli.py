@@ -708,6 +708,8 @@ def xpath(
         click.echo(f"context: {ctx.cache.context}")
 
     if context:
+        if context[-1] != "/":
+            context += "/"
         full_pattern = context + pattern
     else:
         full_pattern = pattern
