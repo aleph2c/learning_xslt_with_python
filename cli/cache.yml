@@ -1,7 +1,7 @@
-context: /menu/entrees
-home_dir: /home/scott/xslt/otegem/ch03
+context: /
+home_dir: /home/scott/xslt/patterns
 output_file_name: text.hierarchy.txt
 params: indent='    '
 processor: saxon
-xml_file_name: menus.xml
+xml_file_name: axis_testing.xml
 xsl_file_name: text.hierarchy2.xsl

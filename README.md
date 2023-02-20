@@ -921,9 +921,78 @@ We could simulate what would be expressed at line 12 by setting the context to
 ``/menu/entrees``:
 
 ```
+try xpath -v
+3.1
+
 try xpath -c "/menu/entrees" -p "dish/text()[1]"
 context: /menu/entrees
 Grilled Salmon
+```
+
+# Testing XPath Axis Features
+
+
+To try and understand the XPath axis feature without a picture is masochistic.
+Below we draw the above document and mark it up with axis information:
+
+![xpath_2.svg](./patterns/xpath_2.svg)
+
+This is how the picture can be represented in XML.
+
+```
+try -d patterns/ xpath -x"axis_testing.xml" -c"/" -p"*"
+context: /
+<A id="1">
+  <B id="2">
+    <C id="3"/>
+    <D id="4"/>
+    <E id="5">
+      <H id="8">
+        <M id="13"/>
+      </H>
+      <I id="9"/>
+      <J id="10">
+        <N id="14"/>
+        <O id="15">
+          <T id="20"/>
+          <U id="21"/>
+        </O>
+        <P id="16"/>
+        <Q id="17"/>
+        <R id="18">
+          <V id="22"/>
+          <W id="23"/>
+        </R>
+      </J>
+      <K id="11"/>
+      <L id="12">
+        <S id="19"/>
+      </L>
+    </E>
+    <F id="6"/>
+    <G id="7"/>
+  </B>
+</A>
+```
+
+To understand how the axis features of XPath works, we set our node context to
+``J``, then apply XPath queries, using the various axis features to do relative
+queries from the ``J`` node to other nodes in the graph.  This will show us how
+these axis names are used to make relative references to other parts of the
+graph; to obtain flattened sequences to other nodes.
+
+```
+try xpath -c "//J" -p "self::*/name()"
+context: //J
+J
+
+try xpath -p "following::*/name()"
+"K"
+"L"
+"S"
+"F"
+"G"
+
 ```
 
 # Useful links
