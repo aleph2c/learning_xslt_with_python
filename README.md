@@ -935,7 +935,9 @@ Grilled Salmon
 To try and understand the XPath axis feature without a picture is masochistic.
 Below we draw the above document and mark it up with axis information:
 
-![xpath_2.svg](./patterns/xpath_2.svg)
+<div style="background-color:white;">
+  <img src="./pattern/xpath_2.svg" />
+</div>
 
 This is how the picture can be represented in XML.
 
