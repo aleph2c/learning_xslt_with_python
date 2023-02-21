@@ -931,13 +931,11 @@ Grilled Salmon
 
 # Testing XPath Axis Features
 
+This picture will help you understand how the axis feature works in XPath:
 
-To try and understand the XPath axis feature without a picture is masochistic.
-Below we draw the above document and mark it up with axis information:
+![xpath 2](patterns/xpath_2.svg)
 
-![xpath_2.svg](./patterns/xpath_2.svg)
-
-This is how the picture can be represented in XML.
+This is how the above picture can be represented in XML (see ``patterns/axis_testing.xml``):
 
 ```
 try -d patterns/ xpath -x"axis_testing.xml" -c"/" -p"*"
@@ -975,24 +973,24 @@ context: /
 </A>
 ```
 
-To understand how the axis features of XPath works, we set our node context to
-``J``, then apply XPath queries, using the various axis features to do relative
-queries from the ``J`` node to other nodes in the graph.  This will show us how
-these axis names are used to make relative references to other parts of the
-graph; to obtain flattened sequences to other nodes.
+Now let's set ``J`` as the node context and perform our first axis experiment:
 
 ```
 try xpath -c "//J" -p "self::*/name()"
 context: //J
 J
+```
 
+Let's look to see how the ``following::`` axis works, we search the "following" axis for any node name (``*``) 
+and return the matched node names:
+
+```
 try xpath -p "following::*/name()"
 "K"
 "L"
 "S"
 "F"
 "G"
-
 ```
 
 # Useful links
