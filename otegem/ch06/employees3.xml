@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<employees>
+  <employee name="Joe Dishwasher">
+    <phonenumber type="home">555-1234</phonenumber>
+    <phonenumber type="fax">555-1234</phonenumber>
+    <phonenumber type="mobile">555-1234</phonenumber>
+  </employee>
+  <employee name="Carol Waitress">
+    <phonenumber type="home">555-1234</phonenumber>
+    <phonenumber type="fax">555-1234</phonenumber>
+    <phonenumber type="mobile">555-1234</phonenumber>
+  </employee>
+</employees>
+

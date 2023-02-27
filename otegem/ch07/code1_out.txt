@@ -1,0 +1,9 @@
+<!--
+  function maxval(A, B) {
+    if (A < B) {
+      return B;
+    } else {
+      return A;
+    }
+  }
+-->

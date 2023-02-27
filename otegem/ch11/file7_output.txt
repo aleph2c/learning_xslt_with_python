@@ -1,0 +1,7 @@
+<My Files>
+address.mdb 
+basket.doc (Word document)
+house.dwg (AutoCad drawing)
+names.xml (XML document)
+namesout.xsl (XSLT stylesheet)
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<movies>
+  <movie title="The Good, the Bad, and the Ugly" genre="western">
+    <director name="Sergio Leone" />
+    <actor name="Clint Eastwood" character="Biondo" />
+    <actor name="Lee Van Cleef" character="Angel Eyes Sentenza" />
+    <actor name="Eli Wallach" character="Tuco Ramirez" />
+  </movie>
+  <movie title="The Piano" genre="drama">
+    <director name="Jane Campion" />
+    <actor name="Holly Hunter" character="Ada McGrath" />
+    <actor name="Harvey Keitel" character="George Baines" />
+  </movie>
+  <movie title="Bird" genre="drama">
+    <director name="Clint Eastwood" />
+    <actor name="Forest Whitaker" character="Charlie ‘Bird' Parker" />
+  </movie>
+  <movie title="Stir Crazy" genre="comedy">
+    <director name="Sidney Poitier" />
+    <actor name="Gene Wilder" character="Skip Donahue" />
+    <actor name="Richard Pryor" character=" Harry Monroe" />
+  </movie>
+</movies>
+

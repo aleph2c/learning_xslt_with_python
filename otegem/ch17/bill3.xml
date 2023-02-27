@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orders>
+  <order id="2" quantity="1" />
+  <order id="3" quantity="2" />
+  <order id="4" quantity="2" />
+  <order id="5" quantity="3" />
+  <order id="7" quantity="2" />
+  <order id="10" quantity="1" />
+  <order id="12" quantity="4" />
+</orders>

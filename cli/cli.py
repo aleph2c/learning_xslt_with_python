@@ -199,7 +199,7 @@ def __saxon_xslt30_transform(
             )
             if java_feedback:
                 saxon_error += java_feedback.stdout
-                saxon_error += java_feedback.sterr
+                saxon_error += java_feedback.stderr
             raise RuntimeError(saxon_error)
 
         if stashed_output_file_path:
@@ -772,7 +772,7 @@ def install_compiler_errors():
     default=None,
     help="Set the output file name",
 )
-@click.option("--params", default=None, help="Set the optional parameter(s)")
+@click.option("-a", "--params", default=None, help="Set the optional parameter(s)")
 @click.option(
     "-v", "--verbose", is_flag=True, default=False, help="Run in verbose mode?"
 )
@@ -792,7 +792,7 @@ def ex(
 
     try -d sal/ch07 ex -x books.xml -l text.hierarchy.xsl \\
 
-      -p "indent='   ',param2='some_value'" -o text.hierarchy.txt
+      --params "indent='   ',param2='some_value'" -o text.hierarchy.txt
 
     """
     if node_name:

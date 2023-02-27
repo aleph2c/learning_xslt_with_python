@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cars>
+   <car model="Focus" manufacturer="Ford" year="2000"/>
+   <car model="Golf" manufacturer="Volkswagen" year="2001"/>
+</cars>

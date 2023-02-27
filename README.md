@@ -54,24 +54,24 @@ format.  XSLT stands for eXtensible Stylesheet Language Transforms. XSLT is very
 flexible; you can convert your XML/JSON data into HTML files, SVG or Python
 programs, or any other file format.
 
-XSLT is significantly more powerful than a lot of the newer templating
-techniques, such as Python's Jinja2 library. This is because XSLT is a fully
-functional programming language (it's a Lisp) that contains the powerful XPath
-tree-language and, within XPath, there is support for regular expressions and
-custom function construction. To use Jinja2, you have to have a complete
-understanding of the data you feed your template, but XSLT is declarative, you
-tell it what you want, and it figures out how to give it to you.
+XSLT is much more powerful than most of the newer templating techniques, such as
+Python's Jinja2 library.  Jinja2 is a great tool for transforming small data
+structures, while XSLT can be used for arbitrarily large data sets or data
+streams.
 
-Jinja2 is a great tool for transforming small data structures, while XSLT can be
-used for arbitrarily large data sets or data streams. XSLT compilers have been
-compiled from XSLT.  XSLT is an XML dialect, so you can use XSLT to transform
-your XSLT.
+This is because XSLT is a fully functional programming language (it's a Lisp)
+that contains the powerful XPath/XQuery tree-languages and, within XPath, there
+is support for regular expressions and custom function construction. To use
+Jinja2, you have to have a complete understanding of the data you feed your
+template, but XSLT is declarative, you tell it what you want, and it figures out
+how to give it to you.  The XSLT programs react to the data you feed them in a
+kind of event-driven way.  
 
-But, it is very difficult to learn XSLT from a book; If you are transcribing the
-book's examples, then running those files through your Python program, most of
-your time will be spent debugging, and not learning.  What makes this even
-harder, is that you have to hold a picture of multiple graphs in your head while
-you are trying to remember the new syntax and semantics.  It can be challenging.
+XSLT compilers have been compiled from XSLT.  XSLT is an XML dialect.  This
+means that all XSLT programs are pre-pickled.  They are serializable by default,
+your XSLT program is data and your XSLT data is a program.  XSLT is an inherent
+meta-programming language, it transforms data, and it is data, so it can
+trivially transform itself into new forms.
 
 Python does not come with a modern XSLT parser, but you can install external
 libraries that integrate the XSLT language into Python. The XSLT standard is
@@ -81,13 +81,43 @@ currently at version "3.0", but most open-source tools only support version
 An XSLT 3.0 book has not yet been published, but there are lots of XSLT 2.0
 books.
 
-To follow along, go and get a copy of "Beginning XSLT 2.0 From Novice to
-Professional" by Jeni Tennison, clone this repo and install the command line
-tools and the XSLT parsers (see below).  This isn't an easy book to read, it's
-like trying to comprehend a swarm of bees at a glance.  If you would like a
-clear step by step understanding of what is going on, step down from XSLT 2.0
-back to XSLT 1.0, and read Michiel van Otegem's teach yourself XSLT in 21 days.
-Pay special attention to chapter 3 which explains XPath using diagrams.
+If your editor uses snippet's, like SirVer's outstanding UltiSnips technology
+for Vim, get yourself ready to build up a custom, intermediary shorthand between
+your fingers and the XSLT language.  Don't copy someone else's snippet library,
+build your own as you read through the XSLT books. Leave programming notes as
+comments in your snippets work, you will reference these notes while you improve
+and tune your snippets over time.  The UltiSnips library provides a short-cut to
+get to your snippet files from your XSLT file.  Use this, or an analogous
+feature in your development environment, to constantly jump back and forth
+between your XSLT and your custom snippet work.
+
+XSLT is an XML, so it is necessarily verbose.  This is the cost of having a data
+language that can run against itself.  But, if you have your development
+environment augmented with your snippets, and you are actively working on the
+program to write your program, you will be able to swiftly type in and debug the
+hundreds of XSLT programs you will encounter in your training.  This will keep
+your mind actively engaged while you work through the manuals.
+
+If I were to re-start my training, I would begin with Michiel van Otegem's teach
+yourself XSLT in 21 days.  It is very well crafted.  Pay special attention to
+chapter 3 which explains the XPath tree language using diagrams.  While you are
+wrestling with these XPath tree query concepts, use the ``try xpath`` command
+provided by this repo.  Within each chapter, build up your snippet library, and
+type out most of the book's programs by hand -- this will be easy to do with
+your snippets.  Get used to validating your programs with the command line, go
+back and troubleshoot your issues.  You are learning a workflow, a new language
+and whatever snippet technology you are using.
+
+To get a sense of what the XSLT compilers are doing, play with 
+[Evan Lenz's XSLT-visualizer](https://github.com/evanlenz/xslt-visualizer).
+This will show you how the XSLT event manager reacts to the data in your XML
+files and how it calls out to your various templates based on their XPath match
+expressions.
+
+Then get a copy of Beginning XSLT 2.0 From Novice to Professional", by Jeni
+Tennison.  This isn't an easy book to read as a beginner, but at this point you
+will have a decent understanding of XSLT 1.0 from which you can infer over the
+gaps in her explainations.
 
 After that, I recommend getting a copy of "XSLT 2.0 and XPath 2.0 Programmer's
 Reference 4th Edition" by Michael Kay, and work through Chapter 17: Stylesheet
@@ -98,8 +128,7 @@ Michael Kay.  There is supporting example code for some of these JSON transforms
 and the pattern's code in the pattern's folder of this repo. (see the docs
 below) To become competent, get a copy of Sal Mangano's XSLT Cookbook, then work
 through his examples as lab work.  For mastery, do a deep dive back into
-Michael's book.  (I am guessing at this education path, I'm not competent with
-XSLT yet).
+Michael's book.
 
 XSLT is a powerful and robust technology.  It has been actively developed for
 almost 25 years, and it has been responsive to its community's feedback.  This
@@ -147,7 +176,8 @@ before you get excited, know that you should avoid this library for production:
   learn XSLT.
 
 The developer who is working on these bugs is buried with other work (at the
-time of this writing he has about 96 bugs in his queue).
+time of this writing he has about 96 bugs in his queue and he has spent 2 years
+on his highest priority bug -- so don't hold your breath).
 
 To learn XSLT 3.0 you need to be able to see its xsl compiler errors.  As I said
 before, ``saxonche`` isn't documented.  I spent a long time trying to figure out
@@ -991,6 +1021,18 @@ try xpath -p "following::*/name()"
 "S"
 "F"
 "G"
+
+try xpath -p "(following::* union preceding::*)/name()"
+"C"
+"D"
+"H"
+"M"
+"I"
+"K"
+"L"
+"S"
+"F"
+"G"
 ```
 
 # Useful links
@@ -1004,3 +1046,8 @@ try xpath -p "following::*/name()"
 - [White space article for XSLT 3.0](https://blogs.sap.com/2020/02/26/thinking-in-xslt-filtering-xml-elements/)
 - [Jeni's white space comments on SO](https://stackoverflow.com/a/185048)
 - [Saxon XSLT 3.0 JSON Whitepaper](https://www.saxonica.com/papers/xmlprague-2016mhk.pdf)
+- [XSLT variable into curly braces (attribute value templates)](https://stackoverflow.com/a/22106562)
+- [What's new in XSLT 3.0 and XPath 3.1](http://dh.obdurodon.org/xslt3.xhtml)
+- [XSLT-visualizer](https://github.com/evanlenz/xslt-visualizer)
+- [xidel: Xidel is a command line tool to download and extract data from HTML/XML pages as well as JSON APIs](https://www.videlibri.de/xidel.html)
+- [XML/XSLT links on Digital humanities](http://dh.obdurodon.org/)

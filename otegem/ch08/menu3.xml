@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+  <appetizers title="Work up an Appetite">
+    <dish id="1" price="8.75">Crab Cakes</dish>
+    <dish id="2" price="9.95">Jumbo Prawns</dish>
+    <dish id="3" price="10.95">Smoked Salmon and Avocado Quesadilla</dish>
+    <dish id="4" price="6.95">Caesar Salad</dish>
+  </appetizers>
+  <entrees title="Chow Time!">
+    <dish id="5" price="19.95">Grilled Salmon</dish>
+    <dish id="6" price="17.95">Seafood Pasta</dish>
+    <dish id="7" price="16.95">Linguini al Pesto</dish>
+    <dish id="8" price="18.75">Rack of Lamb</dish>
+    <dish id="9" price="16.95">Ribs and Wings</dish>
+  </entrees>
+  <desserts title="To Top It Off">
+    <dish id="10" price="6.95">Dame Blanche</dish>
+    <dish id="11" price="5.95">Chocolate Mousse</dish>
+    <dish id="12" price="6.95">Banana Split</dish>
+  </desserts>
+</menu>

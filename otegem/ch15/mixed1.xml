@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shop:basket xmlns:shop="http://www.example.com/xmlsn/shop"
+  xmlns:product="http://www.example.com/xmlsn/product">
+  <product:product product:ID="234" product:description="Bordeax"
+    product:price="50.00" shop:quantity="1" />
+  <product:product product:ID="123" product:description="Brie"
+    produt:price="99.95" shop:quantity="3" />
+</shop:basket>

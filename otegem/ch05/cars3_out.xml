@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><table border="500" width="1">
+  <tr bgcolor="#dddddd"><model>Focus</model><manufacturer>Ford</manufacturer><year>2000</year></tr>
+  <tr bgcolor="#dddddd"><model>Golf</model><manufacturer>Volkswagen</manufacturer><year>2001</year></tr>
+  <tr bgcolor="#dddddd"><model>Camry</model><manufacturer>Toyota</manufacturer><year>2010</year></tr>
+  <tr bgcolor="#dddddd"><model>Civic</model><manufacturer>Honda</manufacturer><year>1999</year></tr>
+</table>

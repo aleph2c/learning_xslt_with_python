@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<car:cars xmlns:car="http://www.cars.com">
+  <car:model model="Focus" manufacturer="Ford" year="2000" />
+  <car:model model="Golf"  manufacturer="Volkswagen" year="2001" />
+  <car:model model="Camry" manufacturer="Toyota" year="2010" />
+  <car:model model="Civic" manufacturer="Honda" year="1999" />
+  <car:model model="Prizm" manufacturer="Chevrolet" year="2000" />
+  <car:model model="Celica" manufacturer="Toyota" year="2000" />
+  <car:model model="Mustang" manufacturer="Ford" year="2001" />
+  <car:model model="Passat" manufacturer="Volkswagon" year="2001" />
+  <car:model model="Accord" manufacturer="Honda" year="2002" />
+  <car:model model="Corvette" manufacturer="Chevrolet" year="2002" />
+</car:cars>

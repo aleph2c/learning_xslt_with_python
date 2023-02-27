@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<car:cars xmlns:car="http://www.example.com/xmlns/car"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <car:car car:model="Focus" car:manufacturer="Ford" car:year="2000"/>
+   <car:car car:model="Golf" car:manufacturer="Volkswagen" car:year="2001"/>
+   <car:car car:model="Camry" car:manufacturer="Toyota" car:year="2010"/>
+   <car:car car:model="Civic" car:manufacturer="Honda" car:year="1999"/>
+   <car:car car:model="Prizm" car:manufacturer="Chevrolet" car:year="2000"/>
+   <car:car car:model="Celica" car:manufacturer="Toyota" car:year="2000"/>
+   <car:car car:model="Mustang" car:manufacturer="Ford" car:year="2001"/>
+   <car:car car:model="Passat" car:manufacturer="Volkswagon" car:year="2001"/>
+   <car:car car:model="Accord" car:manufacturer="Honda" car:year="2002"/>
+   <car:car car:model="Corvette" car:manufacturer="Chevrolet" car:year="2002"/>
+</car:cars>

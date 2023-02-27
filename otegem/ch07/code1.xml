@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<code language="javascript"><![CDATA[
+  function maxval(A, B) {
+    if (A < B) {
+      return B;
+    } else {
+      return A;
+    }
+  }
+]]></code>

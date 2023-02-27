@@ -14,7 +14,7 @@
 <xsl:param name="indent" select=" ' ' "/>
 
 <xsl:template match="*">
-  <xsl:param name="level" select="count(./ancestor::node())"/>
+  <xsl:param name="level" select="count(./ancestor::*)"/>
   <!-- Indent this element -->
   <xsl:call-template name="string-dup" >
     <xsl:with-param name="input" select="$indent"/>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  
+  Model:  Focus
+  Manufacturer  Ford
+  Year  2000
+  
+  Model:  Golf
+  Manufacturer  Volkswagen
+  Year  2001
+  
+  Model:  Camry
+  Manufacturer  Toyota
+  Year  2010
+  
+  Model:  Civic
+  Manufacturer  Honda
+  Year  1999
