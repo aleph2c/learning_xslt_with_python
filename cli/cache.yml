@@ -1,7 +1,7 @@
 context: /
 home_dir: /home/scott/xslt/otegem/ch17
-output_file_name: bill3_output.txt
+output_file_name: factorial1_output.txt
 params: null
 processor: saxon
-xml_file_name: bill3.xml
-xsl_file_name: bill3.xsl
+xml_file_name: factorial1.xml
+xsl_file_name: factorial1.xsl

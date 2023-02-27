@@ -36,4 +36,14 @@
   </xsl:choose>
 </xsl:template>
 
+<!-- remove default behavior -->
+<xsl:template match="*|text()|@*" >
+  <xsl:message>XSL leaking</xsl:message>
+</xsl:template>
+
+<xsl:template match="text()|@*" >
+  <xsl:message>XSL leaking</xsl:message>
+</xsl:template>
+
+<xsl:template match="processing-instruction()|comment()" />
 </xsl:stylesheet>

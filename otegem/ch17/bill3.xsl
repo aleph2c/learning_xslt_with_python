@@ -11,25 +11,22 @@
 <xsl:template match="/">
   <xsl:apply-templates select="//order" />
   <xsl:text>&#xA;Total: $</xsl:text>
-  <!--
   <xsl:call-template name="total">
     <xsl:with-param name="order" select="//order" />
-    </xsl:call-template>
-  -->
-
+  </xsl:call-template>
 </xsl:template>
 
-<xsl:template name="order">
+<xsl:template match="order">
   <xsl:value-of select="@quantity" />
-  <!--
   <xsl:text> x </xsl:text>
   <xsl:value-of select="$dishes[@id = current()/@id]" />
   <xsl:text> ($</xsl:text>
-  <xsl:value-of select="$dishes[@id = current()/@id]/price" />
+  <xsl:value-of select="$dishes[@id = current()/@id]/@price" />
+  <xsl:text>)</xsl:text>
   <xsl:text> = </xsl:text>
+  <xsl:text>$</xsl:text>
   <xsl:value-of select="format-number($dishes[@id = current()/@id]/@price * @quantity, '0.00')" />
-    <xsl:text>&#xA;</xsl:text>
-  -->
+  <xsl:text>&#xA;</xsl:text>
 </xsl:template>
 
 <xsl:template name="total">
@@ -43,7 +40,7 @@
       </xsl:variable>
       <xsl:variable name="price"
         select="$dishes[@id = $order[1]/@id]/@price" />
-      <xsl:value-of select="$subtotal + $price * $order[1]/quantity" />
+      <xsl:value-of select="$subtotal + $price * $order[1]/@quantity" />
     </xsl:when>
     <xsl:otherwise>0</xsl:otherwise>
   </xsl:choose>
