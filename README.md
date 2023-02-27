@@ -78,8 +78,9 @@ libraries that integrate the XSLT language into Python. The XSLT standard is
 currently at version "3.0", but most open-source tools only support version
 "1.0".
 
-An XSLT 3.0 book has not yet been published, but there are lots of XSLT 2.0
-books.
+An XSLT 3.0 book has not yet been published, but Altova has published a nice
+[XPath 3.0/3.1 training resource](https://www.altova.com/training/xpath3), and there
+are lots of XSLT 2.0 books.
 
 If your editor uses snippet's, like SirVer's outstanding UltiSnips technology
 for Vim, get yourself ready to build up a custom, intermediary shorthand between
@@ -1040,14 +1041,11 @@ try xpath -p "(following::* union preceding::*)/name()"
 - [saxonche docs are wrong](https://saxonica.plan.io/issues/5842)
 - [saxonche fails with stackoverflow errors](https://saxonica.plan.io/issues/5787)
 - [interview with Michael Kay](https://www.youtube.com/watch?v=2Zt9oJtFKGw)
+- [XPath 3.0/3.1 training resource](https://www.altova.com/training/xpath3),
+- [XSLT-visualizer](https://github.com/evanlenz/xslt-visualizer)
 - [XSLT 3.0 Prague 2016 resources](https://github.com/Saxonica/Prague2016)
 - [XSLT XPath Tutorial by arbitrarytechnology](https://www.youtube.com/watch?v=WggVR4YI5oI]
-- [Dealing with recursion depth](https://stackoverflow.com/questions/5435881/xslt-processing-recursion-depth)
-- [White space article for XSLT 3.0](https://blogs.sap.com/2020/02/26/thinking-in-xslt-filtering-xml-elements/)
-- [Jeni's white space comments on SO](https://stackoverflow.com/a/185048)
 - [Saxon XSLT 3.0 JSON Whitepaper](https://www.saxonica.com/papers/xmlprague-2016mhk.pdf)
-- [XSLT variable into curly braces (attribute value templates)](https://stackoverflow.com/a/22106562)
 - [What's new in XSLT 3.0 and XPath 3.1](http://dh.obdurodon.org/xslt3.xhtml)
-- [XSLT-visualizer](https://github.com/evanlenz/xslt-visualizer)
 - [xidel: Xidel is a command line tool to download and extract data from HTML/XML pages as well as JSON APIs](https://www.videlibri.de/xidel.html)
 - [XML/XSLT links on Digital humanities](http://dh.obdurodon.org/)
