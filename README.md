@@ -83,7 +83,7 @@ books.
 
 If your editor uses snippet's, like SirVer's outstanding UltiSnips technology
 for Vim, get yourself ready to build up a custom, intermediary shorthand between
-your fingers and the XSLT language.  Don't copy someone else's snippet library,
+your fingers and the XSLT language.  Don't copy someone else's [snippet library](https://github.com/aleph2c/.vim/blob/master/snippets/xslt.snippets),
 build your own as you read through the XSLT books. Leave programming notes as
 comments in your snippets work, you will reference these notes while you improve
 and tune your snippets over time.  The UltiSnips library provides a short-cut to
