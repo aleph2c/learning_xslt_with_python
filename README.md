@@ -1063,4 +1063,4 @@ try xpath -p "(following::* union preceding::*)/name()"
 - [Martin Honnen's Understanding how to use maps](https://stackoverflow.com/a/48051099)
 - [Martin Honnen's XSLT 3.0 by example blog](https://xslt-3-by-example.blogspot.com/)
 - [Martin Honnen's XSLT github gists](https://gist.github.com/martin-honnen)
-
+- [XSL 3.0 Specification](https://www.w3.org/TR/xslt-30)
