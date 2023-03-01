@@ -122,6 +122,8 @@
     name="attr_value"
     select="lfn:match($item, '=(.+)')"
   />
+
+
 </xsl:function>
 
 <xsl:function name="lfn:match">
@@ -140,8 +142,6 @@
   </xsl:analyze-string>
   <xsl:value-of select="$result" />
 </xsl:function>
-
-private-fn
 
 <xsl:function name="lfn:create-reversed-search-nodes" >
   <xsl:param name="search-pattern">

@@ -100,16 +100,7 @@ environment augmented with your snippets, and you are actively working on the
 program to write your program, you will be able to swiftly type-in and debug the
 hundreds of XSLT programs you will encounter in your training.  This will keep
 your mind actively engaged while dealing with the new syntax, as you work through
-the manuals.  The XSLT culture is unlike the Python and Ruby cultures:
-they refuse to include examples in their documentation.  They expect you to
-understand their language specifications, as is. These documents are probably
-auto-generated from their code using XSLT; so that they can save money.  If this
-is the case, it is a bad business decision. A language should not be hostile
-to its new users, especially if its syntax is verbose and unlike other
-languages.  I think this type of snobbery (or curse of knowledge) might be the
-reason why UML/XML/XSLT and a lot of the good ideas have been passed over for
-the worse, but easy-to-learn ideas in recent years.  XSLT/XPath does not have to
-be hard to learn.
+the manuals.
 
 If I were to re-start my training, I would begin with Michiel van Otegem's teach
 yourself XSLT in 21 days.  It is very well written.  Pay special attention to
@@ -132,7 +123,7 @@ expressions.
 Then get a copy of Beginning XSLT 2.0 From Novice to Professional", by Jeni
 Tennison.  This isn't an easy book to read as a beginner, but at this point you
 will have a decent understanding of XSLT 1.0 from which you can infer over the
-gaps in her explainations.
+gaps in her explanations.
 
 After that, I recommend getting a copy of "XSLT 2.0 and XPath 2.0 Programmer's
 Reference 4th Edition" by Michael Kay, and work through Chapter 17: Stylesheet
@@ -145,7 +136,7 @@ below) To become competent, get a copy of Sal Mangano's XSLT Cookbook, then work
 through his examples as lab work.  To learn XSLT 3.0 read Martin Honnen's
 [XSLT 3.0 by example blog](https://xslt-3-by-example.blogspot.com/), and read
 through [his help on stack overflow](https://stackoverflow.com/users/252228/martin-honnen) and 
-his [gists on github](https://gist.github.com/martin-honnen)
+his [gists on github](https://gist.github.com/martin-honnen).
 
 XSLT is a powerful and robust technology.  It has been actively developed for
 almost 25 years, and it has been responsive to its community's feedback.  This
@@ -300,7 +291,7 @@ Options:
 To run an example:
 
 ```
-try -d jenni/ch2_html_from_xml ex -n TVGuide2 -p lxml
+try -d jenni/ch2_html_from_xml ex -x TVGuide2.xml -l TVGuide2.xsl -o TVGuide2.html -p lxml -v
 # a lot of XML
 
 ran the lxml process
@@ -318,7 +309,7 @@ try cache
 To run the same exercise again:
 
 ```
-try ex
+try ex -v
 # a lot of XML
 
 ran the lxml processor
@@ -329,7 +320,7 @@ To try the same example with the saxon processor, you just have to tell the
 are not specified it will use your cached options:
 
 ```
-try ex -p saxon
+try ex -p saxon -v
 # a lot of XML
 
 ran the saxon processor
@@ -387,6 +378,9 @@ python -m json.tool ./michael/json_input.json
 Perform a transform (saxonpy works, saxonche stackoverflow):
 
 ```
+# this will crash with saxonche due to stackoverflow errors
+# but it ran with saxonpy
+
 try -d michael \
   ex -j json_input.json \
      -l to_json.xsl \

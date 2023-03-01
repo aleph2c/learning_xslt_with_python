@@ -1,7 +1,7 @@
 context: ''
-home_dir: /home/scott/xslt/patterns
-output_file_name: txt3.txt
+home_dir: /home/scott/xslt/michael
+output_file_name: json_output.json
 params: null
 processor: saxon
-xml_file_name: xml3_good.xml
-xsl_file_name: xsl3.xsl
+xml_file_name: json_input.json
+xsl_file_name: to_json.xsl
