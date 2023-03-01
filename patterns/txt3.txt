@@ -1,0 +1,6 @@
+//item[@name='Young']/item[@name='Rex']
+hey
+|@name='Rex'|
+|@name='Young'|
+Miss Hit Hit Hit Miss MissHitMiss MissHitMiss 
+item[@name='Rex'] item[@name='Young']  

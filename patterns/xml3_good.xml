@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <meta selection="//item[@name='Young']/item[@name='Rex']"></meta>
+  <data>
+    <items>
+      <item name="Pink">
+        <item name="Young">
+          <item name="Murphy">Miss</item>
+        </item>
+      </item>
+      <item name="Orange">
+        <item name="Young">
+          <item name="Rex">Hit</item>
+        </item>
+      </item>
+      <item name="Green">
+        <item name="Young">
+          <item name="Vinny">Miss</item>
+        </item>
+      </item>
+    </items>
+  </data>
+</root>

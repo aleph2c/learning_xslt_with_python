@@ -38,6 +38,7 @@
 
 <!-- remove default behavior -->
 <xsl:template match="*|text()|@*" >
+  <!-- remove default behavior -->
   <xsl:message>XSL leaking</xsl:message>
 </xsl:template>
 

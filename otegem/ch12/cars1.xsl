@@ -6,6 +6,16 @@
 <xsl:output method="text" encoding="UTF-8" />
 <xsl:strip-space elements="*" />
 
+<!--
+  try
+  -d otegem/ch12
+  ex
+  -x cars1.xml \
+  -l cars1.xsl \
+  -o cars1_output.txt
+  -v
+-->
+
 <xsl:template match="/">
   <xsl:text>&#xA;</xsl:text>
   <xsl:text>CARS:</xsl:text>

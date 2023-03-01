@@ -4,13 +4,16 @@
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <!--
-  try -d otegem/ch10 \
-  ex \
-    -x menu3.xml \
-    -l menu3.xsl \
-    /-/-params "week=6,unused=4" \
-    -o menu3_output.txt -v
+  try
+  -d otegem/ch10
+  ex
+  -x menu3.xml \
+  -l menu3.xsl \
+  -a "week=6" \
+  -o menu3_output.txt
+  -v
 -->
+<xsl:param name="week">1</xsl:param>
 
 <xsl:output method="text" encoding="UTF-8" />
 <xsl:strip-space elements="*" />

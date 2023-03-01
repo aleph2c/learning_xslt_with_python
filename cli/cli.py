@@ -149,6 +149,7 @@ def __saxon_xslt30_transform(
         xsltproc.set_parameter("json_input_filename", json_input_param)
 
     _exec = xsltproc.compile_stylesheet(stylesheet_file=str(xsl_file_path))
+
     if _exec is None:
         saxon_error = f"{xsltproc.error_message}\n"
         xsltproc.exception_clear()
