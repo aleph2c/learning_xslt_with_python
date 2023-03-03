@@ -187,7 +187,23 @@ The developer who is working on these bugs is buried with other work (at the
 time of this writing he has about 96 bugs in his queue and he has spent 2 years
 on his highest priority bug -- so don't hold your breath).
 
-To learn XSLT 3.0 you need to be able to see its xsl compiler errors.  As I said
+This is just one example of many of how the XSLT community lacks empathy for
+their beginners.  When their documentation is written correctly, it is
+excessively formal and uses domain specific terminology to explain itself; it is
+written for them, not for someone trying to understand something new.  There
+aren't enough examples.
+
+It is rational to choose an inferior data transformation technology, because it
+is cheaper to understand than XSLT.  Saxonica and the other XML companies are
+leaving a lot of money on the table because of their snobbery.  They would do
+well to invest in some jargonaughts to bring their concepts down from the
+heights  (Martin Honnen would be perfect for this).  XSLT should have easily won
+as a data-transformation technology.  I predict that someone will build a
+wrapper-business/compiler around XSLT and take all the money that is currently
+sitting as potential energy.  (like what Docker did to Linux containerization or
+Elixir is doing to Erlang).
+
+Also, to learn XSLT 3.0 you need to be able to see its xsl compiler errors.  As I said
 before, ``saxonche`` isn't documented.  I spent a long time trying to figure out
 how to get compiler errors working with a threadable ``saxonche`` and eventually
 decided to try something else.  I downloaded the 

@@ -1,7 +1,7 @@
-context: ''
-home_dir: /home/scott/xslt/michael
-output_file_name: json_output.json
+context: //item[@name='Young']/item[@name='Rex']
+home_dir: /home/scott/xslt/patterns
+output_file_name: xml4.1.txt
 params: null
 processor: saxon
-xml_file_name: json_input.json
-xsl_file_name: to_json.xsl
+xml_file_name: accum4.1.xml
+xsl_file_name: accum4.1.xsl

@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="3.0"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:lfn="http://127.0.0.1/localfunctions"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:private-lfn="http://127.0.0.1/privatelocalfunctions"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:map="http://www.w3.org/2005/xpath-functions/map"
+  xmlns:array="http://www.w3.org/2005/xpath-functions/array"
+  xmlns:lfn="http://127.0.0.1/localfunctions"
+  xmlns:private-lfn="http://127.0.0.1/privatelocalfunctions"
   xmlns:exclude-result-prefixes="lfn private-lfn"
 >
 
 <xsl:output method="text" encoding="UTF-8" />
 <xsl:strip-space elements="*" />
+
+<xsl:accumulator name="test-pass" as="xs:integer" initial-value="0">
+  <xsl:accumulator-rule phase="start" select="0" />
+  <xsl:accumulator-rule phase="end" select="$value" />
+  <xsl:accumulator-rule phase="tests" select="$value + 1" />
+</xsl:accumulator>
+
 <xsl:mode on-no-match="shallow-skip" />
 
 <xsl:template match="/">
@@ -38,8 +46,9 @@
   <xsl:param name="search-path" />
   <xsl:text>&#xA;</xsl:text>
   <xsl:variable name="actual-path" select="ancestor::*/element()"/>
-
-  <xsl:apply-templates select="//item[@name='Young']/item[@name='Rex']" />
+  <xsl:apply-templates select="//item[@name='Young']/item[@name='Rex']" >
+    <xsl:with-param name="search-path" select="$search-path"/>
+  </xsl:apply-templates>
 
   <!--
   <xsl:evaluate xpath="$search-path" context-item="$actual-path" />
@@ -53,112 +62,226 @@
   </xsl:template>
 
   <xsl:template match="item">
+    <xsl:param name="search-path"/>
     <xsl:if test="@* = 'Rex'">
-      <xsl:text>hey</xsl:text>
-      <xsl:text>&#xA;</xsl:text>
+      <!-- pull this out later -->
+      <!--
+        <xsl:variable name="search-path">//item[@name='Young']/item[@name='Rex']</xsl:variable>
+      -->
+      <!--
+        <xsl:variable name="search-path">item/item[@name='Rex']</xsl:variable>
+      <xsl:variable name="search-path">item/item[@name='Rex']</xsl:variable>
+      -->
 
-      <xsl:variable name="search-path">//item[@name='Young']/item[@name='Rex']</xsl:variable>
       <xsl:variable
-        name="reverse-tokens"
-        select="$search-path => tokenize('/') => reverse()"
+        name="reversed-search-tokens"
+        select="lfn:search-path-tokenized-and-reverse($search-path)"
       />
+      <xsl:variable name="ancestors" select="ancestor-or-self::*" />
+      <!-- range(1, lfn:items-in-search-path($search-path)+1)" -->
+      <xsl:variable name="indexes" as="xs:integer*">
+        <xsl:for-each select="1 to lfn:items-in-search-path($search-path)">
+            <xsl:sequence select="." />
+        </xsl:for-each>
+      </xsl:variable>
       <xsl:variable
-        name="reverse-actual-path"
-        select="ancestor::*/element() => reverse()"
-      />
-      <xsl:for-each select="1 to count($reverse-tokens)">
-        <xsl:variable name="i" select='number(.)' />
-        <xsl:if test="string-length($reverse-tokens[$i]) gt 0">
-          <xsl:analyze-string select="$reverse-tokens[$i]" regex="\[(.+)\]" >
-            <xsl:matching-substring>
-              <xsl:text>|</xsl:text>
-              <xsl:value-of select="regex-group(1)" />
-              <xsl:text>|</xsl:text>
-              <xsl:text>&#xA;</xsl:text>
-              <xsl:variable name="temp" select="." />
-            </xsl:matching-substring>
-            <xsl:non-matching-substring>
-              <xsl:variable name="temp" select="." />
-            </xsl:non-matching-substring>
-          </xsl:analyze-string>
-        </xsl:if>
+        name="tests"
+        as="array(xs:integer)"
+        select="array{1 to count($indexes)}" />
+
+      <xsl:for-each select="1 to count($indexes)">
+        <xsl:variable name="index" select="." />
+
+        <!-- search token -->
+        <xsl:variable
+          name="search-token"
+          select="$reversed-search-tokens[$index]"
+        />
+        <xsl:value-of select="$search-token" />
+        <xsl:text>&#xA;|</xsl:text>
+        <xsl:value-of select="reverse($ancestors)[$index]/name()" />
+        <xsl:value-of select="reverse($ancestors)[$index]/@*/name()" />
+        <xsl:value-of select="reverse($ancestors)[$index]/@*/." />
+        <xsl:text>|&#xA;</xsl:text>
+
+        <xsl:variable
+            name="node-name"
+            select="lfn:create-name-for-search-item($search-token)" />
+        <xsl:variable
+          name="attr-name"
+          select="lfn:create-attr-name-for-search-item($search-token)"
+        />
+        <xsl:variable
+          name="attr-value"
+          select="lfn:create-attr-value-for-search-item($search-token)"
+        />
+
+        <xsl:text>&#xA;|</xsl:text>
+        <xsl:value-of select="$node-name" />
+        <xsl:value-of select="$attr-name" />
+        <xsl:value-of select="$attr-value" />
+        <xsl:text>|&#xA;</xsl:text>
+
+        <xsl:variable name="result-ex"
+        select="reverse($ancestors)[$index]/name() = $node-name"
+        />
+        <xsl:value-of select="$result-ex" />
+        <xsl:variable name="test-result" select="
+          lfn:validate(
+            reverse($ancestors)[$index]/name(),
+            reverse($ancestors)[$index]/@*/name(),
+            reverse($ancestors)[$index]/@*/.,
+            $node-name,
+            $attr-name,
+            $attr-value)"
+        />
+        <xsl:value-of select="$test-result" />
       </xsl:for-each>
-
-      <xsl:value-of select="$reverse-actual-path" />
-      <xsl:text>&#xA;</xsl:text>
-      <xsl:value-of select="$reverse-tokens" />
     </xsl:if>
   </xsl:template>
 
-<xsl:function name="lfn:tokenize-reverse-search" >
-  <xsl:param name="search-pattern">
-  <xsl:variable
-    name="tokenized-reverse-search"
-    select="$search-pattern => tokenize('/') => reverse()"
-  />
-  <xsl:value-of select="$tokenized-reverse-search" />
+<xsl:function name="lfn:validate" as="xs:integer">
+  <xsl:param name="path-name" />
+  <xsl:param name="path-attr-name" />
+  <xsl:param name="path-attr-value" />
+  <xsl:param name="search-name" />
+  <xsl:param name="search-attr-name" />
+  <xsl:param name="search-attr-value" />
+
+  <xsl:choose>
+    <xsl:when test="
+      $path-name = $search-name and
+      $path-attr-name = $search-attr-name and
+      $path-attr-value = $search-attr-value"
+    >
+      <xsl:sequence select="1" />
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:sequence select="0" />
+    </xsl:otherwise>
+  </xsl:choose>
 </xsl:function>
 
-<xsl:function name="lfn:reverse-ancestors">
-  <xsl:param name="$ancestors" />
-  <xsl:variable
-    name="reversed-ancestors"
-    select="$ancestors => reverse()"
-  />
-  <xsl:value-of select="$reversed-ancestors" />
+<xsl:function name="lfn:append">
+  <xsl:param name="seq" />
+  <xsl:param name="item" />
+  <xsl:sequence select="insert-before($seq, count($seq)+1, $item)" />
 </xsl:function>
 
-<xsl:function name="lfn:create-node-for-search-item">
-  <xsl:param name="$item" />
+<xsl:function name="lfn:generate-x-path" >
+  <xsl:param name="p-node" />
+  <xsl:for-each select="$p-node/ancestor::*">
+    <xsl:value-of select="name()" />
+    <xsl:text>/</xsl:text>
+  </xsl:for-each>
+  <xsl:value-of select="name($p-node)" />
+</xsl:function>
+
+<xsl:function name="lfn:reverse-ancestors" as="node()*">
+  <xsl:param name="ancestors" as="node()*" />
+</xsl:function>
+
+<!-- working -->
+<xsl:function name="lfn:create-name-for-search-item" as="xs:string*">
+  <xsl:param name="item" />
   <xsl:variable
     name="node_name"
-    select="lfn:match($item, '(.+)\[')"
+    select="lfn:match($item, '(\w+)\[.+')"
+  />
+  <xsl:sequence select="$node_name" />
+</xsl:function>
+
+<!-- not tested -->
+<xsl:function name="lfn:create-attr-name-for-search-item" as="xs:string*">
+  <xsl:param name="item" />
+  <xsl:variable
+    name="attr_name"
+    select="lfn:match($item, '@(\w+)=')"
+  />
+  <xsl:sequence select="$attr_name" />
+</xsl:function>
+
+<!-- not tested -->
+<xsl:function name="lfn:create-attr-value-for-search-item" as="xs:string*">
+  <xsl:param name="item" />
+  <xsl:variable
+    name="attr_value"
+    select="lfn:match($item, '=.(.+).\]')"
+  />
+  <xsl:sequence select="$attr_value" />
+</xsl:function>
+
+<!-- not tested -->
+<xsl:function name="lfn:items-in-search-path" as="xs:integer">
+  <xsl:param name="search-path"></xsl:param>
+  <xsl:sequence select="replace($search-path, '//', '') => tokenize('/') => count()" />
+</xsl:function>
+
+<!-- works -->
+<xsl:function name="lfn:search-path-tokenized-and-reverse" >
+  <xsl:param name="search-pattern" as="xs:string" />
+  <xsl:variable name="_search-path" select="replace($search-pattern, '//', '')"/>
+  <xsl:sequence select="reverse(tokenize($_search-path, '/'))" />
+</xsl:function>
+
+<!-- it seems that without the as="xs:string" this function squishes
+     the results into one string -->
+<xsl:function name="lfn:create-node-for-search-item" as="xs:string*">
+  <xsl:param name="item" />
+  <!--
+  <xsl:text>&lt;</xsl:text>
+  <xsl:value-of select="$item" />
+  <xsl:text>&gt;</xsl:text>
+  <xsl:text>&#xA;</xsl:text>
+  -->
+  <xsl:variable
+    name="node_name"
+    select="lfn:match($item, '(\w+)\[.+')"
   />
   <xsl:variable
     name="attr_name"
-    select="lfn:match($item, '\[@(.+)=')"
+    select="lfn:match($item, '@(\w+)=')"
   />
   <xsl:variable
     name="attr_value"
-    select="lfn:match($item, '=(.+)')"
+    select="lfn:match($item, '=.(.+).\]')"
   />
-
-
+  <!--
+    <xsl:variable name="result" select="$node_name, $attr_name, $attr_value" />
+  -->
+  <xsl:sequence select="$node_name, $attr_name, $attr_value" />
 </xsl:function>
 
 <xsl:function name="lfn:match">
   <xsl:param name="item" />
   <xsl:param name="pattern" />
-  <xsl:analyze-string select="$item" regex="$pattern" >
-    <xsl:matching-substring>
-      <xsl:variable
-        name="result"
-        select="regex-group(1)"
-      />
-    </xsl:matching-substring>
-    <xsl:non-matching-substring>
-      <xsl:variable name="result"></xsl:variable>
-    </xsl:non-matching-substring>
-  </xsl:analyze-string>
-  <xsl:value-of select="$result" />
-</xsl:function>
+  <!--
+  <xsl:text>&lt;</xsl:text>
+  <xsl:value-of select="$pattern" />
+  <xsl:text>&gt;</xsl:text>
+  <xsl:text>&#xA;</xsl:text>
+  <xsl:text>&lt;</xsl:text>
+  <xsl:value-of select="$item" />
+  <xsl:text>&gt;</xsl:text>
+  <xsl:text>&#xA;</xsl:text>
 
-<xsl:function name="lfn:create-reversed-search-nodes" >
-  <xsl:param name="search-pattern">
-  <xsl:variable name="reverse-search-sequenc">
-    <xsl:value-of select="lfn:tokenize-reverse-search($search-pattern)" />
-  </xsl:variable>
-</xsl:function>
-
-<xsl:function name="lfn:compare-ancestors-to-search-pattern">
-  <xsl:param name="ancestors" />
-  <xsl:param name="search-pattern" />
-  <xsl:variable name="reverse-search-nodes">
-    <xsl:value-of select="lfn:create-reversed-search-nodes($search-pattern)" />
-  </xsl:variable>
-  <xsl:variable name="reversed-ancestor-nodes">
-    <xsl:value-of select="lfn:reverse-ancestors($ancestors)" />
-  </xsl:variable>
+  -->
+  <xsl:try>
+    <xsl:variable name="result" as="xs:string">
+      <xsl:analyze-string select="$item" regex="{$pattern}" >
+        <xsl:matching-substring>
+          <xsl:value-of select="regex-group(1)" />
+        </xsl:matching-substring>
+        <xsl:non-matching-substring>
+        </xsl:non-matching-substring>
+      </xsl:analyze-string>
+    </xsl:variable>
+    <xsl:sequence select="$result" />
+    <xsl:catch>
+      <xsl:variable name="empty" ></xsl:variable>
+      <xsl:sequence select="$empty" />
+    </xsl:catch>
+  </xsl:try>
 </xsl:function>
 
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book>
+   <!--chapter 1-->
+   <chapter>
+      <!--figure 1 in
+        chapter 1-->
+      <figure/>
+      <!--figure 2 in
+        chapter 1-->
+      <figure/>
+      <!--figure 3 in
+        chapter 1-->
+      <figure/>
+   </chapter>
+   <p>Figures in chapter 1: 3</p>
+   <!--chapter 2-->
+   <chapter>
+      <!--figure 1 in
+        chapter 2-->
+      <figure/>
+      <!--figure 2 in
+        chapter 2-->
+      <figure/>
+      <!--figure 3 in
+        chapter 2-->
+      <figure/>
+   </chapter>
+   <p>Figures in chapter 2: 3</p>
+   <!--chapter 3-->
+   <chapter>
+      <!--figure 1 in
+        chapter 3-->
+      <figure/>
+      <!--figure 2 in
+        chapter 3-->
+      <figure/>
+      <!--figure 3 in
+        chapter 3-->
+      <figure/>
+   </chapter>
+   <p>Figures in chapter 3: 3</p>
+</book>
