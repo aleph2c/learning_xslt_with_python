@@ -189,25 +189,35 @@ on his highest priority bug -- so don't hold your breath).
 
 This is one example, of many, of how the XSLT community lacks empathy for
 beginners.  When their documentation is written correctly, it is excessively
-formal and uses domain specific terminology to explain itself; it is written for
+formal and uses domain-specific terminology to explain itself; it is written for
 them, not for someone trying to understand something new.  There aren't enough
-examples and this is an unforced error.
+examples, so you will have to make your own.   One of the main challenges you
+will face writing XSLT, coming from a Python background, is to stop thinking
+like a procedural programmer and start thinking like a functional programmer.
+To force a functional mindset and to provide yourself a prototypical example:
 
-It is rational to choose an inferior data transformation technology, because it
-is cheaper to understand than XSLT.  Saxonica and the other XML companies are
-leaving a lot of money on the table because of their snobbery.  They would do
-well to invest in some jargonaughts to bring their concepts down from the
-heights (Martin Honnen would be perfect for this), and write lots of working
-examples.  XSLT should have easily won as a data-transformation technology.
-Ansible/Jinja2/Erb/JSON/YAML should not exist.  I predict that someone will
-build a wrapper-business/compiler around XSLT and take all the money that is
-currently sitting as potential energy.  (like what Docker did to Linux
-containerization or Elixir is doing to Erlang).
+- Write out Python versions of the XSLT XPath functional part of your program
+  before you tackle it directly in XSLT, but
+- Never over-write a Python variable once it is written.  This will force you
+  to write things recursively.
 
-Also, to learn XSLT 3.0 you need to be able to see its xsl compiler errors.  As I said
-before, ``saxonche`` isn't documented.  I spent a long time trying to figure out
-how to get compiler errors working with a threadable ``saxonche`` and eventually
-decided to try something else.  I downloaded the 
+Use the Python debugger or whatever other tools you have to step in and
+debug any issues you encounter.  Once you have this functional Python
+example working, you can ask ChatGPT to translate your Python program into
+XSLT.  This translation will be a mess, and it will not run, but it will
+solve many of the syntax challenges you will have.  If you need an
+advanced XPath search expression, use the ``try xpath`` command tool
+provided by this package to set your template's context and debug your
+XPath pattern against the XML document you are trying to parse (this
+command tool is documented below).  Use your generated examples as
+references, and type in your XSLT program using your snippets.  Then use
+the `try ex` command tools provided by this package and dial it in until
+it works.
+
+Also, to learn XSLT 3.0 you need to be able to see its xsl compiler errors.  As
+I said before, ``saxonche`` isn't documented.  I spent a long time trying to
+figure out how to get compiler errors working with a threadable ``saxonche`` and
+eventually decided to try something else.  I downloaded the 
 [zipped java version of saxon](https://github.com/Saxonica/Saxon-HE/blob/be4dd844d935d8d0ef09748490448624abe3c66b/12/source/saxon12-0source.zip),
 decompressed it and ran it's command line tool:
 

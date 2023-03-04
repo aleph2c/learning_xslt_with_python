@@ -83,10 +83,12 @@
   <xsl:variable
       name="node-name"
       select="lfn:create-name-for-search-item($search-token)" />
+
   <xsl:variable
     name="attr-name"
     select="lfn:create-attr-name-for-search-item($search-token)"
   />
+
   <xsl:variable
     name="attr-value"
     select="lfn:create-attr-value-for-search-item($search-token)"
