@@ -11,17 +11,19 @@ minimize typing).
 
 Install this repo (see instructions below).
 
-
 ### Testing XPath Patterns
 
-Imagine you are trying to under how XPath can be used within XSLT.  Would like
-to use following picture and the `/patterns/axis_testing.xml` to try out various
-XPath expressions:
+Imagine you are trying to understand how to use XPath matching expressions with
+XSLT.
+
+You would like to reference the following picture and the
+`/patterns/axis_testing.xml` file that represents this picture, to try out
+various XPath matching expressions:
 
 ![xpath 2](patterns/xpath_2.svg)
 
-We could set the context to the root node then match against everything in the
-document:
+To see the entire XML file, we could set the context to the "root" node then match
+against everything in the document:
 
 ```
 try -d patterns/ xpath -x"axis_testing.xml" -c"/" -p"*"
@@ -67,8 +69,8 @@ context: //J
 J
 ```
 
-Since the command is lazy, we can query from the ``J`` context and look back at
-it's ancestors like this:
+Since the command is lazy, we can query from the ``J`` context without
+re-specifying it and look back at ``J's`` ancestors like this:
 
 ```
 try xpath -p "ancestor::*/name()"
