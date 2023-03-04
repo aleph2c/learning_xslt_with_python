@@ -11,8 +11,78 @@ minimize typing).
 
 Install this repo (see instructions below).
 
+
+### Testing XPath Patterns
+
+Imagine you are trying to under how XPath can be used within XSLT.  Would like
+to use following picture and the `/patterns/axis_testing.xml` to try out various
+XPath expressions:
+
+![xpath 2](patterns/xpath_2.svg)
+
+We could set the context to the root node then match against everything in the
+document:
+
+```
+try -d patterns/ xpath -x"axis_testing.xml" -c"/" -p"*"
+context: /
+<A id="1">
+  <B id="2">
+    <C id="3"/>
+    <D id="4"/>
+    <E id="5">
+      <H id="8">
+        <M id="13"/>
+      </H>
+      <I id="9"/>
+      <J id="10">
+        <N id="14"/>
+        <O id="15">
+          <T id="20"/>
+          <U id="21"/>
+        </O>
+        <P id="16"/>
+        <Q id="17"/>
+        <R id="18">
+          <V id="22"/>
+          <W id="23"/>
+        </R>
+      </J>
+      <K id="11"/>
+      <L id="12">
+        <S id="19"/>
+      </L>
+    </E>
+    <F id="6"/>
+    <G id="7"/>
+  </B>
+</A>
+```
+
+Now let's set ``J`` as the node context and perform our first axis experiment:
+
+```
+try xpath -c "//J" -p "self::*/name()"
+context: //J
+J
+```
+
+Since the command is lazy, we can query from the ``J`` context and look back at
+it's ancestors like this:
+
+```
+try xpath -p "ancestor::*/name()"
+context: //J
+J
+"A"
+"B"
+"E"
+```
+
+### Evaluating XSLT programs
+
 Now imagine you are trying to learn XSLT.  You have installed this repo's command
-line tools and XSLT compilers (see below).  And now you find yourself working on
+line tools and XSLT compilers (see below).  Suppose you are working on
 the chapter 7.4 exercize of Sal Mangano's XSLT Cookbook.
 You transcribe his text-hierarchy XSLT example into ``./sal/ch07/text.hierarchy.xsl``.
 Now you want to use this .xsl program to transform ``book.xml`` into
@@ -196,9 +266,9 @@ will face writing XSLT, coming from a Python background, is to stop thinking
 like a procedural programmer and start thinking like a functional programmer.
 To force a functional mindset and to provide yourself a prototypical example:
 
-- Write out Python versions of the XSLT XPath functional part of your program
-  before you tackle it directly in XSLT, but
-- Never over-write a Python variable once it is written.  This will force you
+- Write out a Python version of the XPath functional parts of your XSLT
+  program before you tackle it directly in XSLT, but
+- never over-write a Python variable once it is written.  This will force you
   to write things recursively.
 
 Use the Python debugger or whatever other tools you have to step in and

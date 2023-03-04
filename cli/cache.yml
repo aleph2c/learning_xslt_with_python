@@ -1,7 +1,7 @@
-context: //item[@name='Young']/item[@name='Rex']
+context: //J
 home_dir: /home/scott/xslt/patterns
 output_file_name: txt3.txt
 params: null
 processor: saxon
-xml_file_name: xml3_good.xml
+xml_file_name: axis_testing.xml
 xsl_file_name: xsl3.xsl
