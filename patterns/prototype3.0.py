@@ -9,21 +9,21 @@ search_pattern = "//item[@name='Young']/item[@name='Rex']"
 Attr = \
   namedtuple('Attr', ['name', 'value'  ])
 Node = \
-  namedtuple('Node', ['name', 'attrs', 'text' ])
+  namedtuple('Node', ['name', 'attr', 'text' ])
 
 ancestors1 = [
-  Node(name='root', attrs=None, text=None),
-  Node(name='data', attrs=None, text=None),
-  Node(name='items', attrs=None, text=None),
-  Node(name='item', attrs=Attr(name='name', value='Orange'), text=None),
-  Node(name='item', attrs=Attr(name='name', value='Young'), text=None),
-  Node(name='item', attrs=Attr(name='name', value='Rex'), text='Hit'),
+  Node(name='root', attr=None, text=None),
+  Node(name='data', attr=None, text=None),
+  Node(name='items', attr=None, text=None),
+  Node(name='item', attr=Attr(name='name', value='Orange'), text=None),
+  Node(name='item', attr=Attr(name='name', value='Young'), text=None),
+  Node(name='item', attr=Attr(name='name', value='Rex'), text='Hit'),
 ]
 
 ancestors2 = [
-  Node(name='root', attrs=None, text=None),
-  Node(name='data', attrs=None, text=None),
-  Node(name='items', attrs=None, text=None),
+  Node(name='root', attr=None, text=None),
+  Node(name='data', attr=None, text=None),
+  Node(name='items', attr=None, text=None),
   Node(name='item', attr=Attr(name='name', value='Orange'), text=None),
   Node(name='item', attr=Attr(name='name', value='Young'), text=None),
   Node(name='item', attr=Attr(name='name', value='Bob'), text='Hit'),

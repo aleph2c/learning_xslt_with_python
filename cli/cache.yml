@@ -1,7 +1,7 @@
 context: //item[@name='Young']/item[@name='Rex']
 home_dir: /home/scott/xslt/patterns
-output_file_name: xml4.1.txt
+output_file_name: txt3.txt
 params: null
 processor: saxon
-xml_file_name: accum4.1.xml
-xsl_file_name: accum4.1.xsl
+xml_file_name: xml3_good.xml
+xsl_file_name: xsl3.xsl

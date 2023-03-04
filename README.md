@@ -120,7 +120,7 @@ This will show you how the XSLT event manager reacts to the data in your XML
 files and how it calls out to your various templates based on their XPath match
 expressions.
 
-Then get a copy of Beginning XSLT 2.0 From Novice to Professional", by Jeni
+Then get a copy of "Beginning XSLT 2.0 From Novice to Professional", by Jeni
 Tennison.  This isn't an easy book to read as a beginner, but at this point you
 will have a decent understanding of XSLT 1.0 from which you can infer over the
 gaps in her explanations.
@@ -187,21 +187,22 @@ The developer who is working on these bugs is buried with other work (at the
 time of this writing he has about 96 bugs in his queue and he has spent 2 years
 on his highest priority bug -- so don't hold your breath).
 
-This is just one example of many of how the XSLT community lacks empathy for
-their beginners.  When their documentation is written correctly, it is
-excessively formal and uses domain specific terminology to explain itself; it is
-written for them, not for someone trying to understand something new.  There
-aren't enough examples.
+This is one example, of many, of how the XSLT community lacks empathy for
+beginners.  When their documentation is written correctly, it is excessively
+formal and uses domain specific terminology to explain itself; it is written for
+them, not for someone trying to understand something new.  There aren't enough
+examples and this is an unforced error.
 
 It is rational to choose an inferior data transformation technology, because it
 is cheaper to understand than XSLT.  Saxonica and the other XML companies are
 leaving a lot of money on the table because of their snobbery.  They would do
 well to invest in some jargonaughts to bring their concepts down from the
-heights  (Martin Honnen would be perfect for this).  XSLT should have easily won
-as a data-transformation technology.  I predict that someone will build a
-wrapper-business/compiler around XSLT and take all the money that is currently
-sitting as potential energy.  (like what Docker did to Linux containerization or
-Elixir is doing to Erlang).
+heights (Martin Honnen would be perfect for this), and write lots of working
+examples.  XSLT should have easily won as a data-transformation technology.
+Ansible/Jinja2/Erb/JSON/YAML should not exist.  I predict that someone will
+build a wrapper-business/compiler around XSLT and take all the money that is
+currently sitting as potential energy.  (like what Docker did to Linux
+containerization or Elixir is doing to Erlang).
 
 Also, to learn XSLT 3.0 you need to be able to see its xsl compiler errors.  As I said
 before, ``saxonche`` isn't documented.  I spent a long time trying to figure out
