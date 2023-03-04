@@ -3,11 +3,11 @@
 XSLT is an XML Lisp used to transform data from one form to another.  The XSLT
 language contains the XPath tree mini-language within it.
 
-## Quick Start
+Use this repo to learn XSLT/XPath and how it can be integrated with Python. It
+has a lazy CLI (it caches previous command inputs and uses them to minimize
+typing).
 
-I created this repo to learn XSLT/XPath and how it can be integrated with
-Python. It has a lazy CLI (it caches previous command inputs and uses them to
-minimize typing).
+## Quick Start
 
 Install this repo (see instructions below).
 
@@ -256,35 +256,37 @@ before you get excited, know that you should avoid this library for production:
   learn XSLT.
 
 The developer who is working on these bugs is buried with other work (at the
-time of this writing he has about 96 bugs in his queue and he has spent 2 years
-on his highest priority bug -- so don't hold your breath).
+time of this writing he has about 96 bugs in his queue, he's supporting a port
+of the saxon parser to 5 or 6 different programming eco-systems, and he has
+spent 2 years on his highest priority bug -- so don't hold your breath).
 
-This is one example, of many, of how the XSLT community lacks empathy for
-beginners.  When their documentation is written correctly, it is excessively
-formal and uses domain-specific terminology to explain itself; it is written for
-them, not for someone trying to understand something new.  There aren't enough
-examples, so you will have to make your own.   One of the main challenges you
-will face writing XSLT, coming from a Python background, is to stop thinking
-like a procedural programmer and start thinking like a functional programmer.
-To force a functional mindset and to provide yourself a prototypical example:
+When the XSLT documentation is written correctly, it is excessively formal and uses
+domain-specific terminology to explain itself (XSLT people are Lispy-XML people).
 
-- Write out a Python version of the XPath functional parts of your XSLT
-  program before you tackle it directly in XSLT, but
+So, their documentation is written for people who just need a reminder of the
+answer, not for those trying to understand something new.  There aren't enough
+examples, so you will have to make your own. As a Python developer, one of
+the main challenges you will face, is to stop thinking like a procedural
+programmer and start thinking like a functional programmer.  You probably won't
+believe me until you have suffered, but once you give up trying to hack XSLT
+into behaving like Python, come back and read the following:
+
+- before you tackle your programming problems directly in XSLT, write out a
+  Python version, but
 - never over-write a Python variable once it is written.  This will force you
   to write things recursively.
 
-Use the Python debugger or whatever other tools you have to step in and
-debug any issues you encounter.  Once you have this functional Python
-example working, you can ask ChatGPT to translate your Python program into
-XSLT.  This translation will be a mess, and it will not run, but it will
-solve many of the syntax challenges you will have.  If you need an
-advanced XPath search expression, use the ``try xpath`` command tool
-provided by this package to set your template's context and debug your
-XPath pattern against the XML document you are trying to parse (this
-command tool is documented below).  Use your generated examples as
-references, and type in your XSLT program using your snippets.  Then use
-the `try ex` command tools provided by this package and dial it in until
-it works.
+Use the Python debugger or whatever other tools you have to step in and debug
+any issues you encounter.  Once you have this functional Python example working,
+you can ask ChatGPT to translate your Python program into XSLT.  This
+translation will be a mess, and it will not run, but it will solve many of the
+syntax challenges you will have.  If you need an advanced XPath search
+expression, use the ``try xpath`` command tool provided by this package to set
+your template's context and debug your XPath pattern against the XML document
+you are trying to parse (this command tool is documented below).  Use your
+functional Python program, the chatGTP output and your pattern examples as
+references, and type in your XSLT program using your snippets.  Then use the
+`try ex` command tools provided by this package and dial it in until it works.
 
 Also, to learn XSLT 3.0 you need to be able to see its xsl compiler errors.  As
 I said before, ``saxonche`` isn't documented.  I spent a long time trying to
@@ -336,7 +338,7 @@ and decompress its contents in ``./java/``.  With this jar installed the ``try``
 cli tool will call out to java when the ``saxoniche`` library fails to compile
 your ``.xsl``.  It will rerun the compilation using the jar and output the XSLT
 compiler error messages to the terminal.  This will give you the feedback
-required to debug your program.
+required to debug your programs.
 
 # Running Examples
 
@@ -427,9 +429,8 @@ ran the saxon processor
 
 ## Running Your Own Examples
 
-To run examples from a different book, add a descriptive folder name for each
-chapter and add your xml and xsl files so that the basename are the same.
-Example ``MyExample1.xml``, ``MyExample1.xsl``
+To run examples from a different book, add a descriptive folder names
+and put your xml and xsl files in these folders.
 
 ## JSON Transform Example 1
 
