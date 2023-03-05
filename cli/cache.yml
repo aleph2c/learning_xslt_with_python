@@ -1,7 +1,7 @@
-context: //J
+context: //item[@name='Murphy']
 home_dir: /home/scott/xslt/patterns
-output_file_name: txt3.txt
-params: null
+output_file_name: txt5_output.txt
+params: indent='    '
 processor: saxon
-xml_file_name: axis_testing.xml
-xsl_file_name: xsl3.xsl
+xml_file_name: xml5_good.xml
+xsl_file_name: xsl5.xsl
