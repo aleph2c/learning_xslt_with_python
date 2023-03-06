@@ -266,7 +266,7 @@ domain-specific terminology to explain itself (XSLT people are Lispy-XML people)
 So, their documentation is written for people who just need a reminder of the
 answer, not for those trying to understand something new.  There aren't enough
 examples, so you will have to make your own. As a Python developer, one of
-the main challenges you will face, is to stop thinking like a procedural
+the main challenges you will face is to stop thinking like a procedural
 programmer and start thinking like a functional programmer.  You probably won't
 believe me until you have suffered, but once you give up trying to hack XSLT
 into behaving like Python, come back and read the following:
@@ -275,6 +275,11 @@ into behaving like Python, come back and read the following:
   Python version, but
 - never over-write a Python variable once it is written.  This will force you
   to write things recursively.
+
+To get you started with this, this repo provides a ``try to-python`` command.
+(see below for examples) It converts an XML file into a python file. You can use
+the generated python file as your starting point for prototyping your working
+examples of XPath recursive functions.
 
 Use the Python debugger or whatever other tools you have to step in and debug
 any issues you encounter.  Once you have this functional Python example working,
@@ -289,9 +294,9 @@ references, and type in your XSLT program using your snippets.  Then use the
 `try ex` command tools provided by this package and dial it in until it works.
 
 Also, to learn XSLT 3.0 you need to be able to see its xsl compiler errors.  As
-I said before, ``saxonche`` isn't documented.  I spent a long time trying to
-figure out how to get compiler errors working with a threadable ``saxonche`` and
-eventually decided to try something else.  I downloaded the 
+I said before, ``saxonche`` only pretends to be documented.  I spent a long time
+trying to figure out how to get compiler errors working with a threadable
+``saxonche`` and eventually decided to try something else.  I downloaded the 
 [zipped java version of saxon](https://github.com/Saxonica/Saxon-HE/blob/be4dd844d935d8d0ef09748490448624abe3c66b/12/source/saxon12-0source.zip),
 decompressed it and ran it's command line tool:
 
@@ -1144,6 +1149,139 @@ try xpath -p "(following::* union preceding::*)/name()"
 "S"
 "F"
 "G"
+```
+
+# Prototyping your XSLT/XPATH code in Python
+
+The ``try to-python`` writes boilerplate code for you.  You would use this
+command to:
+
+- convert an XML file into a python dict within a minimal python program
+- extend this generated python program with recursive expressions to solve your
+  problem. (like an XSLT program would solve your problem)
+- debug this python program using python tools
+- place the working recursive python program into ChatGPT to discover XSLT syntax that will
+  do the same thing
+- use the recursive styled python, and the broken ChatGPT examples as a set of
+  mental blueprints for how to write your XSLT program.
+- write out your XSLT referencing these examples
+- debug your XSLT until it works.
+
+```
+try -d patterns to-python -x axis_testing.xml -o axis_testing.py -v
+# some python code written to the terminal
+```
+
+This command will output this python program:
+
+```python
+
+import pprint
+def pp(item):
+    pprint.pprint(item)
+
+A = {
+    "A": {
+        "@id" :"1",
+        "B": {
+            "@id" :"2",
+            "C": {
+                "@id" :"3",
+            },
+            "D": {
+                "@id" :"4",
+            },
+            "E": {
+                "@id" :"5",
+                "H": {
+                    "@id" :"8",
+                    "M": {
+                        "@id" :"13",
+                    },
+                },
+                "I": {
+                    "@id" :"9",
+                },
+                "J": {
+                    "@id" :"10",
+                    "N": {
+                        "@id" :"14",
+                    },
+                    "O": {
+                        "@id" :"15",
+                        "T": {
+                            "@id" :"20",
+                        },
+                        "U": {
+                            "@id" :"21",
+                        },
+                    },
+                    "P": {
+                        "@id" :"16",
+                    },
+                    "Q": {
+                        "@id" :"17",
+                    },
+                    "R": {
+                        "@id" :"18",
+                        "V": {
+                            "@id" :"22",
+                        },
+                        "W": {
+                            "@id" :"23",
+                        },
+                    },
+                },
+                "K": {
+                    "@id" :"11",
+                },
+                "L": {
+                    "@id" :"12",
+                    "S": {
+                        "@id" :"19",
+                    },
+                },
+            },
+            "F": {
+                "@id" :"6",
+            },
+            "G": {
+                "@id" :"7",
+            },
+        },
+    },
+}
+
+if __name__ == '__main__':
+    pp(A)
+
+```
+
+If you run this program you will see this in your terminal:
+
+```
+python ./patterns/axis_testing.py
+{'A': {'@id': '1',
+       'B': {'@id': '2',
+             'C': {'@id': '3'},
+             'D': {'@id': '4'},
+             'E': {'@id': '5',
+                   'H': {'@id': '8', 'M': {'@id': '13'}},
+                   'I': {'@id': '9'},
+                   'J': {'@id': '10',
+                         'N': {'@id': '14'},
+                         'O': {'@id': '15',
+                               'T': {'@id': '20'},
+                               'U': {'@id': '21'}},
+                         'P': {'@id': '16'},
+                         'Q': {'@id': '17'},
+                         'R': {'@id': '18',
+                               'V': {'@id': '22'},
+                               'W': {'@id': '23'}}},
+                   'K': {'@id': '11'},
+                   'L': {'@id': '12', 'S': {'@id': '19'}}},
+             'F': {'@id': '6'},
+             'G': {'@id': '7'}}}}
 ```
 
 # Useful links

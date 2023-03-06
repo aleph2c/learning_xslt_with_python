@@ -759,6 +759,70 @@ def install_compiler_errors():
 
 @cli.command
 @pass_config
+@click.option("-x", "--xml", "xml_file_name", default=None, help="Set the xml file")
+@click.option(
+    "-o",
+    "--output_file",
+    "output_file_name",
+    default=None,
+    help="Set the output file name",
+)
+@click.option("-a", "--params", default=None, help="Set the optional parameters(s)")
+@click.option("-v", "--verbose", is_flag=True, default=False, help="Verbose mode")
+def to_python(
+    ctx,
+    xml_file_name,
+    output_file_name,
+    params,
+    verbose
+):
+    '''Convert and XML file into a python file (dict at the top)'''
+    if xml_file_name:
+        ctx.cache.xml_file_name = xml_file_name
+    else:
+        xml_file_name = ctx.cache.xml_file_name
+
+    if output_file_name:
+        ctx.cache.output_file_name = output_file_name
+    else:
+        output_file_name = ctx.cache.output_file_name
+
+    if params:
+        ctx.cache.params = params
+    elif params == '':
+        params = None
+        ctx.cache.params = None
+    else:
+        params = ctx.cache.params
+
+    if params:
+        scratch = params.split(',')
+        _params = {k:v for k,v in [items.split('=') for items in scratch]}
+    else:
+        _params =  None
+
+    home_dir = Path('/')
+    xml_file_name = Path(ctx.cache.home_dir) / Path( xml_file_name )
+    xsl_file_name = (Path(__file__).parent) / 'xml_to_python_dict.xsl'
+    output_file_name = Path(ctx.cache.home_dir) / output_file_name
+
+    try:
+      result = saxon_xslt30_transform(
+          home_dir=home_dir,
+          xml_file_name=xml_file_name,
+          xsl_file_name=xsl_file_name,
+          output_file_name=output_file_name,
+          params=_params,
+          verbose=verbose,
+      )
+      if verbose:
+        print(result)
+      click.echo("ran the saxon processor")
+    except RuntimeError as ex:
+      click.echo(ex)
+
+@cli.command
+@pass_config
 @click.option("-n", "--node-name", default=None, help="Set the node name")
 @click.option("-x", "--xml", "xml_file_name", default=None, help="Set the xml file")
 @click.option(
