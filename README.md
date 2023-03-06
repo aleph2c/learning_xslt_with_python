@@ -434,8 +434,9 @@ ran the saxon processor
 
 ## Running Your Own Examples
 
-To run examples from a different book, add a descriptive folder names
-and put your xml and xsl files in these folders.
+To run examples from a different book, add descriptives folder names and put
+your xml and xsl files in these folders.  Use the ``-d`` flag to point to the
+folder you are working with, then run the sub-commands as you did before.
 
 ## JSON Transform Example 1
 
