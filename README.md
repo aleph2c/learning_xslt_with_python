@@ -250,6 +250,7 @@ trying to hack XSLT into behaving like Python, come back and read the following:
 
 - before you tackle your programming problems directly in XSLT, write out a
   Python version, but
+
 - never over-write a Python variable once it is written.  This will force you
   to write things recursively.
 
@@ -1265,8 +1266,7 @@ python ./patterns/axis_testing.py
 
 # Useful links
 
-- [saxonche docs are wrong](https://saxonica.plan.io/issues/5842)
-- [saxonche fails with stackoverflow errors](https://saxonica.plan.io/issues/5787)
+- [Broken python examples from Saxonica](https://www.saxonica.com/saxon-c/documentation12/index.html#!samples/samples_python)
 - [interview with Michael Kay](https://www.youtube.com/watch?v=2Zt9oJtFKGw)
 - [XPath 3.0/3.1 training resource](https://www.altova.com/training/xpath3),
 - [XSLT-visualizer](https://github.com/evanlenz/xslt-visualizer)
