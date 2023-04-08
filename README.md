@@ -219,57 +219,34 @@ software as open source, and makes his money by licensing XSLT compilers that
 have more features.  His open-source software acts as a loss-leader for his
 business.   He and his developers are active on StackOverflow, manage their bugs
 using openly available bug trackers and are in constant contact with their
-users.  It's worth learning XSLT.  It is also worth listening to Michael for
-many other reasons, such as how to have a good life as a computer scientist, how
-to build a software business, how to manage a committee, and how to follow
-long-term plans.
+users.
 
-As of Jan 13 2023, Saxonica, has released an open-source version of the XSLT
-programming language compiler and parser (Mozilla Public Licence) as a Python
-pip package.  This package is called ``saxonche``, and it supports XSLT 3.0,
-XPath 3.1, XQuery 3.1, XSD 1.1 and has a Schema Validator processor, based on
-SaxonC-HE 12.0.  The ``saxconche`` python library uses ctypes to build a SaxonC
-XSLT compiler and run it within Python.  The SaxonC project is a port of the
-Saxon Java software to C, so it can be used with C/C++, PHP and Python.  But,
-before you get excited, know that you should avoid this library for production:
+As of March 23rd 2023 released the ``saxonche 12.1.0`` pip package.  This is
+XSLT programming language compiler and parser as a Python pip package, under the
+Mozilla Public Licence.  The ``saxonche`` package supports XSLT 3.0, XPath 3.1,
+XQuery 3.1, XSD 1.1 and has a Schema Validator processor, based on SaxonC-HE
+12.0.  The ``saxconche`` python library uses ctypes to build a SaxonC XSLT
+compiler and run it within Python.  The SaxonC project is a port of the Saxon
+Java software to C, so it can be used with C/C++, PHP and Python.  But, there
+are some problems with this library:
 
-- The ``saxonche`` library's documentation is wrong.  If you try to follow their
-  instructions your program won't run.  These docs were copied and pasted from
-  the ``saxonpy`` library, written by non-saxonica people.  The ``saxonpy``
-  library was build to support an earlier version of the saxon api.  If you only
-  need to run your python/XSLT programs in Linux use the ``saxonpy`` library.
-  If you need to run your code on a mac, you are stuck with ``saxonche``.
+- The ``saxonche`` library's documentation is incomplete and wrong.  If you try
+  to follow their instructions your program won't run.  But their are working
+  versions of their python examples in the ``/oneal`` folder of this repo.
 
-- The ``saxonche`` library also causes StackOverFlow errors when you try and
-  instantiate it within certain Python environments, like Flask or in a thread.
-  This bug is known, and it has been given a "low" priority by Saxonica.  So,
-  you might want to stay away from the ``saxoniche`` project for production
-  until it has stabilized.  But if you are willing to take a risk, there is some
-  code at the end of this doc that demonstrates how to call ``saxonche`` in a
-  python thread and not have it crash (I built it through guess-work).
+- The error messages from incorrect xsl compilations are turned off by default
+  in ``saxonche``.  It took me a while to understand that saxon produces nice
+  compiler errors (Michael Kay talks about this in his interviews), but if you
+  use ``saxonche`` all you see is "there was a compiler error" when you make a
+  mistake.  This isn't that helpful if you are trying to learn XSLT.  (this
+  package uses a Java version of the saxon technology to provide compiler
+  errors, see below).
+- It infrequently issues stack overflow errors.
 
-- If things weren't bad enough, error messages from incorrect xsl compilations
-  are turned off by default in ``saxonche``.  It took me a while to understand
-  that saxon produces nice compiler errors (Michael Kay talks about this in his
-  interviews), but if you use ``saxonche`` all you see is "there was a compiler
-  error" when you make a mistake.  This isn't that helpful if you are trying to
-  learn XSLT.
-
-The developer who is working on these bugs is buried with other work (at the
-time of this writing he has about 96 bugs in his queue, he's supporting a port
-of the saxon parser to 5 or 6 different programming eco-systems, and he has
-spent 2 years on his highest priority bug -- so don't hold your breath).
-
-When the XSLT documentation is written correctly, it is excessively formal and uses
-domain-specific terminology to explain itself (XSLT people are Lispy-XML people).
-
-So, their documentation is written for people who just need a reminder of the
-answer, not for those trying to understand something new.  There aren't enough
-examples, so you will have to make your own. As a Python developer, one of
-the main challenges you will face is to stop thinking like a procedural
-programmer and start thinking like a functional programmer.  You probably won't
-believe me until you have suffered, but once you give up trying to hack XSLT
-into behaving like Python, come back and read the following:
+As a Python developer learning XSLT your main challenge will be to stop thinking
+like a procedural programmer and start thinking like a functional programmer.
+You probably won't believe me until you have suffered, but once you give up
+trying to hack XSLT into behaving like Python, come back and read the following:
 
 - before you tackle your programming problems directly in XSLT, write out a
   Python version, but
