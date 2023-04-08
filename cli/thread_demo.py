@@ -75,6 +75,8 @@ def __saxon_xslt30_transform(
         output_file_path = temp_output_path
 
     if Path(xml_file_name).suffix == ".json":
+        # xdm_atomic_value = proc.make_integer_value(5)
+        # xsltproc.set_parameter("xdm_atomic", xdm_atomic_value)
         json_input_param = proc.make_string_value(str(home_dir / xml_file_name))
         xsltproc.set_parameter("json_input_filename", json_input_param)
 
@@ -95,6 +97,8 @@ def __saxon_xslt30_transform(
             output_file_path = stashed_output_file_path
         del _exec
     else:
+        # xdm_atomic_value = proc.make_integer_value(5)
+        # xsltproc.set_parameter("xdm_atomic", xdm_atomic_value)
         # add a test_param to validate saxon is working
         test_param = proc.make_string_value(str(xml_file_path))
         _exec.set_parameter("test_param", test_param)
@@ -207,7 +211,7 @@ def saxon_xslt30_transform(
 if __name__ == '__main__':
 
     # adjust this to point to the directory containing you files
-    home_dir = (Path(__file__).parent / ".." / "ch3_templates").resolve()
+    home_dir = (Path(__file__).parent / ".." / "jenni" / "ch3_templates").resolve()
     xml_file_name = "HelloWorld.xml"
     xsl_file_name = "HelloWorld.xsl"
     output_file_name = "HelloWorld.html"

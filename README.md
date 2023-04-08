@@ -484,8 +484,8 @@ python -m json.tool ./michael/json_input.json
 Perform a transform (saxonpy works, saxonche stackoverflow):
 
 ```
-# this will crash with saxonche due to stackoverflow errors
-# but it ran with saxonpy
+# this will crash with saxonche 12.0 due to stackoverflow errors
+# but will run with saxonche 12.1
 
 try -d michael \
   ex -j json_input.json \
@@ -497,7 +497,7 @@ try -d michael \
 This will create the following output:
 
 ```
-python -m json.tool ./patterns/json_output.json
+python -m json.tool ./michael/json_output.json
 
 [
     {

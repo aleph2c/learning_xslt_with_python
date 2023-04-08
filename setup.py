@@ -10,7 +10,7 @@ setup(
         "black",
         "pyflakes",
         "lxml",
-        "saxonche",
+        "saxonche >= 12.1.0",
         "PyYAML",
     ],
     entry_points="""
