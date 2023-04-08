@@ -121,7 +121,7 @@ try ex -v
 Now you can cycle between trying to fix your program and running the XSLT 3.0
 compiler until your program does what you want.
 
-## Context: What is it and How to Learn it
+## Context
 
 XSLT is a language used to convert the data of an XML/JSON file, into another
 format.  XSLT stands for eXtensible Stylesheet Language Transforms. XSLT is very
@@ -156,9 +156,8 @@ An XSLT 3.0 book has not yet been published, but Altova has published a nice
 [XPath 3.0/3.1 training resource](https://www.altova.com/training/xpath3), and there
 are lots of XSLT 2.0 books.
 
-XSLT is an XML, so it is verbose.  This is the cost of having a data transform language that can run against itself.  If you have your development environment augmented with programmable snippets, I would recommend that you work on your snippet programs as you learn how to program XSLT. These snippets will remove the tedium of typing in the XSLT XLM program syntax.  In this way, you will be able to programattically type in, then debug, the hundreds of XSLT programs you will encounter in your training.
-
-For example, if you use Vim, install SirVer's outstanding UltiSnips python-backed-snippets technology.  Then build up a custom, intermediary shorthand between
+If your editor uses snippet's, like SirVer's outstanding UltiSnips technology
+for Vim, get yourself ready to build up a custom, intermediary shorthand between
 your fingers and the XSLT language.  Don't copy someone else's [snippet library](https://github.com/aleph2c/.vim/blob/master/snippets/xslt.snippets),
 build your own as you read through the XSLT books. Leave programming notes as
 comments in your snippets work, you will reference these notes while you improve
@@ -166,6 +165,14 @@ and tune your snippets over time.  The UltiSnips library provides a short-cut to
 get to your snippet files from your XSLT file.  Use this, or an analogous
 feature in your development environment, to constantly jump back and forth
 between your XSLT and your custom snippet work.
+
+XSLT is an XML, so it is necessarily verbose.  This is the cost of having a data
+language that can run against itself.  But, if you have your development
+environment augmented with your snippets, and you are actively working on the
+program to write your program, you will be able to swiftly type-in and debug the
+hundreds of XSLT programs you will encounter in your training.  This will keep
+your mind actively engaged while dealing with the new syntax, as you work through
+the manuals.
 
 If I were to re-start my training, I would begin with Michiel van Otegem's teach
 yourself XSLT in 21 days.  It is very well written.  Pay special attention to
@@ -214,8 +221,9 @@ business.   He and his developers are active on StackOverflow, manage their bu
 using openly available bug trackers and are in constant contact with their
 users.
 
-As of March 23rd 2023 Saxonica released the ``saxonche 12.1.0`` pip package.  This is
-an XSLT programming language compiler (Mozilla Public Licence).  The ``saxonche`` package supports XSLT 3.0, XPath 3.1,
+As of March 23rd 2023 released the ``saxonche 12.1.0`` pip package.  This is
+XSLT programming language compiler and parser as a Python pip package, under the
+Mozilla Public Licence.  The ``saxonche`` package supports XSLT 3.0, XPath 3.1,
 XQuery 3.1, XSD 1.1 and has a Schema Validator processor, based on SaxonC-HE
 12.0.  The ``saxconche`` python library uses ctypes to build a SaxonC XSLT
 compiler and run it within Python.  The SaxonC project is a port of the Saxon
@@ -223,7 +231,7 @@ Java software to C, so it can be used with C/C++, PHP and Python.  But, there
 are some problems with this library:
 
 - The ``saxonche`` library's documentation is incomplete and wrong.  If you try
-  to follow their instructions your program won't run.  But, their are working
+  to follow their instructions your program won't run.  But their are working
   versions of their python examples in the ``/oneal`` folder of this repo.
 
 - The error messages from incorrect xsl compilations are turned off by default
@@ -232,9 +240,8 @@ are some problems with this library:
   use ``saxonche`` all you see is "there was a compiler error" when you make a
   mistake.  This isn't that helpful if you are trying to learn XSLT.  (this
   package uses a Java version of the saxon technology to provide compiler
-  errors when you make a mistake, see below).
-  
-- ``saxonche`` will infrequently cause stack overflow errors.
+  errors, see below).
+- It infrequently issues stack overflow errors.
 
 As a Python developer learning XSLT your main challenge will be to stop thinking
 like a procedural programmer and start thinking like a functional programmer.
@@ -255,9 +262,7 @@ Use the Python debugger or whatever other tools you have to step in and debug
 any issues you encounter.  Once you have this functional Python example working,
 you can ask ChatGPT to translate your Python program into XSLT.  This
 translation will be a mess, and it will not run, but it will solve many of the
-syntax challenges you will have.  
-
-If you need an advanced XPath search
+syntax challenges you will have.  If you need an advanced XPath search
 expression, use the ``try xpath`` command tool provided by this package to set
 your template's context and debug your XPath pattern against the XML document
 you are trying to parse (this command tool is documented below).  Use your
@@ -648,7 +653,12 @@ python -m json.tool ./patterns/json_output2.json
 
 # Integrating XSLT 3.0 with Python in the main thread
 
-The [saxonche documentation](https://pypi.org/project/saxonche/) is wrong.  It is a copy of the docs from the [saxonpy project](https://github.com/tennom/saxonpy), which is based on SaxonC-HE 11.4 and not SaxonC-HE 12.0.  If you want to get your python code to parse XML/JSON/XSLT and output XML/JSON using ``saxonche`` consider the following:
+The [saxonche documentation](https://pypi.org/project/saxonche/) is incomplete
+and almost useless.  To see fixed versions of the low quality python examples
+provided by Saxonica look in the ``oneal`` folder of this repo.
+
+If you want to get your python code to parse XML/JSON/XSLT and output XML/JSON
+using ``saxonche`` consider the following:
 
 ```python
 
@@ -733,14 +743,9 @@ def transform_with_saxonche(
 
 # Integrating XSLT 3.0 with Multithreaded Python
 
-The [saxonche library will throw StackOverFlow errors](https://saxonica.plan.io/issues/5787) when you try to instantiate it in
-certain Python environments (Flask, or in a thread, etc.).  This bug has been given a "low" priority by
-Saxonica.  This means this library is not production ready.  If you want XSLT in
-production, use XSLT 1.0 and lxml:
-
 ```python
 # This doesn't cause StackOverFlow crashes and, its fully documented 
-# and its documentation isn't wrong
+# and its documentation isn't wrong.  It only support XSLT 1.0
 import lxml
 ```
 
@@ -748,6 +753,7 @@ But if you are willing to accept some risk, here is a working demo of Python thr
 performing XSLT transforms using saxonche without causing StackOverFlows:
 
 ```python
+# working copy can be found in ./cli/thread_demo.py
 import os
 import shutil
 from uuid import uuid1
