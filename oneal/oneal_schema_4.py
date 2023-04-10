@@ -4,6 +4,8 @@ import saxonche
 from saxonche import PySaxonApiError
 from saxonche import PySaxonProcessor
 
+# the schema information will be ignored
+
 with PySaxonProcessor(license=False) as proc:
 
   this_dir = Path(__file__).parent
