@@ -1,11 +1,11 @@
 # Learning XSLT with Python
 
 XSLT is an XML Lisp used to transform data from one form to another.  The XSLT
-language contains the XPath tree mini-language within it.
-
-Use this repo to learn XSLT/XPath and how it can be integrated with Python. It
-has a lazy CLI (it caches previous command inputs and uses them to minimize
-typing).
+language contains the XPath tree mini-language within it.  As of March 23rd, 2023
+you can use the latest XSLT/XPath language features with Python.  This repo
+shows how to do this and where to get your XSLT training.  The repo also provides
+a set of command line tools for building and debugging your XSLT code, validating 
+your XML and for testing XPath 3.1 expressions.
 
 ## Quick Start
 
@@ -221,15 +221,16 @@ business.   He and his developers are active on StackOverflow, manage their bu
 using openly available bug trackers and are in constant contact with their
 users.
 
-As of March 23rd 2023 released the ``saxonche 12.1.0`` pip package.  This is
-XSLT programming language compiler and parser as a Python pip package, under the
+As of March 23rd 2023 Saxonica released the ``saxonche 12.1.0`` pip package.  This is
+a XSLT programming language compiler and parser as a Python pip package, under the
 Mozilla Public Licence.  The ``saxonche`` package supports XSLT 3.0, XPath 3.1,
-XQuery 3.1, XSD 1.1.  The Schema Validator processor is disabled in
+XQuery 3.1, XSD 1.1.  But the Saxonica "Schema Validator" processor is disabled in
 ``saxonche``, it looks like it can be turned on by purchasing a license, but the
-feature looks buggy and [mostly abandoned](https://saxonica.plan.io/issues/4845).  The ``saxconche`` python
-library uses ctypes to build a SaxonC XSLT compiler and run it within Python.
-The SaxonC project is a port of the Saxon Java software to C, so it can be used
-with C/C++, PHP and Python.  But, there are some problems with this library:
+feature looks buggy and [mostly abandoned](https://saxonica.plan.io/issues/4845).  
+The ``saxconche`` python library uses ctypes to build a SaxonC XSLT compiler and
+run it within Python. The SaxonC project is a port of the Saxon Java software 
+to C, so it can be used with C/C++, PHP and Python.  There are some problems with
+this library:
 
 - The ``saxonche`` library's documentation is incomplete and wrong.  If you try
   to follow their instructions your program won't run.  But their are working
@@ -243,12 +244,10 @@ with C/C++, PHP and Python.  But, there are some problems with this library:
   (this package uses a Java version of the saxon technology to provide compiler
   errors, see below).
 
-- It infrequently issues stack overflow errors.
-
 The original version of ``saxonche`` would frequently cause StackOverFlow
 errors, if you are running ``12.0.0``, upgrade immediately: ``pip install
---upgrade saxonche``.  The current version still crashes but not as often. So
-wrap any calls to the library in exceptions and ensure you can recover (I don't
+--upgrade saxonche``.  The current version still crashes but not as often:
+Wrap any calls to the library in exceptions and ensure you can recover (I don't
 know if this leaks memory).  The ``saxonche`` library is low quality work
 wrapping high quality work, but its improving.  If you need something more
 reliable, you could call out to the Java versions of saxon with a pipe.
