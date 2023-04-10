@@ -224,11 +224,12 @@ users.
 As of March 23rd 2023 released the ``saxonche 12.1.0`` pip package.  This is
 XSLT programming language compiler and parser as a Python pip package, under the
 Mozilla Public Licence.  The ``saxonche`` package supports XSLT 3.0, XPath 3.1,
-XQuery 3.1, XSD 1.1 and has a Schema Validator processor, based on SaxonC-HE
-12.0.  The ``saxconche`` python library uses ctypes to build a SaxonC XSLT
-compiler and run it within Python.  The SaxonC project is a port of the Saxon
-Java software to C, so it can be used with C/C++, PHP and Python.  But, there
-are some problems with this library:
+XQuery 3.1, XSD 1.1.  The Schema Validator processor is disabled in
+``saxonche``, it looks like it can be turned on by purchasing a license, but the
+feature looks buggy and [mostly abandoned](https://saxonica.plan.io/issues/4845).  The ``saxconche`` python
+library uses ctypes to build a SaxonC XSLT compiler and run it within Python.
+The SaxonC project is a port of the Saxon Java software to C, so it can be used
+with C/C++, PHP and Python.  But, there are some problems with this library:
 
 - The ``saxonche`` library's documentation is incomplete and wrong.  If you try
   to follow their instructions your program won't run.  But their are working
@@ -236,12 +237,21 @@ are some problems with this library:
 
 - The error messages from incorrect xsl compilations are turned off by default
   in ``saxonche``.  It took me a while to understand that saxon produces nice
-  compiler errors (Michael Kay talks about this in his interviews), but if you
-  use ``saxonche`` all you see is "there was a compiler error" when you make a
-  mistake.  This isn't that helpful if you are trying to learn XSLT.  (this
-  package uses a Java version of the saxon technology to provide compiler
+  compiler errors (Michael Kay talks about this in his interviews), but
+  if you use ``saxonche`` all you see is "there was a compiler error" when you
+  make a mistake.  This isn't that helpful if you are trying to learn XSLT.
+  (this package uses a Java version of the saxon technology to provide compiler
   errors, see below).
+
 - It infrequently issues stack overflow errors.
+
+The original version of ``saxonche`` would frequently cause StackOverFlow
+errors, if you are running ``12.0.0``, upgrade immediately: ``pip install
+--upgrade saxonche``.  The current version still crashes but not as often. So
+wrap any calls to the library in exceptions and ensure you can recover (I don't
+know if this leaks memory).  The ``saxonche`` library is low quality work
+wrapping high quality work, but its improving.  If you need something more
+reliable, you could call out to the Java versions of saxon with a pipe.
 
 As a Python developer learning XSLT your main challenge will be to stop thinking
 like a procedural programmer and start thinking like a functional programmer.

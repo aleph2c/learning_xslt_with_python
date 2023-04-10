@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="schema_4.xsd">
+  <person>
+    <name>John Smith</name>
+    <age>30</age>
+    <email>john.smith@example.com</email>
+  </person>
+  <person>
+    <name>Jane Doe</name>
+    <age>25</age>
+    <email>jane.doe@example.com</email>
+  </person>
+</root>
