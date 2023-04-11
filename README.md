@@ -245,15 +245,15 @@ this library:
   errors, see below).
 
 The original version of ``saxonche`` would frequently cause StackOverFlow
-errors, if you are running ``12.0.0``, upgrade immediately: ``pip install
+errors, so if you are running ``12.0.0``, upgrade immediately: ``pip install
 --upgrade saxonche``.  The current version still crashes but not as often:
 Wrap any calls to the library in exceptions and ensure you can recover (I don't
-know if this leaks memory).  The ``saxonche`` library is low quality work
-wrapping high quality work, but its improving.  If you need something more
-reliable, you could call out to the Java versions of saxon with a pipe.
+know if this leaks memory).  The ``saxonche`` library is low quality software
+wrapping high quality technology, but it's improving.  If you need something more
+reliable, you could call out to the Java versions of saxon software with a pipe.
 
 As a Python developer learning XSLT your main challenge will be to stop thinking
-like a procedural programmer and start thinking like a functional programmer.
+like a procedural programmer and start to think like a functional programmer.
 You probably won't believe me until you have suffered, but once you give up
 trying to hack XSLT into behaving like Python, come back and read the following:
 
