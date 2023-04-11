@@ -1291,3 +1291,4 @@ python ./patterns/axis_testing.py
 - [Martin Honnen's XSLT github gists](https://gist.github.com/martin-honnen)
 - [XSL 3.0 Specification](https://www.w3.org/TR/xslt-30)
 - [A Roadmap to XML Parsers in Python](https://realpython.com/python-xml-parser/)
+- [xmlschema python package](https://pypi.org/project/xmlschema/)
