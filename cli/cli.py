@@ -268,6 +268,9 @@ def xpath_with_saxon(home_dir, xml_file_name, pattern):
         xml_as_string = ""
         with open((Path(home_dir) / xml_file_name), "r") as fp:
             xml_as_string = fp.read()
+        pattern = pattern.replace('///', '//')
+        if 'html' in Path(xml_file_name).suffix:
+          xpath_processor.declare_namespace('xhtml', "http://www.w3.org/1999/xhtml")
         node = proc.parse_xml(xml_text=xml_as_string)
         xpath_processor.set_context(xdm_item=node)
         item = xpath_processor.evaluate(pattern)

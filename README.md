@@ -82,7 +82,8 @@ J
 ```
 
 > **Note**
-> If you are parsing an ``xhtml`` doc include the ``xhtml`` namespace prefix in your query: ``try xpath -x example.html -c "/" "//xhtml:h1[1]"``
+> If you are parsing an ``xhtml`` doc include the ``xhtml`` namespace prefix in your query:
+> ``try -d oneal xpath -x example.html -c "/" -p "//xhtml:h1[1]"``
 
 ### Evaluating XSLT programs
 
@@ -1144,7 +1145,8 @@ try xpath -p "(following::* union preceding::*)/name()"
 ```
 
 > **Note**
-> If you are parsing an ``xhtml`` doc include the ``xhtml`` namespace prefix in your query: ``try xpath -x example.html -c "/" "//xhtml:h1[1]"``
+> If you are parsing an ``xhtml`` doc include the ``xhtml`` namespace prefix in your query:
+> ``try -d oneal xpath -x example.html -c "/" -p "//xhtml:h1[1]"``
 
 # Prototyping your XSLT/XPATH code in Python
 
