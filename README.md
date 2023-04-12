@@ -81,6 +81,9 @@ J
 "E"
 ```
 
+> **Note**
+> If you are parsing an ``xhtml`` doc include the ``xhtml`` namespace prefix in your query: ``try xpath -x example.html -c "/" "//xhtml:h1[1]"``
+
 ### Evaluating XSLT programs
 
 Now imagine you are trying to learn XSLT.  You have installed this repo's command
@@ -1139,6 +1142,9 @@ try xpath -p "(following::* union preceding::*)/name()"
 "F"
 "G"
 ```
+
+> **Note**
+> If you are parsing an ``xhtml`` doc include the ``xhtml`` namespace prefix in your query: ``try xpath -x example.html -c "/" "//xhtml:h1[1]"``
 
 # Prototyping your XSLT/XPATH code in Python
 
