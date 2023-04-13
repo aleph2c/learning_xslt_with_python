@@ -148,7 +148,12 @@ def __saxon_xslt30_transform(
         json_input_param = proc.make_string_value(str(home_dir / xml_file_name))
         xsltproc.set_parameter("json_input_filename", json_input_param)
 
-    _exec = xsltproc.compile_stylesheet(stylesheet_file=str(xsl_file_path))
+    exception_occurred = True
+    try:
+      _exec = xsltproc.compile_stylesheet(stylesheet_file=str(xsl_file_path))
+    except:
+      exception_occurred = True
+      _exec = None
 
     if _exec is None:
         saxon_error = f"{xsltproc.error_message}\n"
@@ -189,7 +194,7 @@ def __saxon_xslt30_transform(
                 _exec.set_parameter(k, param)
         _exec.set_initial_match_selection(file_name=str(xml_file_path))
         _exec.apply_templates_returning_file(output_file=str(output_file_path))
-        if _exec.exception_occurred:
+        if exception_occurred or _exec.exception_occurred:
             saxon_error = f"{_exec.error_message}\n"
             _exec.exception_clear()
             lock.release()

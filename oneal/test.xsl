@@ -3,7 +3,17 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 >
 <!--
-  This missing document to make the saxonche 12.1.0 documentation make sense
+  This missing document to make the saxonche 12.1.0 documentation make sense:
+
+  Usage:
+
+  try
+    -d oneal
+    ex
+    -x test.xml \
+    -l test.xsl \
+    -o test.txt
+    -v
 -->
 <xsl:output method="text" encoding="UTF-8" />
 

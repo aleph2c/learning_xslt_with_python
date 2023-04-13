@@ -1,7 +1,7 @@
 context: /
 home_dir: /home/scott/xslt/oneal
-output_file_name: json_output.json
+output_file_name: broken_6.xml
 params: indent='    '
 processor: saxon
-xml_file_name: example.html
-xsl_file_name: to_json.xsl
+xml_file_name: test_6.xml
+xsl_file_name: broken_6.xsl
