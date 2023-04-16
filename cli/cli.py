@@ -148,10 +148,10 @@ def __saxon_xslt30_transform(
         json_input_param = proc.make_string_value(str(home_dir / xml_file_name))
         xsltproc.set_parameter("json_input_filename", json_input_param)
 
-    exception_occurred = True
+    exception_occurred = False
     try:
       _exec = xsltproc.compile_stylesheet(stylesheet_file=str(xsl_file_path))
-    except:
+    except ex:
       exception_occurred = True
       _exec = None
 
@@ -206,7 +206,7 @@ def __saxon_xslt30_transform(
             if java_feedback:
                 saxon_error += java_feedback.stdout
                 saxon_error += java_feedback.stderr
-            raise RuntimeError(saxon_error)
+            #raise RuntimeError(saxon_error)
 
         if stashed_output_file_path:
             shutil.copy(src=output_file_path, dst=stashed_output_file_path)
