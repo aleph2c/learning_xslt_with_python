@@ -189,7 +189,8 @@ templates based on their XPath match expressions.
 Then get a copy of "Beginning XSLT 2.0 From Novice to Professional", by Jeni
 Tennison.  This isn't an easy book to read as a beginner, but at this point you
 will have a decent understanding of XSLT 1.0 from which you can infer over the
-gaps in her explanations.
+gaps in her explanations.  You can use ChatGPT with her examples and learn
+through interrogation.
 
 After that, I recommend getting a copy of "XSLT 2.0 and XPath 2.0 Programmer's
 Reference 4th Edition" by Michael Kay, and work through Chapter 17: Stylesheet
@@ -214,16 +215,16 @@ features. His open-source software serves as a loss-leader for his business. Kay
 and his developers are active on Stack Overflow, manage their bugs using openly
 available bug trackers, and maintain constant contact with their users.
 
-As of March 23rd 2023 Saxonica released the ``saxonche 12.1.0`` pip package.  This is
-a XSLT programming language compiler and parser as a Python pip package, under the
-Mozilla Public Licence.  The ``saxonche`` package supports XSLT 3.0, XPath 3.1,
-XQuery 3.1, XSD 1.1.  However the Saxonica "Schema Validator" processor is disabled in
-``saxonche``, it looks like it can be turned on by purchasing a license, but the
-feature looks buggy and [mostly abandoned](https://saxonica.plan.io/issues/4845).  
-The ``saxconche`` python library uses ctypes to build a SaxonC XSLT compiler and
-run it within Python. The SaxonC project is a port of the Saxon Java software 
-to C, so it can be used with C/C++, PHP and Python.  There are some problems with
-this library:
+As of March 23rd 2023 Saxonica released the ``saxonche 12.1.0`` pip package.
+This is a XSLT programming language compiler and parser as a Python pip package,
+under the Mozilla Public Licence.  The ``saxonche`` package supports XSLT 3.0,
+XPath 3.1, XQuery 3.1, XSD 1.1.  However the Saxonica "Schema Validator"
+processor is disabled in ``saxonche``, it looks like it can be turned on by
+purchasing a license, but the feature looks buggy and [mostly
+abandoned](https://saxonica.plan.io/issues/4845).  The ``saxconche`` python
+library uses ctypes to build a SaxonC XSLT compiler and run it within Python.
+The SaxonC project is a port of the Saxon Java software to C, so it can be used
+with C/C++, PHP and Python.  There are some problems with this library:
 
 - The ``saxonche`` library's XSLT documentation is incomplete and incorrect.  If
   you try to follow their instructions your program won't run.  But their are
@@ -312,9 +313,9 @@ To install the CLI, the two XSLT python parsers, and the example files:
 git clone git@github.com:aleph2c/leaning_xslt.git
 cd learning_xslt
 python3 -m venv venv
+source ./venv/bin/activate
 pip install --upgrade pip
 pip install -e .
-source ./venv/bin/activate
 # see note:
 xslt install-compile-errors
 ```
