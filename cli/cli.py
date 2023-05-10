@@ -151,7 +151,7 @@ def __saxon_xslt30_transform(
     exception_occurred = False
     try:
       _exec = xsltproc.compile_stylesheet(stylesheet_file=str(xsl_file_path))
-    except ex:
+    except Exception as ex:
       exception_occurred = True
       _exec = None
 

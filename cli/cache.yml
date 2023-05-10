@@ -1,7 +1,7 @@
 context: /
-home_dir: /home/scott/xslt/jenni/templates_ch3
-output_file_name: HelloWorld2.html
+home_dir: /home/scott/xslt/jenni/by_hand/ch3_templates
+output_file_name: TVGuide18.html
 params: indent='    '
 processor: saxon
-xml_file_name: HelloWorld2.xml
-xsl_file_name: HelloWorld2.xsl
+xml_file_name: TVGuide18.xml
+xsl_file_name: TVGuide18.xsl

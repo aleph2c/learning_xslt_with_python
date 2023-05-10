@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns:array="http://www.w3.org/2005/xpath-functions/array"
+       xmlns:map="http://www.w3.org/2005/xpath-functions/map"
+       xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <head>
+      <title>TV Guide</title>
+      <link rel="stylesheet" href="TVGuide2.css"/>
+      <script type="text/javascript">
+        function toggle(element) {
+          if (element.style.display == 'none') {
+            element.style.display = 'block';
+          } else {
+            element.style.display = 'none';
+          }
+        }
+      </script>
+   </head>
+   <body>
+      <h1>TV Guide</h1>
+      <p>
+  [<a href="#BBC1">BBC1</a>]
+
+  [<a href="#BBC2">BBC2</a>]
+
+  [<a href="#ITV">ITV</a>]
+
+  [<a href="#Channel 4">Channel 4</a>]
+
+  [<a href="#Channel 5">Channel 5</a>]
+</p>
+      <h2 class="channel">
+         <a name="BBC1" id="BBC1"/>
+      </h2>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(A QuestionOfSportCast);">[Cast]</span>
+         </p>
+         <div id="A QuestionOfSportCast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(EastEndersCast);">[Cast]</span>
+         </p>
+         <div id="EastEndersCast" style="display: none;">
+            <ul class="castlist">
+               <li>
+                  <span class="character"/>
+                  <span class="actor"/>
+               </li>
+               <li>
+                  <span class="character"/>
+                  <span class="actor"/>
+               </li>
+               <li>
+                  <span class="character"/>
+                  <span class="actor"/>
+               </li>
+            </ul>
+         </div>
+      </div>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(Cast);">[Cast]</span>
+         </p>
+         <div id="Cast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(LotteryCast);">[Cast]</span>
+         </p>
+         <div id="LotteryCast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(PanoramaCast);">[Cast]</span>
+         </p>
+         <div id="PanoramaCast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <h2 class="channel">
+         <a name="BBC2" id="BBC2"/>
+      </h2>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(SnookerCast);">[Cast]</span>
+         </p>
+         <div id="SnookerCast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(HomeFrontCast);">[Cast]</span>
+         </p>
+         <div id="HomeFrontCast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(WildAfricaCast);">[Cast]</span>
+         </p>
+         <div id="WildAfricaCast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(TabooCast);">[Cast]</span>
+         </p>
+         <div id="TabooCast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <h2 class="channel">
+         <a name="ITV" id="ITV"/>
+      </h2>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(EmmerdaleCast);">[Cast]</span>
+         </p>
+         <div id="EmmerdaleCast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(CoronationStreetCast);">[Cast]</span>
+         </p>
+         <div id="CoronationStreetCast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(MillionaireCast);">[Cast]</span>
+         </p>
+         <div id="MillionaireCast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(Cast);">[Cast]</span>
+         </p>
+         <div id="Cast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <h2 class="channel">
+         <a name="Channel 4" id="Channel 4"/>
+      </h2>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(Channel4NewsCast);">[Cast]</span>
+         </p>
+         <div id="Channel4NewsCast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(SlotArtCast);">[Cast]</span>
+         </p>
+         <div id="SlotArtCast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(BrooksideCast);">[Cast]</span>
+         </p>
+         <div id="BrooksideCast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(BrooksideCast);">[Cast]</span>
+         </p>
+         <div id="BrooksideCast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(SwallowCast);">[Cast]</span>
+         </p>
+         <div id="SwallowCast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(AllyMcBealCast);">[Cast]</span>
+         </p>
+         <div id="AllyMcBealCast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <h2 class="channel">
+         <a name="Channel 5" id="Channel 5"/>
+      </h2>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(MovieChartShowCast);">[Cast]</span>
+         </p>
+         <div id="MovieChartShowCast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(FiveNewsCast);">[Cast]</span>
+         </p>
+         <div id="FiveNewsCast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(Cast);">[Cast]</span>
+         </p>
+         <div id="Cast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <div>
+         <p>
+            <span class="date"/>
+            <br/>
+            <span class="title"/>
+            <br/>
+            <span onclick="toggle(Cast);">[Cast]</span>
+         </p>
+         <div id="Cast" style="display: none;">
+            <ul class="castlist"/>
+         </div>
+      </div>
+      <p>
+  [<a href="#BBC1">BBC1</a>]
+
+  [<a href="#BBC2">BBC2</a>]
+
+  [<a href="#ITV">ITV</a>]
+
+  [<a href="#Channel 4">Channel 4</a>]
+
+  [<a href="#Channel 5">Channel 5</a>]
+</p>
+   </body>
+</html>
