@@ -132,31 +132,11 @@ format.  XSLT stands for eXtensible Stylesheet Language Transforms. XSLT is very
 flexible; you can convert your XML/JSON data into HTML files, SVG pictures or
 Python programs, or any other file format.
 
-XSLT is much more powerful than most of the newer templating techniques, such as
-Python's Jinja2 library.  Jinja2 is a great tool for transforming small data
-structures, while XSLT can be used for arbitrarily large data sets or data
-streams.
+Compared to newer templating techniques like Python's Jinja2 library, XSLT is significantly more powerful. While Jinja2 is suitable for transforming small data structures, XSLT can handle much larger data sets or data streams. This is because XSLT is a fully functional programming language (a Lisp dialect) that incorporates the robust XPath/XQuery tree-languages. Additionally, XPath supports regular expressions and custom function construction. Unlike Jinja2, which requires a comprehensive understanding of the data fed into the template, XSLT is declarative; simply specify the desired output and the language will determine how to produce it. XSLT programs respond to the input data in an event-driven manner.
 
-This is because XSLT is a fully functional programming language (it's a Lisp)
-that contains the powerful XPath/XQuery tree-languages and, within XPath, there
-is support for regular expressions and custom function construction. To use
-Jinja2, you have to have a complete understanding of the data you feed your
-template, but XSLT is declarative, you tell it what you want, and it figures out
-how to give it to you.  The XSLT programs react to the data you feed them in a
-kind of event-driven way.
+As an XML dialect, XSLT programs are inherently serializable. This means that your XSLT program is both data and a program, allowing it to easily transform itself into new forms (metaprogramming). Although Python does not come with a modern XSLT parser, external libraries can be installed to integrate the XSLT language into Python. The XSLT standard is currently at version 3.0, but most open-source tools only support version 1.0.
 
-XSLT compilers have been compiled from XSLT.  XSLT is an XML dialect.  This
-means that all XSLT programs are pre-pickled.  They are serializable by default,
-your XSLT program is data and your XSLT data is a program.  XSLT is an inherent
-meta-programming language, it transforms data, and it is data, so it can
-trivially transform itself into new forms.
-
-Python does not come with a modern XSLT parser, but you can install external
-libraries that integrate the XSLT language into Python. The XSLT standard is
-currently at version "3.0", but most open-source tools only support version
-"1.0".
-
-An XSLT 3.0 book has not yet been published, but Altova has published a nice
+An XSLT 3.0 book has not yet been published, however Altova has published a nice
 [XPath 3.0/3.1 training resource](https://www.altova.com/training/xpath3), and there
 are lots of XSLT 2.0 books.
 
@@ -170,31 +150,11 @@ get to your snippet files from your XSLT file.  Use this, or an analogous
 feature in your development environment, to constantly jump back and forth
 between your XSLT and your custom snippet work.
 
-XSLT is an XML, so it is necessarily verbose.  This is the cost of having a data
-language that can run against itself.  But, if you have your development
-environment augmented with your snippets, and you are actively working on the
-program to write your program, you will be able to swiftly type-in and debug the
-hundreds of XSLT programs you will encounter in your training.  This will keep
-your mind actively engaged while dealing with the new syntax, as you work through
-the manuals.
+XSLT, being an XML, is inherently verbose—a trade-off for having a data language that can run against itself. However, with a development environment enhanced by your snippets, you can quickly type in and debug hundreds of XSLT programs you will encounter during your training. This will keep your mind actively engaged with the new syntax as you work through the manuals.
 
-If I were to re-start my training, I would begin with Michiel van Otegem's teach
-yourself XSLT in 21 days.  It is very well written.  Pay special attention to
-chapter 3 which explains the XPath tree language using diagrams.  While you are
-wrestling with these XPath tree query concepts, use the ``try xpath`` command
-provided by this repo (pictures and examples can be seen near the end of this
-document).  Within each chapter, build up your snippet library, and type out
-most of the book's programs by hand -- this will be easy to do with your
-snippets.  Get used to validating your programs with the command line, go back
-and troubleshoot your issues.  You are learning a workflow, a new language and
-whatever snippet technology you are using.  Place your snippets under revision
-control and make sure you can quickly access them in any working environment.
+If I were to restart my training, I would begin with Michiel van Otegem's "Teach Yourself XSLT in 21 Days." It is well-written, with Chapter 3 providing a particularly helpful explanation of the XPath tree language using diagrams. While grappling with XPath tree query concepts, use the "try xpath" command provided by this repo (with pictures and examples seen near the end of this document). Within each chapter, build up your snippet library and type out most of the book's programs by hand—this will be easy with your snippets. Get used to validating your programs with the command line, troubleshoot issues, and learn the workflow, new language, and snippet technology. Place your snippets under revision control and ensure quick access in any working environment.
 
-To get a sense of what the XSLT compilers are doing, play with 
-[Evan Lenz's XSLT-visualizer](https://github.com/evanlenz/xslt-visualizer).
-This will show you how the XSLT event manager reacts to the data in your XML
-files and how it calls out to your various templates based on their XPath match
-expressions.
+To understand what XSLT compilers do, experiment with [Evan Lenz's XSLT-visualizer](https://github.com/evanlenz/xslt-visualizer). It shows how the XSLT event manager reacts to the data in your XML files and calls various templates based on their XPath match expressions.
 
 Then get a copy of "Beginning XSLT 2.0 From Novice to Professional", by Jeni
 Tennison.  This isn't an easy book to read as a beginner, but at this point you
@@ -214,21 +174,12 @@ through his examples as lab work.  To learn XSLT 3.0 read Martin Honnen's
 through [his help on stack overflow](https://stackoverflow.com/users/252228/martin-honnen) and 
 his [gists on github](https://gist.github.com/martin-honnen).
 
-XSLT is a powerful and robust technology.  It has been actively developed for
-almost 25 years, and it has been responsive to its community's feedback.  This
-has been possible because Michael Kay has created a company called Saxonica,
-where he can get paid to develop the language while also working on open
-standards boards and writing books about XSLT/XPath.  He offers up part of his
-software as open source, and makes his money by licensing XSLT compilers that
-have more features.  His open-source software acts as a loss-leader for his
-business.   He and his developers are active on StackOverflow, manage their bugs
-using openly available bug trackers and are in constant contact with their
-users.
+XSLT is a powerful and robust technology that has been actively developed for almost 25 years. It has been responsive to its community's feedback, largely thanks to Michael Kay, who created a company called Saxonica. Through Saxonica, Kay can earn money to develop the language while working on open standards boards and writing books about XSLT/XPath. He offers part of his software as open source and makes money by licensing XSLT compilers with additional features. His open-source software serves as a loss-leader for his business. Kay and his developers are active on Stack Overflow, manage their bugs using openly available bug trackers, and maintain constant contact with their users.
 
 As of March 23rd 2023 Saxonica released the ``saxonche 12.1.0`` pip package.  This is
 a XSLT programming language compiler and parser as a Python pip package, under the
 Mozilla Public Licence.  The ``saxonche`` package supports XSLT 3.0, XPath 3.1,
-XQuery 3.1, XSD 1.1.  But the Saxonica "Schema Validator" processor is disabled in
+XQuery 3.1, XSD 1.1.  However the Saxonica "Schema Validator" processor is disabled in
 ``saxonche``, it looks like it can be turned on by purchasing a license, but the
 feature looks buggy and [mostly abandoned](https://saxonica.plan.io/issues/4845).  
 The ``saxconche`` python library uses ctypes to build a SaxonC XSLT compiler and
@@ -236,15 +187,15 @@ run it within Python. The SaxonC project is a port of the Saxon Java software
 to C, so it can be used with C/C++, PHP and Python.  There are some problems with
 this library:
 
-- The ``saxonche`` library's documentation is incomplete and wrong.  If you try
+- The ``saxonche`` library's documentation is incomplete and incorrect.  If you try
   to follow their instructions your program won't run.  But their are working
   versions of their python examples in the ``/oneal`` folder of this repo.
 
-- The error messages from incorrect xsl compilations are turned off by default
+- Error messages from incorrect xsl compilations are turned off by default
   in ``saxonche``.  It took me a while to understand that saxon produces nice
   compiler errors (Michael Kay talks about this in his interviews), but
   if you use ``saxonche`` all you see is "there was a compiler error" when you
-  make a mistake.  This isn't that helpful if you are trying to learn XSLT.
+  make a mistake.  This is not helpful if you are trying to learn XSLT.
   (this package uses a Java version of the saxon technology to provide compiler
   errors, see below).
 
