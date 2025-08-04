@@ -1,31 +1,40 @@
 # Learning XSLT with Python
 
-XSLT is an XML Lisp used to transform data from one form to another.  The XSLT
-language contains the XPath tree mini-language within it.  As of March 23rd, 2023
-you can use the latest XSLT/XPath language features with Python.  This repo
-shows how to do this and where to get your XSLT training.  The repo also provides
-a set of command line tools for building and debugging your XSLT code, validating 
-your XML and for testing XPath 3.1 expressions.
+XSLT is a functional language for transforming XML data into various formats
+(e.g., XML, HTML, text). It embeds XPath, a query language for navigating XML
+trees. As of March 2023, Python supports XSLT and XPath via libraries like lxml
+(XSLT 1.0) and saxonche (XSLT 3.0/XPath 3.1 for advanced features like streaming
+and JSON handling). This repo provides examples, CLI tools for
+building/debugging XSLT, validating XML, and testing XPath 3.1 expressions,
+along with pointers to XSLT training resources.g., Michael Kay’s books).
 
 ## Quick Start
 
-Install this repo (see instructions below).
+Clone the repo:
+
+```bash
+git clone https://github.com/aleph2c/learning_xslt_with_python.git
+cd learning_xslt_with_python
+pip install -e .
+source venv/bin/activate
+xslt install-compiler-errors  # installs Java version of sachonche
+```
 
 ### Testing XPath Patterns
 
-Imagine you are trying to understand how to use XPath matching expressions with
-XSLT.
+Imagine you are trying to understand how to use XPath matching expressions with XSLT.
 
-You would like to reference the following picture and the
-`/patterns/axis_testing.xml` file that represents this picture, to try out
-various XPath matching expressions:
+You would like to reference the following picture -- a graph depicting an XML tree
+structure with nodes labeled for axes like child, descendant, parent, ancestor,
+sibling, etc. -- and the ``/patterns/axis_testing.xml`` file that represents this
+picture, to try out various XPath matching expressions.
 
 ![xpath 2](patterns/xpath_2.svg)
 
 To see the entire XML file, we could set the context to the "root" node then match
 against everything in the document:
 
-```
+```bash
 try -d patterns/ xpath -x"axis_testing.xml" -c"/" -p"*"
 context: /
 <A id="1">
@@ -87,227 +96,141 @@ J
 
 ### Evaluating XSLT programs
 
-Now imagine you are trying to learn XSLT.  You have installed this repo's command
-line tools and XSLT compilers (see below).  Suppose you are working on
-the chapter 7.4 exercize of Sal Mangano's XSLT Cookbook.
-You transcribe his text-hierarchy XSLT example into ``./sal/ch07/text.hierarchy.xsl``.
-Now you want to use this .xsl program to transform ``book.xml`` into
-``text.hierarchy.txt``.
+To learn XSLT for transforming XML data, you can use this repository’s
+command-line tools and XSLT compilers (installation instructions below). Suppose
+you’re working through Chapter 7.4 of Sal Mangano’s XSLT Cookbook and have
+transcribed the ``text-hierarchy.xsl`` example into
+``sal/ch07/text-hierarchy.xsl``. You want to transform ``books.xml`` into
+``text-hierarchy.txt`` using this XSLT program.
 
-To:
+To do this:
 
-- set the working directory as ``sal/ch07``, and
-- transform the ``books.xml`` file, with the
-- ``text.hierarchy.xsl`` XSLT program,
-- while providing the ``text.hierachy.xsl`` program with an ``indent`` parameter equal to four spaces, to produce
-- the ``text.hierarchy.txt`` file, and
-- see the output verbosely (-v) printed to the screen:
+- Set the working directory as ``sal/ch07``, and
+- Use the ``text-hierarchy.xsl`` XSLT program to transform ``books.xml``.
+- Pass an ``indent`` parameter (four space) to control output formatting
+- Save the result to ``text-hierarchy.txt`` file.
+- Display verbose output (``-v``) for debugging.
 
-```
+Run the following command:
+
+```bash
 try -d sal/ch07 ex \
   -x books.xml \
   -p saxon \
-  -l text.hierarchy.xsl \
+  -l text-hierarchy.xsl \
   --params "indent='    '" \
   -o text.hieracrhy.txt \
   -v
 ```
 
-Since you are learning, you probably made some mistakes.  You read the resulting
-XSLT compiler errors and make an attempt to fix your program.  Since the ``try``
-command caches its inputs you don't have to retype a long command to re-try your
-``.xsl`` XSLT program, instead you type:
+If you’re learning XSLT, you might make mistakes in ``text-hierarchy.xsl``. The
+try command caches its inputs, so if you encounter compiler errors, you can edit
+the XSLT file and re-run the transformation without retyping
+the full command:
 
-```
+```bash
 try ex -v
 ```
 
-Now you can cycle between trying to fix your program and running the XSLT 3.0
-compiler until your program does what you want.
+Repeat this cycle — edit ``text-hierarchy.xsl``, run try ex -v, and check errors
+— until your XSLT program produces the desired ``text-hierarchy.txt`` output.
 
 ## Context
 
-XSLT is a language used to convert the data of an XML/JSON file, into another
-format.  XSLT stands for eXtensible Stylesheet Language Transforms. XSLT is very
-flexible; you can convert your XML/JSON data into HTML files, SVG pictures or
-Python programs, or any other file format.
+XSLT (eXtensible Stylesheet Language Transformations) is a declarative language
+for converting XML data into other formats, such as HTML, SVG, text, or even
+code. With XSLT 3.0, it can also handle JSON input and output, making it
+versatile for modern data transformation.
 
-Compared to newer templating techniques like Python's Jinja2 library, XSLT is
-significantly more powerful. While Jinja2 is suitable for transforming small
-data structures, XSLT can handle much larger data sets or data streams. This is
-because XSLT is a fully functional programming language (a Lisp dialect) that
-incorporates the robust XPath/XQuery tree-languages. Additionally, XPath
-supports regular expressions and custom function construction. Unlike Jinja2,
-which requires a comprehensive understanding of the data fed into the template,
-XSLT is declarative; simply specify the desired output and the language will
-determine how to produce it. XSLT programs respond to the input data in an
-event-driven manner.
+Compared to templating libraries like Python's Jinja2, XSLT is more specialized
+for tree-based data (``XML/JSON``), with built-in XPath for querying and functional
+features for complex transformations. While Jinja2 is simpler for text
+templating, XSLT excels in handling large datasets or streams declaratively — you
+specify what the output should look like, and the language figures out how to
+generate it. XSLT is functional (e.g., no mutable state, recursion for loops),
+but it's not a Lisp dialect; it's XML-based with event-driven template matching.
 
-As an XML dialect, XSLT programs are inherently serializable. This means that
-your XSLT program is both data and a program, allowing it to easily transform
-itself into new forms (metaprogramming). Although Python does not come with a
-modern XSLT parser, external libraries can be installed to integrate the XSLT
-language into Python. The XSLT standard is currently at version 3.0, but most
-open-source tools only support version 1.0.
+XSLT programs are serializable (as XML), enabling metaprogramming — your XSLT
+can transform itself. Python supports XSLT via libraries like lxml (for XSLT
+1.0) or saxonche (for XSLT 3.0/XPath 3.1). The standard is at version 3.0, but
+many open-source tools (e.g., lxml) stick to 1.0, while saxonche provides full
+3.0 support.
 
-An XSLT 3.0 book has not yet been published, however Altova has published a nice
-[XPath 3.0/3.1 training resource](https://www.altova.com/training/xpath3), and there
-are lots of XSLT 2.0 books.
+### Recommended Learning Resources
 
-If your editor uses snippet's, like SirVer's outstanding UltiSnips technology
-for Vim, get yourself ready to build up a custom, intermediary shorthand between
-your fingers and the XSLT language.  Don't copy someone else's [snippet library](https://github.com/aleph2c/.vim/blob/master/snippets/xslt.snippets),
-build your own as you read through the XSLT books. Leave programming notes as
-comments in your snippets work, you will reference these notes while you improve
-and tune your snippets over time.  The UltiSnips library provides a short-cut to
-get to your snippet files from your XSLT file.  Use this, or an analogous
-feature in your development environment, to constantly jump back and forth
-between your XSLT and your custom snippet work.
+* Start with Basics: Michiel van Otegem’s Teach Yourself XSLT in 21 Days.
+  Chapter 3 has helpful XPath diagrams for tree navigation. Use the ``try
+  xpath`` command with this book to dial in the Xpath concepts.  Build up a
+  snippet library as you work through the chapters.  Get used to a
+  troubleshooting workflow as you wrestle with this book.
+* Lab Work: Sal Mangano’s XSLT Cookbook for practical examples.
+* Intermediate: Jeni Tennison’s Beginning XSLT 2.0: From Novice to Professional.
+  Use ChatGPT to interrogate examples and fill gaps.
+* Advanced Patterns: Michael Kay’s book, Chapter 17: Stylesheet Design Patterns.
+* No Dedicated XSLT 3.0 Book Yet: Use Michael Kay’s XSLT 2.0 and XPath 2.0
+  Programmer's Reference (covers much of 3.0) and his article Transforming JSON
+  using XSLT 3.0. For XPath 3.0/3.1, [try Altova’s free training resources](https://www.altova.com/training/xpath3).
+* XSLT 3.0 Specific: [Martin Honnen’s XSLT 3.0 by Example blog](https://xslt-3-by-example.blogspot.com/), [Stack Overflow](https://stackoverflow.com/users/252228/martin-honnen)
+  answers, and GitHub gists.
+* [Transforming JSON using XSLT 3.0](https://www.saxonica.com/papers/xmlprague-2016mhk.pdf) by Michael Kay. (There is supporting example code for some of these JSON transforms and the pattern's code in the pattern's folder of this repo.)
 
-XSLT, being an XML, is inherently verbose—a trade-off for having a data language
-that can run against itself. However, with a development environment enhanced by
-your snippets, you can quickly type in and debug hundreds of XSLT programs you
-will encounter during your training. This will keep your mind actively engaged
-with the new syntax as you work through the manuals.
 
-If I were to restart my training, I would begin with Michiel van Otegem's "Teach
-Yourself XSLT in 21 Days." It is well-written, with Chapter 3 providing a
-particularly helpful explanation of the XPath tree language using diagrams.
-While grappling with XPath tree query concepts, use the "try xpath" command
-provided by this repo (with pictures and examples seen near the end of this
-document). Within each chapter, build up your snippet library and type out most
-of the book's programs by hand—this will be easy with your snippets. Get used to
-validating your programs with the command line, troubleshoot issues, and learn
-the workflow, new language, and snippet technology. Place your snippets under
-revision control and ensure quick access in any working environment.
+### Setting Up Your Development Enviroment
 
-To understand what XSLT compilers do, experiment with [Evan Lenz's
-XSLT-visualizer](https://github.com/evanlenz/xslt-visualizer). It shows how the
-XSLT event manager reacts to the data in your XML files and calls various
-templates based on their XPath match expressions.
+To make XSLT less verbose (a trade-off for its XML-based metaprogramming), use
+editor snippets. In Vim/Neovim, SirVer’s UltiSnips is excellent—create your own
+library as you learn. Build snippets while reading books, adding comments for
+reference. Use UltiSnips’ shortcut to jump between your XSLT file and 
+[snippet files](https://github.com/aleph2c/.vim/blob/master/snippets/xslt.snippets). Keep snippets under Git-control for portability.
 
-Then get a copy of "Beginning XSLT 2.0 From Novice to Professional", by Jeni
-Tennison.  This isn't an easy book to read as a beginner, but at this point you
-will have a decent understanding of XSLT 1.0 from which you can infer over the
-gaps in her explanations.  You can use ChatGPT with her examples and learn
-through interrogation.
+With snippets, typing and debugging XSLT becomes faster. Experiment with [Evan
+Lenz’s XSLT-visualizer](https://github.com/evanlenz/xslt-visualizer) to see how
+templates react to XML input in an event-driven way.
 
-After that, I recommend getting a copy of "XSLT 2.0 and XPath 2.0 Programmer's
-Reference 4th Edition" by Michael Kay, and work through Chapter 17: Stylesheet
-Design Patterns.  If you would like to learn how to use the new XML-to-JSON,
-JSON-to-XML and JSON transform features of XSLT 3.0, read [Transforming JSON
-using XSLT 3.0](https://www.saxonica.com/papers/xmlprague-2016mhk.pdf), by
-Michael Kay.  There is supporting example code for some of these JSON transforms
-and the pattern's code in the pattern's folder of this repo. (see the docs
-below) To become competent, get a copy of Sal Mangano's XSLT Cookbook, then work
-through his examples as lab work.  To learn XSLT 3.0 read Martin Honnen's
-[XSLT 3.0 by example blog](https://xslt-3-by-example.blogspot.com/), and read
-through [his help on stack overflow](https://stackoverflow.com/users/252228/martin-honnen) and 
-his [gists on github](https://gist.github.com/martin-honnen).
+### Shifting to Functional Thinking
 
-XSLT is a powerful and robust technology that has been actively developed for
-almost 25 years. It has been responsive to its community's feedback, largely
-thanks to Michael Kay, who created a company called Saxonica. Through Saxonica,
-Kay can earn money to develop the language while working on open standards
-boards and writing books about XSLT/XPath. He offers part of his software as
-open source and makes money by licensing XSLT compilers with additional
-features. His open-source software serves as a loss-leader for his business. Kay
-and his developers are active on Stack Overflow, manage their bugs using openly
-available bug trackers, and maintain constant contact with their users.
+XSLT is functional, so stop thinking procedurally (like in Python). Prototype in
+Python first, but avoid overwriting variables—use recursion instead. This repo’s
+try to-python command converts XML to Python code as a starting point.
 
-As of March 23rd 2023 Saxonica released the ``saxonche 12.1.0`` pip package.
-This is a XSLT programming language compiler and parser as a Python pip package,
-under the Mozilla Public Licence.  The ``saxonche`` package supports XSLT 3.0,
-XPath 3.1, XQuery 3.1, XSD 1.1.  However the Saxonica "Schema Validator"
-processor is disabled in ``saxonche``, it looks like it can be turned on by
-purchasing a license, but the feature looks buggy and [mostly
-abandoned](https://saxonica.plan.io/issues/4845).  The ``saxconche`` python
-library uses ctypes to build a SaxonC XSLT compiler and run it within Python.
-The SaxonC project is a port of the Saxon Java software to C, so it can be used
-with C/C++, PHP and Python.  There are some problems with this library:
+Once your functional Python prototype works, use Grok/Gemini to translate it to
+XSLT. The output won’t run perfectly, but it handles syntax hurdles. Combine it
+with your XPath patterns (tested via try xpath, see below) and snippets to
+refine. Use the repo’s try ex tool to compile and test until it works.
 
-- The ``saxonche`` library's XSLT documentation is incomplete and incorrect.  If
-  you try to follow their instructions your program won't run.  But their are
-  working versions of their python examples in the ``/oneal`` folder of this
-  repo.
+### Tools and Libraries
 
-- While ``saxonche``  offers powerful XML processing capabilities, its
-  documentation is severely lacking. There are very few examples available, and
-  when provided, they often contain errors. Furthermore, the ``saxonc`` and
-  ``saxonche``  APIs are unstable (So ChatGPT can't help you here). In contrast,
-  the ``lxml``  library is widely used, featuring excellent documentation and a
-  stable API. Built upon the C libraries libxml2 and libxslt, lxml may be an
-  older library, but if you can manage with version 1.0 XPath expressions, it's
-  recommended to use lxml and avoid Saxon products for XML parsing in Python.
+XSLT has been developed for 25 years, with Michael Kay (Saxonica) leading standards and tools. Saxonica’s open-source Saxon-HE supports XSLT 3.0; they sell licensed versions with extra features. Kay’s team is responsive on Stack Overflow and bug trackers.
 
-- Error messages from incorrect xsl compilations are turned off by default
-  in ``saxonche``.  It took me a while to understand that saxon produces nice
-  compiler errors (Michael Kay talks about this in his interviews), but
-  if you use ``saxonche`` all you see is "there was a compiler error" when you
-  make a mistake.  This is not helpful if you are trying to learn XSLT.
-  (this package uses a Java version of the saxon technology to provide compiler
-  errors, see below).
+In Python, install saxonche (12.8.0+, Mozilla license) for XSLT 3.0/XPath 3.1:
 
-The original version of ``saxonche`` would frequently cause StackOverFlow
-errors, so if you are running ``12.0.0``, upgrade immediately: ``pip install
---upgrade saxonche``.  The current version still crashes but not as often:
-Wrap any calls to the library in exceptions and ensure you can recover (I don't
-know if this leaks memory).  The ``saxonche`` library is low quality software
-wrapping high quality technology, but it's improving.  If you need something more
-reliable, you could call out to the Java versions of saxon software with a pipe.
+- Supports XSLT 3.0, XPath 3.1, XQuery 3.1, XSD 1.1 (schema validation disabled in free version).
+- It’s a C port of Saxon Java, usable in Python via ctypes.
 
-As a Python developer learning XSLT your main challenge will be to stop thinking
-like a procedural programmer and start to think like a functional programmer.
-You probably won't believe me until you have suffered, but once you give up
-trying to hack XSLT into behaving like Python, come back and read the following:
+However, ``saxonche`` has limitations:
 
-- before you tackle your programming problems directly in XSLT, write out a
-  Python version, but
+- Incomplete documentation and examples (see this repo's ``/oneal`` folder for
+  working ones).
+- Error messages are off by default -- wrap call in exceptions for recovery.
+- For stability, use ``lxml`` for XSLT 1.0 (better documented, based on
+  libxml2/libxslt)
+  
+To see compiler errors (essential for learning), use Java's Saxon-HE CLI:
 
-- never over-write a Python variable once it is written.  This will force you
-  to write things recursively.
-
-To get you started with this, this repo provides a ``try to-python`` command.
-(see below for examples) It converts an XML file into a python file. You can use
-the generated python file as your starting point for prototyping your working
-examples of XPath recursive functions.
-
-Use the Python debugger or whatever other tools you have to step in and debug
-any issues you encounter.  Once you have this functional Python example working,
-you can ask ChatGPT to translate your Python program into XSLT.  This
-translation will be a mess, and it will not run, but it will solve many of the
-syntax challenges you will have.  If you need an advanced XPath search
-expression, use the ``try xpath`` command tool provided by this package to set
-your template's context and debug your XPath pattern against the XML document
-you are trying to parse (this command tool is documented below).  Use your
-functional Python program, the chatGTP output and your pattern examples as
-references, and type in your XSLT program using your snippets.  Then use the
-`try ex` command tools provided by this package and dial it in until it works.
-
-Also, to learn XSLT 3.0 you need to be able to see its xsl compiler errors.  As
-I said before, ``saxonche`` only pretends to be documented.  I spent a long time
-trying to figure out how to get compiler errors working with a threadable
-``saxonche`` and eventually decided to try something else.  I downloaded the 
-[zipped java version of saxon](https://github.com/Saxonica/Saxon-HE/blob/be4dd844d935d8d0ef09748490448624abe3c66b/12/source/saxon12-0source.zip),
-decompressed it and ran it's command line tool:
-
-```
-  java -jar <path to saxon-he-12.0.jar> \
-   -xsl:<path to your xsl file> \
-   -s:<path to your xml file>
+```bash
+java -jar saxon-he-12.0.jar -xsl:your.xsl -s:your.xml
 ```
 
-By default this java-project produces XSLT compiler errors so you can debug your
-``.xsl`` programs.
+This repo's CLI tools call Java for errors when ``saxonche`` detects issues.
+Install Java to set up as below.
 
-The command line tool used in this project was adjusted to call out to Java when
-``saxonche`` detects an XSLT compiler error.  If you want to use this feature,
-you will have to have java installed on your system.  See the installation
-instructions below for details:
+# Installation Instructions
 
-# Installation of two XSLT processors and a Supporting CLI
+In order for you get build a decent learning environment, setup:
 
-To install the CLI, the two XSLT python parsers, and the example files:
+- This repo's CLI
+- Two XSLT pythone parser (``lxml/sachonche``)
+- Example files
 
 ```bash
 git clone git@github.com:aleph2c/leaning_xslt.git
@@ -318,6 +241,7 @@ pip install --upgrade pip
 pip install -e .
 # see note:
 xslt install-compile-errors
+
 ```
 
 **Note:**
@@ -325,7 +249,7 @@ The ``saxonche`` pip package used by this repo will not output XSLT compiler err
 but if you want to see them (which you do) this command will fix the problem:
 
 ```bash
-xslt install-compile-errors
+xslt install-compiler-errors
 ```
 
 This will download the

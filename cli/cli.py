@@ -9,6 +9,9 @@ from pathlib import Path
 from functools import partial
 from contextlib import contextmanager
 
+
+import markdown
+from pygments.formatters import HtmlFormatter
 from queue import Queue
 from threading import Thread
 from threading import Lock
@@ -634,6 +637,79 @@ class Config:
 
 
 pass_config = click.make_pass_decorator(Config, ensure=True)
+
+@click.command
+@pass_config
+def _markdown(ctx):
+    print("make markdown of the README.md file")
+
+    path_to_mk = (Path(__file__).parent / '..' / 'README.md').resolve()
+    path_to_html = (Path(__file__).parent / '..' / 'README.html').resolve()
+    html = ""
+    with open(path_to_mk, "r") as mk_file:
+        mk_text = mk_file.read()
+        md = markdown.Markdown(
+            extensions=[
+                'fenced_code',  # Code blocks with ```
+                'tables',       # GFM table support
+                'toc',          # Table of contents
+                'extra',        # Extra GFM features (e.g., autolinks)
+                'codehilite',   # Syntax highlighting for code
+                'sane_lists'    # Consistent list behavior
+            ],
+            extensions_configs={
+                'toc': {
+                    'title' : 'Table of Contents',
+                    'permalink' : True,
+                    'toc_depth' : '2-4',
+                },
+                'codehilite': {
+                    'css_class': 'highlight',
+                    'use_pygments': True,
+                    'linenums': True,  # Optional: Add line numbers
+                    'guess_lang': True  # Require explicit language (e.g., ```python)
+                }
+            }
+        )
+        html = md.convert(mk_text)
+        toc = md.toc
+
+
+    pygments_css = HtmlFormatter(style='monokai').get_style_defs('.highlight')
+    github_css = "https://github.githubassets.com/assets/github-markdown.css"
+
+    html_template = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README Preview</title>
+    <link rel="stylesheet" href="{github_css}">
+    <style>
+        body {{
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }}
+        .markdown-body {{
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }}
+        {pygments_css}
+    </style>
+</head>
+<body>
+    <article class="markdown-body">
+        <div class="toc">{toc}</div>
+        {html}
+    </article>
+</body>
+</html>
+"""
+
+    with open(path_to_html, "w+") as html_file:
+        html_file.write(html_template)
 
 
 @click.group()

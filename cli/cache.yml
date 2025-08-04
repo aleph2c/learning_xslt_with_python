@@ -1,7 +1,7 @@
-context: /
-home_dir: /home/scott/xslt/jenni/by_hand/ch3_templates
+context: //J
+home_dir: /mnt/data/learning_xslt_with_python/patterns
 output_file_name: TVGuide18.html
 params: indent='    '
 processor: saxon
-xml_file_name: TVGuide18.xml
+xml_file_name: axis_testing.xml
 xsl_file_name: TVGuide18.xsl

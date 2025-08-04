@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README Preview</title>
+    <link rel="stylesheet" href="https://github.githubassets.com/assets/github-markdown.css">
+    <style>
+        body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+        .markdown-body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+        pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #49483e }
+.highlight { background: #272822; color: #F8F8F2 }
+.highlight .c { color: #959077 } /* Comment */
+.highlight .err { color: #ED007E; background-color: #1E0010 } /* Error */
+.highlight .esc { color: #F8F8F2 } /* Escape */
+.highlight .g { color: #F8F8F2 } /* Generic */
+.highlight .k { color: #66D9EF } /* Keyword */
+.highlight .l { color: #AE81FF } /* Literal */
+.highlight .n { color: #F8F8F2 } /* Name */
+.highlight .o { color: #FF4689 } /* Operator */
+.highlight .x { color: #F8F8F2 } /* Other */
+.highlight .p { color: #F8F8F2 } /* Punctuation */
+.highlight .ch { color: #959077 } /* Comment.Hashbang */
+.highlight .cm { color: #959077 } /* Comment.Multiline */
+.highlight .cp { color: #959077 } /* Comment.Preproc */
+.highlight .cpf { color: #959077 } /* Comment.PreprocFile */
+.highlight .c1 { color: #959077 } /* Comment.Single */
+.highlight .cs { color: #959077 } /* Comment.Special */
+.highlight .gd { color: #FF4689 } /* Generic.Deleted */
+.highlight .ge { color: #F8F8F2; font-style: italic } /* Generic.Emph */
+.highlight .ges { color: #F8F8F2; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.highlight .gr { color: #F8F8F2 } /* Generic.Error */
+.highlight .gh { color: #F8F8F2 } /* Generic.Heading */
+.highlight .gi { color: #A6E22E } /* Generic.Inserted */
+.highlight .go { color: #66D9EF } /* Generic.Output */
+.highlight .gp { color: #FF4689; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { color: #F8F8F2; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #959077 } /* Generic.Subheading */
+.highlight .gt { color: #F8F8F2 } /* Generic.Traceback */
+.highlight .kc { color: #66D9EF } /* Keyword.Constant */
+.highlight .kd { color: #66D9EF } /* Keyword.Declaration */
+.highlight .kn { color: #FF4689 } /* Keyword.Namespace */
+.highlight .kp { color: #66D9EF } /* Keyword.Pseudo */
+.highlight .kr { color: #66D9EF } /* Keyword.Reserved */
+.highlight .kt { color: #66D9EF } /* Keyword.Type */
+.highlight .ld { color: #E6DB74 } /* Literal.Date */
+.highlight .m { color: #AE81FF } /* Literal.Number */
+.highlight .s { color: #E6DB74 } /* Literal.String */
+.highlight .na { color: #A6E22E } /* Name.Attribute */
+.highlight .nb { color: #F8F8F2 } /* Name.Builtin */
+.highlight .nc { color: #A6E22E } /* Name.Class */
+.highlight .no { color: #66D9EF } /* Name.Constant */
+.highlight .nd { color: #A6E22E } /* Name.Decorator */
+.highlight .ni { color: #F8F8F2 } /* Name.Entity */
+.highlight .ne { color: #A6E22E } /* Name.Exception */
+.highlight .nf { color: #A6E22E } /* Name.Function */
+.highlight .nl { color: #F8F8F2 } /* Name.Label */
+.highlight .nn { color: #F8F8F2 } /* Name.Namespace */
+.highlight .nx { color: #A6E22E } /* Name.Other */
+.highlight .py { color: #F8F8F2 } /* Name.Property */
+.highlight .nt { color: #FF4689 } /* Name.Tag */
+.highlight .nv { color: #F8F8F2 } /* Name.Variable */
+.highlight .ow { color: #FF4689 } /* Operator.Word */
+.highlight .pm { color: #F8F8F2 } /* Punctuation.Marker */
+.highlight .w { color: #F8F8F2 } /* Text.Whitespace */
+.highlight .mb { color: #AE81FF } /* Literal.Number.Bin */
+.highlight .mf { color: #AE81FF } /* Literal.Number.Float */
+.highlight .mh { color: #AE81FF } /* Literal.Number.Hex */
+.highlight .mi { color: #AE81FF } /* Literal.Number.Integer */
+.highlight .mo { color: #AE81FF } /* Literal.Number.Oct */
+.highlight .sa { color: #E6DB74 } /* Literal.String.Affix */
+.highlight .sb { color: #E6DB74 } /* Literal.String.Backtick */
+.highlight .sc { color: #E6DB74 } /* Literal.String.Char */
+.highlight .dl { color: #E6DB74 } /* Literal.String.Delimiter */
+.highlight .sd { color: #E6DB74 } /* Literal.String.Doc */
+.highlight .s2 { color: #E6DB74 } /* Literal.String.Double */
+.highlight .se { color: #AE81FF } /* Literal.String.Escape */
+.highlight .sh { color: #E6DB74 } /* Literal.String.Heredoc */
+.highlight .si { color: #E6DB74 } /* Literal.String.Interpol */
+.highlight .sx { color: #E6DB74 } /* Literal.String.Other */
+.highlight .sr { color: #E6DB74 } /* Literal.String.Regex */
+.highlight .s1 { color: #E6DB74 } /* Literal.String.Single */
+.highlight .ss { color: #E6DB74 } /* Literal.String.Symbol */
+.highlight .bp { color: #F8F8F2 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #A6E22E } /* Name.Function.Magic */
+.highlight .vc { color: #F8F8F2 } /* Name.Variable.Class */
+.highlight .vg { color: #F8F8F2 } /* Name.Variable.Global */
+.highlight .vi { color: #F8F8F2 } /* Name.Variable.Instance */
+.highlight .vm { color: #F8F8F2 } /* Name.Variable.Magic */
+.highlight .il { color: #AE81FF } /* Literal.Number.Integer.Long */
+    </style>
+</head>
+<body>
+    <article class="markdown-body">
+        <div class="toc"><div class="toc">
+<ul>
+<li><a href="#learning-xslt-with-python">Learning XSLT with Python</a><ul>
+<li><a href="#quick-start">Quick Start</a><ul>
+<li><a href="#testing-xpath-patterns">Testing XPath Patterns</a></li>
+<li><a href="#evaluating-xslt-programs">Evaluating XSLT programs</a></li>
+</ul>
+</li>
+<li><a href="#context">Context</a><ul>
+<li><a href="#recommended-learning-resources">Recommended Learning Resources</a></li>
+<li><a href="#setting-up-your-development-enviroment">Setting Up Your Development Enviroment</a></li>
+<li><a href="#shifting-to-functional-thinking">Shifting to Functional Thinking</a></li>
+<li><a href="#tools-and-libraries">Tools and Libraries</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#installation-instructions">Installation Instructions</a></li>
+<li><a href="#running-examples">Running Examples</a><ul>
+<li><a href="#how-to-run-specific-examples">How to Run Specific Examples</a></li>
+<li><a href="#running-your-own-examples">Running Your Own Examples</a></li>
+<li><a href="#json-transform-example-1">JSON Transform Example 1</a></li>
+<li><a href="#json-transform-example-2">JSON Transform Example 2</a></li>
+</ul>
+</li>
+<li><a href="#integrating-xslt-30-with-python-in-the-main-thread">Integrating XSLT 3.0 with Python in the main thread</a></li>
+<li><a href="#integrating-xslt-30-with-multithreaded-python">Integrating XSLT 3.0 with Multithreaded Python</a></li>
+<li><a href="#testing-xpath">Testing XPath</a></li>
+<li><a href="#testing-xpath-axis-features">Testing XPath Axis Features</a></li>
+<li><a href="#prototyping-your-xsltxpath-code-in-python">Prototyping your XSLT/XPATH code in Python</a></li>
+<li><a href="#useful-links">Useful links</a></li>
+</ul>
+</div>
+</div>
+        <h1 id="learning-xslt-with-python">Learning XSLT with Python</h1>
+<p>XSLT is a functional language for transforming XML data into various formats
+(e.g., XML, HTML, text). It embeds XPath, a query language for navigating XML
+trees. As of March 2023, Python supports XSLT and XPath via libraries like lxml
+(XSLT 1.0) and saxonche (XSLT 3.0/XPath 3.1 for advanced features like streaming
+and JSON handling). This repo provides examples, CLI tools for
+building/debugging XSLT, validating XML, and testing XPath 3.1 expressions,
+along with pointers to XSLT training resources.g., Michael Kay’s books).</p>
+<h2 id="quick-start">Quick Start</h2>
+<p>Clone the repo:</p>
+<div class="codehilite"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/aleph2c/learning_xslt_with_python.git
+<span class="nb">cd</span><span class="w"> </span>learning_xslt_with_python
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate
+xslt<span class="w"> </span>install-compiler-errors<span class="w">  </span><span class="c1"># installs Java version of sachonche</span>
+</code></pre></div>
+
+<h3 id="testing-xpath-patterns">Testing XPath Patterns</h3>
+<p>Imagine you are trying to understand how to use XPath matching expressions with XSLT.</p>
+<p>You would like to reference the following picture -- a graph depicting an XML tree
+structure with nodes labeled for axes like child, descendant, parent, ancestor,
+sibling, etc. -- and the <code>/patterns/axis_testing.xml</code> file that represents this
+picture, to try out various XPath matching expressions.</p>
+<p><img alt="xpath 2" src="patterns/xpath_2.svg" /></p>
+<p>To see the entire XML file, we could set the context to the "root" node then match
+against everything in the document:</p>
+<div class="codehilite"><pre><span></span><code>try<span class="w"> </span>-d<span class="w"> </span>patterns/<span class="w"> </span>xpath<span class="w"> </span>-x<span class="s2">&quot;axis_testing.xml&quot;</span><span class="w"> </span>-c<span class="s2">&quot;/&quot;</span><span class="w"> </span>-p<span class="s2">&quot;*&quot;</span>
+context:<span class="w"> </span>/
+&lt;A<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>&gt;
+<span class="w">  </span>&lt;B<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;2&quot;</span>&gt;
+<span class="w">    </span>&lt;C<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;3&quot;</span>/&gt;
+<span class="w">    </span>&lt;D<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;4&quot;</span>/&gt;
+<span class="w">    </span>&lt;E<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;5&quot;</span>&gt;
+<span class="w">      </span>&lt;H<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;8&quot;</span>&gt;
+<span class="w">        </span>&lt;M<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;13&quot;</span>/&gt;
+<span class="w">      </span>&lt;/H&gt;
+<span class="w">      </span>&lt;I<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;9&quot;</span>/&gt;
+<span class="w">      </span>&lt;J<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;10&quot;</span>&gt;
+<span class="w">        </span>&lt;N<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;14&quot;</span>/&gt;
+<span class="w">        </span>&lt;O<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;15&quot;</span>&gt;
+<span class="w">          </span>&lt;T<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;20&quot;</span>/&gt;
+<span class="w">          </span>&lt;U<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;21&quot;</span>/&gt;
+<span class="w">        </span>&lt;/O&gt;
+<span class="w">        </span>&lt;P<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;16&quot;</span>/&gt;
+<span class="w">        </span>&lt;Q<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;17&quot;</span>/&gt;
+<span class="w">        </span>&lt;R<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;18&quot;</span>&gt;
+<span class="w">          </span>&lt;V<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;22&quot;</span>/&gt;
+<span class="w">          </span>&lt;W<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;23&quot;</span>/&gt;
+<span class="w">        </span>&lt;/R&gt;
+<span class="w">      </span>&lt;/J&gt;
+<span class="w">      </span>&lt;K<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;11&quot;</span>/&gt;
+<span class="w">      </span>&lt;L<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;12&quot;</span>&gt;
+<span class="w">        </span>&lt;S<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;19&quot;</span>/&gt;
+<span class="w">      </span>&lt;/L&gt;
+<span class="w">    </span>&lt;/E&gt;
+<span class="w">    </span>&lt;F<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;6&quot;</span>/&gt;
+<span class="w">    </span>&lt;G<span class="w"> </span><span class="nv">id</span><span class="o">=</span><span class="s2">&quot;7&quot;</span>/&gt;
+<span class="w">  </span>&lt;/B&gt;
+&lt;/A&gt;
+</code></pre></div>
+
+<p>Now let's set <code>J</code> as the node context and perform our first axis experiment:</p>
+<div class="codehilite"><pre><span></span><code>try xpath -c &quot;//J&quot; -p &quot;self::*/name()&quot;
+context: //J
+J
+</code></pre></div>
+
+<p>Since the command is lazy, we can query from the <code>J</code> context without
+re-specifying it and look back at <code>J's</code> ancestors like this:</p>
+<div class="codehilite"><pre><span></span><code>try xpath -p &quot;ancestor::*/name()&quot;
+context: //J
+J
+&quot;A&quot;
+&quot;B&quot;
+&quot;E&quot;
+</code></pre></div>
+
+<blockquote>
+<p><strong>Note</strong>
+If you are parsing an <code>xhtml</code> doc include the <code>xhtml</code> namespace prefix in your query:
+<code>try -d oneal xpath -x example.html -c "/" -p "//xhtml:h1[1]"</code></p>
+</blockquote>
+<h3 id="evaluating-xslt-programs">Evaluating XSLT programs</h3>
+<p>To learn XSLT for transforming XML data, you can use this repository’s
+command-line tools and XSLT compilers (installation instructions below). Suppose
+you’re working through Chapter 7.4 of Sal Mangano’s XSLT Cookbook and have
+transcribed the <code>text-hierarchy.xsl</code> example into
+<code>sal/ch07/text-hierarchy.xsl</code>. You want to transform <code>books.xml</code> into
+<code>text-hierarchy.txt</code> using this XSLT program.</p>
+<p>To do this:</p>
+<ul>
+<li>Set the working directory as <code>sal/ch07</code>, and</li>
+<li>Use the <code>text-hierarchy.xsl</code> XSLT program to transform <code>books.xml</code>.</li>
+<li>Pass an <code>indent</code> parameter (four space) to control output formatting</li>
+<li>Save the result to <code>text-hierarchy.txt</code> file.</li>
+<li>Display verbose output (<code>-v</code>) for debugging.</li>
+</ul>
+<p>Run the following command:</p>
+<div class="codehilite"><pre><span></span><code>try<span class="w"> </span>-d<span class="w"> </span>sal/ch07<span class="w"> </span>ex<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-x<span class="w"> </span>books.xml<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-p<span class="w"> </span>saxon<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-l<span class="w"> </span>text-hierarchy.xsl<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--params<span class="w"> </span><span class="s2">&quot;indent=&#39;    &#39;&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-o<span class="w"> </span>text.hieracrhy.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v
+</code></pre></div>
+
+<p>If you’re learning XSLT, you might make mistakes in <code>text-hierarchy.xsl</code>. The
+try command caches its inputs, so if you encounter compiler errors, you can edit
+the XSLT file and re-run the transformation without retyping
+the full command:</p>
+<div class="codehilite"><pre><span></span><code>try<span class="w"> </span>ex<span class="w"> </span>-v
+</code></pre></div>
+
+<p>Repeat this cycle — edit <code>text-hierarchy.xsl</code>, run try ex -v, and check errors
+— until your XSLT program produces the desired <code>text-hierarchy.txt</code> output.</p>
+<h2 id="context">Context</h2>
+<p>XSLT (eXtensible Stylesheet Language Transformations) is a declarative language
+for converting XML data into other formats, such as HTML, SVG, text, or even
+code. With XSLT 3.0, it can also handle JSON input and output, making it
+versatile for modern data transformation.</p>
+<p>Compared to templating libraries like Python's Jinja2, XSLT is more specialized
+for tree-based data (<code>XML/JSON</code>), with built-in XPath for querying and functional
+features for complex transformations. While Jinja2 is simpler for text
+templating, XSLT excels in handling large datasets or streams declaratively — you
+specify what the output should look like, and the language figures out how to
+generate it. XSLT is functional (e.g., no mutable state, recursion for loops),
+but it's not a Lisp dialect; it's XML-based with event-driven template matching.</p>
+<p>XSLT programs are serializable (as XML), enabling metaprogramming — your XSLT
+can transform itself. Python supports XSLT via libraries like lxml (for XSLT
+1.0) or saxonche (for XSLT 3.0/XPath 3.1). The standard is at version 3.0, but
+many open-source tools (e.g., lxml) stick to 1.0, while saxonche provides full
+3.0 support.</p>
+<h3 id="recommended-learning-resources">Recommended Learning Resources</h3>
+<ul>
+<li>Start with Basics: Michiel van Otegem’s Teach Yourself XSLT in 21 Days.
+  Chapter 3 has helpful XPath diagrams for tree navigation. Use the <code>try
+  xpath</code> command with this book to dial in the Xpath concepts.  Build up a
+  snippet library as you work through the chapters.  Get used to a
+  troubleshooting workflow as you wrestle with this book.</li>
+<li>Lab Work: Sal Mangano’s XSLT Cookbook for practical examples.</li>
+<li>Intermediate: Jeni Tennison’s Beginning XSLT 2.0: From Novice to Professional.
+  Use ChatGPT to interrogate examples and fill gaps.</li>
+<li>Advanced Patterns: Michael Kay’s book, Chapter 17: Stylesheet Design Patterns.</li>
+<li>No Dedicated XSLT 3.0 Book Yet: Use Michael Kay’s XSLT 2.0 and XPath 2.0
+  Programmer's Reference (covers much of 3.0) and his article Transforming JSON
+  using XSLT 3.0. For XPath 3.0/3.1, <a href="https://www.altova.com/training/xpath3">try Altova’s free training resources</a>.</li>
+<li>XSLT 3.0 Specific: <a href="https://xslt-3-by-example.blogspot.com/">Martin Honnen’s XSLT 3.0 by Example blog</a>, <a href="https://stackoverflow.com/users/252228/martin-honnen">Stack Overflow</a>
+  answers, and GitHub gists.</li>
+<li><a href="https://www.saxonica.com/papers/xmlprague-2016mhk.pdf">Transforming JSON using XSLT 3.0</a> by Michael Kay. (There is supporting example code for some of these JSON transforms and the pattern's code in the pattern's folder of this repo.)</li>
+</ul>
+<h3 id="setting-up-your-development-enviroment">Setting Up Your Development Enviroment</h3>
+<p>To make XSLT less verbose (a trade-off for its XML-based metaprogramming), use
+editor snippets. In Vim/Neovim, SirVer’s UltiSnips is excellent—create your own
+library as you learn. Build snippets while reading books, adding comments for
+reference. Use UltiSnips’ shortcut to jump between your XSLT file and 
+<a href="https://github.com/aleph2c/.vim/blob/master/snippets/xslt.snippets">snippet files</a>. Keep snippets under Git-control for portability.</p>
+<p>With snippets, typing and debugging XSLT becomes faster. Experiment with <a href="https://github.com/evanlenz/xslt-visualizer">Evan
+Lenz’s XSLT-visualizer</a> to see how
+templates react to XML input in an event-driven way.</p>
+<h3 id="shifting-to-functional-thinking">Shifting to Functional Thinking</h3>
+<p>XSLT is functional, so stop thinking procedurally (like in Python). Prototype in
+Python first, but avoid overwriting variables—use recursion instead. This repo’s
+try to-python command converts XML to Python code as a starting point.</p>
+<p>Once your functional Python prototype works, use Grok/Gemini to translate it to
+XSLT. The output won’t run perfectly, but it handles syntax hurdles. Combine it
+with your XPath patterns (tested via try xpath, see below) and snippets to
+refine. Use the repo’s try ex tool to compile and test until it works.</p>
+<h3 id="tools-and-libraries">Tools and Libraries</h3>
+<p>XSLT has been developed for 25 years, with Michael Kay (Saxonica) leading standards and tools. Saxonica’s open-source Saxon-HE supports XSLT 3.0; they sell licensed versions with extra features. Kay’s team is responsive on Stack Overflow and bug trackers.</p>
+<p>In Python, install saxonche (12.8.0+, Mozilla license) for XSLT 3.0/XPath 3.1:</p>
+<ul>
+<li>Supports XSLT 3.0, XPath 3.1, XQuery 3.1, XSD 1.1 (schema validation disabled in free version).</li>
+<li>It’s a C port of Saxon Java, usable in Python via ctypes.</li>
+</ul>
+<p>However, <code>saxonche</code> has limitations:</p>
+<ul>
+<li>Incomplete documentation and examples (see this repo's <code>/oneal</code> folder for
+  working ones).</li>
+<li>Error messages are off by default -- wrap call in exceptions for recovery.</li>
+<li>For stability, use <code>lxml</code> for XSLT 1.0 (better documented, based on
+  libxml2/libxslt)</li>
+</ul>
+<p>To see compiler errors (essential for learning), use Java's Saxon-HE CLI:</p>
+<div class="codehilite"><pre><span></span><code>java<span class="w"> </span>-jar<span class="w"> </span>saxon-he-12.0.jar<span class="w"> </span>-xsl:your.xsl<span class="w"> </span>-s:your.xml
+</code></pre></div>
+
+<p>This repo's CLI tools call Java for errors when <code>saxonche</code> detects issues.
+Install Java to set up as below.</p>
+<h1 id="installation-instructions">Installation Instructions</h1>
+<p>In order for you get build a decent learning environment, setup:</p>
+<ul>
+<li>This repo's CLI</li>
+<li>Two XSLT pythone parser (<code>lxml/sachonche</code>)</li>
+<li>Example files</li>
+</ul>
+<div class="codehilite"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:aleph2c/leaning_xslt.git
+<span class="nb">cd</span><span class="w"> </span>learning_xslt
+python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+<span class="nb">source</span><span class="w"> </span>./venv/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+<span class="c1"># see note:</span>
+xslt<span class="w"> </span>install-compile-errors
+</code></pre></div>
+
+<p><strong>Note:</strong>
+The <code>saxonche</code> pip package used by this repo will not output XSLT compiler errors,
+but if you want to see them (which you do) this command will fix the problem:</p>
+<div class="codehilite"><pre><span></span><code>xslt<span class="w"> </span>install-compiler-errors
+</code></pre></div>
+
+<p>This will download the
+<a href="https://github.com/Saxonica/Saxon-HE/blob/be4dd844d935d8d0ef09748490448624abe3c66b/12/source/saxon12-0source.zip">zipped java version of saxon</a>
+and decompress its contents in <code>./java/</code>.  With this jar installed the <code>try</code>
+cli tool will call out to java when the <code>saxoniche</code> library fails to compile
+your <code>.xsl</code>.  It will rerun the compilation using the jar and output the XSLT
+compiler error messages to the terminal.  This will give you the feedback
+required to debug your programs.</p>
+<h1 id="running-examples">Running Examples</h1>
+<p>The repo installs a <code>try</code> command.  To see how it works:</p>
+<div class="codehilite"><pre><span></span><code>try --help
+Usage: try [OPTIONS] COMMAND [ARGS]...
+
+    Try an XSLT/XPath example and cache the command
+
+Options:
+  -d, --dir TEXT  Set the exercise directory
+  --help          Show this message and exit.
+
+  Commands:
+    cache  View your command cache
+    ex     Run an exercise
+    xpath  Test an XPath query on a given xml doc and context
+</code></pre></div>
+
+<h2 id="how-to-run-specific-examples">How to Run Specific Examples</h2>
+<p>To see how to run an exercise:</p>
+<div class="codehilite"><pre><span></span><code>try ex --help
+Usage: try ex [OPTIONS]
+
+  Run an exercise:
+
+  try -d sal/ch07 ex \
+    -x books.xml \
+    -l text.hierarchy.xsl \
+    -params &quot;indent=&#39;    &#39;,param2=&#39;some_value&#39;&quot; \
+    -o text.hierarchy.txt
+
+Options:
+  -n, --node-name TEXT    Set the node name
+  -x, --xml TEXT          Set the xml file
+  -j, --json TEXT         Set the json file (saxon)
+  -l, --xls TEXT          Set the xls file
+  -p, --processor TEXT    Set the processor (lxml|saxon)
+  -o, --output_file TEXT  Set the output file name
+  --params TEXT           Set the optional parameter(s)
+  -v, --verbose           Run in verbose mode?
+  --help                  Show this message and exit.
+</code></pre></div>
+
+<p>To run an example:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">try -d jenni/ch2_html_from_xml ex -x TVGuide2.xml -l TVGuide2.xsl -o TVGuide2.html -p lxml -v</span>
+<span class="c"># a lot of XML</span>
+
+<span class="n">ran the lxml process</span>
+</code></pre></div>
+
+<p>To see your cache:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">try cache</span>
+<span class="n">{&#39;context&#39;: &#39;&#39;, &#39;home_dir&#39;: &#39;jenni/home/scott/xslt/ch3_templates&#39;,</span>
+<span class="n">&#39;output_file_name&#39;: &#39;TVGuide2.html&#39;, &#39;processor&#39;: &#39;lxml&#39;, </span>
+<span class="n">&#39;xls_file_name&#39;: &#39;TVGuide2.xsl&#39;, &#39;xml_file_name&#39;: &#39;TVGuide2.xml&#39;}</span>
+</code></pre></div>
+
+<p>To run the same exercise again:</p>
+<div class="codehilite"><pre><span></span><code>try ex -v
+# a lot of XML
+
+ran the lxml processor
+</code></pre></div>
+
+<p>To try the same example with the saxon processor, you just have to tell the
+<code>try</code> command you want to use the <code>saxon</code> processor, if the other options
+are not specified it will use your cached options:</p>
+<div class="codehilite"><pre><span></span><code>try ex -p saxon -v
+# a lot of XML
+
+ran the saxon processor
+</code></pre></div>
+
+<h2 id="running-your-own-examples">Running Your Own Examples</h2>
+<p>To run examples from a different book, add descriptives folder names and put
+your xml and xsl files in these folders.  Use the <code>-d</code> flag to point to the
+folder you are working with, then run the sub-commands as you did before.</p>
+<h2 id="json-transform-example-1">JSON Transform Example 1</h2>
+<p>In this example we will perform a transform to increase the price of a product
+tagged with "ice" by 10 percent (see ./patterns/to_json.xs):</p>
+<p>Given this input:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="k">tool</span><span class="w"> </span><span class="o">./</span><span class="n">michael</span><span class="o">/</span><span class="n">json_input</span><span class="o">.</span><span class="n">json</span>
+
+<span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;An ice sculpture&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12.50</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;cold&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ice&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="s2">&quot;dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">7.0</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12.0</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">9.5</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;warehouseLocation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;latitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="o">-</span><span class="mf">78.75</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;longitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">20.4</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A blue mouse&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">25.50</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.1</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;warehouseLocation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;latitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">54.4</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;longitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="o">-</span><span class="mf">32.7</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<p>Perform a transform (saxonpy works, saxonche stackoverflow):</p>
+<div class="codehilite"><pre><span></span><code><span class="gh">#</span> this will crash with saxonche 12.0 due to stackoverflow errors
+<span class="gh">#</span> but will run with saxonche 12.1
+
+try -d michael \
+  ex -j json_input.json \
+     -l to_json.xsl \
+     -o json_output.json \
+     -p saxon
+</code></pre></div>
+
+<p>This will create the following output:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="k">tool</span><span class="w"> </span><span class="o">./</span><span class="n">michael</span><span class="o">/</span><span class="n">json_output</span><span class="o">.</span><span class="n">json</span>
+
+<span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;An ice sculpture&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">13.75</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s2">&quot;cold&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;ice&quot;</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="s2">&quot;dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">9.5</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;warehouseLocation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;latitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="o">-</span><span class="mf">78.75</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;longitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">20.4</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A blue mouse&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">25.5</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;dimensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.1</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;warehouseLocation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;latitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">54.4</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;longitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="o">-</span><span class="mf">32.7</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<h2 id="json-transform-example-2">JSON Transform Example 2</h2>
+<p>We would like to invert the hierarchy of a json document. In this example we
+will take the data being organized from faculty-&gt;courses-&gt;students-&gt;email and
+transform it to email-&gt;courses.  We will also sort the output based on last name
+and then the first name of each student, but we will keep the student's name out
+of the final output.</p>
+<p>Given this input:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">[</span>
+<span class="n">  {</span>
+<span class="n">    &quot;faculty&quot;: &quot;humanities&quot;,</span>
+<span class="n">    &quot;courses&quot;: [</span>
+<span class="n">      {</span>
+<span class="n">        &quot;course&quot;: &quot;English&quot;,</span>
+<span class="n">        &quot;students&quot;: [</span>
+<span class="n">          {</span>
+<span class="n">            &quot;first&quot;: &quot;Mary&quot;,</span>
+<span class="n">            &quot;last&quot;: &quot;Smith&quot;,</span>
+<span class="n">            &quot;email&quot;: &quot;mary_smith@gmail.com&quot;</span>
+<span class="n">          },</span>
+<span class="n">          {</span>
+<span class="n">            &quot;first&quot;: &quot;Ann&quot;,</span>
+<span class="n">            &quot;last&quot;: &quot;Jones&quot;,</span>
+<span class="n">            &quot;email&quot;: &quot;ann_jones@gmail.com&quot;</span>
+<span class="n">          }</span>
+<span class="n">        </span><span class="o">]</span>
+<span class="w">      </span><span class="err">}</span><span class="p">,</span>
+<span class="w">      </span><span class="err">{</span>
+<span class="w">        </span><span class="ss">&quot;course&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;History&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;students&quot;</span><span class="err">:</span><span class="w"> </span><span class="o">[</span>
+<span class="n">          {</span>
+<span class="n">            &quot;first&quot;: &quot;Ann&quot;,</span>
+<span class="n">            &quot;last&quot;: &quot;Jones&quot;,</span>
+<span class="n">            &quot;email&quot;: &quot;ann_jones@gmail.com&quot;</span>
+<span class="n">          },</span>
+<span class="n">          {</span>
+<span class="n">            &quot;first&quot;: &quot;John&quot;,</span>
+<span class="n">            &quot;last&quot;: &quot;Taylor&quot;,</span>
+<span class="n">            &quot;email&quot;: &quot;john_taylor@gmail.com&quot;</span>
+<span class="n">          }</span>
+<span class="n">        </span><span class="o">]</span>
+<span class="w">      </span><span class="err">}</span>
+<span class="w">    </span><span class="err">]</span>
+<span class="w">  </span><span class="err">}</span><span class="p">,</span>
+<span class="w">  </span><span class="err">{</span>
+<span class="w">    </span><span class="ss">&quot;faculty&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;science&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;courses&quot;</span><span class="err">:</span><span class="w"> </span><span class="o">[</span>
+<span class="n">      {</span>
+<span class="n">        &quot;course&quot;: &quot;Physics&quot;,</span>
+<span class="n">        &quot;students&quot;: [</span>
+<span class="n">          {</span>
+<span class="n">            &quot;first&quot;: &quot;Anil&quot;,</span>
+<span class="n">            &quot;last&quot;: &quot;Singh&quot;,</span>
+<span class="n">            &quot;email&quot;: &quot;anil_singh@gmail.com&quot;</span>
+<span class="n">          },</span>
+<span class="n">          {</span>
+<span class="n">            &quot;first&quot;: &quot;Amisha&quot;,</span>
+<span class="n">            &quot;last&quot;: &quot;Patel&quot;,</span>
+<span class="n">            &quot;email&quot;: &quot;amisha_patel@gmail.com&quot;</span>
+<span class="n">          }</span>
+<span class="n">        </span><span class="o">]</span>
+<span class="w">      </span><span class="err">}</span><span class="p">,</span>
+<span class="w">      </span><span class="err">{</span>
+<span class="w">        </span><span class="ss">&quot;course&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;Chemistry&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;students&quot;</span><span class="err">:</span><span class="w"> </span><span class="o">[</span>
+<span class="n">          {</span>
+<span class="n">            &quot;first&quot;: &quot;John&quot;,</span>
+<span class="n">            &quot;last&quot;: &quot;Taylor&quot;,</span>
+<span class="n">            &quot;email&quot;: &quot;john_taylor@gmail.com&quot;</span>
+<span class="n">          },</span>
+<span class="n">          {</span>
+<span class="n">            &quot;first&quot;: &quot;Anil&quot;,</span>
+<span class="n">            &quot;last&quot;: &quot;Singh&quot;,</span>
+<span class="n">            &quot;email&quot;: &quot;anil_singh@gmail.com&quot;</span>
+<span class="n">          }</span>
+<span class="n">        </span><span class="o">]</span>
+<span class="w">      </span><span class="err">}</span>
+<span class="w">    </span><span class="err">]</span>
+<span class="w">  </span><span class="err">}</span>
+<span class="err">]</span>
+</code></pre></div>
+
+<p>Perform the transform (saxonpy works, saxonche stackoverflow):</p>
+<div class="codehilite"><pre><span></span><code>try -d michael \
+  ex -x json_input2.json \
+     -l to_json2.xsl \
+     -o json_output2.json \
+     -p saxon
+</code></pre></div>
+
+<p>This will produce the following output</p>
+<div class="codehilite"><pre><span></span><code><span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="k">tool</span><span class="w"> </span><span class="o">./</span><span class="n">patterns</span><span class="o">/</span><span class="n">json_output2</span><span class="o">.</span><span class="n">json</span>
+
+<span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ann_jones@gmail.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;courses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;English&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;History&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;amisha_patel@gmail.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;courses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;Physics&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;anil_singh@gmail.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;courses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;Physics&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Chemistry&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mary_smith@gmail.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;courses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;English&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;john_taylor@gmail.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;courses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">&quot;History&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;Chemistry&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<h1 id="integrating-xslt-30-with-python-in-the-main-thread">Integrating XSLT 3.0 with Python in the main thread</h1>
+<p>The <a href="https://pypi.org/project/saxonche/">saxonche documentation</a> is incomplete
+and almost useless.  To see fixed versions of the low quality python examples
+provided by Saxonica look in the <code>oneal</code> folder of this repo.</p>
+<p>If you want to get your python code to parse XML/JSON/XSLT and output XML/JSON
+using <code>saxonche</code> consider the following:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">saxonche</span><span class="w"> </span><span class="kn">import</span> <span class="n">PySaxonProcessor</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">transform_with_saxonche</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">home_dir</span><span class="p">,</span> <span class="n">xml_file_name</span><span class="p">,</span> <span class="n">xsl_file_name</span><span class="p">,</span> <span class="n">output_file_name</span>
+<span class="p">):</span>
+    <span class="c1"># Don&#39;t use the PySaxonProcess context manager if you are calling saxonche</span>
+    <span class="c1"># over and over again within your program.  Instead build the proc and</span>
+    <span class="c1"># xsltproc once, and reference them when you need them.  If you don&#39;t do</span>
+    <span class="c1"># this, you will get strange memory errors:</span>
+    <span class="c1"># &quot;JNI_CreateJavaVM() failed with result: -5&quot; (last seen in saxonc-he 11.4)</span>
+    <span class="c1">#</span>
+    <span class="c1"># Example of how to build the proc and xsltproc once per program invocation:</span>
+    <span class="c1">#</span>
+    <span class="c1"># from functools import cache as cached</span>
+    <span class="c1"># @cached</span>
+    <span class="c1"># def get_cached_procs_from(*args):</span>
+    <span class="c1">#   proc = PySaxonProcessor(licence=False)</span>
+    <span class="c1">#   xsltproc = proc.new_xslt30_processor()</span>
+    <span class="c1">#   return proc, xsltproc</span>
+    <span class="c1">#</span>
+    <span class="c1"># def transform_with_saxonche(...)</span>
+    <span class="c1">#   proc, xsltproc = get_cached_procs_from(PySaxonProcessor)</span>
+    <span class="c1">#   # ...</span>
+
+    <span class="c1"># If you are running your transforms once per program invocation</span>
+    <span class="c1"># you can use the PySaxonProcessor context manager.  Don&#39;t be fooled, given</span>
+    <span class="c1"># that this context manager doesn&#39;t clean up memory when it&#39;s done, it&#39;s not</span>
+    <span class="c1"># really behaving like a Python context manager. (see the memory bug</span>
+    <span class="c1"># mentioned above)</span>
+    <span class="k">with</span> <span class="n">PySaxonProcessor</span><span class="p">(</span><span class="n">license</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">proc</span><span class="p">:</span>
+        <span class="n">xsltproc</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">new_xslt30_processor</span><span class="p">()</span>
+        <span class="n">xsltproc</span><span class="o">.</span><span class="n">set_cwd</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">home_dir</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">Path</span><span class="p">(</span><span class="n">home_dir</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">home_dir</span><span class="si">}</span><span class="s2"> doesn&#39;t exist&quot;</span><span class="p">)</span>
+            <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">home_dir</span><span class="p">)</span> <span class="o">/</span> <span class="n">xml_file_name</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;xml_file_name: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">home_dir</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">xml_file_name</span><span class="p">)</span><span class="si">}</span><span class="s2"> doesn&#39;t exist&quot;</span>
+            <span class="p">)</span>
+            <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">home_dir</span><span class="p">)</span> <span class="o">/</span> <span class="n">xsl_file_name</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;xsl_file_name: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">home_dir</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">xsl_file_name</span><span class="p">)</span><span class="si">}</span><span class="s2"> doesn&#39;t exist&quot;</span>
+            <span class="p">)</span>
+            <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">Path</span><span class="p">(</span><span class="n">xml_file_name</span><span class="p">)</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s2">&quot;.json&quot;</span><span class="p">:</span>
+            <span class="n">json_input_param</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">make_string_value</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">home_dir</span> <span class="o">/</span> <span class="n">xml_file_name</span><span class="p">))</span>
+            <span class="n">xsltproc</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="s2">&quot;json_input_filename&quot;</span><span class="p">,</span> <span class="n">json_input_param</span><span class="p">)</span>
+
+        <span class="n">stylesheet_file</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">home_dir</span><span class="p">)</span> <span class="o">/</span> <span class="n">xsl_file_name</span><span class="p">)</span>
+        <span class="n">_exec</span> <span class="o">=</span> <span class="n">xsltproc</span><span class="o">.</span><span class="n">compile_stylesheet</span><span class="p">(</span>
+            <span class="n">stylesheet_file</span><span class="o">=</span><span class="n">stylesheet_file</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">_exec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;saxonica failed&quot;</span><span class="p">)</span>
+            <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">Path</span><span class="p">(</span><span class="n">xml_file_name</span><span class="p">)</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s2">&quot;.json&quot;</span><span class="p">:</span>
+            <span class="c1"># it&#39;s a mystery why we have to use call_template_returning_file</span>
+            <span class="c1"># and not make_string_value (this isn&#39;t documented anywhere)</span>
+            <span class="n">_exec</span><span class="o">.</span><span class="n">call_template_returning_file</span><span class="p">(</span><span class="n">output_file</span><span class="o">=</span><span class="n">output_file_name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># add a test_param to validate saxon is working</span>
+            <span class="n">test_param</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">make_string_value</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">home_dir</span> <span class="o">/</span> <span class="n">xml_file_name</span><span class="p">))</span>
+            <span class="n">_exec</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="s2">&quot;test_param&quot;</span><span class="p">,</span> <span class="n">test_param</span><span class="p">)</span>
+            <span class="n">_exec</span><span class="o">.</span><span class="n">set_initial_match_selection</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">xml_file_name</span><span class="p">)</span>
+            <span class="n">_exec</span><span class="o">.</span><span class="n">apply_templates_returning_file</span><span class="p">(</span><span class="n">output_file</span><span class="o">=</span><span class="n">output_file_name</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">home_dir</span> <span class="o">/</span> <span class="n">output_file_name</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+            <span class="n">contents</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
+</code></pre></div>
+
+<h1 id="integrating-xslt-30-with-multithreaded-python">Integrating XSLT 3.0 with Multithreaded Python</h1>
+<div class="codehilite"><pre><span></span><code><span class="c1"># This doesn&#39;t cause StackOverFlow crashes and, its fully documented </span>
+<span class="c1"># and its documentation isn&#39;t wrong.  It only support XSLT 1.0</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">lxml</span>
+</code></pre></div>
+
+<p>But if you are willing to accept some risk, here is a working demo of Python thread
+performing XSLT transforms using saxonche without causing StackOverFlows:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># working copy can be found in ./cli/thread_demo.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">uuid</span><span class="w"> </span><span class="kn">import</span> <span class="n">uuid1</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">queue</span><span class="w"> </span><span class="kn">import</span> <span class="n">Queue</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">threading</span><span class="w"> </span><span class="kn">import</span> <span class="n">Thread</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">threading</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lock</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">threading</span><span class="w"> </span><span class="kn">import</span> <span class="n">Event</span> <span class="k">as</span> <span class="n">ThreadEvent</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">saxonche</span><span class="w"> </span><span class="kn">import</span> <span class="n">PySaxonProcessor</span>
+
+<span class="n">proc_globals</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">proc_globals_lock</span> <span class="o">=</span> <span class="n">Lock</span><span class="p">()</span>
+<span class="n">ValidateXmlPath</span> <span class="o">=</span> <span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;validate_xml.xsl&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">SaxonPayload</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span>
+    <span class="s2">&quot;SaxonPayload&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s2">&quot;home_dir&quot;</span><span class="p">,</span> <span class="s2">&quot;xml_file_name&quot;</span><span class="p">,</span> <span class="s2">&quot;xsl_file_name&quot;</span><span class="p">,</span> <span class="s2">&quot;output_file_name&quot;</span><span class="p">,</span> <span class="s2">&quot;verbose&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">__initialize_saxon</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The PySaxonProcessor proc and the xslt30 proc should only be made once&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="s2">&quot;proc&quot;</span> <span class="ow">in</span> <span class="n">proc_globals</span><span class="p">:</span>
+        <span class="n">proc</span> <span class="o">=</span> <span class="n">proc_globals</span><span class="p">[</span><span class="s2">&quot;proc&quot;</span><span class="p">]</span>
+        <span class="n">xsltproc</span> <span class="o">=</span> <span class="n">proc_globals</span><span class="p">[</span><span class="s2">&quot;xsltproc&quot;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">proc</span> <span class="o">=</span> <span class="n">PySaxonProcessor</span><span class="p">(</span><span class="n">license</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">xsltproc</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">new_xslt30_processor</span><span class="p">()</span>
+        <span class="n">proc_globals</span><span class="p">[</span><span class="s2">&quot;proc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">proc</span>
+        <span class="n">proc_globals</span><span class="p">[</span><span class="s2">&quot;xsltproc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">xsltproc</span>
+
+    <span class="k">return</span> <span class="n">proc</span><span class="p">,</span> <span class="n">xsltproc</span>
+
+<span class="c1"># call this from the main thread at least once</span>
+<span class="n">proc_globals_lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+<span class="n">__initialize_saxon</span><span class="p">()</span>
+<span class="n">proc_globals_lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">__saxon_xslt30_transform</span><span class="p">(</span>
+    <span class="n">lock</span><span class="p">,</span> <span class="n">home_dir</span><span class="p">,</span> <span class="n">xml_file_name</span><span class="p">,</span> <span class="n">xsl_file_name</span><span class="p">,</span> <span class="n">output_file_name</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">):</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+    <span class="n">proc</span><span class="p">,</span> <span class="n">xsltproc</span> <span class="o">=</span> <span class="n">__initialize_saxon</span><span class="p">()</span>
+
+    <span class="n">home_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">home_dir</span><span class="p">)</span>
+    <span class="n">xml_file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">home_dir</span><span class="p">)</span> <span class="o">/</span> <span class="n">xml_file_name</span>
+    <span class="n">xsl_file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">home_dir</span><span class="p">)</span> <span class="o">/</span> <span class="n">xsl_file_name</span>
+    <span class="n">output_file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">home_dir</span><span class="p">)</span> <span class="o">/</span> <span class="n">output_file_name</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">home_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">home_dir</span><span class="si">}</span><span class="s2"> doesn&#39;t exist&quot;</span>
+        <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">xml_file_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;xml_file_name: </span><span class="si">{</span><span class="n">xml_file_path</span><span class="si">}</span><span class="s2"> doesn&#39;t exist&quot;</span>
+        <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">home_dir</span><span class="p">)</span> <span class="o">/</span> <span class="n">xsl_file_name</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;xsl_file_name: </span><span class="si">{</span><span class="n">xsl_file_path</span><span class="si">}</span><span class="s2"> doesn&#39;t exist&quot;</span>
+        <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="n">stashed_output_file_path</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">xml_file_path</span> <span class="o">==</span> <span class="n">output_file_path</span><span class="p">:</span>
+        <span class="n">temp_output_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_file_path</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">uuid1</span><span class="p">())[</span><span class="mi">0</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;.tmp&quot;</span><span class="p">)</span>
+        <span class="n">stashed_output_file_path</span> <span class="o">=</span> <span class="n">output_file_path</span>
+        <span class="n">output_file_path</span> <span class="o">=</span> <span class="n">temp_output_path</span>
+
+    <span class="k">if</span> <span class="n">Path</span><span class="p">(</span><span class="n">xml_file_name</span><span class="p">)</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s2">&quot;.json&quot;</span><span class="p">:</span>
+        <span class="n">json_input_param</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">make_string_value</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">home_dir</span> <span class="o">/</span> <span class="n">xml_file_name</span><span class="p">))</span>
+        <span class="n">xsltproc</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="s2">&quot;json_input_filename&quot;</span><span class="p">,</span> <span class="n">json_input_param</span><span class="p">)</span>
+
+    <span class="n">_exec</span> <span class="o">=</span> <span class="n">xsltproc</span><span class="o">.</span><span class="n">compile_stylesheet</span><span class="p">(</span><span class="n">stylesheet_file</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">xsl_file_path</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">_exec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">xsltproc</span><span class="o">.</span><span class="n">error_message</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">xsltproc</span><span class="o">.</span><span class="n">exception_clear</span><span class="p">()</span>
+        <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">Path</span><span class="p">(</span><span class="n">xml_file_name</span><span class="p">)</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s2">&quot;.json&quot;</span><span class="p">:</span>
+        <span class="c1"># it&#39;s a mystery why we have to use call_template_returning_file</span>
+        <span class="c1"># and not make_string_value (this isn&#39;t documented anywhere)</span>
+        <span class="n">_exec</span><span class="o">.</span><span class="n">call_template_returning_file</span><span class="p">(</span><span class="n">output_file</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">output_file_path</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">stashed_output_file_path</span><span class="p">:</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">output_file_path</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="n">stashed_output_file_path</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">output_file_path</span><span class="p">)</span>
+            <span class="n">output_file_path</span> <span class="o">=</span> <span class="n">stashed_output_file_path</span>
+        <span class="k">del</span> <span class="n">_exec</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># add a test_param to validate saxon is working</span>
+        <span class="n">test_param</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">make_string_value</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">xml_file_path</span><span class="p">))</span>
+        <span class="n">_exec</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="s2">&quot;test_param&quot;</span><span class="p">,</span> <span class="n">test_param</span><span class="p">)</span>
+        <span class="n">_exec</span><span class="o">.</span><span class="n">set_initial_match_selection</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">xml_file_path</span><span class="p">))</span>
+        <span class="n">_exec</span><span class="o">.</span><span class="n">apply_templates_returning_file</span><span class="p">(</span><span class="n">output_file</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">output_file_path</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">_exec</span><span class="o">.</span><span class="n">exception_occurred</span><span class="p">:</span>
+            <span class="n">saxon_error</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_exec</span><span class="o">.</span><span class="n">error_message</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">_exec</span><span class="o">.</span><span class="n">exception_clear</span><span class="p">()</span>
+            <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">saxon_error</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">stashed_output_file_path</span><span class="p">:</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">output_file_path</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="n">stashed_output_file_path</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">output_file_path</span><span class="p">)</span>
+            <span class="n">output_file_path</span> <span class="o">=</span> <span class="n">stashed_output_file_path</span>
+
+        <span class="c1"># if our output path is an .xml file, run a post-transform-test to see</span>
+        <span class="c1"># if the provided xsl_file_name created valid xml</span>
+        <span class="k">if</span> <span class="n">output_file_path</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s1">&#39;.xml&#39;</span><span class="p">:</span>
+            <span class="n">xsl_post_test_path</span> <span class="o">=</span> <span class="n">ValidateXmlPath</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">xsl_post_test_path</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;xsl_file_name:</span><span class="se">\n</span><span class="si">{</span><span class="n">xsl_post_test_path</span><span class="si">}</span><span class="se">\n</span><span class="s2">doesn&#39;t exist&quot;</span>
+                <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">result</span>
+
+            <span class="n">_exec</span> <span class="o">=</span> <span class="n">xsltproc</span><span class="o">.</span><span class="n">compile_stylesheet</span><span class="p">(</span><span class="n">stylesheet_file</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">xsl_post_test_path</span><span class="p">))</span>
+
+            <span class="n">_exec</span><span class="o">.</span><span class="n">transform_to_string</span><span class="p">(</span>
+                <span class="n">source_file</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">output_file_path</span><span class="p">),</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">_exec</span><span class="o">.</span><span class="n">exception_occurred</span><span class="p">:</span>
+                <span class="n">saxon_error</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_exec</span><span class="o">.</span><span class="n">error_message</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">_exec</span><span class="o">.</span><span class="n">exception_clear</span><span class="p">()</span>
+                <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">saxon_error</span><span class="p">)</span>
+            <span class="k">del</span> <span class="n">_exec</span>
+
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">home_dir</span> <span class="o">/</span> <span class="n">output_file_name</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">thread_runner</span><span class="p">(</span><span class="n">lock</span><span class="p">,</span> <span class="n">task_event</span><span class="p">,</span> <span class="n">input_queue</span><span class="p">,</span> <span class="n">output_queue</span><span class="p">):</span>
+
+    <span class="c1"># this will cause the StackOverFlow if it isn&#39;t first called</span>
+    <span class="c1"># in the main thread</span>
+    <span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+    <span class="n">__initialize_saxon</span><span class="p">()</span>
+    <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+    <span class="k">while</span> <span class="n">task_event</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">input_queue</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">input_queue</span><span class="o">.</span><span class="n">task_done</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">__saxon_xslt30_transform</span><span class="p">(</span>
+            <span class="n">lock</span><span class="p">,</span>
+            <span class="n">home_dir</span><span class="o">=</span><span class="n">q</span><span class="o">.</span><span class="n">home_dir</span><span class="p">,</span>
+            <span class="n">xml_file_name</span><span class="o">=</span><span class="n">q</span><span class="o">.</span><span class="n">xml_file_name</span><span class="p">,</span>
+            <span class="n">xsl_file_name</span><span class="o">=</span><span class="n">q</span><span class="o">.</span><span class="n">xsl_file_name</span><span class="p">,</span>
+            <span class="n">output_file_name</span><span class="o">=</span><span class="n">q</span><span class="o">.</span><span class="n">output_file_name</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="n">q</span><span class="o">.</span><span class="n">verbose</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">output_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="c1"># this function demontrates how to create a thread, communicate with it and stop it.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">saxon_xslt30_transform</span><span class="p">(</span>
+    <span class="n">home_dir</span><span class="p">,</span> <span class="n">xml_file_name</span><span class="p">,</span> <span class="n">xsl_file_name</span><span class="p">,</span> <span class="n">output_file_name</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">):</span>
+    <span class="k">global</span> <span class="n">proc_globals_lock</span>
+
+    <span class="n">input_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+    <span class="n">output_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">SaxonPayload</span><span class="p">(</span>
+        <span class="n">home_dir</span><span class="o">=</span><span class="n">home_dir</span><span class="p">,</span>
+        <span class="n">xml_file_name</span><span class="o">=</span><span class="n">xml_file_name</span><span class="p">,</span>
+        <span class="n">xsl_file_name</span><span class="o">=</span><span class="n">xsl_file_name</span><span class="p">,</span>
+        <span class="n">output_file_name</span><span class="o">=</span><span class="n">output_file_name</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># The task event is a flag, which when:</span>
+    <span class="c1"># - set: means the thread should run</span>
+    <span class="c1"># - cleared: means the thread should stop and exit</span>
+    <span class="n">task_event</span> <span class="o">=</span> <span class="n">ThreadEvent</span><span class="p">()</span>
+    <span class="n">task_event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+
+    <span class="n">thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span>
+        <span class="n">target</span><span class="o">=</span><span class="n">thread_runner</span><span class="p">,</span>
+        <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">proc_globals_lock</span><span class="p">,</span> <span class="n">task_event</span><span class="p">,</span> <span class="n">input_queue</span><span class="p">,</span> <span class="n">output_queue</span><span class="p">),</span>
+        <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># start the thread</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="c1"># give something to the thread</span>
+    <span class="n">input_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+    <span class="c1"># wait for the thread to react</span>
+    <span class="n">input_queue</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+    <span class="c1"># wait for the thread&#39;s output</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">output_queue</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">output_queue</span><span class="o">.</span><span class="n">task_done</span><span class="p">()</span>
+
+    <span class="c1"># kill the thread</span>
+    <span class="n">task_event</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="c1"># adjust this to point to the directory containing you files</span>
+    <span class="n">home_dir</span> <span class="o">=</span> <span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;..&quot;</span> <span class="o">/</span> <span class="s2">&quot;ch3_templates&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+    <span class="n">xml_file_name</span> <span class="o">=</span> <span class="s2">&quot;HelloWorld.xml&quot;</span>
+    <span class="n">xsl_file_name</span> <span class="o">=</span> <span class="s2">&quot;HelloWorld.xsl&quot;</span>
+    <span class="n">output_file_name</span> <span class="o">=</span> <span class="s2">&quot;HelloWorld.html&quot;</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">saxon_xslt30_transform</span><span class="p">(</span>
+        <span class="n">home_dir</span><span class="p">,</span> <span class="n">xml_file_name</span><span class="p">,</span> <span class="n">xsl_file_name</span><span class="p">,</span> <span class="n">output_file_name</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
+
+<h1 id="testing-xpath">Testing XPath</h1>
+<p>Here we run an XPath expression against the <code>menu.xml</code> file in the
+<code>otegem/ch03</code> directory, then cache the command:</p>
+<div class="codehilite"><pre><span></span><code>try<span class="w"> </span>-d<span class="w"> </span>./otegem/ch03<span class="w"> </span>xpath<span class="w"> </span>-x<span class="w"> </span>menus.xml<span class="w"> </span>-c<span class="w"> </span>&quot;/&quot;<span class="w"> </span>-p<span class="w"> </span>&quot;menu&quot;
+context:<span class="w"> </span>/
+<span class="nt">&lt;menu&gt;</span>
+<span class="w">  </span><span class="nt">&lt;appetizers</span><span class="w"> </span><span class="na">title=</span><span class="s">&quot;Work up an Appetite&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dish</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">price=</span><span class="s">&quot;8.95&quot;</span><span class="nt">&gt;</span>Crab<span class="w"> </span>Cakes<span class="nt">&lt;/dish&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dish</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="na">price=</span><span class="s">&quot;9.95&quot;</span><span class="nt">&gt;</span>Jumbo<span class="w"> </span>Prawns<span class="nt">&lt;/dish&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dish</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;3&quot;</span><span class="w"> </span><span class="na">price=</span><span class="s">&quot;10.95&quot;</span><span class="nt">&gt;</span>Smoked<span class="w"> </span>Salmon<span class="w"> </span>and<span class="w"> </span>Avocado<span class="w"> </span>Quesadilla<span class="nt">&lt;/dish&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dish</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;4&quot;</span><span class="w"> </span><span class="na">price=</span><span class="s">&quot;6.95&quot;</span><span class="nt">&gt;</span>Caesar<span class="w"> </span>Salad<span class="nt">&lt;/dish&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/appetizers&gt;</span>
+<span class="w">  </span><span class="nt">&lt;entrees</span><span class="w"> </span><span class="na">title=</span><span class="s">&quot;Chow Time!&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dish</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;5&quot;</span><span class="w"> </span><span class="na">price=</span><span class="s">&quot;19.95&quot;</span><span class="nt">&gt;</span>Grilled<span class="w"> </span>Salmon<span class="nt">&lt;/dish&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dish</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;6&quot;</span><span class="w"> </span><span class="na">price=</span><span class="s">&quot;17.95&quot;</span><span class="nt">&gt;</span>Seafood<span class="w"> </span>Pasta<span class="nt">&lt;/dish&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dish</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;7&quot;</span><span class="w"> </span><span class="na">price=</span><span class="s">&quot;16.95&quot;</span><span class="nt">&gt;</span>Linguini<span class="w"> </span>al<span class="w"> </span>Pesto<span class="nt">&lt;/dish&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dish</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;8&quot;</span><span class="w"> </span><span class="na">price=</span><span class="s">&quot;18.95&quot;</span><span class="nt">&gt;</span>Rack<span class="w"> </span>of<span class="w"> </span>Lamb<span class="nt">&lt;/dish&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dish</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;9&quot;</span><span class="w"> </span><span class="na">price=</span><span class="s">&quot;16.95&quot;</span><span class="nt">&gt;</span>Ribs<span class="w"> </span>and<span class="w"> </span>Wings<span class="nt">&lt;/dish&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/entrees&gt;</span>
+<span class="w">  </span><span class="nt">&lt;desserts</span><span class="w"> </span><span class="na">title=</span><span class="s">&quot;To Top It Off&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dish</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;10&quot;</span><span class="w"> </span><span class="na">price=</span><span class="s">&quot;6.95&quot;</span><span class="nt">&gt;</span>Dame<span class="w"> </span>Blanche<span class="nt">&lt;/dish&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dish</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;11&quot;</span><span class="w"> </span><span class="na">price=</span><span class="s">&quot;5.95&quot;</span><span class="nt">&gt;</span>Chocolate<span class="w"> </span>Mousse<span class="nt">&lt;/dish&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dish</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;12&quot;</span><span class="w"> </span><span class="na">price=</span><span class="s">&quot;6.95&quot;</span><span class="nt">&gt;</span>Banana<span class="w"> </span>Split<span class="nt">&lt;/dish&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/desserts&gt;</span>
+<span class="nt">&lt;/menu&gt;</span>
+</code></pre></div>
+
+<p>To run the next xpath query against the same file:</p>
+<div class="codehilite"><pre><span></span><code>try<span class="w"> </span>xpath<span class="w"> </span>-p<span class="w"> </span>&quot;(//dish)[6]&quot;
+context:<span class="w"> </span>/
+<span class="nt">&lt;dish</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;6&quot;</span><span class="w"> </span><span class="na">price=</span><span class="s">&quot;17.95&quot;</span><span class="nt">&gt;</span>Seafood<span class="w"> </span>Past<span class="nt">&lt;/dish&gt;</span>
+
+try<span class="w"> </span>xpath<span class="w"> </span>-c<span class="w"> </span>&quot;/&quot;<span class="w"> </span>-p<span class="w"> </span>&quot;/menu/entrees/*/text()&quot;
+context:<span class="w"> </span>/
+Grilled<span class="w"> </span>Salmon
+Seafood<span class="w"> </span>Pasta
+Linguini<span class="w"> </span>al<span class="w"> </span>Pestro
+Rack<span class="w"> </span>of<span class="w"> </span>Lamb
+Ribs<span class="w"> </span>and<span class="w"> </span>Wings
+</code></pre></div>
+
+<p>You would use the context to simulate how a template matching an XPath pattern
+would behave.  Suppose you were trying to see what line 12 of the following
+would output:</p>
+<div class="codehilite"><pre><span></span><code><span class="w"> </span>1<span class="w">  </span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="w"> </span>2<span class="w">  </span><span class="k">&lt;xsl:stylesheet</span><span class="w"> </span><span class="na">version=</span><span class="s">&quot;1.0&quot;</span>
+<span class="w"> </span><span class="err">3</span><span class="w">   </span><span class="na">xmlns:xsl=</span><span class="s">&quot;http://www.w3.org/1999/XSL/Transform&quot;</span><span class="nt">&gt;</span>
+<span class="w"> </span>4<span class="w">    </span><span class="nt">&lt;xsl:</span><span class="w"> </span><span class="err">tempate</span><span class="w"> </span><span class="na">match=</span><span class="s">&quot;/&quot;</span><span class="nt">&gt;</span>
+<span class="w"> </span>5<span class="w">      </span><span class="k">&lt;xsl:apply-templates</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w"> </span>6<span class="w">    </span><span class="k">&lt;/xsl:template&gt;</span>
+<span class="w"> </span>7<span class="w">    </span><span class="nt">&lt;xsl:</span><span class="w"> </span><span class="err">tempate</span><span class="w"> </span><span class="na">match=</span><span class="s">&quot;/menu/entrees&quot;</span><span class="nt">&gt;</span>
+<span class="w"> </span>8<span class="w">      </span>Entrees:
+<span class="w"> </span>9<span class="w">      </span><span class="k">&lt;xsl:apply-templates</span><span class="w"> </span><span class="nt">/&gt;</span>
+10<span class="w">    </span><span class="k">&lt;/xsl:template&gt;</span>
+11<span class="w">    </span><span class="k">&lt;xsl:template</span><span class="w"> </span><span class="na">match=</span><span class="s">&quot;dish&quot;</span><span class="nt">&gt;</span>
+12<span class="w">      </span><span class="k">&lt;xsl:value-of</span><span class="w"> </span><span class="na">select=</span><span class="s">&quot;text&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+13<span class="w">    </span><span class="k">&lt;/xsl:template&gt;</span>
+13<span class="w">  </span><span class="k">&lt;/xsl:stylesheet&gt;</span>
+</code></pre></div>
+
+<p>We could simulate what would be expressed at line 12 by setting the context to
+<code>/menu/entrees</code>:</p>
+<div class="codehilite"><pre><span></span><code>try xpath -v
+3.1
+
+try xpath -c &quot;/menu/entrees&quot; -p &quot;dish/text()[1]&quot;
+context: /menu/entrees
+Grilled Salmon
+</code></pre></div>
+
+<h1 id="testing-xpath-axis-features">Testing XPath Axis Features</h1>
+<p>This picture will help you understand how the axis feature works in XPath:</p>
+<p><img alt="xpath 2" src="patterns/xpath_2.svg" /></p>
+<p>This is how the above picture can be represented in XML (see <code>patterns/axis_testing.xml</code>):</p>
+<div class="codehilite"><pre><span></span><code>try<span class="w"> </span>-d<span class="w"> </span>patterns/<span class="w"> </span>xpath<span class="w"> </span>-x&quot;axis_testing.xml&quot;<span class="w"> </span>-c&quot;/&quot;<span class="w"> </span>-p&quot;*&quot;
+context:<span class="w"> </span>/
+<span class="nt">&lt;A</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;B</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;C</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;3&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;D</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;4&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;E</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;5&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;H</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;8&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;M</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;13&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/H&gt;</span>
+<span class="w">      </span><span class="nt">&lt;I</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;9&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;J</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;10&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;N</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;14&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;O</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;15&quot;</span><span class="nt">&gt;</span>
+<span class="w">          </span><span class="nt">&lt;T</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;20&quot;</span><span class="nt">/&gt;</span>
+<span class="w">          </span><span class="nt">&lt;U</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;21&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/O&gt;</span>
+<span class="w">        </span><span class="nt">&lt;P</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;16&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Q</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;17&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;R</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;18&quot;</span><span class="nt">&gt;</span>
+<span class="w">          </span><span class="nt">&lt;V</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;22&quot;</span><span class="nt">/&gt;</span>
+<span class="w">          </span><span class="nt">&lt;W</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;23&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/R&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/J&gt;</span>
+<span class="w">      </span><span class="nt">&lt;K</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;11&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;L</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;12&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;S</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;19&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/L&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/E&gt;</span>
+<span class="w">    </span><span class="nt">&lt;F</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;6&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;G</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;7&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/B&gt;</span>
+<span class="nt">&lt;/A&gt;</span>
+</code></pre></div>
+
+<p>Now let's set <code>J</code> as the node context and perform our first axis experiment:</p>
+<div class="codehilite"><pre><span></span><code>try xpath -c &quot;//J&quot; -p &quot;self::*/name()&quot;
+context: //J
+J
+</code></pre></div>
+
+<p>Let's look to see how the <code>following::</code> axis works, we search the "following" axis for any node name (<code>*</code>) 
+and return the matched node names:</p>
+<div class="codehilite"><pre><span></span><code>try xpath -p &quot;following::*/name()&quot;
+&quot;K&quot;
+&quot;L&quot;
+&quot;S&quot;
+&quot;F&quot;
+&quot;G&quot;
+
+try xpath -p &quot;(following::* union preceding::*)/name()&quot;
+&quot;C&quot;
+&quot;D&quot;
+&quot;H&quot;
+&quot;M&quot;
+&quot;I&quot;
+&quot;K&quot;
+&quot;L&quot;
+&quot;S&quot;
+&quot;F&quot;
+&quot;G&quot;
+</code></pre></div>
+
+<blockquote>
+<p><strong>Note</strong>
+If you are parsing an <code>xhtml</code> doc include the <code>xhtml</code> namespace prefix in your query:
+<code>try -d oneal xpath -x example.html -c "/" -p "//xhtml:h1[1]"</code></p>
+</blockquote>
+<h1 id="prototyping-your-xsltxpath-code-in-python">Prototyping your XSLT/XPATH code in Python</h1>
+<p>The <code>try to-python</code> writes boilerplate code for you.  You would use this
+command to:</p>
+<ul>
+<li>convert an XML file into a python dict within a minimal python program</li>
+<li>extend this generated python program with recursive expressions to solve your
+  problem. (like an XSLT program would solve your problem)</li>
+<li>debug this python program using python tools</li>
+<li>place the working recursive python program into ChatGPT to discover XSLT syntax that will
+  do the same thing</li>
+<li>use the recursive styled python, and the broken ChatGPT examples as a set of
+  mental blueprints for how to write your XSLT program.</li>
+<li>write out your XSLT referencing these examples</li>
+<li>debug your XSLT until it works.</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="n">try -d patterns to-python -x axis_testing.xml -o axis_testing.py -v</span>
+<span class="c"># some python code written to the terminal</span>
+</code></pre></div>
+
+<p>This command will output this python program:</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pprint</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">pp</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+    <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;3&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;4&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;E&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;5&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;H&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;8&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;M&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;13&quot;</span><span class="p">,</span>
+                    <span class="p">},</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;I&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;9&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;J&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;10&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;N&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;14&quot;</span><span class="p">,</span>
+                    <span class="p">},</span>
+                    <span class="s2">&quot;O&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;15&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;T&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;20&quot;</span><span class="p">,</span>
+                        <span class="p">},</span>
+                        <span class="s2">&quot;U&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;21&quot;</span><span class="p">,</span>
+                        <span class="p">},</span>
+                    <span class="p">},</span>
+                    <span class="s2">&quot;P&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;16&quot;</span><span class="p">,</span>
+                    <span class="p">},</span>
+                    <span class="s2">&quot;Q&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;17&quot;</span><span class="p">,</span>
+                    <span class="p">},</span>
+                    <span class="s2">&quot;R&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;18&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;V&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;22&quot;</span><span class="p">,</span>
+                        <span class="p">},</span>
+                        <span class="s2">&quot;W&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;23&quot;</span><span class="p">,</span>
+                        <span class="p">},</span>
+                    <span class="p">},</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;K&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;11&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;L&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;12&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;S&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;19&quot;</span><span class="p">,</span>
+                    <span class="p">},</span>
+                <span class="p">},</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;F&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;6&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;G&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;@id&quot;</span> <span class="p">:</span><span class="s2">&quot;7&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">pp</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</code></pre></div>
+
+<p>If you run this program you will see this in your terminal:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">python</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="n">patterns</span><span class="o">/</span><span class="n">axis_testing</span><span class="p">.</span><span class="n">py</span>
+<span class="err">{</span><span class="s1">&#39;A&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span>
+<span class="w">       </span><span class="s1">&#39;B&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;2&#39;</span><span class="p">,</span>
+<span class="w">             </span><span class="s1">&#39;C&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="err">}</span><span class="p">,</span>
+<span class="w">             </span><span class="s1">&#39;D&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;4&#39;</span><span class="err">}</span><span class="p">,</span>
+<span class="w">             </span><span class="s1">&#39;E&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="p">,</span>
+<span class="w">                   </span><span class="s1">&#39;H&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;8&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;M&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;13&#39;</span><span class="err">}}</span><span class="p">,</span>
+<span class="w">                   </span><span class="s1">&#39;I&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;9&#39;</span><span class="err">}</span><span class="p">,</span>
+<span class="w">                   </span><span class="s1">&#39;J&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;10&#39;</span><span class="p">,</span>
+<span class="w">                         </span><span class="s1">&#39;N&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;14&#39;</span><span class="err">}</span><span class="p">,</span>
+<span class="w">                         </span><span class="s1">&#39;O&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;15&#39;</span><span class="p">,</span>
+<span class="w">                               </span><span class="s1">&#39;T&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;20&#39;</span><span class="err">}</span><span class="p">,</span>
+<span class="w">                               </span><span class="s1">&#39;U&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;21&#39;</span><span class="err">}}</span><span class="p">,</span>
+<span class="w">                         </span><span class="s1">&#39;P&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;16&#39;</span><span class="err">}</span><span class="p">,</span>
+<span class="w">                         </span><span class="s1">&#39;Q&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;17&#39;</span><span class="err">}</span><span class="p">,</span>
+<span class="w">                         </span><span class="s1">&#39;R&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;18&#39;</span><span class="p">,</span>
+<span class="w">                               </span><span class="s1">&#39;V&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;22&#39;</span><span class="err">}</span><span class="p">,</span>
+<span class="w">                               </span><span class="s1">&#39;W&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;23&#39;</span><span class="err">}}}</span><span class="p">,</span>
+<span class="w">                   </span><span class="s1">&#39;K&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;11&#39;</span><span class="err">}</span><span class="p">,</span>
+<span class="w">                   </span><span class="s1">&#39;L&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;12&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;S&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;19&#39;</span><span class="err">}}}</span><span class="p">,</span>
+<span class="w">             </span><span class="s1">&#39;F&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;6&#39;</span><span class="err">}</span><span class="p">,</span>
+<span class="w">             </span><span class="s1">&#39;G&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;@id&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;7&#39;</span><span class="err">}}}}</span>
+</code></pre></div>
+
+<h1 id="useful-links">Useful links</h1>
+<ul>
+<li><a href="https://www.saxonica.com/saxon-c/documentation12/index.html#!samples/samples_python">Broken python examples from Saxonica</a></li>
+<li><a href="https://www.youtube.com/watch?v=2Zt9oJtFKGw">interview with Michael Kay</a></li>
+<li><a href="https://www.altova.com/training/xpath3">XPath 3.0/3.1 training resource</a>,</li>
+<li><a href="https://github.com/evanlenz/xslt-visualizer">XSLT-visualizer</a></li>
+<li><a href="https://github.com/Saxonica/Prague2016">XSLT 3.0 Prague 2016 resources</a></li>
+<li><a href="https://www.youtube.com/watch?v=WggVR4YI5oI">XSLT XPath Tutorial by arbitrarytechnology</a></li>
+<li><a href="https://www.saxonica.com/papers/xmlprague-2016mhk.pdf">Saxon XSLT 3.0 JSON Whitepaper</a></li>
+<li><a href="http://dh.obdurodon.org/xslt3.xhtml">What's new in XSLT 3.0 and XPath 3.1</a></li>
+<li><a href="https://www.videlibri.de/xidel.html">xidel: Xidel is a command line tool to download and extract data from HTML/XML pages as well as JSON APIs</a></li>
+<li><a href="http://dh.obdurodon.org/">XML/XSLT links on Digital humanities</a></li>
+<li><a href="https://www.saxonica.com/documentation12/#!xsl-elements">XSLT elements</a></li>
+<li><a href="https://stackoverflow.com/a/48051099">Martin Honnen's Understanding how to use maps</a></li>
+<li><a href="https://xslt-3-by-example.blogspot.com/">Martin Honnen's XSLT 3.0 by example blog</a></li>
+<li><a href="https://gist.github.com/martin-honnen">Martin Honnen's XSLT github gists</a></li>
+<li><a href="https://www.w3.org/TR/xslt-30">XSL 3.0 Specification</a></li>
+<li><a href="https://realpython.com/python-xml-parser/">A Roadmap to XML Parsers in Python</a></li>
+<li><a href="https://pypi.org/project/xmlschema/">xmlschema python package</a></li>
+</ul>
+    </article>
+</body>
+</html>
