@@ -1,7 +1,7 @@
 context: //J
 home_dir: /mnt/data/learning_xslt_with_python/otegem/ch06
-output_file_name: employee1_out.txt
+output_file_name: employee2_out.txt
 params: indent='    '
 processor: saxon
-xml_file_name: employees1.xml
-xsl_file_name: employees1.xsl
+xml_file_name: employees2.xml
+xsl_file_name: employees2.xsl

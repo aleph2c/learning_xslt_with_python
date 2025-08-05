@@ -1,3 +1,2 @@
-
-  employees:
-  Joe Dishwasher, Carol Waitress.
+Employees:
+Joe Dishwasher, Carol Waitress.

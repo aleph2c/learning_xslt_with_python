@@ -4,8 +4,11 @@
 
 <xsl:output method="text" indent="no" />
 
+<xsl:strip-space elements="*" />
+
 <xsl:template match="/">
-  employees:
+  <xsl:text>Employees:</xsl:text>
+  <xsl:text>&#xA;</xsl:text>
   <xsl:for-each select="employees/employee">
     <xsl:value-of select="@name" />
     <xsl:if test="position() != last()">, </xsl:if>
