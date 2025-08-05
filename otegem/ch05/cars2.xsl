@@ -4,6 +4,8 @@
 
 <xsl:output method="xml" />
 
+<!-- Ask the AI about the default template -->
+
 <xsl:template match="/">
   <xsl:apply-templates />
 </xsl:template>
@@ -17,9 +19,19 @@
 
 <xsl:template match="car">
   <tr bgcolor="#dddddd">
+    <!-- default templated applied here -->
     <xsl:apply-templates select="@*" />
   </tr>
 </xsl:template>
+
+<!--
+<xsl:template match="@*">
+  <td>
+    <xsl:value-of select="." />
+  </td>
+  </xsl:template>
+-->
+
 
 <xsl:template name="tableprop">
   <xsl:attribute name="border">1</xsl:attribute>

@@ -1,7 +1,7 @@
 context: //J
-home_dir: /mnt/data/learning_xslt_with_python/patterns
-output_file_name: TVGuide18.html
+home_dir: /mnt/data/learning_xslt_with_python/otegem/ch06
+output_file_name: employee1_out.txt
 params: indent='    '
 processor: saxon
-xml_file_name: axis_testing.xml
-xsl_file_name: TVGuide18.xsl
+xml_file_name: employees1.xml
+xsl_file_name: employees1.xsl
