@@ -17,7 +17,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema"
 <xsl:template match="auto:model">
   <xsl:value-of select="@manufacturer" />
   <xsl:text> </xsl:text>
-  <xsl:value-of select="@name" />
+  <xsl:value-of select="@model" />
   <xsl:text> (</xsl:text>
   <xsl:value-of select="@year" />
   <xsl:text>)</xsl:text>

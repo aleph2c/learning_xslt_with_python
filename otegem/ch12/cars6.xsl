@@ -16,7 +16,7 @@
 </xsl:template>
 
 <xsl:template match="car|model">
-  <xsl:number level="single" count="car|model" />
+  <xsl:number level="single" count="car|model" format="1. " />
   <xsl:text> </xsl:text>
   <xsl:value-of select="@name|@model" />
   <xsl:text>&#xA;</xsl:text>

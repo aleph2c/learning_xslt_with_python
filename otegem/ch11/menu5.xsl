@@ -10,8 +10,11 @@
     <xsl:apply-templates select="menu/*" />
   </xsl:template>
 
-  <xsl:template match="menu/*[starts-with(name(), 'ent')]">
-    <xsl:value-of select="concat(@title, '&#xA;')" />
+  <xsl:template match="menu/*[matches(name(), '^ent')]">
+    <!--
+    <xsl:template match="menu/*[starts-with(name(), 'ent')]">
+    -->
+    <xsl:value-of select="@title || '&#xA;'" />
     <xsl:apply-templates />
     <xsl:text>&#xA;</xsl:text>
   </xsl:template>

@@ -23,17 +23,22 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 </xsl:template>
 
 <xsl:template match="menu/*">
-  <xsl:value-of select="concat(@title, '&#xA;')" />
+  <xsl:value-of select="@title || '&#xA;'" />
   <xsl:apply-templates />
   <xsl:text>&#xA;</xsl:text>
 </xsl:template>
-
 <xsl:template match="dish">
-  <xsl:if test="not(contains(., 'Salmon') or 
-                    contains(., 'Sea') or
-                    contains(., 'Crab') or
-                    contains(., 'Prawn'))
-  ">
+  <!-- Old way
+
+    <xsl:if test="not(contains(., 'Salmon') or 
+                      contains(., 'Sea') or
+                      contains(., 'Crab') or
+                      contains(., 'Prawn'))
+      ">
+  -->
+    <xsl:variable name="exclude" select="('Salmon', 'Sea', 'Crab', 'Prawn')" />
+    <xsl:if test="not(some $term in $exclude satisfies contains(., $term))">
+
     <xsl:value-of select="." /> $<xsl:value-of select="@price" />
     <xsl:text>&#xA;</xsl:text>
   </xsl:if>

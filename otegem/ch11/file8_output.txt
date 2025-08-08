@@ -1,7 +1,7 @@
 <My Files>
-address.mdb address.mdb 
-basket.doc basket.doc 
-house.dwg house.dwg 
-names.xml names.xml 
-namesout.xsl namesout.xsl 
+address.mdb 
+basket.doc (Word Document)
+house.dwg (AutoCad Drawing)
+names.xml (XML Document)
+namesout.xsl (XSLT Stylesheet)
 

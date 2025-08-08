@@ -7,11 +7,17 @@
   <xsl:strip-space elements="*" />
 
   <xsl:template match="/">
+    <!--
     <xsl:apply-templates select="menu/*" />
+    -->
+    <xsl:apply-templates />
   </xsl:template>
 
   <xsl:template match="menu/*">
+    <!--
     <xsl:value-of select="concat(@title,'&#xA;')" />
+    -->
+    <xsl:value-of select="@title || '&#xA;'" />
     <xsl:apply-templates />
     <xsl:text>&#xA;</xsl:text>
   </xsl:template>

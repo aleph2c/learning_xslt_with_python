@@ -38,7 +38,8 @@
 </xsl:template>
 
 <xsl:template name="getmenu">
-    <xsl:param name="week"/>
+    <xsl:param name="week" as="xs:double">1</xsl:param>
+    <xsl:assert test="$week instance of xs:double" select="'Error: week param must be a number'"/>
     <xsl:copy-of select="/menu/appetizers/dish[position() =
         ((($week - 1) mod count(/menu/appetizers/dish)) + 1)]" />
     <xsl:copy-of select="/menu/entrees/dish[position() =
