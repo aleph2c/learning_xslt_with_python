@@ -13,8 +13,8 @@ Here you can learn and experiment with XSLT via the command line, using tools an
 - Testing XPath 3.1 expressions.
 - Connecting with key training resources (e.g., Michael Kay’s books).
 
-The project leverages modern Python libraries like lxml (for XSLT 1.0) and
-saxonche (for XSLT 3.0), which adds advanced features like streaming and native
+The project leverages modern Python libraries like ``lxml`` (for ``XSLT 1.0``) and
+``saxonche`` (for ``XSLT +3.0``), which adds advanced features like streaming and native
 JSON handling.
 
 # Background: A Tale of Two Philosophies
