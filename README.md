@@ -297,11 +297,14 @@ Apply the learning workflow above to this curated training path. The directory n
 
 *   **3. Intermediate Concepts (``jenni``)**
     *   **Book:** *Beginning XSLT 2.0* by Jeni Tennison.
-    *   **Focus:** Use the AI to explain the high-level concepts from the chapter headings, then dive into the code examples provided in this repo to see them implemented.
+    *   **Focus:** Use the AI to explain the high-level concepts from the chapter headings, then dive into the code examples provided in this repo to see them implemented. (Key chapters: 11, appendix A)
 
 *   **4. Advanced Design Patterns (``michael``, ``patterns``)**
     *   **Book:** Michael Kay’s *XSLT 2.0 and XPath 2.0 Programmer's Reference*.
-    *   **Focus:** Specifically Chapter 17: "Stylesheet Design Patterns." This is essential reading for writing professional, maintainable XSLT.
+    *   **Focus:** Specifically Chapter 17: "Stylesheet Design Patterns." This
+        is essential reading for writing professional, maintainable XSLT.
+        (fill-in-the-blanks stylesheets, navigational stylesheets, rule-based
+        stylesheets, computational stylesheets)
 
 *   **5. Bridging to XSLT 3.0**
     *   Since there is no single XSLT 3.0 book, use a combination of these excellent resources:
@@ -309,11 +312,13 @@ Apply the learning workflow above to this curated training path. The directory n
         *   **Online Examples:** [Martin Honnen’s XSLT 3.0 by Example blog](https://xslt-3-by-example.blogspot.com/) and his expert answers on [Stack Overflow](https://stackoverflow.com/users/252228/martin-honnen).
         *   **JSON Handling:** Michael Kay's paper, [*Transforming JSON using XSLT 3.0*](https://www.saxonica.com/papers/xmlprague-2016mhk.pdf). (Supporting code is in the `/patterns` folder of this repo.)
         *   **XPath 3.1 Training:** [Altova’s free training resources](https://www.altova.com/training/xpath3).
+*   **6. Overview of 3.0**
+    *   Since there is no single XSLT 3.0 book, use the training patterns in the ``(scott)``
+        directory (provided by Grok4)
 
 ### Build an Amoury
 
-To make XSLT less verbose (a trade-off for its XML-based metaprogramming), use
-editor snippets.
+To make XSLT less verbose, use editor-snippets.
 
 In Vim/Neovim, SirVer’s UltiSnips is excellent — create your own library as you
 learn. Build snippets while reading books, adding comments for reference. Use

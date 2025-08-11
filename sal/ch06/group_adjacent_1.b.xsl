@@ -4,14 +4,16 @@
 
 
   <!--
-    # Group adjacent actions usually follow after sort process
-    # (use group_adjacent_1.a.xsl to sort)
+    # Group adjacent will merge items that match if they are "touching"
+    # The merged items will keep their order
+
+    # If there are more than one category/text() items that match, but they
+    # are not touching, they will not be merged.
 
     try -d sal/ch06 ex -x
-    group_adjacent_1.b.xml -l
-    group_adjacent_1.b.xsl
-    -o group_adjacent_1.c.xml -v
-
+      group_adjacent_1.b.xml -l
+      group_adjacent_1.b.xsl
+      -o group_adjacent_1.c.xml -v
   -->
 
   <xsl:template match="/directory">

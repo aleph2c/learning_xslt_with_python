@@ -1,7 +1,7 @@
 context: //J
-home_dir: /mnt/data/learning_xslt_with_python/sal/ch06
-output_file_name: group_adjacent_2.xml
+home_dir: /mnt/data/learning_xslt_with_python/michael
+output_file_name: booklist.html
 params: debug_on='yes',foo=1
 processor: saxon
-xml_file_name: group_adjacent_2.xml
-xsl_file_name: group_adjacent_2.xsl
+xml_file_name: booklist.xml
+xsl_file_name: booklist.xsl
