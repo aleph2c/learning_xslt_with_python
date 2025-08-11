@@ -61,14 +61,11 @@ xslt install-compiler-errors  # installs Java version of sachonche
 
 ### Testing XPath Patterns
 
-XSLT uses XPath within it.  XPath provides powerful syntax called "matching
-expressions" which allow you to capture different parts of a tree.
-
-If you want to understand how to use XPath matching expressions with XSLT, it 
-is useful to reference the following picture -- a graph depicting an XML tree
-structure with nodes labeled for axes like child, descendant, parent, ancestor,
-sibling, etc. -- and the ``/patterns/axis_testing.xml`` file that represents this
-picture, to try out various XPath matching expressions.
+XSLT's power comes from XPath, which uses **axes** like ``child::``,
+``parent::``, and ``ancestor::`` to navigate the XML tree. The diagram below
+illustrates these relationships. You can experiment with them by running your
+own XPath expressions against the corresponding /patterns/axis_testing.xml file,
+which represents this exact tree structure.
 
 ![xpath 2](patterns/xpath_2.svg)
 
