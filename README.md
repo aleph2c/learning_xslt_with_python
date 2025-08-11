@@ -274,6 +274,8 @@ you can just use their exercises.  Here is an effective workflow is:
    above ``.xsl`` file. (A fast way to learn is to force yourself to work from
    TT:5 even when you are competent -- this hurts and it's fast and effective)
 
+Apply the above learning workflow to the working training programs of old books:
+
 * Start with Basics: Michiel van Otegem’s Teach Yourself XSLT in 21 Days.
   (``otegem``) Chapter 3 has helpful XPath diagrams for tree navigation. Use the
   ``try xpath`` command with this book to dial in the Xpath concepts.  Build up
