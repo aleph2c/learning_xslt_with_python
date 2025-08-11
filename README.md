@@ -283,7 +283,7 @@ you can just use their exercises.  Here is an effective workflow is:
   teach each of the chapter headerings. (``sal``) (chapters: 15, 6)
 * Intermediate: Jeni Tennison’s Beginning XSLT 2.0: From Novice to Professional.
   Use an AI to teach each of the chapter headerings, only reach into the book if
-  you have to, it in written in such a way to discourage learning.
+  you have to.
 * Advanced Patterns: Michael Kay’s book, Chapter 17: Stylesheet Design Patterns.
 * No Dedicated XSLT 3.0 Book Yet: Use Michael Kay’s XSLT 2.0 and XPath 2.0
   Programmer's Reference (covers much of 3.0) and his article Transforming JSON
