@@ -295,11 +295,11 @@ Apply the learning workflow above to this curated training path. The directory n
     *   **Book:** *XSLT Cookbook* by Sal Mangano.
     *   **Focus:** These are practical, recipe-style examples. Use the AI to explain the core concept of each recipe before examining the solution. (Key chapters: 15, 6).
 
-*   **3. Intermediate Concepts**
+*   **3. Intermediate Concepts (``jenni``)**
     *   **Book:** *Beginning XSLT 2.0* by Jeni Tennison.
     *   **Focus:** Use the AI to explain the high-level concepts from the chapter headings, then dive into the code examples provided in this repo to see them implemented.
 
-*   **4. Advanced Design Patterns**
+*   **4. Advanced Design Patterns (``michael``, ``patterns``)**
     *   **Book:** Michael Kay’s *XSLT 2.0 and XPath 2.0 Programmer's Reference*.
     *   **Focus:** Specifically Chapter 17: "Stylesheet Design Patterns." This is essential reading for writing professional, maintainable XSLT.
 
@@ -373,11 +373,11 @@ rules by putting this template at the top of their stylesheet:
 
 # Installation Instructions
 
-To get going:
+These installation commands will do the following:
 
 - Install this repo's CLI
-- Install the two XSLT pythone parser (``lxml/sachonche``)
-- Get the example files
+- Install the two XSLT python parsers (``lxml/sachonche``)
+- Get the example programs organized within the book directories
 - Get a separate version of the Saxonic XSLT that will provide compile errors
 
 ```bash
