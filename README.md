@@ -323,9 +323,6 @@ snippets under Git-control for portability.
 
 ### Understanding XSLT's Default Behavior (And Why It's So Confusing)
 
-**Only reference this once you have played with XSLT long enough that have have
-the basics and you are feeling confused.**
-
 The most confusing part of XSLT for newcomers is its set of invisible, built-in
 template rules. The best way to understand them is to compare XSLT to CSS.
 
