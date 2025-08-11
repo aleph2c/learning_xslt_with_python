@@ -199,6 +199,7 @@ workflow to become fluent:
 1. Build a custom AI "Professor" to act as your personal tutor.
 2. Follow a "hack-to-learn" workflow using the provided code examples.
 3. Use a curated curriculum based on classic XSLT texts.
+4. Build an Amoury
 
 ### Build a Custom Professor
 
@@ -309,54 +310,16 @@ Apply the learning workflow above to this curated training path. The directory n
         *   **JSON Handling:** Michael Kay's paper, [*Transforming JSON using XSLT 3.0*](https://www.saxonica.com/papers/xmlprague-2016mhk.pdf). (Supporting code is in the `/patterns` folder of this repo.)
         *   **XPath 3.1 Training:** [Altova’s free training resources](https://www.altova.com/training/xpath3).
 
-### Setting Up Your Development Enviroment
+### Build an Amoury
 
 To make XSLT less verbose (a trade-off for its XML-based metaprogramming), use
-editor snippets. In Vim/Neovim, SirVer’s UltiSnips is excellent—create your own
-library as you learn. Build snippets while reading books, adding comments for
-reference. Use UltiSnips’ shortcut to jump between your XSLT file and 
-[snippet files](https://github.com/aleph2c/.vim/blob/master/snippets/xslt.snippets). Keep snippets under Git-control for portability.
+editor snippets.
 
-With snippets, typing and debugging XSLT becomes faster. Experiment with [Evan
-Lenz’s XSLT-visualizer](https://github.com/evanlenz/xslt-visualizer) to see how
-templates react to XML input in an event-driven way.
-
-### Shifting to Functional Thinking
-
-XSLT is functional, so stop thinking procedurally (like in Python). Prototype in
-Python first, but avoid overwriting variables—use recursion instead. This repo’s
-try to-python command converts XML to Python code as a starting point.
-
-Once your functional Python prototype works, use Grok/Gemini to translate it to
-XSLT. The output won’t run perfectly, but it handles syntax hurdles. Combine it
-with your XPath patterns (tested via try xpath, see below) and snippets to
-refine. Use the repo’s try ex tool to compile and test until it works.
-
-### Tools and Libraries
-
-XSLT has been developed for 25 years, with Michael Kay (Saxonica) leading standards and tools. Saxonica’s open-source Saxon-HE supports XSLT 3.0; they sell licensed versions with extra features. Kay’s team is responsive on Stack Overflow and bug trackers.
-
-In Python, install saxonche (12.8.0+, Mozilla license) for XSLT 3.0/XPath 3.1:
-
-- Supports XSLT 3.0, XPath 3.1, XQuery 3.1, XSD 1.1 (schema validation disabled in free version).
-- It’s a C port of Saxon Java, usable in Python via ctypes.
-
-However, ``saxonche`` has limitations:
-
-- Incomplete documentation and examples (see this repo's ``/oneal`` folder for
-  working ones).
-- Error messages are off by default -- wrap call in exceptions for recovery.
-- For stability, use ``lxml`` for XSLT 1.0 (better documented, based on
-  libxml2/libxslt)
-  
-To see compiler errors (essential for learning), use Java's Saxon-HE CLI:
-
-```bash
-java -jar saxon-he-12.0.jar -xsl:your.xsl -s:your.xml
-```
-
-This repo's CLI tools call Java for errors when ``saxonche`` detects issues.
-Install Java to set up as below.
+In Vim/Neovim, SirVer’s UltiSnips is excellent — create your own library as you
+learn. Build snippets while reading books, adding comments for reference. Use
+UltiSnips’ shortcut to jump between your XSLT file and [snippet
+files](https://github.com/aleph2c/.vim/blob/master/snippets/xslt.snippets). Keep
+snippets under Git-control for portability.
 
 # Installation Instructions
 
