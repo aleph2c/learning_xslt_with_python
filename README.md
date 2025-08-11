@@ -321,13 +321,64 @@ UltiSnips’ shortcut to jump between your XSLT file and [snippet
 files](https://github.com/aleph2c/.vim/blob/master/snippets/xslt.snippets). Keep
 snippets under Git-control for portability.
 
+### Understanding XSLT's Default Behavior (And Why It's So Confusing)
+
+**Only reference this once you have played with XSLT long enough that have have
+the basics and you are feeling confused.**
+
+The most confusing part of XSLT for newcomers is its set of invisible, built-in
+template rules. The best way to understand them is to compare XSLT to CSS.
+
+When you apply a CSS stylesheet to an HTML document, the browser's default
+behavior is to render the entire HTML structure. You write CSS rules to *style*
+the elements, but you don't expect the tags themselves (`<h1>`, `<p>`, etc.) to
+disappear. This is because **HTML is a presentational markup language**; its
+tags have an inherent visual meaning to the browser.
+
+XSLT behaves differently. If you apply a completely empty stylesheet to an XML
+document, the result is that **all the tags are stripped away, leaving only the
+raw text content.** This is baffling at first, but it reveals the core
+philosophy of the language. Unlike HTML, **XML is a semantic data language.**
+Its tags, like `<customer-id>` or `<price>`, have no intrinsic visual meaning.
+They are labels for data.
+
+The XSLT designers assumed that the most basic, default operation anyone would
+want is to extract the data itself—the text. Therefore, they created two
+built-in rules that work together:
+
+1.  **A Rule for Elements:** This default rule matches any element (`*`) or the
+    root node (`/`). Its only job is to recursively keep processing
+    (`<xsl:apply-templates/>`). It produces no output for the element tag
+    itself; it just keeps digging deeper.
+2.  **A Rule for Text:** This default rule matches any text node (`text()`). Its
+    job is to copy the value of the text to the output (`<xsl:value-of
+    select="."/>`).
+
+When you combine these, the first rule navigates silently through the tree of
+element tags, and the second rule shouts out the value of any text it finds
+along the way. The result is a stream of text with all its structural context
+removed.
+
+#### How to Take Back Control
+
+This default behavior is rarely what you want. Experienced XSLT developers
+almost always start by creating a "blank slate." They override the built-in
+rules by putting this template at the top of their stylesheet:
+
+```xml
+<!-- This empty template matches ALL nodes and attributes and does nothing.
+     It effectively disables all the built-in rules. -->
+<xsl:template match="node() | @*"/>
+```
+
 # Installation Instructions
 
-In order for you get build a decent learning environment, setup:
+To get going:
 
-- This repo's CLI
-- Two XSLT pythone parser (``lxml/sachonche``)
-- Example files
+- Install this repo's CLI
+- Install the two XSLT pythone parser (``lxml/sachonche``)
+- Get the example files
+- Get a separate version of the Saxonic XSLT that will provide compile errors
 
 ```bash
 git clone git@github.com:aleph2c/leaning_xslt.git
