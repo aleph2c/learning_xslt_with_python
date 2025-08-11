@@ -173,28 +173,34 @@ try ex -v
 Repeat this cycle — edit ``text-hierarchy.xsl``, run try ex -v, and check errors
 — until your XSLT program produces the desired ``text-hierarchy.txt`` output.
 
-## Context
+## Thinking in Trees: A New Paradigm for Python Developers
 
-XSLT (eXtensible Stylesheet Language Transformations) is a declarative language
-for converting XML data into other formats, such as HTML, SVG, text, or even
-code. With XSLT 3.0, it can also handle JSON input and output, making it
-versatile for modern data transformation.
+**XSLT is a powerful, declarative language for transforming complex data
+structures.** While Python templating libraries like Jinja2 are excellent for
+generating text from data, XSLT is a specialized tool designed for the
+structural transformation of tree-like data such as XML and JSON.
 
-Compared to templating libraries like Python's Jinja2, XSLT is more specialized
-for tree-based data (``XML/JSON``), with built-in XPath for querying and functional
-features for complex transformations. While Jinja2 is simpler for text
-templating, XSLT excels in handling large datasets or streams declaratively — you
-specify what the output should look like, and the language figures out how to
-generate it. XSLT is functional (e.g., no mutable state, recursion for loops),
-but it's not a Lisp dialect; it's XML-based with event-driven template matching.
+The fundamental difference lies in its thinking model. Instead of writing
+imperative Python code that loops through data, you write declarative XSLT
+rules. You define what the output should look like for a given pattern, and the
+XSLT processor, powered by the XPath query language, figures out how to apply
+those rules across the entire document. This functional, rule-based approach can
+be incredibly efficient for handling large or complex data streams.
 
-XSLT programs are serializable (as XML), enabling metaprogramming — your XSLT
-can transform itself. Python supports XSLT via libraries like lxml (for XSLT
-1.0) or saxonche (for XSLT 3.0/XPath 3.1). The standard is at version 3.0, but
-many open-source tools (e.g., lxml) stick to 1.0, while saxonche provides full
-3.0 support.
+Python supports XSLT through libraries like lxml, but this is limited to the
+older, more basic XSLT 1.0 standard. This repository focuses on the modern XSLT
+3.0 via the saxonche library, which provides full support for advanced features,
+including native JSON handling.
 
-### Build A Professor
+Because this declarative, rule-based paradigm is so different from imperative
+Python, learning it requires a new approach. This repository provides a complete
+workflow to become fluent:
+
+1. Build a custom AI "Professor" to act as your personal tutor.
+2. Follow a "hack-to-learn" workflow using the provided code examples.
+3. Use a curated curriculum based on classic XSLT texts.
+
+### Build a Custom Professor
 
 Copy the following markdown into a context file and feed it to the AI which is
 training you. If you can't do that, just drop it into the AI's prompt.  This
@@ -253,7 +259,7 @@ To exit any mode and return to the default, adaptive response style, use the pre
 *   **Activation**: Prefix with `NN:` or occurs automatically after exiting another mode.
 ```
 
-### Recommended Learning Workflow and Training Path
+### Hack-to-Learn Workflow
 
 While new XSLT books are rare, the classic texts contain timeless problems and
 patterns. This repository provides the code for those exercises, allowing you to
