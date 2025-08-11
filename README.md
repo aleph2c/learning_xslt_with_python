@@ -8,6 +8,41 @@ and JSON handling). This repo provides examples, CLI tools for
 building/debugging XSLT, validating XML, and testing XPath 3.1 expressions,
 along with pointers to XSLT training resources.g., Michael Kay’s books).
 
+The histories of Python and XSLT offer a compelling study in how technologies
+are shaped by their communities and core philosophies. Python's development was
+famously practitioner-led by Guido van Rossum, fostering a pragmatic,
+community-driven culture. This was formalized through the Python Enhancement
+Proposal (PEP) process, an agile feedback loop that allowed the language to
+evolve based on the direct needs of its users. In contrast, XSLT emerged from a
+top-down, architecturally-focused W3C committee. This process produced a
+formally specified and incredibly powerful language for document transformation,
+but its inherent complexity and slower, standards-based evolution made it less
+accessible to the broader programming world.
+
+This difference in origin had profound consequences on their trajectories.
+Python's flexible, bottom-up model enabled it to find a "killer app" by
+effectively "borg'ing" the scientific computing world of MATLAB with libraries
+like ``NumPy`` and ``Pandas``, catapulting it to mainstream dominance.
+Meanwhile, ``XSLT``, continuously advanced by its own brilliant
+practitioner-architect, Michael Kay, became the dominant tool within its
+specialized niche of enterprise-level document and data transformation. While it
+was quietly perfected, the larger developer ecosystem was won by tools that
+prioritized ease of use over formal power.
+
+Today, these two histories have converged. With the advent of libraries like
+``saxonche``, ``XSLT`` has effectively "borg'd" itself into the Python ecosystem, not as
+a competitor, but as a specialized engine. It provides a declarative, functional
+paradigm for tackling complex "data plumbing" challenges—performing robust,
+single-step, atomic transformations of data structures in a way that is
+fundamentally different from traditional imperative Python code. This allows
+developers to use the right tool for the job: Python for general-purpose
+programming and orchestration, and XSLT for the powerful, rule-based data
+transformations at which it excels.
+
+This repo has integrated XSLT (``saxonche``) with ``Python`` via the ``Click``
+command line tool. So you can use the command line to select an input XML file,
+the tranformation XSLT file (``.xsl``) and produce an output file (any form).
+
 ## Quick Start
 
 Clone the repo:
@@ -163,9 +198,11 @@ many open-source tools (e.g., lxml) stick to 1.0, while saxonche provides full
   xpath`` command with this book to dial in the Xpath concepts.  Build up a
   snippet library as you work through the chapters.  Get used to a
   troubleshooting workflow as you wrestle with this book.
-* Lab Work: Sal Mangano’s XSLT Cookbook for practical examples.
+* Lab Work: Sal Mangano’s XSLT Cookbook for practical examples.  Use an AI to
+  teach each of the chapter headerings.
 * Intermediate: Jeni Tennison’s Beginning XSLT 2.0: From Novice to Professional.
-  Use ChatGPT to interrogate examples and fill gaps.
+  Use an AI to teach each of the chapter headerings, only reach into the book if
+  you have to.
 * Advanced Patterns: Michael Kay’s book, Chapter 17: Stylesheet Design Patterns.
 * No Dedicated XSLT 3.0 Book Yet: Use Michael Kay’s XSLT 2.0 and XPath 2.0
   Programmer's Reference (covers much of 3.0) and his article Transforming JSON
