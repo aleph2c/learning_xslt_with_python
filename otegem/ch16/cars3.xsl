@@ -16,6 +16,9 @@
 
 <xsl:template match="car:models">
   <xsl:for-each select="car:model">
+    <!--
+    The @m.id is common for both namespaces
+    -->
     <xsl:value-of select="key('mfc', @m:id)/@m:name" />
     <xsl:text> </xsl:text>
     <xsl:value-of select="@car:name" />

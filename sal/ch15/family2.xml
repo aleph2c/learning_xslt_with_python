@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<family>
+  <person name="Grandpa">
+    <person name="Dad">
+      <person name="Me"/>
+      <person name="Sister"/>
+      <person name="Brother"/>
+    </person>
+    <person name="Aunt">
+      <person name="Cousin1"/>
+      <person name="Cousin2"/>
+    </person>
+  </person>
+</family>

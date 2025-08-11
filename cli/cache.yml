@@ -1,7 +1,7 @@
 context: //J
-home_dir: /mnt/data/learning_xslt_with_python/otegem/ch15
-output_file_name: cars2_output.txt
-params: week=2,unused=5
+home_dir: /mnt/data/learning_xslt_with_python/sal/ch06
+output_file_name: group_adjacent_2.xml
+params: debug_on='yes',foo=1
 processor: saxon
-xml_file_name: cars2.xml
-xsl_file_name: cars2.xsl
+xml_file_name: group_adjacent_2.xml
+xsl_file_name: group_adjacent_2.xsl

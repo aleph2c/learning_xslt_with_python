@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grouped-files>
+   <group category="document">
+      <file>
+         <name>basket.doc</name>
+         <extension>.doc</extension>
+      </file>
+   </group>
+   <group category="document">
+      <file>
+         <name>report.doc</name>
+         <extension>.doc</extension>
+      </file>
+   </group>
+   <group category="image">
+      <file>
+         <name>logo.png</name>
+         <extension>.png</extension>
+      </file>
+   </group>
+   <group category="image">
+      <file>
+         <name>chart.jpg</name>
+         <extension>.jpg</extension>
+      </file>
+   </group>
+   <group category="text">
+      <file>
+         <name>notes.txt</name>
+         <extension>.txt</extension>
+      </file>
+   </group>
+</grouped-files>

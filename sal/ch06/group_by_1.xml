@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<directory>
+  <file name="basket.doc" type="document" ext=".doc"/>
+  <file name="logo.png" type="image" ext=".png"/>
+  <file name="notes.txt" type="text" ext=".txt"/>
+  <file name="chart.jpg" type="image" ext=".jpg"/>
+  <file name="report.doc" type="document" ext=".doc"/>
+</directory>

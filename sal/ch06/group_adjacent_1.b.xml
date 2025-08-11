@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<directory>
+   <file>
+      <name>basket.doc</name>
+      <category>document</category>
+      <extension>.doc</extension>
+   </file>
+   <file>
+      <name>report.doc</name>
+      <category>document</category>
+      <extension>.doc</extension>
+   </file>
+   <file>
+      <name>logo.png</name>
+      <category>image</category>
+      <extension>.png</extension>
+   </file>
+   <file>
+      <name>chart.jpg</name>
+      <category>image</category>
+      <extension>.jpg</extension>
+   </file>
+   <file>
+      <name>notes.txt</name>
+      <category>text</category>
+      <extension>.txt</extension>
+   </file>
+</directory>

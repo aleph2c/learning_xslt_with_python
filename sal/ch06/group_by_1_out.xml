@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grouped-files>
+   <group type="document">
+      <file name="basket.doc" ext=".doc"/>
+      <file name="report.doc" ext=".doc"/>
+   </group>
+   <group type="image">
+      <file name="logo.png" ext=".png"/>
+      <file name="chart.jpg" ext=".jpg"/>
+   </group>
+   <group type="text">
+      <file name="notes.txt" ext=".txt"/>
+   </group>
+</grouped-files>
