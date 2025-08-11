@@ -1,47 +1,51 @@
 # Learning XSLT with Python
 
-XSLT is a functional language for transforming XML data into various formats
-(e.g., XML, HTML, text). It embeds XPath, a query language for navigating XML
-trees. As of March 2023, Python supports XSLT and XPath via libraries like lxml
-(XSLT 1.0) and saxonche (XSLT 3.0/XPath 3.1 for advanced features like streaming
-and JSON handling). This repo provides examples, CLI tools for
-building/debugging XSLT, validating XML, and testing XPath 3.1 expressions,
-along with pointers to XSLT training resources.g., Michael Kay’s books).
+This repository is a playground for exploring XSLT, a powerful functional
+language for data transformation, from within a modern Python environment. It
+provides a declarative, "single-step" paradigm for tackling complex data
+plumbing challenges in a way that is fundamentally different from traditional
+imperative code.
+
+Here you can learn and experiment with XSLT via the command line, using tools and examples for:
+
+- Building and debugging XSLT stylesheets.
+- Validating XML (primarily using lxml, as saxonche's validation requires a commercial license),
+- Testing XPath 3.1 expressions.
+- Connecting with key training resources (e.g., Michael Kay’s books).
+
+The project leverages modern Python libraries like lxml (for XSLT 1.0) and
+saxonche (for XSLT 3.0), which adds advanced features like streaming and native
+JSON handling.
+
+# Background: A Tale of Two Philosophies
 
 The histories of Python and XSLT offer a compelling study in how technologies
-are shaped by their communities and core philosophies. Python's development was
-famously practitioner-led by Guido van Rossum, fostering a pragmatic,
-community-driven culture. This was formalized through the Python Enhancement
-Proposal (PEP) process, an agile feedback loop that allowed the language to
-evolve based on the direct needs of its users. In contrast, XSLT emerged from a
-top-down, architecturally-focused W3C committee. This process produced a
-formally specified and incredibly powerful language for document transformation,
-but its inherent complexity and slower, standards-based evolution made it less
-accessible to the broader programming world.
+are shaped. Python's development was famously practitioner-led by Guido van
+Rossum, fostering a pragmatic culture that valued developer happiness. Its
+evolution via the community-driven PEP process meant it was built by and for
+programmers. In stark contrast, XSLT was born from a top-down W3C committee of
+architects. The result was a language that was formally powerful but actively
+hostile to the sensibilities of the average developer, burdened by a punishingly
+verbose XML-based syntax and a steep, declarative-functional learning curve that
+felt alien to most.
 
-This difference in origin had profound consequences on their trajectories.
-Python's flexible, bottom-up model enabled it to find a "killer app" by
-effectively "borg'ing" the scientific computing world of MATLAB with libraries
-like ``NumPy`` and ``Pandas``, catapulting it to mainstream dominance.
-Meanwhile, ``XSLT``, continuously advanced by its own brilliant
-practitioner-architect, Michael Kay, became the dominant tool within its
-specialized niche of enterprise-level document and data transformation. While it
-was quietly perfected, the larger developer ecosystem was won by tools that
-prioritized ease of use over formal power.
+This difference had profound consequences and directly explains why XSLT fell
+into mainstream obscurity. While Python's flexibility allowed it to find a
+"killer app" by "borg'ing" the scientific world of MATLAB, XSLT's rigidity and
+poor ergonomics actively repelled the fast-growing world of web development. As
+web APIs moved towards the lightweight, brain-dead simple JSON format, XSLT's
+heavyweight, document-centric model felt like using a sledgehammer to crack a
+nut. While its champion, Michael Kay, was quietly perfecting it into a
+masterpiece of engineering, the mainstream war had already been lost to tools
+that were simply easier, faster, and more enjoyable to use.
 
-Today, these two histories have converged. With the advent of libraries like
-``saxonche``, ``XSLT`` has effectively "borg'd" itself into the Python ecosystem, not as
-a competitor, but as a specialized engine. It provides a declarative, functional
-paradigm for tackling complex "data plumbing" challenges—performing robust,
-single-step, atomic transformations of data structures in a way that is
-fundamentally different from traditional imperative Python code. This allows
-developers to use the right tool for the job: Python for general-purpose
-programming and orchestration, and XSLT for the powerful, rule-based data
-transformations at which it excels.
-
-This repo has integrated XSLT (``saxonche``) with ``Python`` via the ``Click``
-command line tool. So you can use the command line to select an input XML file,
-the tranformation XSLT file (``.xsl``) and produce an output file (any form).
+Today, however, these two histories have converged. With the advent of libraries
+like saxonche, XSLT has effectively "borg'd" itself into the Python ecosystem,
+not as a competitor, but as a specialized engine for the kind of complex data
+plumbing it was designed for. Freed from having to be a general-purpose tool,
+its difficult nature is less of a barrier. It allows developers to use the right
+tool for the job: Python for orchestration, and XSLT for the powerful, if
+sometimes brutal, rule-based data transformations at which it remains unmatched.
 
 ## Quick Start
 
@@ -57,9 +61,11 @@ xslt install-compiler-errors  # installs Java version of sachonche
 
 ### Testing XPath Patterns
 
-Imagine you are trying to understand how to use XPath matching expressions with XSLT.
+XSLT uses XPath within it.  XPath provides powerful syntax called "matching
+expressions" which allow you to capture different parts of a tree.
 
-You would like to reference the following picture -- a graph depicting an XML tree
+If you want to understand how to use XPath matching expressions with XSLT, it 
+is useful to reference the following picture -- a graph depicting an XML tree
 structure with nodes labeled for axes like child, descendant, parent, ancestor,
 sibling, etc. -- and the ``/patterns/axis_testing.xml`` file that represents this
 picture, to try out various XPath matching expressions.
@@ -191,18 +197,93 @@ can transform itself. Python supports XSLT via libraries like lxml (for XSLT
 many open-source tools (e.g., lxml) stick to 1.0, while saxonche provides full
 3.0 support.
 
-### Recommended Learning Resources
+### Learning Prompt For Your AI
+
+Copy the following markdown into a context file and feed it to the AI which is
+training you. If you can't do that, just drop it into the AI's prompt.  This
+will provide a short hand to turn it into an excellent tutor.
+
+```markdown
+# AI Interaction Modes for XSLT/XML Development
+
+This document outlines custom interaction modes for consulting on XSLT, XML, and XPath. These modes allow for switching response styles dynamically by using a prefix at the start of a message (e.g., `TT:1 What is an atomic value?`).
+
+To exit any mode and return to the default, adaptive response style, use the prefix `NN:` or explicitly ask to leave the current mode.
+
+## Available Modes
+
+### TT: Teacher Mode (Using Revised Bloom's Taxonomy)
+
+*   **Purpose**: An educational style to help learn XSLT, XML, or XPath by building cognitive skills step-by-step. The mode focuses on one level of the taxonomy per query, providing prompts to evaluate and advance your understanding.
+*   **Activation**: Prefix with `TT:X`, where `X` is the level from 1 to 6. If no level is specified (`TT:`), the mode will default to level 1 or infer from the context.
+*   **Levels (Revised Bloom's Taxonomy)**:
+    1.  **Remembering (TT:1)**: Recall facts and basic concepts. I'll ask questions like, "What is the difference between `xsl:copy` and `xsl:copy-of`?" or "What are the seven types of XML nodes?"
+    2.  **Understanding (TT:2)**: Explain ideas or concepts. I'll ask for explanations like, "Can you describe what a sequence is in your own words?" or "Explain the purpose of the identity transform."
+    3.  **Applying (TT:3)**: Use information in concrete situations. I'll provide scenarios like, "Show how you would use `xsl:for-each-group` to group these items by category."
+    4.  **Analyzing (TT:4)**: Draw connections among ideas. I'll prompt analysis like, "Compare the built-in default templates to an explicit identity transform. What are the tradeoffs?"
+    5.  **Evaluating (TT:5)**: Justify a stand or decision. I'll ask for critiques like, "Evaluate this template. Is there a more efficient or readable way to write it?"
+    6.  **Creating (TT:6)**: Produce new or original work. I'll guide creation with prompts like, "Design a recursive function that traces the processing of a document."
+*   **Exit**: Use `NN:` or say "Exit teacher mode."
+
+### AA: XSLT Architect Mode
+
+*   **Purpose**: High-level architectural and design discussions, focusing on best practices, patterns, and trade-offs without necessarily writing full code solutions. This mode is for exploring the "how" and "why" of a solution's structure.
+*   **Activation**: Prefix with `AA:`. You can add a sub-focus like:
+    *   `AA:patterns`: Discuss common XSLT design patterns (e.g., identity transform, fill-in-the-blanks).
+    *   `AA:tradeoffs`: Analyze the pros and cons of different implementation choices (e.g., `xsl:for-each` vs. `xsl:apply-templates`).
+    *   `AA:ideas`: Brainstorm multiple approaches to solving a complex transformation problem.
+*   **Style**:
+    *   Starts by restating the core problem to ensure understanding.
+    *   Generates multiple potential solutions with clear pros and cons (e.g., performance, readability, maintainability).
+    *   Includes risks or "gotchas" for each approach.
+    *   Critiques user-provided ideas rigorously, pointing out potential flaws or edge cases and suggesting robust alternatives.
+*   **Exit**: Use `NN:` or say "Exit architect mode."
+
+### LH: Language Historian Mode
+
+*   **Purpose**: An interdisciplinary discussion exploring the history, design philosophy, and evolution of XSLT/XML and related technologies. This mode focuses on the "why" behind the language's features and its place in the broader history of technology.
+*   **Activation**: Prefix with `LH:`.
+*   **Style**:
+    *   Draws parallels and contrasts between XSLT's development and that of other languages (like Python).
+    *   Explains the reasoning behind confusing or non-intuitive language features (e.g., XSLT's default templates).
+    *   Discusses the influence of standards committees (W3C) versus individual or community-led language design.
+    *   Analyzes the industrial and human factors that lead to a technology's adoption or decline.
+*   **Exit**: Use `NN:` or say "Exit historian mode."
+
+### NN: Normal Mode
+
+*   **Purpose**: Reset to the standard, adaptive response style for direct questions and answers.
+*   **Activation**: Prefix with `NN:` or occurs automatically after exiting another mode.
+```
+
+### Recommended Learning Path
+
+Nobody is writing training material for XSLT anymore, but you can use the
+exercizes from old books to learn it through a series of questions and answer
+seminars with your AI.  If you can't find these old books it doesn't matter,
+you can just use their exercises.  Here is an effective workflow is:
+
+1. Identify a chapter you are interested in and go it in this repo
+2. Copy and paste the XML and XSLT (``.xsl`` file) from that capture into your AI
+3. Integate the AI about the ``.xsl`` file until you understand it.  To dive
+   into why the language is written the way it is using the LH prompt.
+4. Run the example using the ``try`` prompt provided by this repo
+5. Ask the AI to test you on you this ``.xsl`` file by asking questions like,
+   "please provide 5 TT:2 questions about the above ``.xsl`` file"  If you need
+   mastery of a particular point, "please provide 5 TT:5 level exercises for the
+   above ``.xsl`` file. (A fast way to learn is to force yourself to work from
+   TT:5 even when you are competent -- this hurts and it's fast and effective)
 
 * Start with Basics: Michiel van Otegem’s Teach Yourself XSLT in 21 Days.
-  Chapter 3 has helpful XPath diagrams for tree navigation. Use the ``try
-  xpath`` command with this book to dial in the Xpath concepts.  Build up a
-  snippet library as you work through the chapters.  Get used to a
-  troubleshooting workflow as you wrestle with this book.
+  (``otegem``) Chapter 3 has helpful XPath diagrams for tree navigation. Use the
+  ``try xpath`` command with this book to dial in the Xpath concepts.  Build up
+  a snippet library as you work through the chapters.  Get used to a
+  troubleshooting workflow as you wrestle with this book. (chapters: 3-17)
 * Lab Work: Sal Mangano’s XSLT Cookbook for practical examples.  Use an AI to
-  teach each of the chapter headerings.
+  teach each of the chapter headerings. (``sal``) (chapters: 15, 6)
 * Intermediate: Jeni Tennison’s Beginning XSLT 2.0: From Novice to Professional.
   Use an AI to teach each of the chapter headerings, only reach into the book if
-  you have to.
+  you have to, it in written in such a way to discourage learning.
 * Advanced Patterns: Michael Kay’s book, Chapter 17: Stylesheet Design Patterns.
 * No Dedicated XSLT 3.0 Book Yet: Use Michael Kay’s XSLT 2.0 and XPath 2.0
   Programmer's Reference (covers much of 3.0) and his article Transforming JSON
