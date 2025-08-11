@@ -194,7 +194,7 @@ can transform itself. Python supports XSLT via libraries like lxml (for XSLT
 many open-source tools (e.g., lxml) stick to 1.0, while saxonche provides full
 3.0 support.
 
-### Learning Prompt For Your AI
+### Build A Professor
 
 Copy the following markdown into a context file and feed it to the AI which is
 training you. If you can't do that, just drop it into the AI's prompt.  This
@@ -253,44 +253,55 @@ To exit any mode and return to the default, adaptive response style, use the pre
 *   **Activation**: Prefix with `NN:` or occurs automatically after exiting another mode.
 ```
 
-### Recommended Learning Path
+### Recommended Learning Workflow and Training Path
 
-Nobody is writing training material for XSLT anymore, but you can use the
-exercizes from old books to learn it through a series of questions and answer
-seminars with your AI.  If you can't find these old books it doesn't matter,
-you can just use their exercises.  Here is an effective workflow is:
+While new XSLT books are rare, the classic texts contain timeless problems and
+patterns. This repository provides the code for those exercises, allowing you to
+master XSLT using a modern, AI-driven workflow.
 
-1. Identify a chapter you are interested in and go it in this repo
-2. Copy and paste the XML and XSLT (``.xsl`` file) from that capture into your AI
-3. Integate the AI about the ``.xsl`` file until you understand it.  To dive
-   into why the language is written the way it is using the LH prompt.
-4. Run the example using the ``try`` prompt provided by this repo
-5. Ask the AI to test you on you this ``.xsl`` file by asking questions like,
-   "please provide 5 TT:2 questions about the above ``.xsl`` file"  If you need
-   mastery of a particular point, "please provide 5 TT:5 level exercises for the
-   above ``.xsl`` file. (A fast way to learn is to force yourself to work from
-   TT:5 even when you are competent -- this hurts and it's fast and effective)
+The core learning loop is simple: use this repository's code as a foundation and
+an AI assistant as your personal tutor. An effective workflow is:
 
-Apply the above learning workflow to the working training programs of old books:
+1. **Find an Example**: Navigate to a chapter's code within this repository.
+2. **Load the Context**: Copy and paste the source XML and the XSLT (``.xsl``) file into
+   your AI session.
+3. **Interrogate the Code**: Ask the AI to explain the stylesheet until you
+   understand it. Use the AA: (Architect) and LH: (Language Historian) prompts
+   to explore why the code is structured a certain way and the design philosophy
+   behind it.
+4. **Run the Example**: Execute the code using the try command-line helper provided
+   by this repository to see it in action.
+5. **Test Your Knowledge**: Ask the AI to quiz you. Use the TT: (Teacher) prompts to
+   generate targeted questions at different cognitive levels.  (A fast and
+   **painful** way to learn is to set the TT prompt well beyond your level of
+   competence.  If it hurts you are doing it right.)
 
-* Start with Basics: Michiel van Otegem’s Teach Yourself XSLT in 21 Days.
-  (``otegem``) Chapter 3 has helpful XPath diagrams for tree navigation. Use the
-  ``try xpath`` command with this book to dial in the Xpath concepts.  Build up
-  a snippet library as you work through the chapters.  Get used to a
-  troubleshooting workflow as you wrestle with this book. (chapters: 3-17)
-* Lab Work: Sal Mangano’s XSLT Cookbook for practical examples.  Use an AI to
-  teach each of the chapter headerings. (``sal``) (chapters: 15, 6)
-* Intermediate: Jeni Tennison’s Beginning XSLT 2.0: From Novice to Professional.
-  Use an AI to teach each of the chapter headerings, only reach into the book if
-  you have to.
-* Advanced Patterns: Michael Kay’s book, Chapter 17: Stylesheet Design Patterns.
-* No Dedicated XSLT 3.0 Book Yet: Use Michael Kay’s XSLT 2.0 and XPath 2.0
-  Programmer's Reference (covers much of 3.0) and his article Transforming JSON
-  using XSLT 3.0. For XPath 3.0/3.1, [try Altova’s free training resources](https://www.altova.com/training/xpath3).
-* XSLT 3.0 Specific: [Martin Honnen’s XSLT 3.0 by Example blog](https://xslt-3-by-example.blogspot.com/), [Stack Overflow](https://stackoverflow.com/users/252228/martin-honnen)
-  answers, and GitHub gists.
-* [Transforming JSON using XSLT 3.0](https://www.saxonica.com/papers/xmlprague-2016mhk.pdf) by Michael Kay. (There is supporting example code for some of these JSON transforms and the pattern's code in the pattern's folder of this repo.)
+### Recommended Curriculum
 
+Apply the learning workflow above to this curated training path. The directory names in parentheses correspond to the code in this repository.
+
+*   **1. The Basics (`otegem`)**
+    *   **Book:** *Teach Yourself XSLT in 21 Days* by Michiel van Otegem.
+    *   **Focus:** Work through chapters 3-17 to build a strong foundation. Use the `try xpath` command to master XPath concepts, and build a personal snippet library as you go.
+
+*   **2. Practical Labs (`sal`)**
+    *   **Book:** *XSLT Cookbook* by Sal Mangano.
+    *   **Focus:** These are practical, recipe-style examples. Use the AI to explain the core concept of each recipe before examining the solution. (Key chapters: 15, 6).
+
+*   **3. Intermediate Concepts**
+    *   **Book:** *Beginning XSLT 2.0* by Jeni Tennison.
+    *   **Focus:** Use the AI to explain the high-level concepts from the chapter headings, then dive into the code examples provided in this repo to see them implemented.
+
+*   **4. Advanced Design Patterns**
+    *   **Book:** Michael Kay’s *XSLT 2.0 and XPath 2.0 Programmer's Reference*.
+    *   **Focus:** Specifically Chapter 17: "Stylesheet Design Patterns." This is essential reading for writing professional, maintainable XSLT.
+
+*   **5. Bridging to XSLT 3.0**
+    *   Since there is no single XSLT 3.0 book, use a combination of these excellent resources:
+        *   **Michael Kay's Book:** The book above covers much of the foundation needed for 3.0.
+        *   **Online Examples:** [Martin Honnen’s XSLT 3.0 by Example blog](https://xslt-3-by-example.blogspot.com/) and his expert answers on [Stack Overflow](https://stackoverflow.com/users/252228/martin-honnen).
+        *   **JSON Handling:** Michael Kay's paper, [*Transforming JSON using XSLT 3.0*](https://www.saxonica.com/papers/xmlprague-2016mhk.pdf). (Supporting code is in the `/patterns` folder of this repo.)
+        *   **XPath 3.1 Training:** [Altova’s free training resources](https://www.altova.com/training/xpath3).
 
 ### Setting Up Your Development Enviroment
 
