@@ -1,7 +1,7 @@
 context: //J
-home_dir: /mnt/data/learning_xslt_with_python/michael
-output_file_name: booklist.html
+home_dir: /mnt/data/learning_xslt_with_python/scott/1_json_support
+output_file_name: json_out_2.json
 params: debug_on='yes',foo=1
 processor: saxon
-xml_file_name: booklist.xml
-xsl_file_name: booklist.xsl
+xml_file_name: json_2.json
+xsl_file_name: from_json_to_json_2.xsl

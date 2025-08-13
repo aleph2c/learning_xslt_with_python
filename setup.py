@@ -16,7 +16,7 @@ setup(
         "PyYAML",
     ],
     entry_points={
-        "console_scripts" : [
+        "console_scripts": [
           "try=cli.cli:cli",
           "xslt=cli.cli:xslt",
           "mk=cli.cli:_markdown",
