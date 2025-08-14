@@ -1,7 +1,7 @@
 context: //J
 home_dir: /mnt/data/learning_xslt_with_python/scott/1_json_support
-output_file_name: json_out_2.json
+output_file_name: json_out_4.json
 params: debug_on='yes',foo=1
 processor: saxon
-xml_file_name: json_2.json
-xsl_file_name: from_json_to_json_2.xsl
+xml_file_name: json_4.json
+xsl_file_name: from_json_to_json_4.xsl

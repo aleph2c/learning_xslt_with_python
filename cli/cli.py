@@ -28,6 +28,7 @@ from saxonche import PySaxonProcessor
 def pp(item):
     pprint.pprint(item)
 
+JAVA_SAXON_VERSION = "saxon-he-12.8.jar"
 
 PathToDefault = (Path(__file__).parent / ".." / "ch3_templates").resolve()
 
@@ -88,13 +89,13 @@ def call_out_to_java_to_get_saxon_compile_errors(
     xsl_file_path_str = str((Path(home_dir) / xsl_file_name).resolve())
     run_path = (Path(__file__).parent / "..").resolve()
     run_path_str = str(run_path)
-    saxon_java_path = run_path / "java" / "saxon-he-12.0.jar"
+    saxon_java_path = run_path / "java" / JAVA_SAXON_VERSION
     saxon_java_path_str = str(saxon_java_path)
     output_obj = None
     if not saxon_java_path.exists():
         feedback0 = "saxonche isn't documented, so there is no way to get saxon compiler errors"
-        feedback1 = f"download saxon-he-12.0.jar and place it in {saxon_java_path_str}"
-        feedback2 = "saxon-he-12.0.jar can be used to generate compiler messages"
+        feedback1 = f"download {JAVA_SAXON_VERSION} and place it in {saxon_java_path_str}"
+        feedback2 = f"{JAVA_SAXON_VERSION} can be used to generate compiler messages"
         click.echo(feedback0)
         click.echo(feedback1)
         click.echo(feedback2)
@@ -823,10 +824,10 @@ def xslt():
 @xslt.command
 def install_compiler_errors():
     """Download and inflate java version of saxon-he"""
-    url = "https://github.com/Saxonica/Saxon-HE/raw/be4dd844d935d8d0ef09748490448624abe3c66b/12/Java/SaxonHE12-0J.zip"
+    url = "https://github.com/Saxonica/Saxon-HE/raw/refs/heads/main/12/Java/SaxonHE12-8J.zip"
     zip_file_path = Path(url.split("/")[-1])
     install_directory = (Path(__file__).parent / ".." / "java").resolve()
-    target_path = install_directory / "saxon-he-12.0.jar"
+    target_path = install_directory / JAVA_SAXON_VERSION
 
     if not install_directory.exists():
         os.makedirs(install_directory)
