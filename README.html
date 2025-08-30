@@ -107,17 +107,39 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
     <article class="markdown-body">
         <div class="toc"><div class="toc">
 <ul>
-<li><a href="#learning-xslt-with-python">Learning XSLT with Python</a><ul>
+<li><a href="#xml-schemas">XML Schemas</a><ul>
+<li><a href="#unspecified-xml-leads-to-disaster-its-a-timebomb">Unspecified XML Leads to Disaster (It's a timebomb)</a></li>
+<li><a href="#a-brilliant-trap-the-saxon-give-them-enough-rope-business-model">A Brilliant Trap: The Saxon "Give Them Enough Rope" Business Model</a></li>
+<li><a href="#schema-technologies">Schema Technologies</a><ul>
+<li><a href="#dtd-document-type-definition">DTD (Document Type Definition)</a></li>
+<li><a href="#xds-10">XDS 1.0</a></li>
+<li><a href="#xds-11">XDS 1.1</a></li>
+<li><a href="#relax-ng">RELAX NG</a></li>
+<li><a href="#schematron">Schematron</a></li>
+</ul>
+</li>
+<li><a href="#xds-11-python-integration">XDS 1.1 Python Integration</a></li>
+<li><a href="#scematron-python-integration">Scematron Python Integration</a></li>
+<li><a href="#xds-11-cli-and-training-examples">XDS 1.1 Cli and Training Examples</a></li>
+<li><a href="#scematron-cli-and-training-examples">Scematron Cli and Training Examples</a></li>
+</ul>
+</li>
+<li><a href="#learning-xslt-with-python">Learning XSLT with Python</a></li>
+<li><a href="#background-a-tale-of-two-philosophies">Background: A Tale of Two Philosophies</a><ul>
 <li><a href="#quick-start">Quick Start</a><ul>
 <li><a href="#testing-xpath-patterns">Testing XPath Patterns</a></li>
 <li><a href="#evaluating-xslt-programs">Evaluating XSLT programs</a></li>
 </ul>
 </li>
-<li><a href="#context">Context</a><ul>
-<li><a href="#recommended-learning-resources">Recommended Learning Resources</a></li>
-<li><a href="#setting-up-your-development-enviroment">Setting Up Your Development Enviroment</a></li>
-<li><a href="#shifting-to-functional-thinking">Shifting to Functional Thinking</a></li>
-<li><a href="#tools-and-libraries">Tools and Libraries</a></li>
+<li><a href="#thinking-in-trees-a-new-paradigm-for-python-developers">Thinking in Trees: A New Paradigm for Python Developers</a><ul>
+<li><a href="#build-a-custom-professor">Build a Custom Professor</a></li>
+<li><a href="#hack-to-learn-workflow">Hack-to-Learn Workflow</a></li>
+<li><a href="#recommended-curriculum">Recommended Curriculum</a></li>
+<li><a href="#build-an-amoury">Build an Amoury</a></li>
+<li><a href="#understanding-xslts-default-behavior-and-why-its-so-confusing">Understanding XSLT's Default Behavior (And Why It's So Confusing)</a><ul>
+<li><a href="#how-to-take-back-control">How to Take Back Control</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -139,14 +161,197 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </ul>
 </div>
 </div>
-        <h1 id="learning-xslt-with-python">Learning XSLT with Python</h1>
-<p>XSLT is a functional language for transforming XML data into various formats
-(e.g., XML, HTML, text). It embeds XPath, a query language for navigating XML
-trees. As of March 2023, Python supports XSLT and XPath via libraries like lxml
-(XSLT 1.0) and saxonche (XSLT 3.0/XPath 3.1 for advanced features like streaming
-and JSON handling). This repo provides examples, CLI tools for
-building/debugging XSLT, validating XML, and testing XPath 3.1 expressions,
-along with pointers to XSLT training resources.g., Michael Kay’s books).</p>
+        <h1 id="xml-schemas">XML Schemas</h1>
+<h2 id="unspecified-xml-leads-to-disaster-its-a-timebomb">Unspecified XML Leads to Disaster (It's a timebomb)</h2>
+<p>When you're building something with XML, it's tempting to skip creating a
+schema. But what even is a schema?</p>
+<p>Simply put, a schema is a formal blueprint for your XML. It’s a file you write
+that defines the rules: what tags are allowed, what order they must appear in,
+and what kind of data they can hold (like numbers, text, or dates).</p>
+<p>It feels like extra work when you're under pressure, but using XML without a
+schema is like building a complex machine without any blueprints. It might run
+for a little while, but a catastrophic failure isn't just a risk—it's a
+guarantee. You've essentially created a timebomb in your project. Let's break
+down how it works.</p>
+<ul>
+<li><strong>The Bomb</strong>: Your collection of XML files. Without a schema, you don't really
+  know what's inside them. You assume they follow the structure your code
+  expects, but you have no guarantee.  Each file that deviates from that
+  unwritten specification is a potential point of failure.</li>
+<li><strong>The Ticking</strong>: Time and change. The fuse gets lit the moment your project
+  needs to change. With every new software version, every new feature, or every
+  data migration, the assumptions your code makes about the XML structure get
+  stricter. The system gets more and more fragile with each update, and the fuse
+  burns shorter.</li>
+<li><strong>The Explosion</strong>: The "technical disaster." This is the moment your software
+  encounters an XML document it cannot process correctly. This can manifest in
+  several ways:<ul>
+<li><strong>Loud Failure</strong>: The application crashes because an expected element is
+  missing. This is the best-case scenario, as the problem is immediately
+  obvious.</li>
+<li><strong>Silent Data Corruption</strong>: The application misinterprets the data,
+  leading to incorrect calculations, lost information, or corrupted
+  records.  This is the most dangerous outcome, as the damage can go
+  unnoticed for weeks or months, spreading through your system and making
+  recovery nearly impossible.</li>
+<li><strong>Massive Cleanup Effort</strong>: You are now forced to halt development,
+  painstakingly analyze mountains of XML to find the inconsistencies, and
+  write complex, defensive code to handle all the unexpected variations—the
+  exact mess you found yourself in.</li>
+</ul>
+</li>
+</ul>
+<h2 id="a-brilliant-trap-the-saxon-give-them-enough-rope-business-model">A Brilliant Trap: The Saxon "Give Them Enough Rope" Business Model</h2>
+<p>So, if this is such a common disaster, why do so many of us walk right into it?
+Often, the path is paved by the very tools we start with.</p>
+<p>Many of us begin our journey with XSLT using the fantastic—and free—Saxon Home
+Edition (saxon-he). It's an incredibly powerful engine for transforming XML. But
+there is one critical feature it intentionally leaves out: schema validation.
+To get that you need to pay for a license.</p>
+<p>Now, I can't say for sure if this is their grand strategic plan, but the result
+is what you might call a brilliant "give them enough rope to hang themselves"
+business model. Here's how it often plays out for developers:</p>
+<ol>
+<li>First, you get hooked on the power and elegance of XSLT using their amazing
+   free tool.</li>
+<li>As your project grows and evolves, you inevitably wander into the minefield
+   of data inconsistency and experience the "technical disaster" we just
+   described.</li>
+<li>After the pain becomes too great, you realize the only way to secure
+   your system is with schema validation, a feature only available in their
+   licensed product line (Saxon-PE and Saxon-EE).</li>
+</ol>
+<p>Whether it's intentional or not, it's a powerful lesson in the true cost of
+"free." This isn't just a scary story; it's a preventable outcome. Investing in
+the right knowledge and tools and defining a schema from the start is your
+insurance policy. It turns vague assumptions into clear, enforceable rules,
+making your system stable, predictable, and much easier to evolve over time.</p>
+<p>However, there are a lot of open source XML schema validation tools that you can
+include in your program that you can use with the <code>sachonche</code> library.</p>
+<h2 id="schema-technologies">Schema Technologies</h2>
+<p>In this training we will be looking at how to integrate XDS 1.1 and Schematron
+schema validation technologies with Python, but here is the full list of
+available schema validation technologies.</p>
+<h3 id="dtd-document-type-definition">DTD (Document Type Definition)</h3>
+<p>A DTD is the original schema language, introduced with the XML 1.0 specification
+in 1998. Its unique offering is its simplicity and its ability to be embedded
+directly within an XML file. The DTD rules can live inside a <code>&lt;!DOCTYPE
+[...]&gt;</code> block at the top of the XML, making the file self-contained, or they
+can be in a separate <code>.dtd</code> file that is referenced. While this reference tells a
+parser what the document structure is, validation is a step that must be
+explicitly enabled by the processing software, like Python's <code>lxml</code> library, which
+has full support for it. DTD is a complete and stable technology, but it is
+largely considered legacy because it lacks support for data types (e.g., numbers
+vs. text) and namespaces. </p>
+<p>The effort to learn it is very low.</p>
+<h3 id="xds-10">XDS 1.0</h3>
+<p>XSD 1.0 became a W3C Recommendation in 2001 as a powerful successor to DTDs. Its
+unique offering is its rich set of data types (integers, dates, strings, etc.)
+and full support for XML Namespaces, which are essential for complex documents.
+The schema is almost always defined in a separate <code>.xsd</code> file and lives on a web
+server or in the project's file system. An XML document references its schema
+via an <code>xsi:schemaLocation</code> attribute in the root element. This attribute acts as
+a hint; it doesn't automatically trigger validation. A validation-aware parser,
+like the one included in Python's powerful <code>lxml</code> library, must be instructed to
+fetch the schema and perform the validation. XSD 1.0 is a complete, stable, and
+still massively widespread technology. </p>
+<p>The learning effort is medium due to its verbose XML-based syntax and extensive
+feature set.</p>
+<h3 id="xds-11">XDS 1.1</h3>
+<p>Becoming a W3C Recommendation in 2012, XSD 1.1 is the modern evolution of the
+XML Schema language. Its most significant unique offering is the <code>&lt;xs:assert&gt;</code>
+element, which allows you to embed complex validation rules using XPath 2.0
+directly inside the schema, <strong>a feature heavily inspired by Schematron</strong>. Like
+its predecessor, an XSD 1.1 schema lives in an external .xsd file and is
+referenced the same way. While lxml's support for 1.1 is incomplete, the Python
+<code>xmlschema</code> library is the go-to tool for full XSD 1.1 support. XSD 1.1 is a
+complete and stable recommendation representing the current standard. </p>
+<p>The learning effort is medium-to-high, as it builds on the complexity of 1.0
+with powerful new capabilities.</p>
+<h3 id="relax-ng">RELAX NG</h3>
+<p>Standardized by OASIS and ISO around 2003, RELAX NG is a popular alternative to
+XSD. Its unique offering is a much simpler and more intuitive grammar for
+defining XML structures, especially those with complex ordering or choices. Many
+find it more elegant and easier to read than XSD. The schema lives in an
+external <code>.rng</code> file and can be written in either an XML syntax or a more
+human-readable "compact syntax." It is typically referenced from an XML document
+using a special processing instruction, and validation is performed explicitly
+by a tool. Python's lxml library has excellent, built-in support for RELAX NG
+validation. It is a complete and stable ISO standard that, while less widespread
+than XSD, is highly respected.</p>
+<p>The learning effort is medium, but generally considered lower than XSD.</p>
+<h3 id="schematron">Schematron</h3>
+<p>Think of Schematron not as a blueprint for your XML's structure, but as a
+quality control inspector for its content. Standardized as an ISO standard in
+2006, its unique purpose is to enforce specific business rules that other schema
+languages can't handle. Its power comes from using XPath to make assertions. For
+example, you can write a rule that says, "if an order's type attribute is
+'sale', then a discount element must be present." Even better, you can define
+your own clear error messages like, "Sale orders must include a discount
+amount."</p>
+<p>Under the hood, Schematron rules are executed by an XSLT engine. This is a
+critical detail because the engine you use determines how powerful your rules
+can be. Python's <code>lxml</code> library has great built-in support, but it uses an engine
+limited to XPath 1.0. For more complex rules using modern features (like regular
+expressions or advanced date functions), you need a more capable engine like
+<code>saxonche</code>, which supports XPath 3.0 and above.</p>
+<p>Your Schematron rules live in a separate <code>.sch</code> file. You apply them as a distinct
+validation step, often after you've already confirmed the basic structure with
+something like XSD.</p>
+<p>Schematron is a complete and stable technology, and the learning effort is
+medium — not because Schematron itself is complex, but because your ability to
+write powerful rules depends entirely on how well you know XPath.</p>
+<h2 id="xds-11-python-integration">XDS 1.1 Python Integration</h2>
+<p>To access the XDS 1.1 technology we will install <a href="https://github.com/sissaschool/xmlschema">xmlschema</a>:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">source</span><span class="w"> </span>./venv/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>xmlschema
+</code></pre></div>
+
+<h2 id="scematron-python-integration">Scematron Python Integration</h2>
+<h2 id="xds-11-cli-and-training-examples">XDS 1.1 Cli and Training Examples</h2>
+<h2 id="scematron-cli-and-training-examples">Scematron Cli and Training Examples</h2>
+<h1 id="learning-xslt-with-python">Learning XSLT with Python</h1>
+<p>This repository is a playground for exploring XSLT, a powerful functional
+language for data transformation, from within a modern Python environment. It
+provides a declarative, "single-step" paradigm for tackling complex data
+plumbing challenges in a way that is fundamentally different from traditional
+imperative code.</p>
+<p>Here you can learn and experiment with XSLT via the command line, using tools and examples for:</p>
+<ul>
+<li>Building and debugging XSLT stylesheets.</li>
+<li>Validating XML using XDS 1.1 and Schematron.</li>
+<li>Testing XPath 3.1 expressions.</li>
+<li>Connecting with key training resources (e.g., Michael Kay’s books).</li>
+</ul>
+<p>The project leverages modern Python libraries like <code>lxml</code> (for <code>XSLT 1.0</code>)
+and <code>saxonche</code> (for <code>XSLT +3.0</code>), which adds advanced features like
+streaming and native JSON handling.</p>
+<h1 id="background-a-tale-of-two-philosophies">Background: A Tale of Two Philosophies</h1>
+<p>The histories of Python and XSLT offer a compelling study in how technologies
+are shaped. Python's development was famously practitioner-led by Guido van
+Rossum, fostering a pragmatic culture that valued developer happiness. Its
+evolution via the community-driven PEP process meant it was built by and for
+programmers. In stark contrast, XSLT was born from a top-down W3C committee of
+architects. The result was a language that was formally powerful but actively
+hostile to the sensibilities of the average developer, burdened by a punishingly
+verbose XML-based syntax and a steep, declarative-functional learning curve that
+felt extraterrestrial to most practitioners.</p>
+<p>This difference had profound consequences and directly explains why XSLT fell
+into mainstream obscurity. While Python's flexibility allowed it to find a
+"killer app" by "borg'ing" the scientific world of MATLAB, XSLT's rigidity and
+poor ergonomics actively repelled the fast-growing world of web development. As
+web APIs moved towards the lightweight, brain-dead simple JSON format, XSLT's
+heavyweight, document-centric model felt like using a sledgehammer to crack a
+nut. While its champion, Michael Kay, was quietly perfecting it into a
+masterpiece of engineering, the mainstream war had already been lost to tools
+that were simply easier, faster, and more enjoyable to use.</p>
+<p>Today, however, these two histories have converged. With the advent of libraries
+like saxonche, XSLT has effectively "borg'd" itself into the Python ecosystem,
+not as a competitor, but as a specialized engine for the kind of complex data
+plumbing it was designed for. Freed from having to be a general-purpose tool,
+its difficult nature is less of a barrier. It allows developers to use the right
+tool for the job: Python for orchestration, and XSLT for the powerful, if
+sometimes brutal, rule-based data transformations at which it remains unmatched.</p>
 <h2 id="quick-start">Quick Start</h2>
 <p>Clone the repo:</p>
 <div class="codehilite"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/aleph2c/learning_xslt_with_python.git
@@ -157,11 +362,11 @@ xslt<span class="w"> </span>install-compiler-errors<span class="w">  </span><spa
 </code></pre></div>
 
 <h3 id="testing-xpath-patterns">Testing XPath Patterns</h3>
-<p>Imagine you are trying to understand how to use XPath matching expressions with XSLT.</p>
-<p>You would like to reference the following picture -- a graph depicting an XML tree
-structure with nodes labeled for axes like child, descendant, parent, ancestor,
-sibling, etc. -- and the <code>/patterns/axis_testing.xml</code> file that represents this
-picture, to try out various XPath matching expressions.</p>
+<p>XSLT's power comes from XPath, which uses <strong>axes</strong> like <code>child::</code>,
+<code>parent::</code>, and <code>ancestor::</code> to navigate the XML tree. The diagram below
+illustrates these relationships. You can experiment with them by running your
+own XPath expressions against the corresponding /patterns/axis_testing.xml file,
+which represents this exact tree structure.</p>
 <p><img alt="xpath 2" src="patterns/xpath_2.svg" /></p>
 <p>To see the entire XML file, we could set the context to the "root" node then match
 against everything in the document:</p>
@@ -255,85 +460,212 @@ the full command:</p>
 
 <p>Repeat this cycle — edit <code>text-hierarchy.xsl</code>, run try ex -v, and check errors
 — until your XSLT program produces the desired <code>text-hierarchy.txt</code> output.</p>
-<h2 id="context">Context</h2>
-<p>XSLT (eXtensible Stylesheet Language Transformations) is a declarative language
-for converting XML data into other formats, such as HTML, SVG, text, or even
-code. With XSLT 3.0, it can also handle JSON input and output, making it
-versatile for modern data transformation.</p>
-<p>Compared to templating libraries like Python's Jinja2, XSLT is more specialized
-for tree-based data (<code>XML/JSON</code>), with built-in XPath for querying and functional
-features for complex transformations. While Jinja2 is simpler for text
-templating, XSLT excels in handling large datasets or streams declaratively — you
-specify what the output should look like, and the language figures out how to
-generate it. XSLT is functional (e.g., no mutable state, recursion for loops),
-but it's not a Lisp dialect; it's XML-based with event-driven template matching.</p>
-<p>XSLT programs are serializable (as XML), enabling metaprogramming — your XSLT
-can transform itself. Python supports XSLT via libraries like lxml (for XSLT
-1.0) or saxonche (for XSLT 3.0/XPath 3.1). The standard is at version 3.0, but
-many open-source tools (e.g., lxml) stick to 1.0, while saxonche provides full
-3.0 support.</p>
-<h3 id="recommended-learning-resources">Recommended Learning Resources</h3>
-<ul>
-<li>Start with Basics: Michiel van Otegem’s Teach Yourself XSLT in 21 Days.
-  Chapter 3 has helpful XPath diagrams for tree navigation. Use the <code>try
-  xpath</code> command with this book to dial in the Xpath concepts.  Build up a
-  snippet library as you work through the chapters.  Get used to a
-  troubleshooting workflow as you wrestle with this book.</li>
-<li>Lab Work: Sal Mangano’s XSLT Cookbook for practical examples.</li>
-<li>Intermediate: Jeni Tennison’s Beginning XSLT 2.0: From Novice to Professional.
-  Use ChatGPT to interrogate examples and fill gaps.</li>
-<li>Advanced Patterns: Michael Kay’s book, Chapter 17: Stylesheet Design Patterns.</li>
-<li>No Dedicated XSLT 3.0 Book Yet: Use Michael Kay’s XSLT 2.0 and XPath 2.0
-  Programmer's Reference (covers much of 3.0) and his article Transforming JSON
-  using XSLT 3.0. For XPath 3.0/3.1, <a href="https://www.altova.com/training/xpath3">try Altova’s free training resources</a>.</li>
-<li>XSLT 3.0 Specific: <a href="https://xslt-3-by-example.blogspot.com/">Martin Honnen’s XSLT 3.0 by Example blog</a>, <a href="https://stackoverflow.com/users/252228/martin-honnen">Stack Overflow</a>
-  answers, and GitHub gists.</li>
-<li><a href="https://www.saxonica.com/papers/xmlprague-2016mhk.pdf">Transforming JSON using XSLT 3.0</a> by Michael Kay. (There is supporting example code for some of these JSON transforms and the pattern's code in the pattern's folder of this repo.)</li>
-</ul>
-<h3 id="setting-up-your-development-enviroment">Setting Up Your Development Enviroment</h3>
-<p>To make XSLT less verbose (a trade-off for its XML-based metaprogramming), use
-editor snippets. In Vim/Neovim, SirVer’s UltiSnips is excellent—create your own
-library as you learn. Build snippets while reading books, adding comments for
-reference. Use UltiSnips’ shortcut to jump between your XSLT file and 
-<a href="https://github.com/aleph2c/.vim/blob/master/snippets/xslt.snippets">snippet files</a>. Keep snippets under Git-control for portability.</p>
-<p>With snippets, typing and debugging XSLT becomes faster. Experiment with <a href="https://github.com/evanlenz/xslt-visualizer">Evan
-Lenz’s XSLT-visualizer</a> to see how
-templates react to XML input in an event-driven way.</p>
-<h3 id="shifting-to-functional-thinking">Shifting to Functional Thinking</h3>
-<p>XSLT is functional, so stop thinking procedurally (like in Python). Prototype in
-Python first, but avoid overwriting variables—use recursion instead. This repo’s
-try to-python command converts XML to Python code as a starting point.</p>
-<p>Once your functional Python prototype works, use Grok/Gemini to translate it to
-XSLT. The output won’t run perfectly, but it handles syntax hurdles. Combine it
-with your XPath patterns (tested via try xpath, see below) and snippets to
-refine. Use the repo’s try ex tool to compile and test until it works.</p>
-<h3 id="tools-and-libraries">Tools and Libraries</h3>
-<p>XSLT has been developed for 25 years, with Michael Kay (Saxonica) leading standards and tools. Saxonica’s open-source Saxon-HE supports XSLT 3.0; they sell licensed versions with extra features. Kay’s team is responsive on Stack Overflow and bug trackers.</p>
-<p>In Python, install saxonche (12.8.0+, Mozilla license) for XSLT 3.0/XPath 3.1:</p>
-<ul>
-<li>Supports XSLT 3.0, XPath 3.1, XQuery 3.1, XSD 1.1 (schema validation disabled in free version).</li>
-<li>It’s a C port of Saxon Java, usable in Python via ctypes.</li>
-</ul>
-<p>However, <code>saxonche</code> has limitations:</p>
-<ul>
-<li>Incomplete documentation and examples (see this repo's <code>/oneal</code> folder for
-  working ones).</li>
-<li>Error messages are off by default -- wrap call in exceptions for recovery.</li>
-<li>For stability, use <code>lxml</code> for XSLT 1.0 (better documented, based on
-  libxml2/libxslt)</li>
-</ul>
-<p>To see compiler errors (essential for learning), use Java's Saxon-HE CLI:</p>
-<div class="codehilite"><pre><span></span><code>java<span class="w"> </span>-jar<span class="w"> </span>saxon-he-12.0.jar<span class="w"> </span>-xsl:your.xsl<span class="w"> </span>-s:your.xml
+<h2 id="thinking-in-trees-a-new-paradigm-for-python-developers">Thinking in Trees: A New Paradigm for Python Developers</h2>
+<p><strong>XSLT is a powerful, declarative language for transforming complex data
+structures.</strong> While Python templating libraries like Jinja2 are excellent for
+generating text from data, XSLT is a specialized tool designed for the
+structural transformation of tree-like data such as XML and JSON.</p>
+<p>The fundamental difference lies in its thinking model. Instead of writing
+imperative Python code that loops through data, you write declarative XSLT
+rules. You define what the output should look like for a given pattern, and the
+XSLT processor, powered by the XPath query language, figures out how to apply
+those rules across the entire document. This functional, rule-based approach can
+be incredibly efficient for handling large or complex data streams.</p>
+<p>Python supports XSLT through libraries like <code>lxml</code>, but this is limited to the
+older, more basic XSLT 1.0 standard. This repository focuses on the modern XSLT
+3.0 via the saxonche library, which provides full support for advanced features,
+including native JSON handling.</p>
+<p>Because this declarative, rule-based paradigm is so different from imperative
+Python, learning it requires a new approach. This repository provides a complete
+workflow to become fluent:</p>
+<ol>
+<li>Build a custom AI "Professor" to act as your personal tutor.</li>
+<li>Follow a "hack-to-learn" workflow using the provided code examples.</li>
+<li>Use a curated curriculum based on some classic XSLT texts.</li>
+<li>Build an Amoury</li>
+</ol>
+<h3 id="build-a-custom-professor">Build a Custom Professor</h3>
+<p>Copy the following markdown into a context file and feed it to the AI which is
+training you. If you can't do that, just drop it into the AI's prompt.  This
+will provide a short hand to turn it into an excellent tutor.</p>
+<div class="codehilite"><pre><span></span><code><span class="gh"># AI Interaction Modes for XSLT/XML Development</span>
+
+This document outlines custom interaction modes for consulting on XSLT, XML, and XPath. These modes allow for switching response styles dynamically by using a prefix at the start of a message (e.g., <span class="sb">`TT:1 What is an atomic value?`</span>).
+
+To exit any mode and return to the default, adaptive response style, use the prefix <span class="sb">`NN:`</span> or explicitly ask to leave the current mode.
+
+<span class="gu">## Available Modes</span>
+
+<span class="gu">### TT: Teacher Mode (Using Revised Bloom&#39;s Taxonomy)</span>
+
+<span class="k">*</span><span class="w"> </span>  <span class="gs">**Purpose**</span>: An educational style to help learn XSLT, XML, or XPath by building cognitive skills step-by-step. The mode focuses on one level of the taxonomy per query, providing prompts to evaluate and advance your understanding.
+<span class="k">*</span><span class="w"> </span>  <span class="gs">**Activation**</span>: Prefix with <span class="sb">`TT:X`</span>, where <span class="sb">`X`</span> is the level from 1 to 6. If no level is specified (<span class="sb">`TT:`</span>), the mode will default to level 1 or infer from the context.
+<span class="k">*</span><span class="w"> </span>  <span class="gs">**Levels (Revised Bloom&#39;s Taxonomy)**</span>:
+<span class="w">    </span><span class="k">1.</span>  <span class="gs">**Remembering (TT:1)**</span>: Recall facts and basic concepts. I&#39;ll ask questions like, &quot;What is the difference between <span class="sb">`xsl:copy`</span> and <span class="sb">`xsl:copy-of`</span>?&quot; or &quot;What are the seven types of XML nodes?&quot;
+<span class="w">    </span><span class="k">2.</span>  <span class="gs">**Understanding (TT:2)**</span>: Explain ideas or concepts. I&#39;ll ask for explanations like, &quot;Can you describe what a sequence is in your own words?&quot; or &quot;Explain the purpose of the identity transform.&quot;
+<span class="w">    </span><span class="k">3.</span>  <span class="gs">**Applying (TT:3)**</span>: Use information in concrete situations. I&#39;ll provide scenarios like, &quot;Show how you would use <span class="sb">`xsl:for-each-group`</span> to group these items by category.&quot;
+<span class="w">    </span><span class="k">4.</span>  <span class="gs">**Analyzing (TT:4)**</span>: Draw connections among ideas. I&#39;ll prompt analysis like, &quot;Compare the built-in default templates to an explicit identity transform. What are the tradeoffs?&quot;
+<span class="w">    </span><span class="k">5.</span>  <span class="gs">**Evaluating (TT:5)**</span>: Justify a stand or decision. I&#39;ll ask for critiques like, &quot;Evaluate this template. Is there a more efficient or readable way to write it?&quot;
+<span class="w">    </span><span class="k">6.</span>  <span class="gs">**Creating (TT:6)**</span>: Produce new or original work. I&#39;ll guide creation with prompts like, &quot;Design a recursive function that traces the processing of a document.&quot;
+<span class="k">*</span><span class="w"> </span>  <span class="gs">**Exit**</span>: Use <span class="sb">`NN:`</span> or say &quot;Exit teacher mode.&quot;
+
+<span class="gu">### AA: XSLT Architect Mode</span>
+
+<span class="k">*</span><span class="w"> </span>  <span class="gs">**Purpose**</span>: High-level architectural and design discussions, focusing on best practices, patterns, and trade-offs without necessarily writing full code solutions. This mode is for exploring the &quot;how&quot; and &quot;why&quot; of a solution&#39;s structure.
+<span class="k">*</span><span class="w"> </span>  <span class="gs">**Activation**</span>: Prefix with <span class="sb">`AA:`</span>. You can add a sub-focus like:
+<span class="w">    </span><span class="k">*</span><span class="w"> </span>  <span class="sb">`AA:patterns`</span>: Discuss common XSLT design patterns (e.g., identity transform, fill-in-the-blanks).
+<span class="w">    </span><span class="k">*</span><span class="w"> </span>  <span class="sb">`AA:tradeoffs`</span>: Analyze the pros and cons of different implementation choices (e.g., <span class="sb">`xsl:for-each`</span> vs. <span class="sb">`xsl:apply-templates`</span>).
+<span class="w">    </span><span class="k">*</span><span class="w"> </span>  <span class="sb">`AA:ideas`</span>: Brainstorm multiple approaches to solving a complex transformation problem.
+<span class="k">*</span><span class="w"> </span>  <span class="gs">**Style**</span>:
+<span class="w">    </span><span class="k">*</span><span class="w"> </span>  Starts by restating the core problem to ensure understanding.
+<span class="w">    </span><span class="k">*</span><span class="w"> </span>  Generates multiple potential solutions with clear pros and cons (e.g., performance, readability, maintainability).
+<span class="w">    </span><span class="k">*</span><span class="w"> </span>  Includes risks or &quot;gotchas&quot; for each approach.
+<span class="w">    </span><span class="k">*</span><span class="w"> </span>  Critiques user-provided ideas rigorously, pointing out potential flaws or edge cases and suggesting robust alternatives.
+<span class="k">*</span><span class="w"> </span>  <span class="gs">**Exit**</span>: Use <span class="sb">`NN:`</span> or say &quot;Exit architect mode.&quot;
+
+<span class="gu">### LH: Language Historian Mode</span>
+
+<span class="k">*</span><span class="w"> </span>  <span class="gs">**Purpose**</span>: An interdisciplinary discussion exploring the history, design philosophy, and evolution of XSLT/XML and related technologies. This mode focuses on the &quot;why&quot; behind the language&#39;s features and its place in the broader history of technology.
+<span class="k">*</span><span class="w"> </span>  <span class="gs">**Activation**</span>: Prefix with <span class="sb">`LH:`</span>.
+<span class="k">*</span><span class="w"> </span>  <span class="gs">**Style**</span>:
+<span class="w">    </span><span class="k">*</span><span class="w"> </span>  Draws parallels and contrasts between XSLT&#39;s development and that of other languages (like Python).
+<span class="w">    </span><span class="k">*</span><span class="w"> </span>  Explains the reasoning behind confusing or non-intuitive language features (e.g., XSLT&#39;s default templates).
+<span class="w">    </span><span class="k">*</span><span class="w"> </span>  Discusses the influence of standards committees (W3C) versus individual or community-led language design.
+<span class="w">    </span><span class="k">*</span><span class="w"> </span>  Analyzes the industrial and human factors that lead to a technology&#39;s adoption or decline.
+<span class="k">*</span><span class="w"> </span>  <span class="gs">**Exit**</span>: Use <span class="sb">`NN:`</span> or say &quot;Exit historian mode.&quot;
+
+<span class="gu">### NN: Normal Mode</span>
+
+<span class="k">*</span><span class="w"> </span>  <span class="gs">**Purpose**</span>: Reset to the standard, adaptive response style for direct questions and answers.
+<span class="k">*</span><span class="w"> </span>  <span class="gs">**Activation**</span>: Prefix with <span class="sb">`NN:`</span> or occurs automatically after exiting another mode.
 </code></pre></div>
 
-<p>This repo's CLI tools call Java for errors when <code>saxonche</code> detects issues.
-Install Java to set up as below.</p>
-<h1 id="installation-instructions">Installation Instructions</h1>
-<p>In order for you get build a decent learning environment, setup:</p>
+<h3 id="hack-to-learn-workflow">Hack-to-Learn Workflow</h3>
+<p>While new XSLT books are rare, the classic texts contain timeless problems and
+patterns. This repository provides the code for those exercises, allowing you to
+master XSLT using a modern, AI-driven workflow.</p>
+<p>The core learning loop is simple: use this repository's code as a foundation and
+an AI assistant as your personal tutor. An effective workflow is:</p>
+<ol>
+<li><strong>Find an Example</strong>: Navigate to a chapter's code within this repository.</li>
+<li><strong>Load the Context</strong>: Copy and paste the source XML and the XSLT (<code>.xsl</code>) file into
+   your AI session.</li>
+<li><strong>Interrogate the Code</strong>: Ask the AI to explain the stylesheet until you
+   understand it. Use the AA: (Architect) and LH: (Language Historian) prompts
+   to explore why the code is structured a certain way and the design philosophy
+   behind it.</li>
+<li><strong>Run the Example</strong>: Execute the code using the try command-line helper provided
+   by this repository to see it in action.</li>
+<li><strong>Test Your Knowledge</strong>: Ask the AI to quiz you. Use the TT: (Teacher) prompts to
+   generate targeted questions at different cognitive levels.  (A fast and
+   <strong>painful</strong> way to learn is to set the TT prompt well beyond your level of
+   competence.  If it hurts you are doing it right.)</li>
+</ol>
+<h3 id="recommended-curriculum">Recommended Curriculum</h3>
+<p>Apply the learning workflow above to this curated training path. The directory names in parentheses correspond to the code in this repository.</p>
 <ul>
-<li>This repo's CLI</li>
-<li>Two XSLT pythone parser (<code>lxml/sachonche</code>)</li>
-<li>Example files</li>
+<li>
+<p><strong>1. The Basics (<code>otegem</code>)</strong></p>
+<ul>
+<li><strong>Book:</strong> <em>Teach Yourself XSLT in 21 Days</em> by Michiel van Otegem.</li>
+<li><strong>Focus:</strong> Work through chapters 3-17 to build a strong foundation. Use the <code>try xpath</code> command to master XPath concepts, and build a personal snippet library as you go.</li>
+</ul>
+</li>
+<li>
+<p><strong>2. Practical Labs (<code>sal</code>)</strong></p>
+<ul>
+<li><strong>Book:</strong> <em>XSLT Cookbook</em> by Sal Mangano.</li>
+<li><strong>Focus:</strong> These are practical, recipe-style examples. Use the AI to explain the core concept of each recipe before examining the solution. (Key chapters: 15, 6).</li>
+</ul>
+</li>
+<li>
+<p><strong>3. Intermediate Concepts (<code>jenni</code>)</strong></p>
+<ul>
+<li><strong>Book:</strong> <em>Beginning XSLT 2.0</em> by Jeni Tennison.</li>
+<li><strong>Focus:</strong> Use the AI to explain the high-level concepts from the chapter headings, then dive into the code examples provided in this repo to see them implemented. (Key chapters: 11, appendix A)</li>
+</ul>
+</li>
+<li>
+<p><strong>4. Advanced Design Patterns (<code>michael</code>, <code>patterns</code>)</strong></p>
+<ul>
+<li><strong>Book:</strong> Michael Kay’s <em>XSLT 2.0 and XPath 2.0 Programmer's Reference</em>.</li>
+<li><strong>Focus:</strong> Specifically Chapter 17: "Stylesheet Design Patterns." This
+    is essential reading for writing professional, maintainable XSLT.
+    (fill-in-the-blanks stylesheets, navigational stylesheets, rule-based
+    stylesheets, computational stylesheets)</li>
+</ul>
+</li>
+<li>
+<p><strong>5. Bridging to XSLT 3.0</strong></p>
+<ul>
+<li>Since there is no single XSLT 3.0 book, use a combination of these excellent resources:<ul>
+<li><strong>Michael Kay's Book:</strong> The book above covers much of the foundation needed for 3.0.</li>
+<li><strong>Online Examples:</strong> <a href="https://xslt-3-by-example.blogspot.com/">Martin Honnen’s XSLT 3.0 by Example blog</a> and his expert answers on <a href="https://stackoverflow.com/users/252228/martin-honnen">Stack Overflow</a>.</li>
+<li><strong>JSON Handling:</strong> Michael Kay's paper, <a href="https://www.saxonica.com/papers/xmlprague-2016mhk.pdf"><em>Transforming JSON using XSLT 3.0</em></a>. (Supporting code is in the <code>/patterns</code> folder of this repo.)</li>
+<li><strong>XPath 3.1 Training:</strong> <a href="https://www.altova.com/training/xpath3">Altova’s free training resources</a>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>6. Overview of 3.0</strong><ul>
+<li>Since there is no single XSLT 3.0 book, use the training patterns in the <code>(scott)</code>
+    directory (provided by Grok4)</li>
+</ul>
+</li>
+</ul>
+<h3 id="build-an-amoury">Build an Amoury</h3>
+<p>To make XSLT less verbose, use editor-snippets.</p>
+<p>In Vim/Neovim, SirVer’s UltiSnips is excellent — create your own library as you
+learn. Build snippets while reading books, adding comments for reference. Use
+UltiSnips’ shortcut to jump between your XSLT file and <a href="https://github.com/aleph2c/.vim/blob/master/snippets/xslt.snippets">snippet
+files</a>. Keep
+snippets under Git-control for portability.</p>
+<h3 id="understanding-xslts-default-behavior-and-why-its-so-confusing">Understanding XSLT's Default Behavior (And Why It's So Confusing)</h3>
+<p>The most confusing part of XSLT for newcomers is its set of invisible, built-in
+template rules. The best way to understand them is to compare XSLT to CSS.</p>
+<p>When you apply a CSS stylesheet to an HTML document, the browser's default
+behavior is to render the entire HTML structure. You write CSS rules to <em>style</em>
+the elements, but you don't expect the tags themselves (<code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, etc.) to
+disappear. This is because <strong>HTML is a presentational markup language</strong>; its
+tags have an inherent visual meaning to the browser.</p>
+<p>XSLT behaves differently. If you apply a completely empty stylesheet to an XML
+document, the result is that <strong>all the tags are stripped away, leaving only the
+raw text content.</strong> This is baffling at first, but it reveals the core
+philosophy of the language. Unlike HTML, <strong>XML is a semantic data language.</strong>
+Its tags, like <code>&lt;customer-id&gt;</code> or <code>&lt;price&gt;</code>, have no intrinsic visual meaning.
+They are labels for data.</p>
+<p>The XSLT designers assumed that the most basic, default operation anyone would
+want is to extract the data itself—the text. Therefore, they created two
+built-in rules that work together:</p>
+<ol>
+<li><strong>A Rule for Elements:</strong> This default rule matches any element (<code>*</code>) or the
+    root node (<code>/</code>). Its only job is to recursively keep processing
+    (<code>&lt;xsl:apply-templates/&gt;</code>). It produces no output for the element tag
+    itself; it just keeps digging deeper.</li>
+<li><strong>A Rule for Text:</strong> This default rule matches any text node (<code>text()</code>). Its
+    job is to copy the value of the text to the output (<code>&lt;xsl:value-of
+    select="."/&gt;</code>).</li>
+</ol>
+<p>When you combine these, the first rule navigates silently through the tree of
+element tags, and the second rule shouts out the value of any text it finds
+along the way. The result is a stream of text with all its structural context
+removed.</p>
+<h4 id="how-to-take-back-control">How to Take Back Control</h4>
+<p>This default behavior is rarely what you want. Experienced XSLT developers
+almost always start by creating a "blank slate." They override the built-in
+rules by putting this template at the top of their stylesheet:</p>
+<div class="codehilite"><pre><span></span><code><span class="cm">&lt;!-- This empty template matches ALL nodes and attributes and does nothing.</span>
+<span class="cm">     It effectively disables all the built-in rules. --&gt;</span>
+<span class="nt">&lt;xsl:template</span><span class="w"> </span><span class="na">match=</span><span class="s">&quot;node() | @*&quot;</span><span class="nt">/&gt;</span>
+</code></pre></div>
+
+<h1 id="installation-instructions">Installation Instructions</h1>
+<p>These installation commands will do the following:</p>
+<ul>
+<li>Install this repo's CLI</li>
+<li>Install the two XSLT python parsers (<code>lxml/sachonche</code>)</li>
+<li>Get the example programs organized within the book directories</li>
+<li>Get a separate version of the Saxonic XSLT that will provide compile errors</li>
 </ul>
 <div class="codehilite"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:aleph2c/leaning_xslt.git
 <span class="nb">cd</span><span class="w"> </span>learning_xslt

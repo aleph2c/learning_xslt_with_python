@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This XML file is invalid because the age element, which is required by the schema, is missing.
+-->
+<employees>
+  <employee>
+    <name>John Doe</name>
+    <bonus>1500.00</bonus>
+  </employee>
+</employees>

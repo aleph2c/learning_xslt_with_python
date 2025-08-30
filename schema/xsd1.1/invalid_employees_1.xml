@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This XML file is invalide because the root is staff instead of the expected
+exployees
+-->
+<staff>
+  <employee>
+    <name>John Doe</name>
+    <age>35</age>
+    <bonus>1500.00</bonus>
+  </employee>
+</staff>

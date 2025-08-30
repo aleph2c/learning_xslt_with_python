@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<employees>
+  <employee>
+    <name>John Doe</name>
+    <age>35</age>
+    <bonus>1500.00</bonus>
+  </employee>
+  <employee>
+    <name>Jane Smith</name>
+    <age>42</age>
+    <bonus>2500.50</bonus>
+  </employee>
+</employees>

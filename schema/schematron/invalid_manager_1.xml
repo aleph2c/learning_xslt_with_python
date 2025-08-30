@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<staff>
+  <employee role="manager">
+    <name>Carol White</name>
+    <department>Support</department>
+    <bonus>9000</bonus>
+  </employee>
+</staff>

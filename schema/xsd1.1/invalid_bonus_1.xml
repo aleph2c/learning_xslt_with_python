@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This XML file is invalid because the bonus element contains a non-decimal value.
+-->
+<employees>
+  <employee>
+    <name>John Doe</name>
+    <age>35</age>
+    <bonus>one thousand</bonus>
+  </employee>
+</employees>

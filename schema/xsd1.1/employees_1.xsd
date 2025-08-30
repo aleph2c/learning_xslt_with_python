@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+This XML Schema Definition (XSD) file defines the structure for a collection of
+employee records. Each employee must have a name (string), an age (integer
+between 18 and 65), and a bonus (decimal).
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="employees">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="employee" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" type="xs:string"/>
+              <xs:element name="age">
+                <xs:simpleType>
+                  <xs:restriction base="xs:integer">
+                    <xs:minInclusive value="18"/>
+                    <xs:maxInclusive value="65"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="bonus" type="xs:decimal"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

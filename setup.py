@@ -12,6 +12,7 @@ setup(
         "lxml",
         "markdown",
         "pygments",
+        "xmlschema",
         "saxonche >= 12.1.0",
         "PyYAML",
     ],

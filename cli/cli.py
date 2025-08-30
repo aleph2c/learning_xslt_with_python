@@ -3,6 +3,7 @@ import yaml
 import pprint
 import shutil
 import zipfile
+import xmlschema
 import subprocess
 from uuid import uuid1
 from pathlib import Path
@@ -31,7 +32,8 @@ def pp(item):
 JAVA_SAXON_VERSION = "saxon-he-12.8.jar"
 
 PathToDefault = (Path(__file__).parent / ".." / "ch3_templates").resolve()
-
+PathToSchematronIsoDir = (Path(__file__).parent / ".." / "schema" / "schematron" / "iso").resolve()
+PathToSchematronSchToXsl = PathToSchematronIsoDir / "iso_svrl_for_xslt2.xsl"
 # SaxonC/Saxonche is currently unreliable: Issues StackOverFlow errors using
 # Python on a server: https://saxonica.plan.io/issues/5787
 #
@@ -107,12 +109,13 @@ def call_out_to_java_to_get_saxon_compile_errors(
     return output_obj
 
 
+
 def __saxon_xslt30_transform(
     lock,
     home_dir,
     xml_file_name,
-    xsl_file_name,
     output_file_name,
+    xsl_file_name=None,
     params=None,
     verbose=False,
 ):
@@ -124,7 +127,20 @@ def __saxon_xslt30_transform(
 
     home_path = Path(home_dir)
     xml_file_path = Path(home_dir) / xml_file_name
-    xsl_file_path = Path(home_dir) / xsl_file_name
+
+    if Path(xml_file_name).suffix != ".sch":
+        xsl_file_path = Path(home_dir) / xsl_file_name
+        if not (Path(home_dir) / xsl_file_name).exists():
+            result = f"xsl_file_name: {xsl_file_path} doesn't exist"
+            lock.release()
+            return result
+    else:
+        if not PathToSchematronSchToXsl.exists():
+            result = f"{PathToSchematronSchToXsl} needed by schematron doesn't exist"
+            lock.release()
+            return result
+        xsl_file_path = PathToSchematronSchToXsl
+
     output_file_path = Path(home_dir) / output_file_name
 
     if not home_path.exists():
@@ -134,11 +150,6 @@ def __saxon_xslt30_transform(
 
     if not xml_file_path.exists():
         result = f"xml_file_name: {xml_file_path} doesn't exist"
-        lock.release()
-        return result
-
-    if not (Path(home_dir) / xsl_file_name).exists():
-        result = f"xsl_file_name: {xsl_file_path} doesn't exist"
         lock.release()
         return result
 
@@ -152,12 +163,16 @@ def __saxon_xslt30_transform(
         json_input_param = proc.make_string_value(str(home_dir / xml_file_name))
         xsltproc.set_parameter("json_input_filename", json_input_param)
 
+    if Path(xml_file_name).suffix == ".sch":
+        xsltproc.set_parameter("phase", proc.make_string_value("#ALL"))
+
     exception_occurred = False
     try:
-      _exec = xsltproc.compile_stylesheet(stylesheet_file=str(xsl_file_path))
+        _exec = xsltproc.compile_stylesheet(stylesheet_file=str(xsl_file_path))
     except Exception as ex:
-      exception_occurred = True
-      _exec = None
+        assert ex
+        exception_occurred = True
+        _exec = None
 
     if _exec is None:
         saxon_error = f"{xsltproc.error_message}\n"
@@ -196,8 +211,12 @@ def __saxon_xslt30_transform(
                         v = v[1:-1]
                 param = proc.make_string_value(str(v))
                 _exec.set_parameter(k, param)
-        _exec.set_initial_match_selection(file_name=str(xml_file_path))
-        _exec.apply_templates_returning_file(output_file=str(output_file_path))
+        _exec.transform_to_file(
+            source_file=str(xml_file_path),
+            output_file=str(output_file_path)
+        )
+        #_exec.set_initial_match_selection(file_name=str(xml_file_path))
+        #_exec.apply_templates_returning_file(output_file=str(output_file_path))
         if exception_occurred or _exec.exception_occurred:
             saxon_error = f"{_exec.error_message}\n"
             _exec.exception_clear()
@@ -261,8 +280,8 @@ def thread_runner(lock, task_event, input_queue, output_queue):
                 lock,
                 home_dir=q.home_dir,
                 xml_file_name=q.xml_file_name,
-                xsl_file_name=q.xsl_file_name,
                 output_file_name=q.output_file_name,
+                xsl_file_name=q.xsl_file_name,
                 params=q.params,
                 verbose=q.verbose,
             )
@@ -289,8 +308,8 @@ def xpath_with_saxon(home_dir, xml_file_name, pattern):
 def saxon_xslt30_transform(
     home_dir,
     xml_file_name,
-    xsl_file_name,
     output_file_name,
+    xsl_file_name=None,
     params=None,
     verbose=False,
 ):
@@ -336,6 +355,80 @@ def saxon_xslt30_transform(
 
     return result
 
+def validate_xml_xsd11(xsd_path, xml_path):
+    """
+    Validates an XML file against an XSD schema.
+
+    Args:
+        xsd_path: The path to the XSD schema file.
+        xml_path: The path to the XML file to validate.
+    """
+    try:
+        # For XSD 1.1, it's recommended to use XmlSchema11
+        # The xmlschema library supports XSD 1.0 and 1.1.
+        schema = xmlschema.XMLSchema11(xsd_path)
+        schema.validate(xml_path)
+        return True
+    except xmlschema.XMLSchemaValidationError as e:
+        print(f"Validation failed for {xml_path}:\n{e}")
+        return e
+    except Exception as e:
+        print(f"An unexpected error occurred for {xml_path}:\n{e}")
+        return False
+
+def is_schematron_validation_successful(svrl_report_string: str) -> bool:
+    """
+    Determines if a Schematron validation was successful based on the SVRL report.
+
+    The rule is simple: if the report contains the string for a "failed-assert"
+    tag, the validation has failed. Otherwise, it has passed.
+
+    Args:
+        svrl_report_string: The full SVRL report as a string.
+
+    Returns:
+        True if the validation passed, False otherwise.
+    """
+    if not svrl_report_string:
+        # An empty or None report indicates a failure in the process.
+        return False
+
+    # The presence of this tag is the definitive sign of a validation failure.
+    failure_tag = '<svrl:failed-assert'
+
+    return failure_tag not in svrl_report_string
+
+def validate_schema(
+    home_dir,
+    xml_file_name,
+    output_file_name,
+    schema_file_name=None,
+    params=None,
+    verbose=False,
+):
+
+    result = None
+    if Path(schema_file_name).suffix == '.sch':
+        schematron_xsl = Path(schema_file_name).stem + '.xsl'
+        saxon_xslt30_transform(
+            home_dir=home_dir,
+            xml_file_name=schema_file_name,
+            output_file_name=schematron_xsl,
+        )
+
+        result = saxon_xslt30_transform(
+            home_dir=home_dir,
+            xml_file_name=xml_file_name,
+            xsl_file_name=schematron_xsl,
+            output_file_name=output_file_name,
+            verbose=True,
+        )
+    else:
+        xsd_path = str(Path(home_dir) / schema_file_name)
+        xml_path = str(Path(home_dir) / xml_file_name)
+        result = validate_xml_xsd11(xsd_path, xml_path)
+    return result
+
 
 class CliCache:
 
@@ -347,6 +440,8 @@ class CliCache:
         home_dir,
         xml_file_name=None,
         xsl_file_name=None,
+        xsd_file_name=None,
+        schematron_file_name=None,
         processor=None,
         output_file_name=None,
         context=None,
@@ -360,6 +455,8 @@ class CliCache:
             self._cache["home_dir"] = str(home_dir)
             self._cache["xml_file_name"] = None
             self._cache["xsl_file_name"] = None
+            self._cache["xsd_file_name"] = None
+            self._cache["schematron_file_name"] = None
             self._cache["processor"] = None
             self._cache["output_file_name"] = None
             self._cache["context"] = None
@@ -432,6 +529,30 @@ class CliCache:
     def xsl_file_name(self, xsl_file_name):
         with self.cached() as cache:
             cache["xsl_file_name"] = xsl_file_name
+
+    @property
+    def xsd_file_name(self):
+        result = None
+        with self.cached() as cache:
+            result = cache["xsd_file_name"]
+        return result
+
+    @xsd_file_name.setter
+    def xsd_file_name(self, xsd_file_name):
+        with self.cached() as cache:
+            cache["xsd_file_name"] = xsd_file_name
+
+    @property
+    def schematron_file_name(self):
+        result = None
+        with self.cached() as cache:
+            result = cache["schematron_file_name"]
+        return result
+
+    @schematron_file_name.setter
+    def schematron_file_name(self, schematron_file_name):
+        with self.cached() as cache:
+            cache["schematron_file_name"] = schematron_file_name
 
     @property
     def processor(self):
@@ -508,7 +629,8 @@ class Config:
         self.cache.processor = None
 
     def cache_inputs(
-        self, home_dir, xml_file_name, xsl_file_name, processor, context, params
+        self, home_dir, xml_file_name, xsl_file_name, xsd_file_name,
+        schematron_file_name, processor, context, params
     ):
         cache_exists = True if CliCache.exists() else False
 
@@ -520,6 +642,10 @@ class Config:
                 xml_file_name = self.cache.xml_file_name
             if xsl_file_name is None:
                 xsl_file_name = self.cache.xsl_file_name
+            if xsd_file_name is None:
+                xsd_file_name = self.cache.xsd_file_name
+            if schematron_file_name is None:
+                schematron_file_name = self.cache.schematron_file_name
             if processor is None:
                 processor = self.cache.processor
             if context is None:
@@ -544,6 +670,7 @@ class Config:
         self.cache.processor = processor
         self.cache.context = context
         self.cache.params = params
+
 
     def transform_with_lxml(
         self, home_dir, xml_file_name, xsl_file_name, output_file_name
@@ -660,9 +787,9 @@ def _markdown(ctx):
             ],
             extensions_configs={
                 'toc': {
-                    'title' : 'Table of Contents',
-                    'permalink' : True,
-                    'toc_depth' : '2-4',
+                    'title': 'Table of Contents',
+                    'permalink': True,
+                    'toc_depth': '2-4',
                 },
                 'codehilite': {
                     'css_class': 'highlight',
@@ -724,6 +851,8 @@ def cli(ctx, home_dir):
         home_dir=home_dir,
         xml_file_name=None,
         xsl_file_name=None,
+        xsd_file_name=None,
+        schematron_file_name=None,
         processor=None,
         context=None,
         params=None,
@@ -1024,3 +1153,55 @@ def ex(
         click.echo("ran the saxon processor thread")
     else:
         click.echo('command ignored, no processor set; "try ex --help"')
+
+
+@cli.command
+@pass_config
+@click.option("-x", "--xml", "xml_file_name", default=None, help="Set the xml file")
+@click.argument("schema_file_name", required=False)
+def check(
+    ctx,
+    xml_file_name,
+    schema_file_name=None,
+):
+
+    if xml_file_name:
+        ctx.cache.xml_file_name = xml_file_name
+    else:
+        xml_file_name = ctx.cache.xml_file_name
+
+    if schema_file_name is None and any(Path(ctx.cache.home_dir).glob('*.sch')):
+        schema_file_name = ctx.cache.schematron_file_name
+    elif schema_file_name is None:
+        schema_file_name = ctx.cache.xsd_file_name
+
+    if Path(schema_file_name).suffix == ".sch":
+        ctx.cache.schematron_file_name = schema_file_name
+    else:
+        ctx.cache.xsd_file_name = schema_file_name
+
+    results_file_name = Path(schema_file_name).stem + '.result'
+
+    result = validate_schema(
+        home_dir=ctx.cache.home_dir,
+        xml_file_name=xml_file_name,
+        schema_file_name=schema_file_name,
+        output_file_name=results_file_name
+    )
+    result_path = Path(ctx.cache.home_dir) / results_file_name
+    if Path(schema_file_name).suffix == ".sch":
+        test_result = is_schematron_validation_successful(result)
+        if test_result:
+            click.echo('PASSED')
+        else:
+            click.echo('FAILED')
+            click.echo(result)
+    else:
+        if type(result) is bool and result is True:
+            click.echo('PASSED')
+        else:
+            click.echo('FAILED')
+            click.echo(result)
+
+    if result_path.exists():
+        os.remove(result_path)

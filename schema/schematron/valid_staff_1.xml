@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<staff>
+  <employee role="manager">
+    <name>Alice Johnson</name>
+    <department>Engineering</department>
+    <bonus>10000</bonus>
+  </employee>
+  <employee role="associate">
+    <name>Bob Williams</name>
+    <department>Support</department>
+    <bonus>4500</bonus>
+  </employee>
+</staff>
