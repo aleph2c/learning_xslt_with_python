@@ -1,9 +1,9 @@
 context: /
-home_dir: /mnt/data/learning_xslt_with_python/schema/xsd1.1
+home_dir: /mnt/data/learning_xslt_with_python/schema/schematron
 output_file_name: json_out_3.xml
 params: debug_on='yes',foo=1
 processor: saxon
 schematron_file_name: staff_rules_1.sch
-xml_file_name: valid_employees_1.xml
+xml_file_name: invalid_bonus_1.xml
 xsd_file_name: employees_1.xsd
 xsl_file_name: from_json_to_xml_3.xsl

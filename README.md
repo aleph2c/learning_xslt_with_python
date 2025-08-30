@@ -1,183 +1,3 @@
-# XML Schemas
-
-## Unspecified XML Leads to Disaster (It's a timebomb)
-
-When you're building something with XML, it's tempting to skip creating a
-schema. But what even is a schema?
-
-Simply put, a schema is a formal blueprint for your XML. It’s a file you write
-that defines the rules: what tags are allowed, what order they must appear in,
-and what kind of data they can hold (like numbers, text, or dates).
-
-It feels like extra work when you're under pressure, but using XML without a
-schema is like building a complex machine without any blueprints. It might run
-for a little while, but a catastrophic failure isn't just a risk—it's a
-guarantee. You've essentially created a timebomb in your project. Let's break
-down how it works.
-
-* **The Bomb**: Your collection of XML files. Without a schema, you don't really
-  know what's inside them. You assume they follow the structure your code
-  expects, but you have no guarantee.  Each file that deviates from that
-  unwritten specification is a potential point of failure.
-* **The Ticking**: Time and change. The fuse gets lit the moment your project
-  needs to change. With every new software version, every new feature, or every
-  data migration, the assumptions your code makes about the XML structure get
-  stricter. The system gets more and more fragile with each update, and the fuse
-  burns shorter.
-* **The Explosion**: The "technical disaster." This is the moment your software
-  encounters an XML document it cannot process correctly. This can manifest in
-  several ways:
-    * **Loud Failure**: The application crashes because an expected element is
-      missing. This is the best-case scenario, as the problem is immediately
-      obvious.
-    * **Silent Data Corruption**: The application misinterprets the data,
-      leading to incorrect calculations, lost information, or corrupted
-      records.  This is the most dangerous outcome, as the damage can go
-      unnoticed for weeks or months, spreading through your system and making
-      recovery nearly impossible.
-    * **Massive Cleanup Effort**: You are now forced to halt development,
-      painstakingly analyze mountains of XML to find the inconsistencies, and
-      write complex, defensive code to handle all the unexpected variations—the
-      exact mess you found yourself in.
-
-## A Brilliant Trap: The Saxon "Give Them Enough Rope" Business Model
-
-So, if this is such a common disaster, why do so many of us walk right into it?
-Often, the path is paved by the very tools we start with.
-
-Many of us begin our journey with XSLT using the fantastic—and free—Saxon Home
-Edition (saxon-he). It's an incredibly powerful engine for transforming XML. But
-there is one critical feature it intentionally leaves out: schema validation.
-To get that you need to pay for a license.
-
-Now, I can't say for sure if this is their grand strategic plan, but the result
-is what you might call a brilliant "give them enough rope to hang themselves"
-business model. Here's how it often plays out for developers:
-
-1. First, you get hooked on the power and elegance of XSLT using their amazing
-   free tool.
-2. As your project grows and evolves, you inevitably wander into the minefield
-   of data inconsistency and experience the "technical disaster" we just
-   described.
-3. After the pain becomes too great, you realize the only way to secure
-   your system is with schema validation, a feature only available in their
-   licensed product line (Saxon-PE and Saxon-EE).
-
-Whether it's intentional or not, it's a powerful lesson in the true cost of
-"free." This isn't just a scary story; it's a preventable outcome. Investing in
-the right knowledge and tools and defining a schema from the start is your
-insurance policy. It turns vague assumptions into clear, enforceable rules,
-making your system stable, predictable, and much easier to evolve over time.
-
-However, there are a lot of open source XML schema validation tools that you can
-include in your program that you can use with the ``sachonche`` library.
-
-## Schema Technologies
-
-In this training we will be looking at how to integrate XDS 1.1 and Schematron
-schema validation technologies with Python, but here is the full list of
-available schema validation technologies.
-
-### DTD (Document Type Definition)
-
-A DTD is the original schema language, introduced with the XML 1.0 specification
-in 1998. Its unique offering is its simplicity and its ability to be embedded
-directly within an XML file. The DTD rules can live inside a ``<!DOCTYPE
-[...]>`` block at the top of the XML, making the file self-contained, or they
-can be in a separate ``.dtd`` file that is referenced. While this reference tells a
-parser what the document structure is, validation is a step that must be
-explicitly enabled by the processing software, like Python's ``lxml`` library, which
-has full support for it. DTD is a complete and stable technology, but it is
-largely considered legacy because it lacks support for data types (e.g., numbers
-vs. text) and namespaces. 
-
-The effort to learn it is very low.
-
-### XDS 1.0
-
-XSD 1.0 became a W3C Recommendation in 2001 as a powerful successor to DTDs. Its
-unique offering is its rich set of data types (integers, dates, strings, etc.)
-and full support for XML Namespaces, which are essential for complex documents.
-The schema is almost always defined in a separate ``.xsd`` file and lives on a web
-server or in the project's file system. An XML document references its schema
-via an ``xsi:schemaLocation`` attribute in the root element. This attribute acts as
-a hint; it doesn't automatically trigger validation. A validation-aware parser,
-like the one included in Python's powerful ``lxml`` library, must be instructed to
-fetch the schema and perform the validation. XSD 1.0 is a complete, stable, and
-still massively widespread technology. 
-
-The learning effort is medium due to its verbose XML-based syntax and extensive
-feature set.
-
-### XDS 1.1
-
-Becoming a W3C Recommendation in 2012, XSD 1.1 is the modern evolution of the
-XML Schema language. Its most significant unique offering is the ``<xs:assert>``
-element, which allows you to embed complex validation rules using XPath 2.0
-directly inside the schema, **a feature heavily inspired by Schematron**. Like
-its predecessor, an XSD 1.1 schema lives in an external .xsd file and is
-referenced the same way. While lxml's support for 1.1 is incomplete, the Python
-``xmlschema`` library is the go-to tool for full XSD 1.1 support. XSD 1.1 is a
-complete and stable recommendation representing the current standard. 
-
-The learning effort is medium-to-high, as it builds on the complexity of 1.0
-with powerful new capabilities.
-
-### RELAX NG
-
-Standardized by OASIS and ISO around 2003, RELAX NG is a popular alternative to
-XSD. Its unique offering is a much simpler and more intuitive grammar for
-defining XML structures, especially those with complex ordering or choices. Many
-find it more elegant and easier to read than XSD. The schema lives in an
-external ``.rng`` file and can be written in either an XML syntax or a more
-human-readable "compact syntax." It is typically referenced from an XML document
-using a special processing instruction, and validation is performed explicitly
-by a tool. Python's lxml library has excellent, built-in support for RELAX NG
-validation. It is a complete and stable ISO standard that, while less widespread
-than XSD, is highly respected.
-
-The learning effort is medium, but generally considered lower than XSD.
-
-### Schematron
-
-Think of Schematron not as a blueprint for your XML's structure, but as a
-quality control inspector for its content. Standardized as an ISO standard in
-2006, its unique purpose is to enforce specific business rules that other schema
-languages can't handle. Its power comes from using XPath to make assertions. For
-example, you can write a rule that says, "if an order's type attribute is
-'sale', then a discount element must be present." Even better, you can define
-your own clear error messages like, "Sale orders must include a discount
-amount."
-
-Under the hood, Schematron rules are executed by an XSLT engine. This is a
-critical detail because the engine you use determines how powerful your rules
-can be. Python's ``lxml`` library has great built-in support, but it uses an engine
-limited to XPath 1.0. For more complex rules using modern features (like regular
-expressions or advanced date functions), you need a more capable engine like
-``saxonche``, which supports XPath 3.0 and above.
-
-Your Schematron rules live in a separate ``.sch`` file. You apply them as a distinct
-validation step, often after you've already confirmed the basic structure with
-something like XSD.
-
-Schematron is a complete and stable technology, and the learning effort is
-medium — not because Schematron itself is complex, but because your ability to
-write powerful rules depends entirely on how well you know XPath.
-
-## XDS 1.1 Python Integration
-
-To access the XDS 1.1 technology we will install [xmlschema](https://github.com/sissaschool/xmlschema):
-
-```bash
-source ./venv/bin/activate
-pip install xmlschema
-```
-
-## Scematron Python Integration
-
-## XDS 1.1 Cli and Training Examples
-
-## Scematron Cli and Training Examples
 
 # Learning XSLT with Python
 
@@ -193,6 +13,8 @@ Here you can learn and experiment with XSLT via the command line, using tools an
 - Validating XML using XDS 1.1 and Schematron.
 - Testing XPath 3.1 expressions.
 - Connecting with key training resources (e.g., Michael Kay’s books).
+- Specifying and validating your XML using XSD1.1 schemas and schematron
+  schemas.
 
 The project leverages modern Python libraries like ``lxml`` (for ``XSLT 1.0``)
 and ``saxonche`` (for ``XSLT +3.0``), which adds advanced features like
@@ -480,23 +302,328 @@ Apply the learning workflow above to this curated training path. The directory n
     *   **Book:** *Beginning XSLT 2.0* by Jeni Tennison.
     *   **Focus:** Use the AI to explain the high-level concepts from the chapter headings, then dive into the code examples provided in this repo to see them implemented. (Key chapters: 11, appendix A)
 
-*   **4. Advanced Design Patterns (``michael``, ``patterns``)**
+*   **4. Schemas (``schema``)**
+    *   **Book:** [XML Schemas in these docs](#xml-schemas), use the existing examples and an AI to generate new examples
+    *   **Focus:** Ensure your xml can be properly guarded and specified with an
+        XDS1.1 and schematron schemas.
+
+*   **5. Advanced Design Patterns (``michael``, ``patterns``)**
     *   **Book:** Michael Kay’s *XSLT 2.0 and XPath 2.0 Programmer's Reference*.
     *   **Focus:** Specifically Chapter 17: "Stylesheet Design Patterns." This
         is essential reading for writing professional, maintainable XSLT.
         (fill-in-the-blanks stylesheets, navigational stylesheets, rule-based
         stylesheets, computational stylesheets)
 
-*   **5. Bridging to XSLT 3.0**
+*   **6. Bridging to XSLT 3.0**
     *   Since there is no single XSLT 3.0 book, use a combination of these excellent resources:
         *   **Michael Kay's Book:** The book above covers much of the foundation needed for 3.0.
         *   **Online Examples:** [Martin Honnen’s XSLT 3.0 by Example blog](https://xslt-3-by-example.blogspot.com/) and his expert answers on [Stack Overflow](https://stackoverflow.com/users/252228/martin-honnen).
         *   **JSON Handling:** Michael Kay's paper, [*Transforming JSON using XSLT 3.0*](https://www.saxonica.com/papers/xmlprague-2016mhk.pdf). (Supporting code is in the `/patterns` folder of this repo.)
         *   **XPath 3.1 Training:** [Altova’s free training resources](https://www.altova.com/training/xpath3).
-*   **6. Overview of 3.0**
+*   **7. Overview of 3.0 (``scott``)**
     *   Since there is no single XSLT 3.0 book, use the training patterns in the ``(scott)``
         directory (provided by Grok4)
 
+# XML Schemas
+
+## Unspecified XML Leads to Disaster (It's a timebomb)
+
+When you're building something with XML, it's tempting to skip creating a
+schema. But what even is a schema?
+
+Simply put, a schema is a formal blueprint for your XML. It’s a file you write
+that defines the rules: what tags are allowed, what order they must appear in,
+and what kind of data they can hold (like numbers, text, or dates).
+
+It feels like extra work when you're under pressure, but using XML without a
+schema is like building a complex machine without any blueprints. It might run
+for a little while, but a catastrophic failure isn't just a risk—it's a
+guarantee. You've essentially created a timebomb in your project. Let's break
+down how it works.
+
+* **The Bomb**: Your collection of XML files. Without a schema, you don't really
+  know what's inside them. You assume they follow the structure your code
+  expects, but you have no guarantee.  Each file that deviates from that
+  unwritten specification is a potential point of failure.
+* **The Ticking**: Time and change. The fuse gets lit the moment your project
+  needs to change. With every new software version, every new feature, or every
+  data migration, the assumptions your code makes about the XML structure get
+  stricter. The system gets more and more fragile with each update, and the fuse
+  burns shorter.
+* **The Explosion**: The "technical disaster." This is the moment your software
+  encounters an XML document it cannot process correctly. This can manifest in
+  several ways:
+    * **Loud Failure**: The application crashes because an expected element is
+      missing. This is the best-case scenario, as the problem is immediately
+      obvious.
+    * **Silent Data Corruption**: The application misinterprets the data,
+      leading to incorrect calculations, lost information, or corrupted
+      records.  This is the most dangerous outcome, as the damage can go
+      unnoticed for weeks or months, spreading through your system and making
+      recovery nearly impossible.
+    * **Massive Cleanup Effort**: You are now forced to halt development,
+      painstakingly analyze mountains of XML to find the inconsistencies, and
+      write complex, defensive code to handle all the unexpected variations—the
+      exact mess you found yourself in.
+
+## A Brilliant Trap: The Saxon "Give Them Enough Rope" Business Model
+
+So, if this is such a common disaster, why do so many of us walk right into it?
+Often, the path is paved by the very tools we start with.
+
+Many of us begin our journey with XSLT using the fantastic—and free—Saxon Home
+Edition (saxon-he). It's an incredibly powerful engine for transforming XML. But
+there is one critical feature it intentionally leaves out: schema validation.
+To get that you need to pay for a license.
+
+Now, I can't say for sure if this is their grand strategic plan, but the result
+is what you might call a brilliant "give them enough rope to hang themselves"
+business model. Here's how it often plays out for developers:
+
+1. First, you get hooked on the power and elegance of XSLT using their amazing
+   free tool.
+2. As your project grows and evolves, you inevitably wander into the minefield
+   of data inconsistency and experience the "technical disaster" we just
+   described.
+3. After the pain becomes too great, you realize the only way to secure
+   your system is with schema validation, a feature only available in their
+   licensed product line (Saxon-PE and Saxon-EE).
+
+Whether it's intentional or not, it's a powerful lesson in the true cost of
+"free." This isn't just a scary story; it's a preventable outcome. Investing in
+the right knowledge and tools and defining a schema from the start is your
+insurance policy. It turns vague assumptions into clear, enforceable rules,
+making your system stable, predictable, and much easier to evolve over time.
+
+However, there are a lot of open source XML schema validation tools that you can
+include in your program that you can use with the ``sachonche`` library.
+
+## Schema Technologies
+
+In this training we will be looking at how to integrate **XDS 1.1** and
+**Schematron** schema validation technologies with Python, but here is the full
+list of available schema validation technologies.
+
+### DTD (Document Type Definition)
+
+A DTD is the original schema language, introduced with the XML 1.0 specification
+in 1998. Its unique offering is its simplicity and its ability to be embedded
+directly within an XML file. The DTD rules can live inside a ``<!DOCTYPE
+[...]>`` block at the top of the XML, making the file self-contained, or they
+can be in a separate ``.dtd`` file that is referenced. While this reference tells a
+parser what the document structure is, validation is a step that must be
+explicitly enabled by the processing software, like Python's ``lxml`` library, which
+has full support for it. DTD is a complete and stable technology, but it is
+largely considered legacy because it lacks support for data types (e.g., numbers
+vs. text) and namespaces. 
+
+The effort to learn it is **very low**.
+
+### XDS 1.0
+
+XSD 1.0 became a W3C Recommendation in 2001 as a powerful successor to DTDs. Its
+unique offering is its rich set of data types (integers, dates, strings, etc.)
+and full support for XML Namespaces, which are essential for complex documents.
+The schema is almost always defined in a separate ``.xsd`` file and lives on a web
+server or in the project's file system. An XML document references its schema
+via an ``xsi:schemaLocation`` attribute in the root element. This attribute acts as
+a hint; it doesn't automatically trigger validation. A validation-aware parser,
+like the one included in Python's powerful ``lxml`` library, must be instructed to
+fetch the schema and perform the validation. XSD 1.0 is a complete, stable, and
+still massively widespread technology. 
+
+The learning effort is **medium** due to its verbose XML-based syntax and extensive
+feature set.
+
+### RELAX NG
+
+Standardized by OASIS and ISO around 2003, RELAX NG is a popular alternative to
+XSD. Its unique offering is a much simpler and more intuitive grammar for
+defining XML structures, especially those with complex ordering or choices. Many
+find it more elegant and easier to read than XSD. The schema lives in an
+external ``.rng`` file and can be written in either an XML syntax or a more
+human-readable "compact syntax." It is typically referenced from an XML document
+using a special processing instruction, and validation is performed explicitly
+by a tool. Python's lxml library has excellent, built-in support for RELAX NG
+validation. It is a complete and stable ISO standard that, while less widespread
+than XSD, is highly respected.
+
+The learning effort is **medium**, but generally considered lower than XSD.
+
+### Schematron
+
+Think of Schematron not as a blueprint for your XML's structure, but as a
+quality control inspector for its content. Standardized as an ISO standard in
+2006, its unique purpose is **to enforce specific business rules that other schema
+languages can't handle**. Its power comes from using XPath to make assertions. For
+example, you can write a rule that says, "if an order's type attribute is
+'sale', then a discount element must be present." Even better, you can define
+your own clear error messages like, "Sale orders must include a discount
+amount."
+
+Under the hood, Schematron rules are executed by an XSLT engine. This is a
+critical detail because the engine you use determines how powerful your rules
+can be. Python's ``lxml`` library has great built-in support, but it uses an engine
+limited to XPath 1.0. For more complex rules using modern features (like regular
+expressions or advanced date functions), you need a more capable engine like
+``saxonche``, which supports XPath 3.0 and above.
+
+Your Schematron rules live in a separate ``.sch`` file. You apply them as a distinct
+validation step, often after you've already confirmed the basic structure with
+something like XSD.
+
+Schematron is a complete and stable technology, and the learning effort is
+**medium** — not because Schematron itself is complex, but because your ability to
+write powerful rules depends entirely on how well you know XPath.
+
+### XDS 1.1
+
+Becoming a W3C Recommendation in 2012, XSD 1.1 is the modern evolution of the
+XML Schema language. Its most significant unique offering is the ``<xs:assert>``
+element, which allows you to embed complex validation rules using XPath 2.0
+directly inside the schema, **a feature heavily inspired by Schematron**. Like
+its predecessor, an XSD 1.1 schema lives in an external .xsd file and is
+referenced the same way. While lxml's support for 1.1 is incomplete, the Python
+``xmlschema`` library is the go-to tool for full XSD 1.1 support. XSD 1.1 is a
+complete and stable recommendation representing the current standard. 
+
+The learning effort is **medium-to-high**, as it builds on the complexity of 1.0
+with powerful new capabilities.
+
+## XDS 1.1 CLI and Training
+
+The XDS 1.1 training examples for this repo are in ``schema/xsd1.1/``. Use this
+folder as your laboratory.  If you build new examples, create a schema
+(``.xsd``) and a set of passing and failing xml files.  Place these examples
+with the other examples in the ``schema/xsd1.1`` folder, then run these examples
+using the ``try check`` command.
+
+Check the help for instructions on how to use it
+```bash
+$ try check --help
+Usage: try check [OPTIONS] [SCHEMA_FILE_NAME]
+
+Options:
+  -x, --xml TEXT  Set the xml file
+  --help          Show this message and exit.
+
+```
+
+Here we test a **valid** xml file against its xsd1.1 schema
+```bash
+try -d schema/xsd1.1 check -x validate_employees_1.xml exmployees_1.xsd
+PASSED
+```
+
+Here we test a **invalid** xml file against its xsd1.1 schema
+```bash
+# NOTE: The "try check" command caches your arguments so you don't have to type as much
+try check -x invalid_bonus_1.xml
+FAILED
+ To implement your own validation logic, reference the schematron command in
+ this repository\'s cli/cli.py file as a guide. ...
+
+```
+
+Add your own examples to traing yourself.  XDS1.1 is probably enough for
+validating your project, but in the case that you need to perform complex
+business logic check, like ensuring math across multiple elements works as
+expected, reach for schematron.
+
+Once you have an example working, use professor to test you.  Example: "Given
+this .xds code evaluate my understanding at TT.2, please ask 5 questions".
+
+## Schematron CLI and Training
+
+The Schematron training examples for this repo are in ``schema/schematron/``.
+Use this folder as your laboratory.  If you build new examples, create a schema
+(``.sch``) and a set of passing and failing xml files.  Place these examples
+with the other examples in the ``schema/schematron`` folder, then run these examples
+using the ``try check`` command.
+
+Check the help for instructions on how to use it:
+
+```bash
+$ try check --help
+Usage: try check [OPTIONS] [SCHEMA_FILE_NAME]
+
+Options:
+  -x, --xml TEXT  Set the xml file
+  --help          Show this message and exit.
+
+```
+
+Here we test a **valid** xml file against its xsd1.1 schema
+```bash
+try -d schema/schematron check -x valid_staff_1.xml staff_rules_1.sch
+PASSED
+```
+Here we test a **invalid** xml file against its xsd1.1 schema
+
+```bash
+# NOTE: The "try check" command caches your arguments so you don't have to type as much
+try check -x invalid_bonus_1.xml
+FAILED
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svrl:schematron-output xmlns:iso="http://purl.oclc.org/dsdl/schematron"
+                        xmlns:schold="http://www.ascc.net/xml/schematron"
+                        xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+                        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                        title="Business Rules for Staff Roster"
+                        schemaVersion=""><!--   
+                   
+                   
+                 -->
+   <svrl:active-pattern document="file:///mnt/data/learning_xslt_with_python/schema/schematron/invalid_bonus_1.xml"
+                        name="Manager and Associate Rules"/>
+   <svrl:fired-rule context="employee[@role='associate']"/>
+   <svrl:failed-assert test="bonus &lt;= 5000" location="/staff/employee">
+      <svrl:text>
+        An associate's bonus must not exceed 5000. This associate's bonus is
+        7500.
+      </svrl:text>
+   </svrl:failed-assert>
+</svrl:schematron-output>
+```
+
+Once you have an example working, use professor to test you.  Example: "Given
+this ``.sch`` code evaluate my understanding at TT.2, please ask 5 questions".
+
+
+## XDS 1.1 Python Integration
+
+To access the XDS 1.1 technology install [xmlschema](https://github.com/sissaschool/xmlschema):
+
+In this repo, the xmlschema dependency is in the setup.py file so to install it:
+
+```bash
+python3 -m venv
+source venv/bin/activate
+pip install -e .
+```
+
+To write your own ``xds1.1`` parser, reference this repo's ``cli/cli.py`` file,
+and search for ``xmlschema``.
+
+
+## Scematron Python Integration
+
+To integrate schematron into your project copy the
+[schematron/trunk/schematron/code](https://github.com/Schematron/schematron/tree/master/trunk/schematron/code)
+"compiler" stylesheets onto your system.  (This has been done already for this repo, so if you
+have pulled this code, you have these files.)
+
+The process leverages the Saxon-HE XSLT engine (via the saxonche Python library)
+to enable modern XPath features. This is achieved with a two-pass transformation:
+
+1. Your custom ``.sch`` rule file is transformed by the ISO "compiler"
+   stylesheets to generate a new, custom ``.xsl`` validator.
+2. This generated ``.xsl`` file is used to transform your target XML data,
+   producing a final SVRL (Schematron Validation Report Language) report.
+
+To implement your own validation logic, reference the ``try check`` subcommand
+in this repository's ``cli/cli.py`` file as a guide.
 ### Build an Amoury
 
 To make XSLT less verbose, use editor-snippets.
