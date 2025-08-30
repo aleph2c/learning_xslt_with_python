@@ -13,8 +13,6 @@ Here you can learn and experiment with XSLT via the command line, using tools an
 - Validating XML using XDS 1.1 and Schematron.
 - Testing XPath 3.1 expressions.
 - Connecting with key training resources (e.g., Michael Kay’s books).
-- Specifying and validating your XML using XSD1.1 schemas and schematron
-  schemas.
 
 The project leverages modern Python libraries like ``lxml`` (for ``XSLT 1.0``)
 and ``saxonche`` (for ``XSLT +3.0``), which adds advanced features like
@@ -25,7 +23,7 @@ streaming and native JSON handling.
 The histories of Python and XSLT offer a compelling study in how technologies
 are shaped. Python's development was famously practitioner-led by Guido van
 Rossum, fostering a pragmatic culture that valued developer happiness. Its
-evolution via the community-driven PEP process meant it was built by and for
+evolution via the community-driven [PEP process](https://peps.python.org/pep-0001/) meant it was built by and for
 programmers. In stark contrast, XSLT was born from a top-down W3C committee of
 architects. The result was a language that was formally powerful but actively
 hostile to the sensibilities of the average developer, burdened by a punishingly
@@ -34,7 +32,7 @@ felt extraterrestrial to most practitioners.
 
 This difference had profound consequences and directly explains why XSLT fell
 into mainstream obscurity. While Python's flexibility allowed it to find a
-"killer app" by "borg'ing" the scientific world of MATLAB, XSLT's rigidity and
+"killer app" by ["borg'ing"](https://www.youtube.com/watch?v=AyenRCJ_4Ww) the scientific world of MATLAB, XSLT's rigidity and
 poor ergonomics actively repelled the fast-growing world of web development. As
 web APIs moved towards the lightweight, brain-dead simple JSON format, XSLT's
 heavyweight, document-centric model felt like using a sledgehammer to crack a
@@ -175,6 +173,22 @@ try ex -v
 
 Repeat this cycle — edit ``text-hierarchy.xsl``, run try ex -v, and check errors
 — until your XSLT program produces the desired ``text-hierarchy.txt`` output.
+
+### Testing Schemas
+
+This training repo contains code and examples for testing the XDS 1.1 and
+schematron XML schema technologies.  (See ``schema/xds1.1`` and
+``schema/schematron`` for examples)
+
+```bash
+
+try -d schema/xsd1.1 check -x validate_employees_1.xml exmployees_1.xsd
+PASSED
+try -d schema/schematron check -x valid_staff_1.xml staff_rules_1.sch
+PASSED
+
+```
+
 
 ## Thinking in Trees: A New Paradigm for Python Developers
 
