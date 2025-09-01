@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://www.yourcompany.com/schemas/notifications/v1"
+    targetNamespace="http://www.yourcompany.com/schemas/notifications/v1"
+    elementFormDefault="qualified"
+    version="1.0.0">
+
+    <!-- First, we define the different structures that a notification can have. -->
+
+    <xs:complexType name="EmailContentType">
+        <xs:sequence>
+            <xs:element name="subject" type="xs:string"/>
+            <xs:element name="body" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SmsContentType">
+        <xs:sequence>
+            <xs:element name="message" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <!-- Now, we define the main <notification> element -->
+    <xs:element name="notification">
+        <xs:complexType>
+            <!-- A notification has a mandatory 'type' attribute -->
+            <xs:attribute name="type" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="email"/>
+                        <xs:enumeration value="sms"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+
+            <!--
+              XSD 1.1 ADVANCED FEATURE: <xs:alternative>
+              This is the core of the example. It allows us to change the
+              content model (the type) of the <notification> element based
+              on the value of its 'type' attribute.
+            -->
+            <xs:alternative test="@type='email'" type="EmailContentType"/>
+            <xs:alternative test="@type='sms'" type="SmsContentType"/>
+
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Finally, we define the root element of our document -->
+    <xs:element name="notifications">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="notification" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

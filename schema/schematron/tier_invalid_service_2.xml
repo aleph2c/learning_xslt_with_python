@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://a_long_string_that_makes_people_hate_xml.com/v1">
+  <service>
+    <name>Professional Plan</name>
+    <tier>Pro</tier>
+    <max_speed>150</max_speed> <!-- This is > 100, which is the limit for "Pro" -->
+  </service>
+</services>

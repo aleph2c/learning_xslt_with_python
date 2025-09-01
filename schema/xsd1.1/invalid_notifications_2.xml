@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notifications xmlns="http://www.yourcompany.com/schemas/notifications/v1">
+
+  <!--
+    INVALID: Mismatched content.
+    The type is "email", but the content (<message>) is for an "sms".
+    This directly violates the first <xs:alternative> rule.
+  -->
+  <notification type="email">
+    <message>This is the wrong structure for an email.</message>
+  </notification>
+  
+  <!--
+    INVALID: Missing required content.
+    The type is "sms", so it MUST contain a <message> element.
+    This violates the content model of the 'SmsContentType'.
+  -->
+  <notification type="sms">
+    <subject>This element does not belong here.</subject>
+  </notification>
+  
+  <!--
+    INVALID: Invalid attribute value.
+    The value "fax" is not one of the allowed enumerations ('email', 'sms')
+    for the 'type' attribute.
+  -->
+  <notification type="fax">
+    <message>This will fail before the content is even checked.</message>
+  </notification>
+
+</notifications>

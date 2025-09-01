@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://www.yourcompany.com/schemas/services/v1">
+  <service>
+    <name>Basic Web Hosting</name>
+    <tier>Pro</tier>
+    <max_speed>100</max_speed>
+  </service>
+  <service>
+    <name>Corporate CDN</name>
+    <tier>Enterprise</tier>
+    <max_speed>950</max_speed> <!-- OK, because the limit is 1000 for non-Pro -->
+  </service>
+</services>

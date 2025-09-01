@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  The xmlns attribute MUST match the targetNamespace in the XSD for validation to work.
+-->
+<notifications xmlns="http://www.yourcompany.com/schemas/notifications/v1">
+
+  <!-- This notification is valid because type="email" and it contains a subject and body. -->
+  <notification type="email">
+    <subject>Project Update</subject>
+    <body>There will be a mandatory meeting at 3 PM.</body>
+  </notification>
+
+  <!-- This notification is valid because type="sms" and it contains a message. -->
+  <notification type="sms">
+    <message>Meeting at 3 PM. Please be on time.</message>
+  </notification>
+
+</notifications>
