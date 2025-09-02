@@ -1401,6 +1401,10 @@ pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </s
 
 <p>To write your own <code>xds1.1</code> parser, reference this repo's <code>cli/cli.py</code> file,
 and search for <code>xmlschema</code>.</p>
+<div class="codehilite"><pre><span></span><code>$<span class="w"> </span>try<span class="w"> </span>-d<span class="w"> </span>schema/xsd1.1<span class="w"> </span>check<span class="w"> </span>-x<span class="w"> </span>valid_employees_1.xml<span class="w"> </span>employees_1.xsd
+PASSED
+</code></pre></div>
+
 <h2 id="scematron-python-integration">Scematron Python Integration</h2>
 <p>To integrate schematron into your project copy the
 <a href="https://github.com/Schematron/schematron/tree/master/trunk/schematron/code">schematron/trunk/schematron/code</a>
@@ -1416,6 +1420,10 @@ to enable modern XPath features. This is achieved with a two-pass transformation
 </ol>
 <p>To implement your own validation logic, reference the <code>try check</code> subcommand
 in this repository's <code>cli/cli.py</code> file as a guide.</p>
+<div class="codehilite"><pre><span></span><code>$<span class="w"> </span>try<span class="w"> </span>-d<span class="w"> </span>schema/schematron<span class="w"> </span>check<span class="w"> </span>-x<span class="w"> </span>valid_staff_1.xml<span class="w"> </span>staff_rules_1.sch
+PASSED
+</code></pre></div>
+
 <h2 id="embracing-the-necessary-pain-of-xml-namespaces">Embracing the Necessary Pain of XML Namespaces</h2>
 <p>Alright, let's wrap this schema topic up. We've been through the ringer. We've
 successfully built a modern, powerful XSD1.1 and Schematron validation pipeline.
@@ -1434,7 +1442,7 @@ feeling it.</p>
   principle of least astonishment has been thrown out the window.</li>
 <li><strong>The Abysmal Signal-to-Noise Ratio</strong>: Get ready to watch your clean, simple
   data drown in a sea of syntactic gobbledygook. Long, meaningless URLs that are
-  never visited, xmlns attributes that are longer than the data itself, and
+  never visited, xmlns attributes that can be longer than the data itself, and
   prefixes on every single tag. It is verbose, it is tedious, and it is ugly.</li>
 <li><strong>The Alien Mindset</strong>: This entire system feels hostile to a pragmatic,
   Python-centric worldview. Where Python values simplicity and readability, XML
@@ -1475,7 +1483,7 @@ than convenience. Embrace it. Accept the temporary dip in productivity. Refactor
 your lxml queries with namespace maps and update your Schematron rules with
 <code>&lt;sch:ns&gt;</code> prefixes. You're not just writing code anymore; you're authoring a
 specification.</p>
-<p>If you're convinced. We can proceed with this step. But we're not approaching it
+<p>If you're convinced, we can proceed with this step. But we're not approaching it
 without preparation. The challenges you're about to encounter -- such as silent
 failures, invisible context, and rules that may seem unclear -- can be managed
 effectively. We've addressed these issues before and developed guidelines to
@@ -1509,9 +1517,9 @@ minimize them. This isn't theory. This is our practical guide:</p>
 <span class="n">new_element</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s1">&#39;f:data&#39;</span><span class="p">,</span> <span class="n">nsmap</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)</span> <span class="c1"># The right way</span>
 </code></pre></div>
 
-<p>These laws are not suggestions. They are the guidelines we developed based on
-experience. They help distinguish between the frustration of debugging a complex
-system and the structured, predictable approach of professional engineering.</p>
+<p>These "laws" were developed based on experience. They help distinguish between
+the frustration of debugging a complex system and the structured, predictable
+approach of professional engineering.</p>
 <h1 id="testing-xpath">Testing XPath</h1>
 <p>Here we run an XPath expression against the <code>menu.xml</code> file in the
 <code>otegem/ch03</code> directory, then cache the command:</p>

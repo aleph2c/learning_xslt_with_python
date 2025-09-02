@@ -1367,6 +1367,11 @@ pip install -e .
 To write your own ``xds1.1`` parser, reference this repo's ``cli/cli.py`` file,
 and search for ``xmlschema``.
 
+```bash
+$ try -d schema/xsd1.1 check -x valid_employees_1.xml employees_1.xsd
+PASSED
+```
+
 ## Scematron Python Integration
 
 To integrate schematron into your project copy the
@@ -1384,6 +1389,11 @@ to enable modern XPath features. This is achieved with a two-pass transformation
 
 To implement your own validation logic, reference the ``try check`` subcommand
 in this repository's ``cli/cli.py`` file as a guide.
+
+```bash
+$ try -d schema/schematron check -x valid_staff_1.xml staff_rules_1.sch
+PASSED
+```
 
 ## Embracing the Necessary Pain of XML Namespaces
 
@@ -1406,7 +1416,7 @@ feeling it.
   principle of least astonishment has been thrown out the window.
 * **The Abysmal Signal-to-Noise Ratio**: Get ready to watch your clean, simple
   data drown in a sea of syntactic gobbledygook. Long, meaningless URLs that are
-  never visited, xmlns attributes that are longer than the data itself, and
+  never visited, xmlns attributes that can be longer than the data itself, and
   prefixes on every single tag. It is verbose, it is tedious, and it is ugly.
 * **The Alien Mindset**: This entire system feels hostile to a pragmatic,
   Python-centric worldview. Where Python values simplicity and readability, XML
@@ -1451,7 +1461,7 @@ your lxml queries with namespace maps and update your Schematron rules with
 ``<sch:ns>`` prefixes. You're not just writing code anymore; you're authoring a
 specification.
 
-If you're convinced. We can proceed with this step. But we're not approaching it
+If you're convinced, we can proceed with this step. But we're not approaching it
 without preparation. The challenges you're about to encounter -- such as silent
 failures, invisible context, and rules that may seem unclear -- can be managed
 effectively. We've addressed these issues before and developed guidelines to
@@ -1487,9 +1497,9 @@ new_element = etree.Element('{urn:your-fancy-namespace:v1}data') # The wrong way
 new_element = etree.Element('f:data', nsmap=nsmap) # The right way
 
 ```
-These laws are not suggestions. They are the guidelines we developed based on
-experience. They help distinguish between the frustration of debugging a complex
-system and the structured, predictable approach of professional engineering.
+These "laws" were developed based on experience. They help distinguish between
+the frustration of debugging a complex system and the structured, predictable
+approach of professional engineering.
 
 # Testing XPath
 
