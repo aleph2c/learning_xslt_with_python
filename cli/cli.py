@@ -215,8 +215,6 @@ def __saxon_xslt30_transform(
             source_file=str(xml_file_path),
             output_file=str(output_file_path)
         )
-        #_exec.set_initial_match_selection(file_name=str(xml_file_path))
-        #_exec.apply_templates_returning_file(output_file=str(output_file_path))
         if exception_occurred or _exec.exception_occurred:
             saxon_error = f"{_exec.error_message}\n"
             _exec.exception_clear()
@@ -313,8 +311,6 @@ def saxon_xslt30_transform(
     params=None,
     verbose=False,
 ):
-
-    global proc_globals_lock
 
     input_queue = Queue()
     output_queue = Queue()
@@ -871,7 +867,8 @@ def cli(ctx, home_dir):
 @pass_config
 def cache(ctx):
     """View your command cache"""
-    click.echo(ctx.cache)
+    string = pprint.pformat(ctx.cache._cache, indent=4)
+    click.echo(string)
 
 
 @cli.command

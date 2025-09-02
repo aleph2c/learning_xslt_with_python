@@ -337,6 +337,58 @@ Apply the learning workflow above to this curated training path. The directory n
     *   Since there is no single XSLT 3.0 book, use the training patterns in the ``(scott)``
         directory (provided by Grok4)
 
+### Build an Amoury
+
+To make XSLT less verbose, use editor-snippets.
+
+In Vim/Neovim, SirVer’s UltiSnips is excellent — create your own library as you
+learn. Build snippets while reading books, adding comments for reference. Use
+UltiSnips’ shortcut to jump between your XSLT file and [snippet
+files](https://github.com/aleph2c/.vim/blob/master/snippets/xslt.snippets). Keep
+snippets under Git-control for portability.
+
+# XML Schemas
+
+## Unspecified XML Leads to Disaster (It's a timebomb)
+
+When you're building something with XML, it's tempting to skip creating a
+schema. But what even is a schema?
+
+Simply put, a schema is a formal blueprint for your XML. It’s a file you write
+that defines the rules: what tags are allowed, what order they must appear in,
+and what kind of data they can hold (like numbers, text, or dates).
+
+It feels like extra work when you're under pressure, but using XML without a
+schema is like building a complex machine without any blueprints. It might run
+for a little while, but a catastrophic failure isn't just a risk—it's a
+guarantee. You've essentially created a timebomb in your project. Let's break
+down how it works.
+
+* **The Bomb**: Your collection of XML files. Without a schema, you don't really
+  know what's inside them. You assume they follow the structure your code
+  expects, but you have no guarantee.  Each file that deviates from that
+  unwritten specification is a potential point of failure.
+* **The Ticking**: Time and change. The fuse gets lit the moment your project
+  needs to change. With every new software version, every new feature, or every
+  data migration, the assumptions your code makes about the XML structure get
+  stricter. The system gets more and more fragile with each update, and the fuse
+  burns shorter.
+* **The Explosion**: The "technical disaster." This is the moment your software
+  encounters an XML document it cannot process correctly. This can manifest in
+  several ways:
+    * **Loud Failure**: The application crashes because an expected element is
+      missing. This is the best-case scenario, as the problem is immediately
+      obvious.
+    * **Silent Data Corruption**: The application misinterprets the data,
+      leading to incorrect calculations, lost information, or corrupted
+      records.  This is the most dangerous outcome, as the damage can go
+      unnoticed for weeks or months, spreading through your system and making
+      recovery nearly impossible.
+    * **Massive Cleanup Effort**: You are now forced to halt development,
+      painstakingly analyze mountains of XML to find the inconsistencies, and
+      write complex, defensive code to handle all the unexpected variations—the
+      exact mess you found yourself in.
+
 ### Understanding XSLT's Default Behavior (And Why It's So Confusing)
 
 The most confusing part of XSLT for newcomers is its set of invisible, built-in
@@ -1073,57 +1125,6 @@ if __name__ == '__main__':
 
 ```
 
-### Build an Amoury
-
-To make XSLT less verbose, use editor-snippets.
-
-In Vim/Neovim, SirVer’s UltiSnips is excellent — create your own library as you
-learn. Build snippets while reading books, adding comments for reference. Use
-UltiSnips’ shortcut to jump between your XSLT file and [snippet
-files](https://github.com/aleph2c/.vim/blob/master/snippets/xslt.snippets). Keep
-snippets under Git-control for portability.
-
-# XML Schemas
-
-## Unspecified XML Leads to Disaster (It's a timebomb)
-
-When you're building something with XML, it's tempting to skip creating a
-schema. But what even is a schema?
-
-Simply put, a schema is a formal blueprint for your XML. It’s a file you write
-that defines the rules: what tags are allowed, what order they must appear in,
-and what kind of data they can hold (like numbers, text, or dates).
-
-It feels like extra work when you're under pressure, but using XML without a
-schema is like building a complex machine without any blueprints. It might run
-for a little while, but a catastrophic failure isn't just a risk—it's a
-guarantee. You've essentially created a timebomb in your project. Let's break
-down how it works.
-
-* **The Bomb**: Your collection of XML files. Without a schema, you don't really
-  know what's inside them. You assume they follow the structure your code
-  expects, but you have no guarantee.  Each file that deviates from that
-  unwritten specification is a potential point of failure.
-* **The Ticking**: Time and change. The fuse gets lit the moment your project
-  needs to change. With every new software version, every new feature, or every
-  data migration, the assumptions your code makes about the XML structure get
-  stricter. The system gets more and more fragile with each update, and the fuse
-  burns shorter.
-* **The Explosion**: The "technical disaster." This is the moment your software
-  encounters an XML document it cannot process correctly. This can manifest in
-  several ways:
-    * **Loud Failure**: The application crashes because an expected element is
-      missing. This is the best-case scenario, as the problem is immediately
-      obvious.
-    * **Silent Data Corruption**: The application misinterprets the data,
-      leading to incorrect calculations, lost information, or corrupted
-      records.  This is the most dangerous outcome, as the damage can go
-      unnoticed for weeks or months, spreading through your system and making
-      recovery nearly impossible.
-    * **Massive Cleanup Effort**: You are now forced to halt development,
-      painstakingly analyze mountains of XML to find the inconsistencies, and
-      write complex, defensive code to handle all the unexpected variations—the
-      exact mess you found yourself in.
 
 ## A Brilliant Trap: The Saxon "Give Them Enough Rope" Business Model
 
@@ -1451,6 +1452,47 @@ your lxml queries with namespace maps and update your Schematron rules with
 that nice, low-productivity job in the federal government. You're not just
 writing code anymore; you're authoring a specification.
 
+So we're convinced. We're going to eat our vegetables. But we're not going into
+this fight unarmed. The pain you're about to experience is the *undisciplined*
+pain. The pain of silent failures, of invisible context, of rules that make no
+sense. We've already fought that war and established a doctrine to minimize the
+damage. This isn't theory. This is our survival guide.
+
+* **LAW #1: We Abolished "Default" Namespaces.** You will see
+  ``xmlns="urn:..."`` in examples online. You will be tempted to use it. Do not.
+  This is the source of the "maximal surprise." It creates an invisible context
+  that breaks XPath and makes your life hell. **All namespaces will be
+  explicitly prefixed.** What you see is what you get. ``f:element`` is good.
+  ``<element>`` in a namespaced world is a landmine.
+* **LAW #2: We Embrace the Asymmetry.** For reasons that are bizarre and
+  infuriating, the XML world decided that elements should live in a namespace,
+  but their attributes should not. You don't have to like it, you just have to
+  obey it. This is a law of physics in our system. Your XPath for an element
+  needs a prefix: ``//f:meta``. Your predicate for an attribute on that element
+  does not: ``//f:meta[@version='1.0']``. Memorize this. It will save you hours
+  of debugging.
+* **LAW #3: We Are Explicit in Our Code.** To enforce this discipline in our
+  Python code, we follow a simple, repetitive, and foolproof pattern. Every
+  single function that touches XML will define and use an nsmap.
+
+```python
+
+# Every. Single. Time. No shortcuts.
+nsmap = {'f': 'urn:your-fancy-namespace:v1'}
+
+# Use it for finding things:
+meta_element = root.xpath('//f:meta', namespaces=nsmap)
+
+# Use it for creating things:
+new_element = etree.Element('{urn:your-fancy-namespace:v1}data') # The wrong way (Clark Notation)
+new_element = etree.Element('f:data', nsmap=nsmap) # The right way
+
+```
+
+These laws are not suggestions. They are the guardrails we built after driving
+off the cliff. They are the difference between the soul-crushing pain of
+debugging an alien system and the manageable, predictable pain of professional
+engineering.
 
 # Testing XPath
 

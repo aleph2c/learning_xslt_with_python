@@ -8,7 +8,7 @@
   <sch:title>Service Tier and Speed Limit Rules (XSLT 2.0)</sch:title>
 
   <!-- Namespace support is identical and works perfectly in XSLT 2.0 -->
-  <sch:ns prefix="s" uri="http://www.a_long_stupid_string_that_makes_people_hate_xml.com/v1">
+  <sch:ns prefix="s" uri="http://www.a_long_stupid_string_that_makes_people_hate_xml.com/v1" />
 
   <sch:pattern>
     <sch:title>Validation of Service Tiers and Speeds</sch:title>

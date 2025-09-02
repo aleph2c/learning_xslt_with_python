@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xsl:stylesheet xmlns:iso="http://purl.oclc.org/dsdl/schematron"
-                xmlns:s="http://www.yourcompany.com/schemas/services/v1"
+                xmlns:s="http://www.a_long_stupid_string_that_makes_people_hate_xml.com/v1"
                 xmlns:saxon="http://saxon.sf.net/"
                 xmlns:schold="http://www.ascc.net/xml/schematron"
                 xmlns:xhtml="http://www.w3.org/1999/xhtml"
@@ -162,7 +162,8 @@
 		 <xsl:value-of select="$fileNameParameter"/>  
 		 <xsl:value-of select="$fileDirParameter"/>
          </xsl:comment>
-         <svrl:ns-prefix-in-attribute-values uri="http://www.yourcompany.com/schemas/services/v1" prefix="s"/>
+         <svrl:ns-prefix-in-attribute-values uri="http://www.a_long_stupid_string_that_makes_people_hate_xml.com/v1"
+                                             prefix="s"/>
          <svrl:active-pattern>
             <xsl:attribute name="document">
                <xsl:value-of select="document-uri(/)"/>
