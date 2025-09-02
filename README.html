@@ -120,18 +120,16 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <li><a href="#hack-to-learn-workflow">Hack-to-Learn Workflow</a></li>
 <li><a href="#recommended-curriculum">Recommended Curriculum</a></li>
 <li><a href="#build-an-amoury">Build an Amoury</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#xml-schemas">XML Schemas</a><ul>
-<li><a href="#unspecified-xml-leads-to-disaster-its-a-timebomb">Unspecified XML Leads to Disaster (It's a timebomb)</a><ul>
 <li><a href="#understanding-xslts-default-behavior-and-why-its-so-confusing">Understanding XSLT's Default Behavior (And Why It's So Confusing)</a><ul>
 <li><a href="#how-to-take-back-control">How to Take Back Control</a></li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#xml-schemas">XML Schemas</a><ul>
+<li><a href="#unspecified-xml-leads-to-disaster-its-a-timebomb">Unspecified XML Leads to Disaster (It's a timebomb)</a></li>
 </ul>
 </li>
 <li><a href="#installation-instructions">Installation Instructions</a></li>
@@ -495,6 +493,45 @@ learn. Build snippets while reading books, adding comments for reference. Use
 UltiSnips’ shortcut to jump between your XSLT file and <a href="https://github.com/aleph2c/.vim/blob/master/snippets/xslt.snippets">snippet
 files</a>. Keep
 snippets under Git-control for portability.</p>
+<h3 id="understanding-xslts-default-behavior-and-why-its-so-confusing">Understanding XSLT's Default Behavior (And Why It's So Confusing)</h3>
+<p>The most confusing part of XSLT for newcomers is its set of invisible, built-in
+template rules. The best way to understand them is to compare XSLT to CSS.</p>
+<p>When you apply a CSS stylesheet to an HTML document, the browser's default
+behavior is to render the entire HTML structure. You write CSS rules to <em>style</em>
+the elements, but you don't expect the tags themselves (<code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, etc.) to
+disappear. This is because <strong>HTML is a presentational markup language</strong>; its
+tags have an inherent visual meaning to the browser.</p>
+<p>XSLT behaves differently. If you apply a completely empty stylesheet to an XML
+document, the result is that <strong>all the tags are stripped away, leaving only the
+raw text content.</strong> This is baffling at first, but it reveals the core
+philosophy of the language. Unlike HTML, <strong>XML is a semantic data language.</strong>
+Its tags, like <code>&lt;customer-id&gt;</code> or <code>&lt;price&gt;</code>, have no intrinsic visual meaning.
+They are labels for data.</p>
+<p>The XSLT designers assumed that the most basic, default operation anyone would
+want is to extract the data itself—the text. Therefore, they created two
+built-in rules that work together:</p>
+<ol>
+<li><strong>A Rule for Elements:</strong> This default rule matches any element (<code>*</code>) or the
+    root node (<code>/</code>). Its only job is to recursively keep processing
+    (<code>&lt;xsl:apply-templates/&gt;</code>). It produces no output for the element tag
+    itself; it just keeps digging deeper.</li>
+<li><strong>A Rule for Text:</strong> This default rule matches any text node (<code>text()</code>). Its
+    job is to copy the value of the text to the output (<code>&lt;xsl:value-of
+    select="."/&gt;</code>).</li>
+</ol>
+<p>When you combine these, the first rule navigates silently through the tree of
+element tags, and the second rule shouts out the value of any text it finds
+along the way. The result is a stream of text with all its structural context
+removed.</p>
+<h4 id="how-to-take-back-control">How to Take Back Control</h4>
+<p>This default behavior is rarely what you want. Experienced XSLT developers
+almost always start by creating a "blank slate." They override the built-in
+rules by putting this template at the top of their stylesheet:</p>
+<div class="codehilite"><pre><span></span><code><span class="cm">&lt;!-- This empty template matches ALL nodes and attributes and does nothing.</span>
+<span class="cm">     It effectively disables all the built-in rules. --&gt;</span>
+<span class="nt">&lt;xsl:template</span><span class="w"> </span><span class="na">match=</span><span class="s">&quot;node() | @*&quot;</span><span class="nt">/&gt;</span>
+</code></pre></div>
+
 <h1 id="xml-schemas">XML Schemas</h1>
 <h2 id="unspecified-xml-leads-to-disaster-its-a-timebomb">Unspecified XML Leads to Disaster (It's a timebomb)</h2>
 <p>When you're building something with XML, it's tempting to skip creating a
@@ -535,45 +572,6 @@ down how it works.</p>
 </ul>
 </li>
 </ul>
-<h3 id="understanding-xslts-default-behavior-and-why-its-so-confusing">Understanding XSLT's Default Behavior (And Why It's So Confusing)</h3>
-<p>The most confusing part of XSLT for newcomers is its set of invisible, built-in
-template rules. The best way to understand them is to compare XSLT to CSS.</p>
-<p>When you apply a CSS stylesheet to an HTML document, the browser's default
-behavior is to render the entire HTML structure. You write CSS rules to <em>style</em>
-the elements, but you don't expect the tags themselves (<code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, etc.) to
-disappear. This is because <strong>HTML is a presentational markup language</strong>; its
-tags have an inherent visual meaning to the browser.</p>
-<p>XSLT behaves differently. If you apply a completely empty stylesheet to an XML
-document, the result is that <strong>all the tags are stripped away, leaving only the
-raw text content.</strong> This is baffling at first, but it reveals the core
-philosophy of the language. Unlike HTML, <strong>XML is a semantic data language.</strong>
-Its tags, like <code>&lt;customer-id&gt;</code> or <code>&lt;price&gt;</code>, have no intrinsic visual meaning.
-They are labels for data.</p>
-<p>The XSLT designers assumed that the most basic, default operation anyone would
-want is to extract the data itself—the text. Therefore, they created two
-built-in rules that work together:</p>
-<ol>
-<li><strong>A Rule for Elements:</strong> This default rule matches any element (<code>*</code>) or the
-    root node (<code>/</code>). Its only job is to recursively keep processing
-    (<code>&lt;xsl:apply-templates/&gt;</code>). It produces no output for the element tag
-    itself; it just keeps digging deeper.</li>
-<li><strong>A Rule for Text:</strong> This default rule matches any text node (<code>text()</code>). Its
-    job is to copy the value of the text to the output (<code>&lt;xsl:value-of
-    select="."/&gt;</code>).</li>
-</ol>
-<p>When you combine these, the first rule navigates silently through the tree of
-element tags, and the second rule shouts out the value of any text it finds
-along the way. The result is a stream of text with all its structural context
-removed.</p>
-<h4 id="how-to-take-back-control">How to Take Back Control</h4>
-<p>This default behavior is rarely what you want. Experienced XSLT developers
-almost always start by creating a "blank slate." They override the built-in
-rules by putting this template at the top of their stylesheet:</p>
-<div class="codehilite"><pre><span></span><code><span class="cm">&lt;!-- This empty template matches ALL nodes and attributes and does nothing.</span>
-<span class="cm">     It effectively disables all the built-in rules. --&gt;</span>
-<span class="nt">&lt;xsl:template</span><span class="w"> </span><span class="na">match=</span><span class="s">&quot;node() | @*&quot;</span><span class="nt">/&gt;</span>
-</code></pre></div>
-
 <h1 id="installation-instructions">Installation Instructions</h1>
 <p>These installation commands will do the following:</p>
 <ul>

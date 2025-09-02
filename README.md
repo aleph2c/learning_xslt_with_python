@@ -347,48 +347,6 @@ UltiSnips’ shortcut to jump between your XSLT file and [snippet
 files](https://github.com/aleph2c/.vim/blob/master/snippets/xslt.snippets). Keep
 snippets under Git-control for portability.
 
-# XML Schemas
-
-## Unspecified XML Leads to Disaster (It's a timebomb)
-
-When you're building something with XML, it's tempting to skip creating a
-schema. But what even is a schema?
-
-Simply put, a schema is a formal blueprint for your XML. It’s a file you write
-that defines the rules: what tags are allowed, what order they must appear in,
-and what kind of data they can hold (like numbers, text, or dates).
-
-It feels like extra work when you're under pressure, but using XML without a
-schema is like building a complex machine without any blueprints. It might run
-for a little while, but a catastrophic failure isn't just a risk—it's a
-guarantee. You've essentially created a timebomb in your project. Let's break
-down how it works.
-
-* **The Bomb**: Your collection of XML files. Without a schema, you don't really
-  know what's inside them. You assume they follow the structure your code
-  expects, but you have no guarantee.  Each file that deviates from that
-  unwritten specification is a potential point of failure.
-* **The Ticking**: Time and change. The fuse gets lit the moment your project
-  needs to change. With every new software version, every new feature, or every
-  data migration, the assumptions your code makes about the XML structure get
-  stricter. The system gets more and more fragile with each update, and the fuse
-  burns shorter.
-* **The Explosion**: The "technical disaster." This is the moment your software
-  encounters an XML document it cannot process correctly. This can manifest in
-  several ways:
-    * **Loud Failure**: The application crashes because an expected element is
-      missing. This is the best-case scenario, as the problem is immediately
-      obvious.
-    * **Silent Data Corruption**: The application misinterprets the data,
-      leading to incorrect calculations, lost information, or corrupted
-      records.  This is the most dangerous outcome, as the damage can go
-      unnoticed for weeks or months, spreading through your system and making
-      recovery nearly impossible.
-    * **Massive Cleanup Effort**: You are now forced to halt development,
-      painstakingly analyze mountains of XML to find the inconsistencies, and
-      write complex, defensive code to handle all the unexpected variations—the
-      exact mess you found yourself in.
-
 ### Understanding XSLT's Default Behavior (And Why It's So Confusing)
 
 The most confusing part of XSLT for newcomers is its set of invisible, built-in
@@ -435,6 +393,48 @@ rules by putting this template at the top of their stylesheet:
      It effectively disables all the built-in rules. -->
 <xsl:template match="node() | @*"/>
 ```
+# XML Schemas
+
+## Unspecified XML Leads to Disaster (It's a timebomb)
+
+When you're building something with XML, it's tempting to skip creating a
+schema. But what even is a schema?
+
+Simply put, a schema is a formal blueprint for your XML. It’s a file you write
+that defines the rules: what tags are allowed, what order they must appear in,
+and what kind of data they can hold (like numbers, text, or dates).
+
+It feels like extra work when you're under pressure, but using XML without a
+schema is like building a complex machine without any blueprints. It might run
+for a little while, but a catastrophic failure isn't just a risk—it's a
+guarantee. You've essentially created a timebomb in your project. Let's break
+down how it works.
+
+* **The Bomb**: Your collection of XML files. Without a schema, you don't really
+  know what's inside them. You assume they follow the structure your code
+  expects, but you have no guarantee.  Each file that deviates from that
+  unwritten specification is a potential point of failure.
+* **The Ticking**: Time and change. The fuse gets lit the moment your project
+  needs to change. With every new software version, every new feature, or every
+  data migration, the assumptions your code makes about the XML structure get
+  stricter. The system gets more and more fragile with each update, and the fuse
+  burns shorter.
+* **The Explosion**: The "technical disaster." This is the moment your software
+  encounters an XML document it cannot process correctly. This can manifest in
+  several ways:
+    * **Loud Failure**: The application crashes because an expected element is
+      missing. This is the best-case scenario, as the problem is immediately
+      obvious.
+    * **Silent Data Corruption**: The application misinterprets the data,
+      leading to incorrect calculations, lost information, or corrupted
+      records.  This is the most dangerous outcome, as the damage can go
+      unnoticed for weeks or months, spreading through your system and making
+      recovery nearly impossible.
+    * **Massive Cleanup Effort**: You are now forced to halt development,
+      painstakingly analyze mountains of XML to find the inconsistencies, and
+      write complex, defensive code to handle all the unexpected variations—the
+      exact mess you found yourself in.
+
 
 # Installation Instructions
 
