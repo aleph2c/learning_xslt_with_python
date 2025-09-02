@@ -182,7 +182,7 @@ streaming and native JSON handling.</p>
 <h1 id="background-a-tale-of-two-philosophies">Background: A Tale of Two Philosophies</h1>
 <p>The histories of Python and XSLT offer a compelling study in how technologies
 are shaped. Python's development was famously practitioner-led by Guido van
-Rossum, fostering a pragmatic culture that valued developer happiness. Its
+Rossum, fostering a pragmatic culture that valued <a href="https://www.youtube.com/watch?v=GfH4QL4VqJ0">developer happiness</a>. Its
 evolution via the community-driven <a href="https://peps.python.org/pep-0001/">PEP process</a> meant it was built by and for
 programmers. In stark contrast, XSLT was born from a top-down W3C committee of
 architects. The result was a language that was formally powerful but actively
@@ -191,15 +191,16 @@ verbose XML-based syntax and a steep, declarative-functional learning curve that
 felt extraterrestrial to most practitioners.</p>
 <p>This difference had profound consequences and directly explains why XSLT fell
 into mainstream obscurity. While Python's flexibility allowed it to find a
-"killer app" by <a href="https://www.youtube.com/watch?v=AyenRCJ_4Ww">"borg'ing"</a> the scientific world of MATLAB, XSLT's rigidity and
-poor ergonomics actively repelled the fast-growing world of web development. As
-web APIs moved towards the lightweight, brain-dead simple JSON format, XSLT's
-heavyweight, document-centric model felt like using a sledgehammer to crack a
-nut. While its champion, Michael Kay, was quietly perfecting it into a
-masterpiece of engineering, the mainstream war had already been lost to tools
-that were simply easier, faster, and more enjoyable to use.</p>
+"killer app" by <a href="https://www.youtube.com/watch?v=AyenRCJ_4Ww">borg'ing</a> the
+scientific world of MATLAB, XSLT's rigidity and poor ergonomics actively
+repelled the fast-growing world of web development. As web APIs moved towards
+the lightweight, brain-dead simple JSON format, XSLT's heavyweight,
+document-centric model felt like using a sledgehammer to crack a nut. While its
+champion, Michael Kay, was quietly perfecting it over decades, into a masterpiece
+of engineering. The mainstream war had already been lost to tools that were
+simply easier, faster, and more enjoyable to use.</p>
 <p>Today, however, these two histories have converged. With the advent of libraries
-like saxonche, XSLT has effectively "borg'd" itself into the Python ecosystem,
+like saxonche, XSLT has effectively borg'd itself into the Python ecosystem,
 not as a competitor, but as a specialized engine for the kind of complex data
 plumbing it was designed for. Freed from having to be a general-purpose tool,
 its difficult nature is less of a barrier. It allows developers to use the right
@@ -1422,12 +1423,13 @@ It works, it's fast, and it proves that this technology, for all its warts, is
 incredibly capable.</p>
 <p>And now, after all that work, I have to tell you that to do things "right," <strong>we
 have to go back and break everything.</strong> It's time to talk about namespaces.</p>
-<p>First, let's not pretend this is fun. Let's commiserate and get ready for the
-pain by pre-listing the bullshit, because you are going to feel it, and you
-should know that you're not wrong for feeling it.</p>
+<p>First, we are coming from Python, so let's not pretend this is going to be fun.
+Let's commiserate and get ready for the pain by pre-listing the bullshit,
+because you are going to feel it, and you should know that you're not wrong for
+feeling it.</p>
 <ul>
 <li><strong>The Maximal Surprise Requirement</strong>: The moment you add a namespace, your
-  code will break. Not with a bang, but with the silent, soul-crushing whimper
+  code will break. Not with a bang, but with the silent-whimper
   of an <strong>XPath query returning an empty list for no discernible reason</strong>. The
   principle of least astonishment has been thrown out the window.</li>
 <li><strong>The Abysmal Signal-to-Noise Ratio</strong>: Get ready to watch your clean, simple
@@ -1463,23 +1465,21 @@ professional, scalable, and immortal.</p>
   is a signal that you are building a mature system designed for the long haul.</li>
 </ul>
 <p>So, where does this leave us?</p>
-<p>It leaves us with a choice. We can take the easy path and pretend the future
-doesn't exist, or we can embrace the discipline. The explicit declarations, the
-rigid rules, the verbose bureaucracy—this is not the "move fast and break
-things" ethos of a startup. This is the methodical, deliberate, and slightly
-soul-crushing ethos of systems that have to be stable, auditable, and last for
-decades.</p>
+<p>It leaves us with a choice. We can take the easy path and ignore potential
+future challenges, or we can adopt a more disciplined approach. The explicit
+declarations, rigid rules, and added verbosity represent a shift from the "move
+fast and break things" ethos of startups to a methodical and deliberate style
+suited for systems that need to be stable, auditable, and durable over time.</p>
 <p>It's the mindset required for building systems where precision is valued more
 than convenience. Embrace it. Accept the temporary dip in productivity. Refactor
 your lxml queries with namespace maps and update your Schematron rules with
-<code>&lt;sch:ns&gt;</code> prefixes. Once you do, as you age, you'll be perfectly prepared for
-that nice, low-productivity job in the federal government. You're not just
-writing code anymore; you're authoring a specification.</p>
-<p>So we're convinced. We're going to eat our vegetables. But we're not going into
-this fight unarmed. The pain you're about to experience is the <em>undisciplined</em>
-pain. The pain of silent failures, of invisible context, of rules that make no
-sense. We've already fought that war and established a doctrine to minimize the
-damage. This isn't theory. This is our survival guide.</p>
+<code>&lt;sch:ns&gt;</code> prefixes. You're not just writing code anymore; you're authoring a
+specification.</p>
+<p>If you're convinced. We can proceed with this step. But we're not approaching it
+without preparation. The challenges you're about to encounter -- such as silent
+failures, invisible context, and rules that may seem unclear -- can be managed
+effectively. We've addressed these issues before and developed guidelines to
+minimize them. This isn't theory. This is our practical guide:</p>
 <ul>
 <li><strong>LAW #1: We Abolished "Default" Namespaces.</strong> You will see
   <code>xmlns="urn:..."</code> in examples online. You will be tempted to use it. Do not.
@@ -1509,10 +1509,9 @@ damage. This isn't theory. This is our survival guide.</p>
 <span class="n">new_element</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s1">&#39;f:data&#39;</span><span class="p">,</span> <span class="n">nsmap</span><span class="o">=</span><span class="n">nsmap</span><span class="p">)</span> <span class="c1"># The right way</span>
 </code></pre></div>
 
-<p>These laws are not suggestions. They are the guardrails we built after driving
-off the cliff. They are the difference between the soul-crushing pain of
-debugging an alien system and the manageable, predictable pain of professional
-engineering.</p>
+<p>These laws are not suggestions. They are the guidelines we developed based on
+experience. They help distinguish between the frustration of debugging a complex
+system and the structured, predictable approach of professional engineering.</p>
 <h1 id="testing-xpath">Testing XPath</h1>
 <p>Here we run an XPath expression against the <code>menu.xml</code> file in the
 <code>otegem/ch03</code> directory, then cache the command:</p>
