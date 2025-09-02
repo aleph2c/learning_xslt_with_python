@@ -128,10 +128,6 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </li>
 </ul>
 </li>
-<li><a href="#xml-schemas">XML Schemas</a><ul>
-<li><a href="#unspecified-xml-leads-to-disaster-its-a-timebomb">Unspecified XML Leads to Disaster (It's a timebomb)</a></li>
-</ul>
-</li>
 <li><a href="#installation-instructions">Installation Instructions</a></li>
 <li><a href="#running-examples">Running Examples</a><ul>
 <li><a href="#how-to-run-specific-examples">How to Run Specific Examples</a></li>
@@ -141,7 +137,9 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </ul>
 </li>
 <li><a href="#integrating-xslt-30-with-python-in-the-main-thread">Integrating XSLT 3.0 with Python in the main thread</a></li>
-<li><a href="#integrating-xslt-30-with-multithreaded-python">Integrating XSLT 3.0 with Multithreaded Python</a><ul>
+<li><a href="#integrating-xslt-30-with-multithreaded-python">Integrating XSLT 3.0 with Multithreaded Python</a></li>
+<li><a href="#xml-schemas">XML Schemas</a><ul>
+<li><a href="#unspecified-xml-leads-to-disaster-its-a-timebomb">Unspecified XML Leads to Disaster (It's a timebomb)</a></li>
 <li><a href="#a-brilliant-trap-the-saxon-give-them-enough-rope-business-model">A Brilliant Trap: The Saxon "Give Them Enough Rope" Business Model</a></li>
 <li><a href="#schema-technologies">Schema Technologies</a><ul>
 <li><a href="#dtd-document-type-definition">DTD (Document Type Definition)</a></li>
@@ -532,46 +530,6 @@ rules by putting this template at the top of their stylesheet:</p>
 <span class="nt">&lt;xsl:template</span><span class="w"> </span><span class="na">match=</span><span class="s">&quot;node() | @*&quot;</span><span class="nt">/&gt;</span>
 </code></pre></div>
 
-<h1 id="xml-schemas">XML Schemas</h1>
-<h2 id="unspecified-xml-leads-to-disaster-its-a-timebomb">Unspecified XML Leads to Disaster (It's a timebomb)</h2>
-<p>When you're building something with XML, it's tempting to skip creating a
-schema. But what even is a schema?</p>
-<p>Simply put, a schema is a formal blueprint for your XML. It’s a file you write
-that defines the rules: what tags are allowed, what order they must appear in,
-and what kind of data they can hold (like numbers, text, or dates).</p>
-<p>It feels like extra work when you're under pressure, but using XML without a
-schema is like building a complex machine without any blueprints. It might run
-for a little while, but a catastrophic failure isn't just a risk—it's a
-guarantee. You've essentially created a timebomb in your project. Let's break
-down how it works.</p>
-<ul>
-<li><strong>The Bomb</strong>: Your collection of XML files. Without a schema, you don't really
-  know what's inside them. You assume they follow the structure your code
-  expects, but you have no guarantee.  Each file that deviates from that
-  unwritten specification is a potential point of failure.</li>
-<li><strong>The Ticking</strong>: Time and change. The fuse gets lit the moment your project
-  needs to change. With every new software version, every new feature, or every
-  data migration, the assumptions your code makes about the XML structure get
-  stricter. The system gets more and more fragile with each update, and the fuse
-  burns shorter.</li>
-<li><strong>The Explosion</strong>: The "technical disaster." This is the moment your software
-  encounters an XML document it cannot process correctly. This can manifest in
-  several ways:<ul>
-<li><strong>Loud Failure</strong>: The application crashes because an expected element is
-  missing. This is the best-case scenario, as the problem is immediately
-  obvious.</li>
-<li><strong>Silent Data Corruption</strong>: The application misinterprets the data,
-  leading to incorrect calculations, lost information, or corrupted
-  records.  This is the most dangerous outcome, as the damage can go
-  unnoticed for weeks or months, spreading through your system and making
-  recovery nearly impossible.</li>
-<li><strong>Massive Cleanup Effort</strong>: You are now forced to halt development,
-  painstakingly analyze mountains of XML to find the inconsistencies, and
-  write complex, defensive code to handle all the unexpected variations—the
-  exact mess you found yourself in.</li>
-</ul>
-</li>
-</ul>
 <h1 id="installation-instructions">Installation Instructions</h1>
 <p>These installation commands will do the following:</p>
 <ul>
@@ -1209,6 +1167,46 @@ performing XSLT transforms using saxonche without causing StackOverFlows:</p>
     <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </code></pre></div>
 
+<h1 id="xml-schemas">XML Schemas</h1>
+<h2 id="unspecified-xml-leads-to-disaster-its-a-timebomb">Unspecified XML Leads to Disaster (It's a timebomb)</h2>
+<p>When you're building something with XML, it's tempting to skip creating a
+schema. But what even is a schema?</p>
+<p>Simply put, a schema is a formal blueprint for your XML. It’s a file you write
+that defines the rules: what tags are allowed, what order they must appear in,
+and what kind of data they can hold (like numbers, text, or dates).</p>
+<p>It feels like extra work when you're under pressure, but using XML without a
+schema is like building a complex machine without any blueprints. It might run
+for a little while, but a catastrophic failure isn't just a risk—it's a
+guarantee. You've essentially created a timebomb in your project. Let's break
+down how it works.</p>
+<ul>
+<li><strong>The Bomb</strong>: Your collection of XML files. Without a schema, you don't really
+  know what's inside them. You assume they follow the structure your code
+  expects, but you have no guarantee.  Each file that deviates from that
+  unwritten specification is a potential point of failure.</li>
+<li><strong>The Ticking</strong>: Time and change. The fuse gets lit the moment your project
+  needs to change. With every new software version, every new feature, or every
+  data migration, the assumptions your code makes about the XML structure get
+  stricter. The system gets more and more fragile with each update, and the fuse
+  burns shorter.</li>
+<li><strong>The Explosion</strong>: The "technical disaster." This is the moment your software
+  encounters an XML document it cannot process correctly. This can manifest in
+  several ways:<ul>
+<li><strong>Loud Failure</strong>: The application crashes because an expected element is
+  missing. This is the best-case scenario, as the problem is immediately
+  obvious.</li>
+<li><strong>Silent Data Corruption</strong>: The application misinterprets the data,
+  leading to incorrect calculations, lost information, or corrupted
+  records.  This is the most dangerous outcome, as the damage can go
+  unnoticed for weeks or months, spreading through your system and making
+  recovery nearly impossible.</li>
+<li><strong>Massive Cleanup Effort</strong>: You are now forced to halt development,
+  painstakingly analyze mountains of XML to find the inconsistencies, and
+  write complex, defensive code to handle all the unexpected variations—the
+  exact mess you found yourself in.</li>
+</ul>
+</li>
+</ul>
 <h2 id="a-brilliant-trap-the-saxon-give-them-enough-rope-business-model">A Brilliant Trap: The Saxon "Give Them Enough Rope" Business Model</h2>
 <p>So, if this is such a common disaster, why do so many of us walk right into it?
 Often, the path is paved by the very tools we start with.</p>
